@@ -12,7 +12,7 @@ body{
 
 header{
     background:#c8102e;
-    color:green;
+    color:white;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -61,7 +61,7 @@ nav a{
     color:white;
     text-decoration:none;
     font-weight:bold;
-}
+
 }
 
 body{
@@ -95,7 +95,7 @@ nav a{
     align-items:center;
     text-align:center;
     color:white;
-}
+
 }
 
 .hero h2{
@@ -150,6 +150,8 @@ nav a{
     object-fit:contain;
     background:white;
     border-radius:15px;
+
+}
 
 .gallery{
     display:grid;
@@ -237,4 +239,52 @@ form button{
 
 .whatsapp-btn:hover{
     background:#1ebe5d !important;
+}
+
+@media screen and (max-width:768px){
+
+    header{
+        flex-direction:column;
+        padding:10px;
+    }
+
+    .logo{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .logo img{
+        width:80px;
+        height:80px;
+    }
+
+    .logo h1{
+        font-size:22px;
+    }
+
+    nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:10px;
+    }
+
+    nav a{
+        font-size:14px;
+    }
+
+    .hero h2{
+        font-size:32px;
+    }
+
+    .hero p{
+        font-size:18px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .section{
+        padding:50px 20px;
+    }
 }
