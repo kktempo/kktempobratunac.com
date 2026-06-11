@@ -376,3 +376,10 @@ form button{
     background:white;
     transform:scale(1.3);
 }
+
+.wa-icon{
+    width:28px;
+    height:28px;
+    vertical-align:middle;
+    margin-right:10px;
+}
