@@ -267,14 +267,23 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+<input type="text" id="ime" name="ime_prezime" placeholder="Ime i prezime deteta" required>
 
-<input type="text" id="ime" placeholder="Ime i prezime deteta">
-<input type="number" id="godiste" placeholder="Godište">
-<input type="text" id="roditelj" placeholder="Ime roditelja">
-<input type="tel" id="telefon" placeholder="Telefon">
-<input type="email" id="email" placeholder="Email">
+<input type="number" id="godiste" name="godiste" placeholder="Godište" required>
 
-<select id="programi">
+<input type="text" id="roditelj" name="roditelj" placeholder="Ime roditelja" required>
+
+<input type="tel" id="telefon" name="telefon" placeholder="Telefon" required>
+
+<input type="email" id="email" name="email" placeholder="Email" required>
+
+<select id="programi" name="programi" required>
+    <option value="">-- Izaberite program --</option>
+    <option value="Program 1">Program 1</option>
+    <option value="Program 2">Program 2</option>
+    <option value="Program 3">Program 3</option>
+</select>
+
 
 <script>
 function posaljiWhatsapp(){
