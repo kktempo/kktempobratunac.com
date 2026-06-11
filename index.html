@@ -142,12 +142,9 @@
 
  
 <div style="text-align:center; margin-top:30px;">
-    <a href="https://wa.me/381640024662"
-   target="_blank"
-   class="whatsapp-btn">
-
-   <img src="whatsapp.png" class="wa-icon">
-   PRIJAVI SE PUTEM WHATSAPP-A
+   <a href="#" onclick="posaljiWhatsapp()" class="btn">
+    Prijavi dete
+</a>
 
 </a>
 
@@ -270,7 +267,39 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+
+<input type="text" id="ime" placeholder="Ime i prezime deteta">
+<input type="number" id="godiste" placeholder="Godište">
+<input type="text" id="roditelj" placeholder="Ime roditelja">
+<input type="tel" id="telefon" placeholder="Telefon">
+<input type="email" id="email" placeholder="Email">
+
+<select id="programi">
+
+<script>
+function posaljiWhatsapp(){
+
+    let ime = document.getElementById("ime").value;
+    let godiste = document.getElementById("godiste").value;
+    let roditelj = document.getElementById("roditelj").value;
+    let telefon = document.getElementById("telefon").value;
+    let email = document.getElementById("email").value;
+    let program = document.getElementById("programi").value;
+
+    let poruka =
+`Ime i prezime deteta: ${ime}
+Godište: ${godiste}
+Ime roditelja: ${roditelj}
+Telefon: ${telefon}
+Email: ${email}
+Program: ${program}`;
+
+    let url = "https://wa.me/381640024662?text=" + encodeURIComponent(poruka);
+
+    window.open(url, "_blank");
+}
+</script>
+
 </body>
 </html>
-
 
