@@ -418,3 +418,20 @@ form button{
         width:90%;
     }
 }
+
+@media screen and (max-width:768px){
+
+    form{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        width:100%;
+    }
+
+    form input,
+    form select{
+        width:100%;
+        font-size:18px;
+    }
+
+}
