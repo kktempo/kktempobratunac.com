@@ -448,3 +448,29 @@ form button{
     border:none;
     cursor:pointer;
 }
+
+.social-icons{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+.social-icons img{
+    width:45px;
+    height:45px;
+    transition:0.3s;
+}
+
+.social-icons img:hover{
+    transform:scale(1.15);
+}
+
+.social-icons a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:#222;
+    font-weight:bold;
+}
