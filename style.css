@@ -391,3 +391,30 @@ form button{
     vertical-align:middle;
     background:transparent !important;
 }
+
+#upis .gallery{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+#upis .photo{
+    width:450px;
+    height:auto;
+    background:none;
+}
+
+#upis .photo img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+@media screen and (max-width:768px){
+    #upis .photo{
+        width:90%;
+    }
+}
