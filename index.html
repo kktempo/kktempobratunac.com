@@ -167,11 +167,10 @@
     Prijavi dete
 </button>
 
-</a>
 
 </div>
-        </a>
-    </div>
+      
+   
 </section>
 
 <section id="galerija" class="section">
@@ -301,14 +300,14 @@ function posaljiWhatsapp(){
     let program = document.getElementById("programi").value;
     let velicina = document.getElementById("velicina").value;
 
-    let poruka =
+let poruka =
 `Ime i prezime deteta: ${ime}
 Godište: ${godiste}
 Ime roditelja: ${roditelj}
 Telefon: ${telefon}
 Email: ${email}
-Program: ${program}`;
-Veličina opreme: ${velicina}
+Program: ${program}
+Veličina opreme: ${velicina}`;
 
     let url = "https://wa.me/381640024662?text=" + encodeURIComponent(poruka);
 
