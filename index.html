@@ -236,11 +236,18 @@ Prijavi dete
 document.addEventListener("DOMContentLoaded", function() {
 
     const slides = document.querySelectorAll('.slide');
+   <script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+
     let current = 0;
 
     setInterval(() => {
 
         slides[current].classList.remove('active');
+        dots[current].classList.remove('active-dot');
 
         current++;
 
@@ -249,6 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         slides[current].classList.add('active');
+        dots[current].classList.add('active-dot');
 
     }, 5000);
 
