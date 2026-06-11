@@ -133,6 +133,25 @@
             <option value="Program 2">Program 2</option>
             <option value="Program 3">Program 3</option>
         </select>
+<label>Veličina opreme:</label>
+
+<select id="velicina" required>
+    <option value="">-- Izaberite veličinu --</option>
+    <option value="8">8</option>
+    <option value="10">10</option>
+    <option value="12">12</option>
+    <option value="14">14</option>
+    <option value="16">16</option>
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+    <option value="XXL">XXL</option>
+    <option value="XXXL">XXXL</option>
+    <option value="XXXXL">XXXXL</option>
+</select>
+
+<img src="oprema.png" alt="Klupska oprema" class="oprema-slika">
 
     </form>
 </section>
@@ -280,6 +299,7 @@ function posaljiWhatsapp(){
     let telefon = document.getElementById("telefon").value;
     let email = document.getElementById("email").value;
     let program = document.getElementById("programi").value;
+    let velicina = document.getElementById("velicina").value;
 
     let poruka =
 `Ime i prezime deteta: ${ime}
@@ -288,6 +308,7 @@ Ime roditelja: ${roditelj}
 Telefon: ${telefon}
 Email: ${email}
 Program: ${program}`;
+Veličina opreme: ${velicina}
 
     let url = "https://wa.me/381640024662?text=" + encodeURIComponent(poruka);
 
