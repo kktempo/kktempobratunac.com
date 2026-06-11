@@ -6,6 +6,9 @@
     <title>KK Tempo Bratunac</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
+
+
 <body>
 
 <header>
@@ -27,11 +30,19 @@
 </header>
 
 <section class="hero">
+
+    <div class="slider">
+        <img src="naslovna.jpg" class="slide active">
+        <img src="naslovna 1.png" class="slide">
+        <img src="naslovna 2.png" class="slide">
+    </div>
+
     <div class="hero-content">
         <h2>DOBRODOŠLI NA ZVANIČNI SAJT<br>KK TEMPO BRATUNAC</h2>
         <p>DISCIPLINA • POSVEĆENOST • ISTRAJNOST</p>
         <a href="#upis" class="btn">Pridruži se klubu</a>
     </div>
+
 </section>
 
 <section id="o-nama" class="section">
@@ -209,6 +220,32 @@ Prijavi dete
 <footer>
     <p>© 2026 KK Tempo Bratunac. Sva prava zadržana.</p>
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    setInterval(() => {
+
+        slides[current].classList.remove('active');
+
+        current++;
+
+        if(current >= slides.length){
+            current = 0;
+        }
+
+        slides[current].classList.add('active');
+
+    }, 3000);
+
+});
+</script>
+
+</body>
+</html>
 
 </body>
 </html>
