@@ -354,3 +354,25 @@ form button{
 .slide3{
     object-position:right center;
 }
+
+.slider-dots{
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:3;
+    display:flex;
+    gap:10px;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.5);
+}
+
+.active-dot{
+    background:white;
+    transform:scale(1.3);
+}
