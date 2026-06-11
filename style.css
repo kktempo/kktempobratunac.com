@@ -347,11 +347,6 @@ form button{
 
 }
 
-@media screen and (max-width:768px){
-
-    .slide{
-        object-fit:cover;
-        object-position:right center;
-    }
-
+.slide2{
+    object-position:right center;
 }
