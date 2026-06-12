@@ -18,7 +18,7 @@
     </div>
 
    <nav>
-    <div class="dropdown">
+    <div class="dropdown-content" id="mobileMenu">
         <button class="dropbtn">☰ Meni</button>
 
         <div class="dropdown-content">
@@ -377,6 +377,21 @@ Veličina opreme: ${velicina}`;
 
     window.open(url, "_blank");
 }
+</script>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuBtn.addEventListener("click", function() {
+    mobileMenu.classList.toggle("show-menu");
+});
+
+document.querySelectorAll("#mobileMenu a").forEach(link => {
+    link.addEventListener("click", function() {
+        mobileMenu.classList.remove("show-menu");
+    });
+});
 </script>
 
 </body>

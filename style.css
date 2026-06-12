@@ -537,8 +537,6 @@ form button{
     background:#f1f1f1;
 }
 
-.dropdown:hover .dropdown-content{
-    display:block;
 }
 
 .rezultati-slika{
@@ -583,4 +581,12 @@ form button{
         width:250px;
     }
 
+}
+
+.dropdown-content{
+    display:none;
+}
+
+.dropdown-content.show-menu{
+    display:block;
 }
