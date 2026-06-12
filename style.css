@@ -712,22 +712,43 @@ form button{
         padding:8px 5px;
     }
 
-.program-slider{
+.programi-slider{
     display:flex;
     overflow-x:auto;
     scroll-snap-type:x mandatory;
-    gap:20px;
-    padding:10px;
+    scroll-behavior:smooth;
+    gap:0;
+    padding:0;
 }
 
-.program-slider img{
-    min-width:100%;
-    scroll-snap-align:center;
-    border-radius:15px;
+.programi-slider .photo{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
 }
 
-.program-slider::-webkit-scrollbar{
-    display:none;
+.programi-slider img{
+    width:100%;
+    display:block;
 }
 
+.programi-dots{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+}
+
+.program-dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#ccc;
+    transition:0.3s;
+}
+
+.active-program-dot{
+    background:#c8102e;
+    transform:scale(1.2);
+}
 }
