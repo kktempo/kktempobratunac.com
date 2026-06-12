@@ -385,8 +385,8 @@ emailjs.send("service_42vtnmu", "template_a5us9th", {
     alert("Prijava uspešno poslata!");
 })
 .catch(function(error) {
-    alert("Greška pri slanju emaila!");
-    console.log(error);
+    console.log("EMAILJS GRESKA:", error);
+    alert("Greška: " + JSON.stringify(error));
 });
 
 let poruka =
