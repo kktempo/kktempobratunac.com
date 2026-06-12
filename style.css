@@ -573,3 +573,14 @@ form button{
 .active-rezultat{
     opacity:1;
 }
+
+@media screen and (max-width:768px){
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        right:auto;
+        width:250px;
+    }
+
+}
