@@ -190,35 +190,25 @@
         <section id="rezultati" class="section">
     <h2>Rezultati</h2>
 
-    <div class="rezultati-slider">
+    <h2>Rezultati</h2>
 
-        <img src="rezultat1.jpg" class="rezultat-slide active-rezultat">
-        <img src="rezultat2.jpg" class="rezultat-slide">
-        <img src="rezultat3.jpg" class="rezultat-slide">
-        <img src="rezultat4.jpg" class="rezultat-slide">
+<div class="rezultati-meni">
+    <button onclick="otvoriSliku('rezultati.jpg')">Rezultati</button>
 
-    </div>
-</section>
+    <button onclick="otvoriSliku('naredna-utakmica.jpg')">
+        Naredna utakmica
+    </button>
 
-<script>
-const rezultatSlides = document.querySelectorAll(".rezultat-slide");
+    <button onclick="otvoriSliku('raspored.jpg')">
+        Raspored utakmica
+    </button>
+</div>
 
-let rezultatCurrent = 0;
+<div id="popupSlika" class="popup">
+    <span class="zatvori" onclick="zatvoriSliku()">&times;</span>
 
-setInterval(() => {
-
-    rezultatSlides[rezultatCurrent].classList.remove("active-rezultat");
-
-    rezultatCurrent++;
-
-    if(rezultatCurrent >= rezultatSlides.length){
-        rezultatCurrent = 0;
-    }
-
-    rezultatSlides[rezultatCurrent].classList.add("active-rezultat");
-
-}, 4000);
-</script>
+    <img id="popupImg" src="">
+</div>
     
 
 <img src="ksrs.png" alt="Rezultati" class="rezultati-slika">
@@ -396,6 +386,19 @@ document.querySelectorAll("#mobileMenu a").forEach(link => {
         mobileMenu.classList.remove("show-menu");
     });
 });
+</script>
+
+<script>
+function otvoriSliku(slika){
+
+    document.getElementById("popupImg").src = slika;
+    document.getElementById("popupSlika").style.display = "block";
+}
+
+function zatvoriSliku(){
+
+    document.getElementById("popupSlika").style.display = "none";
+}
 </script>
 
 </body>
