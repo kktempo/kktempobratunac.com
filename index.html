@@ -350,10 +350,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <script>
 function posaljiWhatsapp(){
-let sifra = "TEMPO" + Math.floor(1000 + Math.random() * 9000);
+
 
     let ime = document.getElementById("ime").value;
     let godiste = document.getElementById("godiste").value;
+
+    let prvoIme = ime.split(" ")[0];
+    let sifra = prvoIme.toUpperCase() + godiste;
+
     let roditelj = document.getElementById("roditelj").value;
     let telefon = document.getElementById("telefon").value;
     let email = document.getElementById("email").value;
