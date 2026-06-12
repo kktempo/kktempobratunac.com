@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roditeljski portal - KK Tempo</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    margin:0;
+    padding:20px;
+}
+
+.portal{
+    max-width:800px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+h1{
+    text-align:center;
+    color:#c8102e;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#c8102e;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.kartica{
+    margin-top:25px;
+    padding:20px;
+    background:#f8f8f8;
+    border-radius:10px;
+    display:none;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="portal">
+
+<h1>Roditeljski portal</h1>
+
+<input type="text" id="sifra" placeholder="Unesite šifru deteta">
+
+<button onclick="prikaziPodatke()">Prikaži podatke</button>
+
+<div class="kartica" id="podaci">
+    <h2>Podaci člana</h2>
+
+```
+<p><strong>Ime:</strong> Marko Petrović</p>
+
+<p><strong>Status članarine:</strong> PLAĆENO</p>
+
+<p><strong>Poslednja uplata:</strong> 01.06.2027.</p>
+
+<p><strong>Dolasci na trening:</strong> 18</p>
+
+<p><strong>Izostanci:</strong> 2</p>
+
+<p><strong>Napomena:</strong> Sve obaveze izmirene.</p>
+```
+
+</div>
+
+</div>
+
+<script>
+function prikaziPodatke(){
+
+let sifra=document.getElementById("sifra").value;
+
+if(sifra==="TEMPO001"){
+document.getElementById("podaci").style.display="block";
+}else{
+alert("Neispravna šifra.");
+}
+
+}
+</script>
+
+</body>
+</html>
