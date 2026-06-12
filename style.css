@@ -590,10 +590,11 @@ form button{
 @media screen and (max-width:768px){
 
     .dropdown-content{
-        left:50%;
-        transform:translateX(-50%);
-        right:auto;
-        width:250px;
+        left:auto;
+        right:0;
+        transform:none;
+        width:280px;
+        max-width:85vw;
     }
 
 }
@@ -711,6 +712,7 @@ form button{
         font-size:11px;
         padding:8px 5px;
     }
+}
 
 .programi-slider{
     display:flex;
