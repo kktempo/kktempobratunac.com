@@ -495,6 +495,81 @@ form button{
 }
 
 .instagram-icon{
-    width:80px;
-    height:80px;
+    width:150px;
+    height:150px;
+}
+
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropbtn{
+    background:white;
+    color:#c8102e;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    right:0;
+    background:white;
+    min-width:250px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    border-radius:10px;
+    overflow:hidden;
+    z-index:1000;
+}
+
+.dropdown-content a{
+    display:block;
+    color:#222;
+    padding:12px 15px;
+    text-decoration:none;
+}
+
+.dropdown-content a:hover{
+    background:#f1f1f1;
+}
+
+.dropdown:hover .dropdown-content{
+    display:block;
+}
+
+.rezultati-slika{
+    width:98%;
+    height:250px;
+    object-fit:contain;
+    display:block;
+    margin:20px auto;
+    border-radius:15px;
+}
+
+.rezultati-slider{
+    position:relative;
+    width:100%;
+    max-width:1200px;
+    height:300px;
+    margin:auto;
+    overflow:hidden;
+}
+
+.rezultat-slide{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    opacity:0;
+    transition:opacity 1s ease;
+}
+
+.active-rezultat{
+    opacity:1;
 }

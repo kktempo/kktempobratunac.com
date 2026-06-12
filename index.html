@@ -17,16 +17,21 @@
         <h1>KK TEMPO BRATUNAC</h1>
     </div>
 
-    <nav>
-        <ul>
-            <li><a href="#o-nama">O klubu</a></li>
-            <li><a href="#timovi">Timovi</a></li>
-            <li><a href="#galerija">Galerija</a></li>
-            <li><a href="#kontakt">Kontakt</a></li>
-            <li><a href="#upis">Programi treninga i Upis</li>
-            <li><a href="#sponzori">Sponzori</a></li>
-        </ul>
-    </nav>
+   <nav>
+    <div class="dropdown">
+        <button class="dropbtn">☰ Meni</button>
+
+        <div class="dropdown-content">
+            <a href="#o-nama">O klubu</a>
+            <a href="#timovi">Selekcije</a>
+            <a href="#upis">Programi treninga i Upis</a>
+            <a href="#rezultati">Rezultati</a>
+            <a href="#galerija">Galerija</a>
+            <a href="#sponzori">Sponzori</a>
+            <a href="#kontakt">Kontakt</a>
+        </div>
+    </div>
+</nav>
 </header>
 
 <section class="hero">
@@ -171,6 +176,52 @@
 </div>
       
    
+</section>
+
+<section id="rezultati" class="section">
+    <h2>Rezultati</h2>
+
+    <div class="cards">
+
+        <section id="rezultati" class="section">
+    <h2>Rezultati</h2>
+
+    <div class="rezultati-slider">
+
+        <img src="rezultat1.jpg" class="rezultat-slide active-rezultat">
+        <img src="rezultat2.jpg" class="rezultat-slide">
+        <img src="rezultat3.jpg" class="rezultat-slide">
+        <img src="rezultat4.jpg" class="rezultat-slide">
+
+    </div>
+</section>
+
+<script>
+const rezultatSlides = document.querySelectorAll(".rezultat-slide");
+
+let rezultatCurrent = 0;
+
+setInterval(() => {
+
+    rezultatSlides[rezultatCurrent].classList.remove("active-rezultat");
+
+    rezultatCurrent++;
+
+    if(rezultatCurrent >= rezultatSlides.length){
+        rezultatCurrent = 0;
+    }
+
+    rezultatSlides[rezultatCurrent].classList.add("active-rezultat");
+
+}, 4000);
+</script>
+    
+
+<img src="ksrs.png" alt="Rezultati" class="rezultati-slika">
+
+    
+
+    </div>
 </section>
 
 <section id="galerija" class="section">
