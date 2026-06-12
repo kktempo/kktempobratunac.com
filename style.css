@@ -1,3 +1,9 @@
+html,
+body{
+    overflow-x:hidden;
+    width:100%;
+}
+
 *{
     margin:0;
     padding:0;
@@ -535,7 +541,7 @@ form button{
 
 .dropdown-content a:hover{
     background:#f1f1f1;
-}
+
 
 }
 
@@ -550,11 +556,12 @@ form button{
 
 .rezultati-slider{
     position:relative;
-    width:100%;
-    max-width:1200px;
-    height:300px;
+    width:95%;
+    max-width:1000px;
+    height:220px;
     margin:auto;
     overflow:hidden;
+
 }
 
 .rezultat-slide{
@@ -589,4 +596,30 @@ form button{
 
 .dropdown-content.show-menu{
     display:block;
+}
+
+@media screen and (max-width:768px){
+
+    header{
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+        padding:10px 15px;
+    }
+
+    .logo{
+        flex-direction:row;
+        gap:10px;
+    }
+
+    .logo img{
+        width:60px;
+        height:60px;
+    }
+
+    .logo h1{
+        font-size:16px;
+    }
+
 }
