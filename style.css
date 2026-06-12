@@ -712,4 +712,22 @@ form button{
         padding:8px 5px;
     }
 
+.program-slider{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    gap:20px;
+    padding:10px;
+}
+
+.program-slider img{
+    min-width:100%;
+    scroll-snap-align:center;
+    border-radius:15px;
+}
+
+.program-slider::-webkit-scrollbar{
+    display:none;
+}
+
 }
