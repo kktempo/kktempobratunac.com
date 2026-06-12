@@ -699,3 +699,17 @@ form button{
     font-size:40px;
     cursor:pointer;
 }
+
+@media screen and (max-width:768px){
+
+    .rezultati-meni{
+        gap:5px;
+    }
+
+    .rezultati-meni button{
+        min-width:85px;
+        font-size:11px;
+        padding:8px 5px;
+    }
+
+}
