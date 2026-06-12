@@ -751,4 +751,26 @@ form button{
     background:#c8102e;
     transform:scale(1.2);
 }
+
+.programi-slider{
+    display:flex;
+    overflow-x:scroll;
+    scroll-snap-type:x mandatory;
+    width:100%;
+}
+
+.programi-slider .photo{
+    flex:0 0 100%;
+    width:100%;
+    background:none;
+    scroll-snap-align:center;
+}
+
+.programi-slider .photo img{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    margin:auto;
+    display:block;
+
 }
