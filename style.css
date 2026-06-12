@@ -774,3 +774,22 @@ form button{
     display:block;
 
 }
+
+.programi-slider{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    width:100%;
+    -webkit-overflow-scrolling:touch;
+}
+
+.programi-slider .photo{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+}
+
+.programi-slider .photo img{
+    width:100%;
+    height:auto;
+    display:block;
+}
