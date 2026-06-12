@@ -90,38 +90,114 @@ button{
 </div>
 
 <script>
-function prikaziPodatke(){
-
-let sifra=document.getElementById("sifra").value;
-
-if(sifra==="TEMPO001"){
-document.getElementById("podaci").style.display="block";
-}else{
-alert("Neispravna šifra.");
-}
 
 const clanovi = {
+
     "TEMPO001": {
         ime: "Aleksej Krsmanović",
-        clanarina za tekući mesec: "PLAĆENO",
-        dolasci: 18
+        clanarina: "PLAĆENO",
+        godiste: "2014",
+        program: "Program 2",
+        januar: "PLAĆENO",
+        februar: "PLAĆENO",
+        mart: "PLAĆENO",
+        april: "PLAĆENO",
+        maj: "NIJE PLAĆENO",
+        jun: "NIJE PLAĆENO"
     },
 
     "TEMPO002": {
         ime: "Nikola Jovanović",
         clanarina: "DUGUJE JUN",
-        dolasci: 15
+        godiste: "2014",
+        program: "Program 2",
+        januar: "PLAĆENO",
+        februar: "PLAĆENO",
+        mart: "PLAĆENO",
+        april: "PLAĆENO",
+        maj: "PLAĆENO",
+        jun: "NIJE PLAĆENO"
     },
 
     "TEMPO003": {
         ime: "Petar Ilić",
         clanarina: "PLAĆENO",
-        dolasci: 20
+        godiste: "2014",
+        program: "Program 2",
+        januar: "PLAĆENO",
+        februar: "PLAĆENO",
+        mart: "PLAĆENO",
+        april: "PLAĆENO",
+        maj: "PLAĆENO",
+        jun: "PLAĆENO"
     }
+
 };
 
-}
-</script>
 
-</body>
-</html>
+function prikaziPodatke(){
+
+    let sifra = document.getElementById("sifra").value.trim();
+
+    if(clanovi[sifra]){
+
+        let clan = clanovi[sifra];
+
+        document.getElementById("podaci").innerHTML = `
+    <h2>${clan.ime}</h2>
+
+    <p><strong>Godište:</strong> ${clan.godiste}</p>
+
+    <p><strong>Program:</strong> ${clan.program}</p>
+
+    <hr>
+
+    <h3>Pregled članarina</h3>
+
+    <p>Januar:
+        <span style="color:${clan.januar === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.januar}
+        </span>
+    </p>
+
+    <p>Februar:
+        <span style="color:${clan.februar === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.februar}
+        </span>
+    </p>
+
+    <p>Mart:
+        <span style="color:${clan.mart === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.mart}
+        </span>
+    </p>
+
+    <p>April:
+        <span style="color:${clan.april === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.april}
+        </span>
+    </p>
+
+    <p>Maj:
+        <span style="color:${clan.maj === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.maj}
+        </span>
+    </p>
+
+    <p>Jun:
+        <span style="color:${clan.jun === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.jun}
+        </span>
+    </p>
+`;
+        document.getElementById("podaci").style.display = "block";
+
+    }else{
+
+        alert("Neispravna šifra.");
+
+    }
+
+}
+
+</script>

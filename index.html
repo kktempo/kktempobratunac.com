@@ -350,6 +350,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <script>
 function posaljiWhatsapp(){
+let sifra = "TEMPO" + Math.floor(1000 + Math.random() * 9000);
 
     let ime = document.getElementById("ime").value;
     let godiste = document.getElementById("godiste").value;
@@ -360,6 +361,8 @@ function posaljiWhatsapp(){
     let velicina = document.getElementById("velicina").value;
 
 let poruka =
+ŠIFRA ČLANA: ${sifra}
+
 `Ime i prezime deteta: ${ime}
 Godište: ${godiste}
 Ime roditelja: ${roditelj}
