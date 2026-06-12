@@ -653,8 +653,9 @@ form button{
 .rezultati-meni{
     display:flex;
     justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
+    align-items:center;
+    gap:8px;
+    flex-wrap:nowrap;
     margin:30px 0;
 }
 
@@ -662,10 +663,12 @@ form button{
     background:#c8102e;
     color:white;
     border:none;
-    padding:12px 20px;
+    padding:10px 8px;
     border-radius:10px;
     cursor:pointer;
     font-weight:bold;
+    font-size:12px;
+    min-width:95px;
 }
 
 .popup{
