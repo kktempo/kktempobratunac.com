@@ -440,6 +440,21 @@ function zatvoriSliku(){
 }
 </script>
 
+<script>
+const slider = document.querySelector('.programi-slider');
+const dots = document.querySelectorAll('.program-dot');
+
+slider.addEventListener('scroll', () => {
+    const index = Math.round(slider.scrollLeft / slider.offsetWidth);
+
+    dots.forEach(dot => dot.classList.remove('active-program-dot'));
+
+    if (dots[index]) {
+        dots[index].classList.add('active-program-dot');
+    }
+});
+</script>
+
 </body>
 </html>
 
