@@ -464,53 +464,52 @@ form button{
 }
 
 .social-icons{
-    margin-top:20px;
     display:flex;
     justify-content:center;
-    gap:20px;
-}
-
-.social-icons img{
-    width:45px;
-    height:45px;
-    transition:0.3s;
-}
-
-.social-icons img:hover{
-    transform:scale(1.15);
+    align-items:center;
+    gap:0px;
+    flex-wrap:nowrap;
 }
 
 .social-icons a{
     display:flex;
     align-items:center;
-    gap:10px;
-    text-decoration:none;
-    color:#222;
-    font-weight:bold;
+    justify-content:center;
+
 }
 
 @media screen and (max-width:768px){
 
     .social-icons{
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        gap:15px;
+        flex-direction:row;
+        justify-content:center;
+        gap:0px;
     }
+
+}
 
     .social-icons a{
         display:flex;
         align-items:center;
-        gap:10px;
-        width:100%;
+        gap:0px;
+        width:auto;
         justify-content:center;
     }
 
 }
 
-.instagram-icon{
-    width:150px;
-    height:150px;
+.social-icons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:0px;
+}
+
+.social-icons img{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+
 }
 
 .dropdown{
