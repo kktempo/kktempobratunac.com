@@ -846,3 +846,23 @@ form button{
 .pdf-btn:hover{
     background:#a50d25;
 }
+
+.kontakt-kartica{
+    max-width:600px;
+    margin:0 auto 40px auto;
+    text-align:center;
+}
+
+.kontakt-kartica h3{
+    color:#c8102e;
+    margin-top:25px;
+    margin-bottom:8px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.kontakt-kartica p{
+    font-size:18px;
+    color:#333;
+    margin-bottom:10px;
+}
