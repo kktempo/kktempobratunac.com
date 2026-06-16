@@ -865,3 +865,21 @@ form button{
     color:#333;
     margin-bottom:10px;
 }
+
+body{
+    background-image: url('pozadina-tempo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color:#222;
+}
+
+body{
+    background:
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+    url('pozadina-tempo.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
