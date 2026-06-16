@@ -123,9 +123,13 @@ nav a{
 }
 
 .section h2{
-    color:#c8102e;
+    color:white;
     margin-bottom:30px;
     font-size:40px;
+}
+
+.section h3{
+    color:white;
 }
 
 .cards{
@@ -853,7 +857,7 @@ form button{
 }
 
 .kontakt-kartica h3{
-    color:#c8102e;
+    color:white;
     margin-top:25px;
     margin-bottom:8px;
     font-size:22px;
@@ -862,24 +866,24 @@ form button{
 
 .kontakt-kartica p{
     font-size:18px;
-    color:#333;
+    color:white;
     margin-bottom:10px;
 }
 
-body{
-    background-image: url('pozadina-tempo.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    color:#222;
-}
 
 body{
+    margin:0;
+    padding:0;
     background:
-    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
-    url('pozadina-tempo.jpg');
+    linear-gradient(
+        120deg,
+        rgba(200,16,46,0.6),
+        rgba(0,0,0,0.75)
+    ),
+    url('pozadica-tempo.jpg');
+
     background-size:cover;
     background-position:center;
     background-attachment:fixed;
+    color:#fff;
 }
