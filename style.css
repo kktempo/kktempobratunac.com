@@ -963,3 +963,18 @@ nav a{
     font-size:50px;
     cursor:pointer;
 }
+
+.dropdown-content{
+    background:white !important;
+}
+
+.dropdown-content a{
+    color:#222 !important;
+    display:block;
+    padding:15px;
+    font-weight:bold;
+}
+
+.dropdown-content a:hover{
+    background:#f1f1f1;
+}
