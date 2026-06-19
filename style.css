@@ -978,3 +978,16 @@ nav a{
 .dropdown-content a:hover{
     background:#f1f1f1;
 }
+
+.tim-kartica button{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(5px);
+    border:2px solid white;
+    color:white;
+    padding:14px 30px;
+    border-radius:50px;
+    font-weight:700;
+    letter-spacing:1px;
+    cursor:pointer;
+    transition:0.3s;
+}
