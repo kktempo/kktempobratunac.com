@@ -913,11 +913,16 @@ nav a{
     border-radius:20px;
 }
 
-.tim-kartica img{
-    width:100%;
-    height:300px;
-    object-fit:cover;
-    display:block;
+@media screen and (max-width:768px){
+
+    .tim-kartica img{
+        width:100%;
+        height:250px;
+        object-fit:contain;
+        background:#000;
+    }
+
+
 }
 
 .tim-kartica button{
