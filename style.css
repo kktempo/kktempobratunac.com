@@ -719,46 +719,9 @@ form button{
         font-size:11px;
         padding:8px 5px;
     }
-}
 
-.programi-slider{
-    display:flex;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    scroll-behavior:smooth;
-    gap:0;
-    padding:0;
-}
 
-.programi-slider .photo{
-    flex:0 0 100%;
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-}
 
-.programi-slider img{
-    width:100%;
-    display:block;
-}
-
-.programi-dots{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:15px;
-}
-
-.program-dot{
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    background:#ccc;
-    transition:0.3s;
-}
-
-.active-program-dot{
-    background:#c8102e;
-    transform:scale(1.2);
 }
 
 .programi-slider{
@@ -1287,4 +1250,220 @@ header{
         font-size:16px;
     }
 
+}
+
+.programi-slider{
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+    width:100%;
+}
+
+.programi-slider .photo{
+    width:100%;
+}
+
+.programi-slider .photo img{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+    margin:auto;
+}
+
+.programi-slider{
+    display:flex;
+    flex-direction:column;
+    align-items:center;   /* centrira slike */
+    gap:30px;
+    width:100%;
+}
+
+.programi-slider .photo{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.programi-slider .photo img{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+}
+
+.program-btn{
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:14px 30px;
+
+    border:2px solid white;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,0.05);
+
+    backdrop-filter:blur(5px);
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    transition:0.3s;
+}
+
+.program-btn:hover{
+    background:#c8102e;
+    border-color:#c8102e;
+    transform:translateY(-2px);
+}
+
+.programi-slider{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:40px;
+}
+
+.program-kartica{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.program-kartica img{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+}
+
+.program-btn{
+    margin-top:15px;
+    padding:12px 30px;
+    border:2px solid #c8102e;
+    border-radius:50px;
+    color:#c8102e;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.programi-slider{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:40px;
+}
+
+.program-kartica{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+}
+
+.program-kartica img{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+}
+
+.program-btn{
+    margin-top:15px;
+    padding:12px 30px;
+    border:2px solid white;
+    border-radius:50px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(5px);
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.programi-slider{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:40px;
+}
+
+.program-kartica{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+}
+
+.program-kartica img{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+}
+
+.program-btn{
+    margin-top:15px;
+    padding:12px 30px;
+    border:2px solid white;
+    border-radius:50px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(5px);
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.program-btn:hover{
+    background:#c8102e;
+    border-color:#c8102e;
+}
+
+.programi-slider{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:40px;
+    width:100%;
+}
+
+.program-kartica{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+}
+
+.program-kartica img{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+    border-radius:15px;
+}
+
+.program-btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:12px 30px;
+    border:2px solid white;
+    border-radius:50px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(5px);
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.program-btn:hover{
+    background:#c8102e;
+    border-color:#c8102e;
 }
