@@ -1467,3 +1467,28 @@ header{
     background:#c8102e;
     border-color:#c8102e;
 }
+
+@media screen and (max-width:768px){
+
+    .programi-slider{
+        display:flex !important;
+        flex-direction:column !important;
+        align-items:center !important;
+        gap:30px !important;
+    }
+
+    .program-kartica{
+        width:100% !important;
+        display:flex !important;
+        flex-direction:column !important;
+        align-items:center !important;
+    }
+
+    .program-kartica img{
+        width:95% !important;
+        max-width:700px !important;
+        height:auto !important;
+        display:block !important;
+    }
+
+}
