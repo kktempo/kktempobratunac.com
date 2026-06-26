@@ -1637,3 +1637,67 @@ header{
     }
 
 }
+
+/* ================= HEADER ================= */
+
+header{
+    background:#ffffff;
+    position:sticky;
+    top:0;
+    z-index:9999;
+    box-shadow:0 3px 15px rgba(0,0,0,.12);
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:45px;
+
+    padding:22px 20px;
+
+    flex-wrap:wrap;
+}
+
+.navbar a{
+
+    text-decoration:none;
+
+    color:#c8102e;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    transition:.3s;
+}
+
+.navbar a:hover{
+
+    color:#000;
+
+    transform:translateY(-2px);
+
+}
+
+@media(max-width:768px){
+
+.navbar{
+
+    gap:15px;
+
+    padding:15px;
+
+}
+
+.navbar a{
+
+    font-size:14px;
+
+}
+
+}
