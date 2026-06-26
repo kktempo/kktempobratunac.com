@@ -18,6 +18,16 @@
 
 <body>
 
+<div id="intro">
+
+    <div class="intro-glow"></div>
+
+    <img src="logo.png" class="intro-logo" alt="KK Tempo Bratunac">
+
+    <h1>KOŠARKAŠKI KLUB TEMPO</h1>
+
+</div>
+
     <!-- GORNJI DEO SA GRBOM -->
 
     <div class="hero-header">
@@ -654,6 +664,16 @@ function otvoriGaleriju(id){
 function zatvoriGaleriju(id){
     document.getElementById(id).style.display = "none";
 }
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        document.getElementById("intro").classList.add("hide");
+
+    }, 3200);
+
+});
 </script>
 
 </body>
