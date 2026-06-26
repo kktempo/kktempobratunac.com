@@ -1701,3 +1701,141 @@ header{
 }
 
 }
+
+/* ===================== */
+/* PROFESIONALNA NAVBAR  */
+/* ===================== */
+
+.navbar{
+
+    width:100%;
+
+    background:#ffffff;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:9999;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+
+}
+
+.navbar nav{
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+.navbar ul{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    list-style:none;
+
+    gap:45px;
+
+    padding:22px 30px;
+
+}
+
+.navbar li{
+
+    position:relative;
+
+}
+
+.navbar a{
+
+    text-decoration:none;
+
+    color:#c8102e;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    transition:.3s;
+
+    padding:8px 0;
+
+}
+
+/* Efekat pri prelasku mišem */
+
+.navbar a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-8px;
+
+    width:0;
+
+    height:3px;
+
+    background:#c8102e;
+
+    transition:.3s;
+
+    border-radius:10px;
+
+}
+
+.navbar a:hover::after{
+
+    width:100%;
+
+}
+
+.navbar a:hover{
+
+    color:#111;
+
+}
+
+/* Aktivna stranica */
+
+.navbar a.active{
+
+    color:#111;
+
+}
+
+.navbar a.active::after{
+
+    width:100%;
+
+}
+
+@media(max-width:900px){
+
+.navbar ul{
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    padding:15px;
+
+}
+
+.navbar a{
+
+    font-size:13px;
+
+}
+
+}
