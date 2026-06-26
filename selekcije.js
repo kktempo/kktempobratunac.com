@@ -1,15 +1,25 @@
-function otvoriGaleriju(id){
-
-    document.getElementById(id).style.display="block";
-
-    document.body.style.overflow="hidden";
-
+// OTVARANJE GALERIJE
+function otvoriGaleriju(id) {
+    document.getElementById(id).style.display = "block";
+    document.body.style.overflow = "hidden";
 }
 
-function zatvoriGaleriju(id){
-
-    document.getElementById(id).style.display="none";
-
-    document.body.style.overflow="auto";
-
+// ZATVARANJE GALERIJE
+function zatvoriGaleriju(id) {
+    document.getElementById(id).style.display = "none";
+    document.body.style.overflow = "auto";
 }
+
+// Zatvaranje klikom van slike
+document.querySelectorAll(".popup-galerija").forEach(function(galerija){
+
+    galerija.addEventListener("click", function(e){
+
+        if(e.target === galerija){
+            galerija.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+    });
+
+});
