@@ -1802,7 +1802,7 @@ header{
 
 .navbar a:hover{
 
-    color:#111;
+    color:#red;
 
 }
 
@@ -1810,7 +1810,7 @@ header{
 
 .navbar a.active{
 
-    color:#111;
+    color:#red;
 
 }
 
