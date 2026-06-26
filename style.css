@@ -1753,20 +1753,14 @@ header{
 }
 
 .navbar a{
-
     text-decoration:none;
-
-    color:#c8102e;
-
+    color:#ffffff !important;
+    font-weight:700;
     font-size:17px;
-
-    font-weight:800;
-
-    letter-spacing:1px;
-
+    letter-spacing:.5px;
+    position:relative;
     transition:.3s;
 
-    padding:8px 0;
 
 }
 
@@ -1801,8 +1795,8 @@ header{
 }
 
 .navbar a:hover{
+    color:#ffffff !important;
 
-    color:red;
 
 }
 
@@ -1932,4 +1926,59 @@ nav ul li a:hover::after{
         font-size:14px;
     }
 
+}
+
+.navbar .active{
+    color:#ffffff !important;
+}
+
+/* ===== NAVIGACIJA ===== */
+
+.navbar{
+    background:#c8102e;
+}
+
+.navbar a{
+    color:#fff !important;
+    text-decoration:none;
+    font-weight:700;
+}
+
+.navbar a:visited{
+    color:#fff !important;
+}
+
+.navbar a:hover{
+    color:#fff !important;
+}
+
+.navbar a.active{
+    color:#fff !important;
+}
+
+/* ===== FINAL NAVIGACIJA (PREPIS SVEGA) ===== */
+
+nav ul{
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+    margin:0;
+    padding:0;
+}
+
+nav ul li a{
+    color:#ffffff !important;
+    text-decoration:none;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:1px;
+    transition:0.3s;
+}
+
+/* hover efekat */
+nav ul li a:hover{
+    color:#ffffff !important;
+    opacity:0.8;
 }
