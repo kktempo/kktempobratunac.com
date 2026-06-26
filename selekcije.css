@@ -1,0 +1,398 @@
+/* ===========================
+   OSNOVNO
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    background:
+    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.75)),
+    url("pozadica-tempo.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    color:white;
+}
+
+
+/* ===========================
+   LOGO
+=========================== */
+
+.hero-header{
+
+    background:white;
+
+    text-align:center;
+
+    padding:25px 0;
+
+}
+
+.hero-logo{
+
+    width:220px;
+
+    filter:
+    drop-shadow(0 0 12px rgba(255,0,0,.8))
+    drop-shadow(0 0 30px rgba(255,0,0,.6));
+
+}
+
+.hero-header h1{
+
+    color:#c8102e;
+
+    margin-top:10px;
+
+    font-size:42px;
+
+    letter-spacing:3px;
+
+}
+
+
+/* ===========================
+   MENI
+=========================== */
+
+header{
+
+    position:sticky;
+
+    top:0;
+
+    background:white;
+
+    height:75px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1000;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+.dropdown{
+
+    position:relative;
+
+}
+
+.dropbtn{
+
+    background:white;
+
+    color:#c8102e;
+
+    border:2px solid #c8102e;
+
+    padding:12px 25px;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.dropbtn:hover{
+
+    background:#c8102e;
+
+    color:white;
+
+}
+
+.dropdown-content{
+
+    display:none;
+
+    position:absolute;
+
+    top:60px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:white;
+
+    border-radius:15px;
+
+    min-width:260px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+}
+
+.dropdown-content a{
+
+    display:block;
+
+    color:#333;
+
+    padding:15px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+.dropdown-content a:hover{
+
+    background:#c8102e;
+
+    color:white;
+
+}
+
+.dropdown:hover .dropdown-content{
+
+    display:block;
+
+}
+
+
+/* ===========================
+   NASLOV
+=========================== */
+
+.section{
+
+    width:90%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:80px 0;
+
+}
+
+.section h2{
+
+    text-align:center;
+
+    font-size:48px;
+
+    margin-bottom:50px;
+
+}
+
+
+/* ===========================
+   GRID
+=========================== */
+
+.timovi-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+
+    gap:40px;
+
+}
+
+
+/* ===========================
+   KARTICE
+=========================== */
+
+.tim-kartica{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+}
+
+.tim-kartica img{
+
+    width:100%;
+
+    height:500px;
+
+    object-fit:cover;
+
+    transition:.5s;
+
+}
+
+.tim-kartica:hover img{
+
+    transform:scale(1.08);
+
+}
+
+.tim-kartica::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        rgba(0,0,0,.1),
+        rgba(0,0,0,.6)
+    );
+
+}
+
+
+/* ===========================
+   DUGME
+=========================== */
+
+.tim-kartica button{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(8px);
+
+    border:2px solid white;
+
+    color:white;
+
+    padding:16px 35px;
+
+    border-radius:50px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.tim-kartica button:hover{
+
+    background:#c8102e;
+
+    border-color:#c8102e;
+
+    transform:translate(-50%,-50%) scale(1.06);
+
+}
+
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer{
+
+    text-align:center;
+
+    padding:35px;
+
+    background:#111;
+
+    margin-top:60px;
+
+}
+
+
+/* ===========================
+   TELEFON
+=========================== */
+
+@media(max-width:768px){
+
+.hero-logo{
+
+    width:130px;
+
+}
+
+.hero-header h1{
+
+    font-size:22px;
+
+}
+
+header{
+
+    height:65px;
+
+}
+
+.dropbtn{
+
+    font-size:15px;
+
+    padding:10px 18px;
+
+}
+
+.section h2{
+
+    font-size:34px;
+
+}
+
+.timovi-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.tim-kartica img{
+
+    height:300px;
+
+}
+
+.tim-kartica button{
+
+    width:85%;
+
+    font-size:15px;
+
+}
+
+}
