@@ -657,3 +657,78 @@ header{
 }
 
 }
+
+/* =======================
+   NAVIGACIJA
+======================= */
+
+header{
+    background:#fff;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    width:100%;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.navbar{
+    max-width:1400px;
+    margin:auto;
+    height:75px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+}
+
+.navbar a{
+    text-decoration:none;
+    color:#c8102e !important;
+    font-weight:700;
+    font-size:17px;
+    letter-spacing:.5px;
+    position:relative;
+    transition:.3s;
+}
+
+.navbar a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:0;
+    height:3px;
+    background:#c8102e;
+    transition:.3s;
+}
+
+.navbar a:hover::after,
+.navbar a.active::after{
+    width:100%;
+}
+
+.navbar a:hover{
+    color:#a50d25 !important;
+}
+
+.navbar .active{
+    color:#c8102e !important;
+}
+
+/* TELEFON */
+
+@media(max-width:900px){
+
+    .navbar{
+        flex-wrap:wrap;
+        gap:15px;
+        height:auto;
+        padding:15px;
+    }
+
+    .navbar a{
+        font-size:14px;
+    }
+
+}
