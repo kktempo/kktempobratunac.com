@@ -584,3 +584,76 @@ header{
 }
 
 }
+
+.selekcije-opis{
+
+    max-width:1000px;
+    margin:40px auto 60px;
+
+    background:rgba(0,0,0,.45);
+
+    border-left:6px solid #c8102e;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+
+}
+
+.selekcije-opis h3{
+
+    color:white;
+
+    font-size:30px;
+
+    margin-bottom:20px;
+
+}
+
+.selekcije-opis p{
+
+    color:#f2f2f2;
+
+    font-size:19px;
+
+    line-height:1.8;
+
+    text-align:justify;
+
+}
+
+.selekcije-opis strong{
+
+    color:#ffffff;
+
+}
+
+@media(max-width:768px){
+
+.selekcije-opis{
+
+    padding:20px;
+
+    margin-bottom:40px;
+
+}
+
+.selekcije-opis h3{
+
+    font-size:22px;
+
+    text-align:center;
+
+}
+
+.selekcije-opis p{
+
+    font-size:16px;
+
+    text-align:left;
+
+}
+
+}
