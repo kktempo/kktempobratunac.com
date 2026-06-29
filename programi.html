@@ -110,6 +110,90 @@
 
 
 </div>
+<script>
+function posaljiWhatsapp(){
+
+
+    let ime = document.getElementById("ime").value;
+    let godiste = document.getElementById("godiste").value;
+
+    let prvoIme = ime.split(" ")[0];
+    let sifra = prvoIme.toUpperCase() + godiste;
+
+    let roditelj = document.getElementById("roditelj").value;
+    let telefon = document.getElementById("telefon").value;
+    let email = document.getElementById("email").value;
+   
+
+emailjs.send("service_42vtnmu", "template_05sc68w", {
+    sifra: sifra,
+    ime: ime,
+    godiste: godiste,
+    roditelj: roditelj,
+    telefon: telefon,
+    email: email,
+    
+})
+.then(function() {
+    alert("Prijava uspešno poslata!");
+})
+.catch(function(error) {
+    console.log("EMAILJS GRESKA:", error);
+    alert("Greška: " + JSON.stringify(error));
+});
+
+let poruka =
+`ŠIFRA ČLANA: ${sifra}
+
+Ime i prezime deteta: ${ime}
+Godište: ${godiste}
+Ime roditelja: ${roditelj}
+Telefon: ${telefon}
+Email: ${email} ;
+
+    let url = "https://wa.me/381640024662?text=" + encodeURIComponent(poruka);
+document.body.insertAdjacentHTML("beforeend", `
+<div id="sifraPopup" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+">
+    <div style="
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    max-width:350px;
+    ">
+        <h2>USPEŠNA PRIJAVA!</h2>
+        <p>Šifra deteta je:</p>
+        <h1 style="color:#c8102e;">${sifra}</h1>
+        <p>Sačuvajte ovu šifru za roditeljski portal.</p>
+
+        <button onclick="document.getElementById('sifraPopup').remove()"
+        style="
+        padding:10px 20px;
+        background:#c8102e;
+        color:white;
+        border:none;
+        border-radius:8px;
+        cursor:pointer;
+        ">
+            U redu
+        </button>
+    </div>
+</div>
+`);
+
+    window.open(url, "_blank");
+}
 
 <!-- ===== FOOTER ===== -->
 <footer>
