@@ -113,86 +113,145 @@
 <script>
 function posaljiWhatsapp(){
 
+    // Uzimanje podataka
+    let ime = document.getElementById("ime").value.trim();
+    let godiste = document.getElementById("godiste").value.trim();
+    let roditelj = document.getElementById("roditelj").value.trim();
+    let telefon = document.getElementById("telefon").value.trim();
+    let email = document.getElementById("email").value.trim();
 
-    let ime = document.getElementById("ime").value;
-    let godiste = document.getElementById("godiste").value;
+    // Provera
+    if(
+        ime==="" ||
+        godiste==="" ||
+        roditelj==="" ||
+        telefon==="" ||
+        email===""){
+        alert("Popunite sva polja.");
+        return;
+    }
 
-    let prvoIme = ime.split(" ")[0];
-    let sifra = prvoIme.toUpperCase() + godiste;
+    // Generisanje šifre
+    let prvoIme = ime.split(" ")[0].toUpperCase();
+    let sifra = "TEMPO-" + prvoIme + "-" + godiste;
 
-    let roditelj = document.getElementById("roditelj").value;
-    let telefon = document.getElementById("telefon").value;
-    let email = document.getElementById("email").value;
-   
+    // EmailJS
+    emailjs.send(
+        "service_42vtnmu",
+        "template_05sc68w",
+        {
+            sifra:sifra,
+            ime:ime,
+            godiste:godiste,
+            roditelj:roditelj,
+            telefon:telefon,
+            email:email
+        }
+    )
+    .then(function(){
 
-emailjs.send("service_42vtnmu", "template_05sc68w", {
-    sifra: sifra,
-    ime: ime,
-    godiste: godiste,
-    roditelj: roditelj,
-    telefon: telefon,
-    email: email,
-    
-})
-.then(function() {
-    alert("Prijava uspešno poslata!");
-})
-.catch(function(error) {
-    console.log("EMAILJS GRESKA:", error);
-    alert("Greška: " + JSON.stringify(error));
-});
+        // WhatsApp poruka
+        let poruka =
+`🏀 NOVA PRIJAVA
 
-let poruka =
-`ŠIFRA ČLANA: ${sifra}
+ŠIFRA: ${sifra}
 
-Ime i prezime deteta: ${ime}
+Ime deteta: ${ime}
+
 Godište: ${godiste}
-Ime roditelja: ${roditelj}
-Telefon: ${telefon}
-Email: ${email} ;
 
-    let url = "https://wa.me/381640024662?text=" + encodeURIComponent(poruka);
-document.body.insertAdjacentHTML("beforeend", `
-<div id="sifraPopup" style="
+Roditelj: ${roditelj}
+
+Telefon: ${telefon}
+
+Email: ${email}`;
+
+        let url = "https://wa.me/381640024662?text=" + encodeURIComponent(poruka);
+
+        window.open(url,"_blank");
+
+        // Popup
+        document.body.insertAdjacentHTML("beforeend",`
+
+<div id="popupTempo" style="
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.7);
+background:rgba(0,0,0,.75);
 display:flex;
 justify-content:center;
 align-items:center;
 z-index:99999;
 ">
-    <div style="
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    text-align:center;
-    max-width:350px;
-    ">
-        <h2>USPEŠNA PRIJAVA!</h2>
-        <p>Šifra deteta je:</p>
-        <h1 style="color:#c8102e;">${sifra}</h1>
-        <p>Sačuvajte ovu šifru za roditeljski portal.</p>
 
-        <button onclick="document.getElementById('sifraPopup').remove()"
-        style="
-        padding:10px 20px;
-        background:#c8102e;
-        color:white;
-        border:none;
-        border-radius:8px;
-        cursor:pointer;
-        ">
-            U redu
-        </button>
-    </div>
+<div style="
+background:white;
+padding:35px;
+border-radius:18px;
+text-align:center;
+width:360px;
+max-width:90%;
+box-shadow:0 15px 40px rgba(0,0,0,.3);
+">
+
+<h2 style="color:#c8102e;margin-bottom:15px;">
+PRIJAVA USPEŠNA
+</h2>
+
+<p style="color:#333;">
+Vaša šifra za roditeljski portal je:
+</p>
+
+<h1 style="
+color:#c8102e;
+margin:20px 0;
+font-size:32px;
+">
+${sifra}
+</h1>
+
+<p style="color:#666;">
+Sačuvajte ovu šifru.
+</p>
+
+<button onclick="zatvoriPopup()"
+style="
+margin-top:20px;
+padding:12px 35px;
+background:#c8102e;
+color:white;
+border:none;
+border-radius:50px;
+font-size:16px;
+cursor:pointer;
+">
+U REDU
+</button>
+
+</div>
 </div>
 `);
 
-    window.open(url, "_blank");
+        // Čišćenje forme
+        document.getElementById("ime").value="";
+        document.getElementById("godiste").value="";
+        document.getElementById("roditelj").value="";
+        document.getElementById("telefon").value="";
+        document.getElementById("email").value="";
+
+    })
+
+    .catch(function(error){
+        console.log(error);
+        alert("Greška pri slanju prijave.");
+    });
+
+}
+    
+function zatvoriPopup(){
+    document.getElementById("popupTempo").remove();
 }
 
 <!-- ===== FOOTER ===== -->
