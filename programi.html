@@ -104,6 +104,15 @@
 
         <input type="email" id="email" name="email" placeholder="Email" required>
 
+<label>Izaberite program:</label>
+
+        <select id="programi" name="programi" required>
+            <option value="">-- Izaberite program --</option>
+            <option value="Program 1">Program 1</option>
+            <option value="Program 2">Program 2</option>
+            <option value="Program 3">Program 3</option>
+        </select>
+
 <div style="text-align:center; margin-top:30px;">
   <button type="button" onclick="posaljiWhatsapp()" class="btn">
     PRIJAVI DETE
@@ -129,6 +138,7 @@ function posaljiWhatsapp(){
     let roditelj = document.getElementById("roditelj").value.trim();
     let telefon = document.getElementById("telefon").value.trim();
     let email = document.getElementById("email").value.trim();
+    let program = document.getElementById("program").value.trim();
 
     // Provera
     if(
@@ -136,7 +146,8 @@ function posaljiWhatsapp(){
         godiste==="" ||
         roditelj==="" ||
         telefon==="" ||
-        email===""){
+        email===""  ||
+        program===""){
         alert("Popunite sva polja.");
         return;
     }
@@ -156,6 +167,7 @@ function posaljiWhatsapp(){
             roditelj:roditelj,
             telefon:telefon,
             email:email
+            program:program
         }
     )
     .then(function(){
@@ -174,7 +186,9 @@ Roditelj: ${roditelj}
 
 Telefon: ${telefon}
 
-Email: ${email}`;
+Email: ${email}
+
+Program: ${program}`;
 
         let url = "https://wa.me/381640024662?text=" + encodeURIComponent(poruka);
 
@@ -250,6 +264,7 @@ U REDU
         document.getElementById("roditelj").value="";
         document.getElementById("telefon").value="";
         document.getElementById("email").value="";
+        document.getElementById("program").value="";
 
     })
 
