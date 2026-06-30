@@ -113,6 +113,18 @@
             <option value="Program 3">Program 3</option>
         </select>
 
+<div id="podProgramDiv" style="display:none; margin-top:20px;">
+
+    <label>Izaberite vrstu Programa 2:</label>
+
+    <select id="podProgram">
+        <option value="">-- Izaberite --</option>
+        <option value="Teretana">Teretana</option>
+        <option value="Individualni rad">Individualni rad</option>
+    </select>
+
+</div>
+
 <div style="text-align:center; margin-top:30px;">
   <button type="button" onclick="posaljiWhatsapp()" class="btn">
     PRIJAVI DETE
@@ -139,6 +151,7 @@ function posaljiWhatsapp(){
     let telefon = document.getElementById("telefon").value.trim();
     let email = document.getElementById("email").value.trim();
     let program = document.getElementById("programi").value;
+    let podProgram = document.getElementById("podProgram").value;
 
     // Provera
     if(
@@ -150,6 +163,10 @@ function posaljiWhatsapp(){
         program===""){
         alert("Popunite sva polja.");
         return;
+if(program==="Program 2" && podProgram===""){
+    alert("Izaberite Teretanu ili Individualni rad.");
+    return;
+
     }
 
     // Generisanje šifre
@@ -167,7 +184,8 @@ function posaljiWhatsapp(){
         roditelj: roditelj,
         telefon: telefon,
         email: email,
-        program: program
+        program: program,
+        podProgram: podProgram
     }
 )
     .then(function(){
@@ -189,6 +207,8 @@ Telefon: ${telefon}
 Email: ${email}
 
 Program: ${program}`;
+
+${program==="Program 2" ? "Vrsta: " + podProgram : ""}
 
         let url = "https://wa.me/381640024662?text=" + encodeURIComponent(poruka);
 
@@ -277,6 +297,20 @@ U REDU
     
 function zatvoriPopup(){
     document.getElementById("popupTempo").remove();
+}
+
+function prikaziPodprogram(){
+
+    let program = document.getElementById("programi").value;
+    let podProgramDiv = document.getElementById("podProgramDiv");
+
+    if(program === "Program 2"){
+        podProgramDiv.style.display = "block";
+    }else{
+        podProgramDiv.style.display = "none";
+        document.getElementById("podProgram").value = "";
+    }
+
 }
 </script>
 
