@@ -1982,3 +1982,75 @@ nav ul li a:hover{
     color:#ffffff !important;
     opacity:0.8;
 }
+
+body{
+    margin:0;
+    padding:0;
+    background:
+    linear-gradient(
+        120deg,
+        rgba(200,16,46,0.6),
+        rgba(0,0,0,0.75)
+    ),
+    url('pozadica-tempo.jpg');
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:#fff;
+}
+
+body{
+    margin:0;
+    padding:0;
+    background:#ffffff;
+    color:#c8102e;
+}
+
+.section h2{
+    color:#c8102e;
+}
+
+.section h3{
+    color:#c8102e;
+}
+
+.section p{
+    color:#444;
+    line-height:1.8;
+}
+
+.kontakt-kartica h3{
+    color:#c8102e;
+}
+
+.kontakt-kartica p{
+    color:#444;
+}
+
+.btn,
+.program-btn,
+.tim-kartica button{
+    background:#c8102e;
+    color:white;
+    border:none;
+}
+
+.btn:hover,
+.program-btn:hover,
+.tim-kartica button:hover{
+    background:#a40d25;
+}
+
+header{
+    background:#ffffff;
+    border-bottom:2px solid #c8102e;
+}
+
+nav a{
+    color:#c8102e !important;
+}
+
+nav a:hover{
+    color:#8b0d20 !important;
+}
