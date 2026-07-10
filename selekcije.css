@@ -648,20 +648,7 @@ header{
 
 }
 
-}
 
-/* =======================
-   NAVIGACIJA
-======================= */
-
-header{
-    background:#fff;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    width:100%;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
 
 .navbar{
     max-width:1400px;
@@ -756,12 +743,7 @@ nav ul li a:hover{
     color:#a50d25 !important;
 }
 
-/* ===== NAVIGACIJA ===== */
 
-header{
-    background:#ffffff;
-    border-bottom:2px solid #c8102e;
-}
 
 nav ul{
     display:flex;
@@ -805,21 +787,22 @@ nav ul li a.active{
 
 }
 
-/* =========================================
-   GLAVNA NAVIGACIJA
-========================================= */
+/* ===========================================
+   PROFESIONALNA BELA NAVIGACIJA
+=========================================== */
 
 header{
-    background:#ffffff !important;
     position:sticky;
     top:0;
-    z-index:9999;
     width:100%;
     height:80px;
+    background:#ffffff !important;
     display:flex;
     justify-content:center;
     align-items:center;
+    z-index:9999;
     box-shadow:0 4px 15px rgba(0,0,0,.12);
+    border-bottom:2px solid #c8102e;
 }
 
 header nav{
@@ -845,7 +828,7 @@ header nav ul li a{
     text-decoration:none;
     font-size:17px;
     font-weight:700;
-    letter-spacing:0.5px;
+    letter-spacing:.5px;
     transition:.3s;
 }
 
@@ -854,13 +837,19 @@ header nav ul li a:hover{
 }
 
 header nav ul li a.active{
+    color:#8d0d20 !important;
+}
+
+/* Gasi sva stara pravila */
+
+nav a,
+.navbar a,
+.logo h1,
+.dropbtn{
     color:#c8102e !important;
 }
 
-/* Isključi stari dropdown */
-
 .dropdown,
-.dropbtn,
 .dropdown-content{
     display:none !important;
 }
@@ -884,3 +873,4 @@ header nav ul li a.active{
     }
 
 }
+
