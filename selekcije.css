@@ -450,6 +450,8 @@ header{
 
 }
 
+}
+
 .popup-galerija img{
 
     margin:15px auto;
@@ -623,6 +625,8 @@ header{
 }
 
 @media(max-width:768px){
+
+}
 
 .selekcije-opis{
 
