@@ -387,7 +387,7 @@ header{
 
 }
 
-}
+
 
 .popup-galerija{
 
@@ -573,7 +573,7 @@ header{
 
     line-height:1.8;
 
-}
+
 
 }
 
@@ -650,27 +650,6 @@ header{
 
 
 
-.navbar{
-    max-width:1400px;
-    margin:auto;
-    height:75px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:40px;
-}
-
-.navbar a{
-    text-decoration:none;
-    color:#c8102e !important;
-    font-weight:700;
-    font-size:17px;
-    letter-spacing:.5px;
-    position:relative;
-    transition:.3s;
-}
-
 .navbar a::after{
     content:"";
     position:absolute;
@@ -712,65 +691,13 @@ header{
 
 }
 
-nav a{
-    color:#c8102e !important;
-}
+
 
 nav{
     max-width:1400px;
     margin:auto;
 }
 
-nav ul{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:40px;
-    list-style:none;
-    margin:0;
-    padding:0;
-}
-
-nav ul li a{
-    color:#c8102e !important;
-    text-decoration:none;
-    font-size:17px;
-    font-weight:700;
-    transition:.3s;
-}
-
-nav ul li a:hover{
-    color:#a50d25 !important;
-}
-
-
-
-nav ul{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:35px;
-    list-style:none;
-    margin:0;
-    padding:0;
-}
-
-nav ul li a{
-    color:#c8102e !important;
-    text-decoration:none;
-    font-size:17px;
-    font-weight:700;
-    letter-spacing:0.5px;
-    transition:0.3s;
-}
-
-nav ul li a:hover{
-    color:#8f0d22 !important;
-}
-
-nav ul li a.active{
-    color:#8f0d22 !important;
-}
 
 /* Telefon */
 
@@ -787,22 +714,35 @@ nav ul li a.active{
 
 }
 
-/* ===========================================
-   PROFESIONALNA BELA NAVIGACIJA
-=========================================== */
+/* ==============================
+   GLAVNA NAVIGACIJA
+============================== */
+
+body{
+    background:#ffffff;
+    color:#333;
+}
+
+.hero-header{
+    background:#ffffff;
+}
+
+.hero-header h1{
+    color:#c8102e;
+}
 
 header{
     position:sticky;
     top:0;
     width:100%;
+    background:#ffffff;
     height:80px;
-    background:#ffffff !important;
     display:flex;
     justify-content:center;
     align-items:center;
-    z-index:9999;
-    box-shadow:0 4px 15px rgba(0,0,0,.12);
     border-bottom:2px solid #c8102e;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    z-index:9999;
 }
 
 header nav{
@@ -819,42 +759,21 @@ header nav ul{
     padding:0;
 }
 
-header nav ul li{
-    list-style:none;
-}
-
 header nav ul li a{
-    color:#c8102e !important;
     text-decoration:none;
+    color:#c8102e;
     font-size:17px;
     font-weight:700;
-    letter-spacing:.5px;
     transition:.3s;
 }
 
 header nav ul li a:hover{
-    color:#8d0d20 !important;
+    color:#8d0d20;
 }
 
 header nav ul li a.active{
-    color:#8d0d20 !important;
+    color:#8d0d20;
 }
-
-/* Gasi sva stara pravila */
-
-nav a,
-.navbar a,
-.logo h1,
-.dropbtn{
-    color:#c8102e !important;
-}
-
-.dropdown,
-.dropdown-content{
-    display:none !important;
-}
-
-/* Telefon */
 
 @media(max-width:900px){
 
