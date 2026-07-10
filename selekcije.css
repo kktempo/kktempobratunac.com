@@ -53,7 +53,7 @@ body{
 
 .hero-header h1{
 
-    color:#c8102e;
+    color:white;
 
     margin-top:10px;
 
@@ -731,4 +731,8 @@ header{
         font-size:14px;
     }
 
+}
+
+nav a{
+    color:#c8102e !important;
 }
