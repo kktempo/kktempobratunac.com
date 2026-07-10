@@ -14,16 +14,8 @@ html{
 }
 
 body{
-
-    background:
-    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.75)),
-    url("pozadica-tempo.jpg");
-
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-
-    color:white;
+    background:#ffffff;
+    color:#333;
 }
 
 
@@ -735,4 +727,31 @@ header{
 
 nav a{
     color:#c8102e !important;
+}
+
+nav{
+    max-width:1400px;
+    margin:auto;
+}
+
+nav ul{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+nav ul li a{
+    color:#c8102e !important;
+    text-decoration:none;
+    font-size:17px;
+    font-weight:700;
+    transition:.3s;
+}
+
+nav ul li a:hover{
+    color:#a50d25 !important;
 }
