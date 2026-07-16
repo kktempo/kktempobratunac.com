@@ -640,3 +640,15 @@ header nav ul li a{
 
 }
 
+.tim-kartica img{
+    position:relative;
+    z-index:1;
+}
+
+.tim-kartica::before{
+    z-index:2;
+}
+
+.tim-kartica button{
+    z-index:3;
+}
