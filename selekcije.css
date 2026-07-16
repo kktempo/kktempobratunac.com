@@ -300,6 +300,8 @@ header{
 
 }
 
+}
+
 
 
 .popup-galerija{
@@ -353,7 +355,9 @@ header{
     cursor:pointer;
 
     font-weight:bold;
+
 }
+
 
 @media(max-width:768px){
 
@@ -371,7 +375,7 @@ header{
 
 }
 
-}
+
 
 /* ===========================
    UVOD
@@ -488,7 +492,7 @@ header{
 
     line-height:1.8;
 
-
+}
 
 }
 
@@ -539,7 +543,6 @@ header{
 
 @media(max-width:768px){
 
-}
 
 .selekcije-opis{
 
@@ -565,150 +568,9 @@ header{
 
 }
 
-
-
-.navbar a::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-8px;
-    width:0;
-    height:3px;
-    background:#c8102e;
-    transition:.3s;
-}
-
-.navbar a:hover::after,
-.navbar a.active::after{
-    width:100%;
-}
-
-.navbar a:hover{
-    color:#a50d25 !important;
-}
-
-.navbar .active{
-    color:#c8102e !important;
-}
-
-/* TELEFON */
-
-@media(max-width:900px){
-
-    .navbar{
-        flex-wrap:wrap;
-        gap:15px;
-        height:auto;
-        padding:15px;
-    }
-
-    .navbar a{
-        font-size:14px;
-    }
-
 }
 
 
-
-nav{
-    max-width:1400px;
-    margin:auto;
-}
-
-
-/* Telefon */
-
-@media (max-width:768px){
-
-    nav ul{
-        flex-wrap:wrap;
-        gap:15px;
-    }
-
-    nav ul li a{
-        font-size:14px;
-    }
-
-}
-
-/* ==============================
-   GLAVNA NAVIGACIJA
-============================== */
-
-body{
-    background:#ffffff;
-    color:#333;
-}
-
-.hero-header{
-    background:#ffffff;
-}
-
-.hero-header h1{
-    color:#c8102e;
-}
-
-header{
-    position:sticky;
-    top:0;
-    width:100%;
-    background:#ffffff;
-    height:80px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-bottom:2px solid #c8102e;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-    z-index:9999;
-}
-
-header nav{
-    width:100%;
-}
-
-header nav ul{
-    list-style:none;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:35px;
-    margin:0;
-    padding:0;
-}
-
-header nav ul li a{
-    text-decoration:none;
-    color:#c8102e;
-    font-size:17px;
-    font-weight:700;
-    transition:.3s;
-}
-
-header nav ul li a:hover{
-    color:#8d0d20;
-}
-
-header nav ul li a.active{
-    color:#8d0d20;
-}
-
-@media(max-width:900px){
-
-    header{
-        height:auto;
-        padding:15px 0;
-    }
-
-    header nav ul{
-        flex-wrap:wrap;
-        gap:15px;
-    }
-
-    header nav ul li a{
-        font-size:14px;
-    }
-
-}
 
 /* ===========================
    GLAVNA NAVIGACIJA
