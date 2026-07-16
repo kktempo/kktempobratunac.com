@@ -45,7 +45,7 @@ body{
 
 .hero-header h1{
 
-    color:white;
+    color:#c8102e;
 
     margin-top:10px;
 
@@ -82,93 +82,6 @@ header{
 
 }
 
-.dropdown{
-
-    position:relative;
-
-}
-
-.dropbtn{
-
-    background:white;
-
-    color:#c8102e;
-
-    border:2px solid #c8102e;
-
-    padding:12px 25px;
-
-    border-radius:12px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-.dropbtn:hover{
-
-    background:#c8102e;
-
-    color:white;
-
-}
-
-.dropdown-content{
-
-    display:none;
-
-    position:absolute;
-
-    top:60px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    background:white;
-
-    border-radius:15px;
-
-    min-width:260px;
-
-    overflow:hidden;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.2);
-
-}
-
-.dropdown-content a{
-
-    display:block;
-
-    color:#333;
-
-    padding:15px;
-
-    text-decoration:none;
-
-    font-weight:bold;
-
-}
-
-.dropdown-content a:hover{
-
-    background:#c8102e;
-
-    color:white;
-
-}
-
-.dropdown:hover .dropdown-content{
-
-    display:block;
-
-}
 
 
 /* ===========================
@@ -794,6 +707,74 @@ header nav ul li a.active{
     header nav ul li a{
         font-size:14px;
     }
+
+}
+
+/* ===========================
+   GLAVNA NAVIGACIJA
+=========================== */
+
+header{
+    position:sticky;
+    top:0;
+    width:100%;
+    background:#ffffff !important;
+    border-bottom:2px solid #c8102e;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    z-index:9999;
+}
+
+header nav{
+    width:100%;
+}
+
+header nav ul{
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:35px;
+    padding:20px 0;
+    margin:0;
+}
+
+header nav ul li{
+    list-style:none;
+}
+
+header nav ul li a{
+    color:#c8102e !important;
+    text-decoration:none;
+    font-size:17px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+header nav ul li a:hover{
+    color:#8d0d20 !important;
+}
+
+header nav ul li a.active{
+    color:#8d0d20 !important;
+}
+
+/* Telefon */
+
+@media(max-width:900px){
+
+header{
+    height:auto;
+}
+
+header nav ul{
+    flex-wrap:wrap;
+    gap:15px;
+    padding:15px;
+}
+
+header nav ul li a{
+    font-size:14px;
+}
 
 }
 
