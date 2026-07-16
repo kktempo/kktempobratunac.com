@@ -18,205 +18,8 @@
     font-size:48px;
     color:#c8102e;
     margin-bottom:50px;
-    letter-spacing:2px;
 
 }
-
-
-/* GRID FOTOGRAFIJA */
-
-.galerija-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
-
-    gap:30px;
-
-}
-
-
-/* KARTICA SLIKE */
-
-.galerija-slika{
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:25px;
-
-    height:320px;
-
-    box-shadow:
-    0 15px 35px rgba(0,0,0,.25);
-
-    cursor:pointer;
-
-}
-
-
-/* SLIKA */
-
-.galerija-slika img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    transition:.5s ease;
-
-}
-
-
-
-/* EFEKAT PREKO SLIKE */
-
-.galerija-slika::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-    linear-gradient(
-    rgba(0,0,0,0),
-    rgba(0,0,0,.45)
-    );
-
-    opacity:0;
-
-    transition:.4s;
-
-}
-
-
-/* HOVER */
-
-.galerija-slika:hover img{
-
-    transform:scale(1.08);
-
-}
-
-
-.galerija-slika:hover::after{
-
-    opacity:1;
-
-}
-
-
-
-/* IKONICA / TEKST PREKO SLIKE */
-
-.galerija-slika span{
-
-    position:absolute;
-
-    bottom:20px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    z-index:2;
-
-    opacity:0;
-
-    transition:.3s;
-
-}
-
-
-.galerija-slika:hover span{
-
-    opacity:1;
-
-}
-
-
-/* ===========================
-   TELEFON
-=========================== */
-
-
-@media(max-width:768px){
-
-
-.galerija-sekcija{
-
-    width:92%;
-
-    padding:50px 0;
-
-}
-
-
-.galerija-sekcija h2{
-
-    font-size:34px;
-
-}
-
-
-.galerija-grid{
-
-    grid-template-columns:1fr;
-
-    gap:20px;
-
-}
-
-
-.galerija-slika{
-
-    height:260px;
-
-}
-
-
-}
-
-/* ===========================
-   GALERIJA
-=========================== */
-
-.galerija-sekcija{
-
-    width:90%;
-    max-width:1400px;
-    margin:auto;
-    padding:80px 0;
-
-}
-
-
-.galerija-sekcija h2{
-
-    text-align:center;
-
-    font-size:48px;
-
-    color:#c8102e;
-
-    margin-bottom:50px;
-
-    letter-spacing:2px;
-
-}
-
 
 
 /* GRID */
@@ -233,8 +36,7 @@
 }
 
 
-
-/* SLIKA KARTICA */
+/* KARTICE */
 
 .photo{
 
@@ -244,10 +46,10 @@
 
     border-radius:25px;
 
-    position:relative;
-
     box-shadow:
     0 15px 35px rgba(0,0,0,.25);
+
+    position:relative;
 
     cursor:pointer;
 
@@ -255,7 +57,7 @@
 
 
 
-/* FOTOGRAFIJA */
+/* SLIKE */
 
 .photo img{
 
@@ -265,13 +67,19 @@
 
     object-fit:cover;
 
-    transition:.5s ease;
+    transition:.5s;
 
 }
 
 
+/* EFEKAT */
 
-/* TAMNI EFEKAT */
+.photo:hover img{
+
+    transform:scale(1.08);
+
+}
+
 
 .photo::after{
 
@@ -283,43 +91,19 @@
 
     background:linear-gradient(
         rgba(0,0,0,0),
-        rgba(0,0,0,.45)
+        rgba(0,0,0,.4)
     );
 
-    opacity:0;
-
-    transition:.4s;
-
 }
-
-
-
-/* HOVER EFEKAT */
-
-.photo:hover img{
-
-    transform:scale(1.08);
-
-}
-
-
-.photo:hover::after{
-
-    opacity:1;
-
-}
-
 
 
 /* TELEFON */
 
 @media(max-width:768px){
 
-
 .galerija-sekcija{
 
     width:92%;
-
     padding:50px 0;
 
 }
@@ -347,45 +131,4 @@
 
 }
 
-.gallery img{
-    width:100%;
-    height:250px;
-    object-fit:contain;
-    background:white;
-    border-radius:15px;
-
-}
-
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:20px;
-
-
-}
-
-.photo{
-    background:#2da7e0;
-    color:white;
-    height:220px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-radius:15px;
-    font-size:22px;
-}
-
-footer{
-    background:#0b2d5c;
-    color:white;
-    text-align:center;
-    padding:25px;
-}
-
-form{
-    max-width:600px;
-    margin:auto;
-    display:flex;
-    flex-direction:column;
-    gap:15px;
 }
