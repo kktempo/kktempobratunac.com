@@ -1,6 +1,7 @@
 /* ===========================
-   GALERIJA
+   GALERIJA - ISTO KAO POCETNA
 =========================== */
+
 
 .galerija-sekcija{
 
@@ -12,14 +13,17 @@
 }
 
 
+
 .galerija-sekcija h2{
 
     text-align:center;
     font-size:48px;
-    color:#c8102e;
     margin-bottom:50px;
+    color:#c8102e;
+    letter-spacing:2px;
 
 }
+
 
 
 /* GRID */
@@ -29,35 +33,34 @@
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
+    repeat(auto-fit,minmax(350px,1fr));
 
-    gap:30px;
+    gap:40px;
 
 }
+
 
 
 /* KARTICE */
 
 .photo{
 
-    height:320px;
+    position:relative;
 
     overflow:hidden;
 
     border-radius:25px;
 
+    height:500px;
+
     box-shadow:
-    0 15px 35px rgba(0,0,0,.25);
-
-    position:relative;
-
-    cursor:pointer;
+    0 15px 35px rgba(0,0,0,.35);
 
 }
 
 
 
-/* SLIKE */
+/* SLIKA */
 
 .photo img{
 
@@ -72,7 +75,8 @@
 }
 
 
-/* EFEKAT */
+
+/* ZUMIRANJE */
 
 .photo:hover img{
 
@@ -81,7 +85,10 @@
 }
 
 
-.photo::after{
+
+/* TAMNI PRELAZ */
+
+.photo::before{
 
     content:"";
 
@@ -90,16 +97,33 @@
     inset:0;
 
     background:linear-gradient(
-        rgba(0,0,0,0),
-        rgba(0,0,0,.4)
+        rgba(0,0,0,.1),
+        rgba(0,0,0,.6)
+    );
+
+    z-index:1;
+
+}
+
+
+
+/* HOVER EFEKAT */
+
+.photo:hover::before{
+
+    background:linear-gradient(
+        rgba(200,16,46,.15),
+        rgba(0,0,0,.65)
     );
 
 }
 
 
+
 /* TELEFON */
 
 @media(max-width:768px){
+
 
 .galerija-sekcija{
 
@@ -120,15 +144,16 @@
 
     grid-template-columns:1fr;
 
-    gap:20px;
+    gap:25px;
 
 }
 
 
 .photo{
 
-    height:260px;
+    height:320px;
 
 }
+
 
 }
