@@ -23,3 +23,16 @@ document.querySelectorAll(".popup-galerija").forEach(function(galerija){
     });
 
 });
+
+function otvoriGaleriju(id){
+
+    document.getElementById(id).style.display="block";
+
+}
+
+
+function zatvoriGaleriju(id){
+
+    document.getElementById(id).style.display="none";
+
+}
