@@ -155,5 +155,96 @@
 
 }
 
+/* ===========================
+   GALERIJA KAO POCETNA
+=========================== */
+
+
+.gallery{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(350px,1fr));
+
+    gap:40px;
 
 }
+
+
+
+.photo{
+
+    height:500px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.35);
+
+}
+
+
+
+.photo img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.5s;
+
+}
+
+
+
+.photo:hover img{
+
+    transform:scale(1.08);
+
+}
+
+
+
+.photo::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        rgba(0,0,0,.05),
+        rgba(0,0,0,.55)
+    );
+
+}
+
+
+
+@media(max-width:768px){
+
+.gallery{
+
+    grid-template-columns:1fr;
+
+    gap:25px;
+
+}
+
+
+.photo{
+
+    height:320px;
+
+}
+
+}
+
