@@ -28,7 +28,7 @@
 
 /* GRID */
 
-.gallery{
+.galerija-sekcija .gallery{
 
     display:grid;
 
@@ -135,15 +135,37 @@
 
 }
 
+/* TELEFON */
+
 @media(max-width:768px){
+
+    .galerija-sekcija{
+
+        width:92%;
+        padding:50px 0;
+
+    }
+
+
+    .galerija-sekcija h2{
+
+        font-size:34px;
+
+    }
+
+
+    .galerija-sekcija .gallery{
+
+        grid-template-columns:1fr;
+        gap:25px;
+
+    }
+
 
     .galerija-sekcija .photo{
 
         height:320px;
 
     }
-
-}
-
 
 }
