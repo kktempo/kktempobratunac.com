@@ -152,33 +152,7 @@ nav a{
     border-top:5px solid #2da7e0;
 }
 
-.gallery img{
-    width:100%;
-    height:250px;
-    object-fit:contain;
-    background:white;
-    border-radius:15px;
 
-}
-
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:20px;
-
-
-}
-
-.photo{
-    background:#2da7e0;
-    color:white;
-    height:220px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-radius:15px;
-    font-size:22px;
-}
 
 footer{
     background:#0b2d5c;
