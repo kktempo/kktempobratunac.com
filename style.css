@@ -288,9 +288,6 @@ form button{
         font-size:18px;
     }
 
-    .gallery{
-        grid-template-columns:1fr;
-    }
 
     .section{
         padding:50px 20px;
