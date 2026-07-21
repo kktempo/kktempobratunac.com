@@ -97,28 +97,6 @@
 
 
 
-/* TELEFON */
-
-@media(max-width:768px){
-
-
-.galerija-sekcija{
-
-    width:92%;
-    padding:50px 0;
-
-}
-
-
-
-.galerija-sekcija h2{
-
-    font-size:34px;
-
-}
-
-
-
 .gallery{
 
     grid-template-columns:1fr;
@@ -162,12 +140,6 @@
     }
 
 
-    .galerija-sekcija .photo{
-
-        height:320px;
-
-    }
-
 }
 
 /* ===========================
@@ -175,14 +147,6 @@
 =========================== */
 
 
-.galerija-sekcija{
-
-    width:90%;
-    max-width:1400px;
-    margin:auto;
-    padding:80px 0;
-
-}
 
 
 .galerija-sekcija h2{
@@ -315,17 +279,17 @@ nav ul li a.active{
 
 @media (max-width:768px){
 
-    nav ul{
+    header nav ul{
         flex-wrap:wrap;
         gap:15px;
     }
 
-    nav ul li a{
+    header nav ul li a{
         font-size:14px;
     }
 
 }
 
-nav a{
+header nav a{
     color:#c8102e !important;
 }
