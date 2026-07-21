@@ -2208,3 +2208,52 @@ nav a{
     }
 
 }
+
+/* ===========================
+   PRIJATELJI KLUBA
+=========================== */
+
+#sponzori .photo{
+
+    height:auto;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+
+}
+
+
+#sponzori .photo img{
+
+    width:100%;
+    height:auto;
+    max-height:500px;
+    object-fit:contain;
+
+}
+
+
+/* TELEFON */
+
+@media(max-width:768px){
+
+    #sponzori .photo{
+
+        height:auto;
+        padding:15px;
+
+    }
+
+
+    #sponzori .photo img{
+
+        width:100%;
+        height:auto;
+        max-height:none;
+        object-fit:contain;
+
+    }
+
+}
