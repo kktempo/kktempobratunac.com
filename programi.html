@@ -161,6 +161,8 @@ function posaljiWhatsapp(){
         program===""){
         alert("Popunite sva polja.");
         return;
+}
+
 if(program==="Program 2" && podProgram===""){
     alert("Izaberite Teretanu ili Individualni rad.");
     return;
@@ -206,7 +208,7 @@ Email: ${email}
 
 Program: ${program}`;
 
-${program==="Program 2" ? "Vrsta: " + podProgram : ""}
+${program==="Program 2" ? "Vrsta: " + podProgram : ""} `;
 
         let url = "https://wa.me/381640024662?text=" + encodeURIComponent(poruka);
 
