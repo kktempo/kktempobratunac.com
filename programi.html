@@ -82,7 +82,6 @@
     <span class="program-dot"></span>
     <span class="program-dot"></span>
 </div>
-</section>
 
 
    
@@ -104,7 +103,7 @@
 
 <label>Izaberite program:</label>
 
-        <select id="programi" name="programi" required>
+        <select id="programi" name="programi" required onchange="prikaziPodprogram()">
             <option value="">-- Izaberite program --</option>
             <option value="Program 1">Program 1</option>
             <option value="Program 2">Program 2</option>
@@ -206,7 +205,7 @@ Telefon: ${telefon}
 
 Email: ${email}
 
-Program: ${program}`;
+Program: ${program}
 
 ${program==="Program 2" ? "Vrsta: " + podProgram : ""} `;
 
