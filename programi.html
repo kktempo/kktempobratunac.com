@@ -169,8 +169,17 @@ if(program==="Program 2" && podProgram===""){
     }
 
     // Generisanje šifre
-    let prvoIme = ime.split(" ")[0].toUpperCase();
-    let sifra = "TEMPO-" + prvoIme + "-" + godiste;
+    let deloviImena = ime.trim().split(" ");
+
+let prvoIme = deloviImena[0].toUpperCase();
+
+let prvoSlovoPrezimena = "";
+
+if (deloviImena.length > 1) {
+    prvoSlovoPrezimena = deloviImena[1].charAt(0).toUpperCase();
+}
+
+let sifra = prvoIme + prvoSlovoPrezimena + godiste;
 
     // EmailJS
    emailjs.send(
