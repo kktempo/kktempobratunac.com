@@ -97,46 +97,52 @@ const clanovi = {
         ime: "Matija Gligorevic",
         godiste: "2014",
         program: "Program 2",
-        Avgust: "NIJE PLAĆENO",
-        Septembar: "NIJE PLAĆENO",
-        Oktobar: "NIJE PLAĆENO",
-        Novembar: "NIJE PLAĆENO",
-        Decembar: "NIJE PLAĆENO",
-        Januar: "NIJE PLAĆENO",
-        Februar: "NIJE PLAĆENO",
-        Mart: "NIJE PLAĆENO",
-        April: "NIJE PLAĆENO",
-        Maj: "NIJE PLAĆENO",
-        Jun: "NIJE PLAĆENO"
-    },
-
-    "TEMPO002": {
-        ime: "Nikola Jovanović",
-        clanarina: "DUGUJE JUN",
-        godiste: "2014",
-        program: "Program 2",
-        januar: "PLAĆENO",
-        februar: "PLAĆENO",
-        mart: "PLAĆENO",
-        april: "PLAĆENO",
-        maj: "PLAĆENO",
+        avgust: "NIJE PLAĆENO",
+        septembar: "NIJE PLAĆENO",
+        oktobar: "NIJE PLAĆENO",
+        novembar: "NIJE PLAĆENO",
+        decembar: "NIJE PLAĆENO",
+        januar: "NIJE PLAĆENO",
+        februar: "NIJE PLAĆENO",
+        mart: "NIJE PLAĆENO",
+        april: "NIJE PLAĆENO",
+        maj: "NIJE PLAĆENO",
         jun: "NIJE PLAĆENO"
     },
 
-    "TEMPO003": {
-        ime: "Petar Ilić",
-        clanarina: "PLAĆENO",
-        godiste: "2014",
-        program: "Program 2",
-        januar: "PLAĆENO",
-        februar: "PLAĆENO",
-        mart: "PLAĆENO",
-        april: "PLAĆENO",
-        maj: "PLAĆENO",
-        jun: "PLAĆENO"
-    }
+    "KOSTAĆ2015": {
+        ime: "Kosta Ćetković",
+        godiste: "2015",
+        program: "Program 3",
+        avgust: "NIJE PLAĆENO",
+        septembar: "NIJE PLAĆENO",
+        oktobar: "NIJE PLAĆENO",
+        novembar: "NIJE PLAĆENO",
+        decembar: "NIJE PLAĆENO",
+        januar: "NIJE PLAĆENO",
+        februar: "NIJE PLAĆENO",
+        mart: "NIJE PLAĆENO",
+        april: "NIJE PLAĆENO",
+        maj: "NIJE PLAĆENO",
+        jun: "NIJE PLAĆENO"
+    },
 
-};
+    "MATIJAĆ2018": {
+        ime: "Matija Ćetković",
+        godiste: "2018",
+        program: "Program 1",
+        avgust: "NIJE PLAĆENO",
+        septembar: "NIJE PLAĆENO",
+        oktobar: "NIJE PLAĆENO",
+        novembar: "NIJE PLAĆENO",
+        decembar: "NIJE PLAĆENO",
+        januar: "NIJE PLAĆENO",
+        februar: "NIJE PLAĆENO",
+        mart: "NIJE PLAĆENO",
+        april: "NIJE PLAĆENO",
+        maj: "NIJE PLAĆENO",
+        jun: "NIJE PLAĆENO"
+    },
 
 
 function prikaziPodatke(){
@@ -159,6 +165,36 @@ function prikaziPodatke(){
 
 
     <h3>Pregled članarina</h3>
+
+   <p>Avgust:
+        <span style="color:${clan.avgust === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.avgust}
+        </span>
+    </p>
+
+    <p>Septembar:
+        <span style="color:${clan.septembar === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.septembar}
+        </span>
+    </p>
+
+    <p>Oktobar:
+        <span style="color:${clan.oktobar === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.oktobar}
+        </span>
+    </p>
+
+    <p>Novembar:
+        <span style="color:${clan.novembar === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.novembar}
+        </span>
+    </p>
+
+    <p>Decembar:
+        <span style="color:${clan.decembar === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
+            ${clan.decembar}
+        </span>
+    </p>
 
     <p>Januar:
         <span style="color:${clan.januar === 'PLAĆENO' ? 'green' : 'red'}; font-weight:bold;">
