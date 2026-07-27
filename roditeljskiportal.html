@@ -653,9 +653,24 @@ function prikaziFormuZaSifru(){
 
 }
 
+function normalizujTekst(tekst){
+
+    return tekst
+        .toLowerCase()
+        .trim()
+        .replace(/č/g,"c")
+        .replace(/ć/g,"c")
+        .replace(/š/g,"s")
+        .replace(/ž/g,"z")
+        .replace(/đ/g,"dj");
+
+}
+
 function pronadjiSifru(){
 
-    let ime = document.getElementById("imeDeteta").value.trim().toLowerCase();
+    let ime = normalizujTekst(
+        document.getElementById("imeDeteta").value
+    );
 
     let godiste = document.getElementById("godisteDeteta").value.trim();
 
@@ -666,24 +681,19 @@ function pronadjiSifru(){
         let clan = clanovi[sifra];
 
         if(
-            clan.ime.toLowerCase()===ime &&
-            clan.godiste===godiste 
+            normalizujTekst(clan.ime) === ime &&
+            clan.godiste === godiste
         ){
 
             alert("Vaša šifra je: " + sifra);
 
             pronadjena = true;
-
             break;
-
         }
-
     }
 
     if(!pronadjena){
-
-        alert("Podaci nisu pronađeni.");
-
+        alert("Nismo pronašli člana sa tim podacima.");
     }
 
 }
