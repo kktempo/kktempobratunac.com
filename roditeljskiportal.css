@@ -7,3 +7,69 @@
     font-weight:bold;
     text-align:center;
 }
+
+/* ===========================
+   DUGME - ZABORAVLJENA ŠIFRA
+=========================== */
+
+.zaboravljena-sifra-btn{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:14px 32px;
+
+    background:#ffffff;
+
+    color:#c8102e;
+
+    border:2px solid #c8102e;
+
+    border-radius:50px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+.zaboravljena-sifra-btn:hover{
+
+    background:#c8102e;
+
+    color:#fff;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 30px rgba(200,16,46,.35);
+
+}
+
+.zaboravljena-sifra-btn:active{
+
+    transform:scale(.97);
+
+}
+
+@media(max-width:768px){
+
+    .zaboravljena-sifra-btn{
+
+        width:100%;
+
+        font-size:15px;
+
+        padding:14px 20px;
+
+    }
+
+}
