@@ -658,12 +658,46 @@ function normalizujTekst(tekst){
     return tekst
         .toLowerCase()
         .trim()
+
+        // ćirilica → latinica
+        .replace(/љ/g,"lj")
+        .replace(/њ/g,"nj")
+        .replace(/џ/g,"dz")
+
+        .replace(/а/g,"a")
+        .replace(/б/g,"b")
+        .replace(/в/g,"v")
+        .replace(/г/g,"g")
+        .replace(/д/g,"d")
+        .replace(/ђ/g,"dj")
+        .replace(/е/g,"e")
+        .replace(/ж/g,"z")
+        .replace(/з/g,"z")
+        .replace(/и/g,"i")
+        .replace(/ј/g,"j")
+        .replace(/к/g,"k")
+        .replace(/л/g,"l")
+        .replace(/м/g,"m")
+        .replace(/н/g,"n")
+        .replace(/о/g,"o")
+        .replace(/п/g,"p")
+        .replace(/р/g,"r")
+        .replace(/с/g,"s")
+        .replace(/т/g,"t")
+        .replace(/ћ/g,"c")
+        .replace(/у/g,"u")
+        .replace(/ф/g,"f")
+        .replace(/х/g,"h")
+        .replace(/ц/g,"c")
+        .replace(/ч/g,"c")
+        .replace(/ш/g,"s")
+
+        // latinica sa kvačicama
         .replace(/č/g,"c")
         .replace(/ć/g,"c")
         .replace(/š/g,"s")
         .replace(/ž/g,"z")
         .replace(/đ/g,"dj");
-
 }
 
 function pronadjiSifru(){
