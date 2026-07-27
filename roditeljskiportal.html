@@ -68,6 +68,33 @@ button{
 
 <button onclick="prikaziPodatke()">Prikaži podatke</button>
 
+<p style="text-align:center;margin-top:15px;">
+    <a href="#" onclick="prikaziFormuZaSifru(); return false;">
+        Zaboravili ste šifru?
+    </a>
+</p>
+
+<div id="vratiSifru" style="display:none; margin-top:30px;">
+
+    <h3>Pronađi svoju šifru</h3>
+
+    <input
+        type="text"
+        id="imeDeteta"
+        placeholder="Ime i prezime deteta">
+
+    <input
+        type="number"
+        id="godisteDeteta"
+        placeholder="Godište">
+
+
+    <button onclick="pronadjiSifru()">
+        PRONAĐI ŠIFRU
+    </button>
+
+</div>
+
 <div class="kartica" id="podaci">
     <h2>Podaci člana</h2>
 
@@ -615,6 +642,47 @@ function prikaziPodatke(){
     }else{
 
         alert("Šifra nije pronađena. Proverite unos i pokušajte ponovo.");
+
+    }
+
+}
+
+function prikaziFormuZaSifru(){
+
+    document.getElementById("vratiSifru").style.display="block";
+
+}
+
+function pronadjiSifru(){
+
+    let ime = document.getElementById("imeDeteta").value.trim().toLowerCase();
+
+    let godiste = document.getElementById("godisteDeteta").value.trim();
+
+    let pronadjena = false;
+
+    for(let sifra in clanovi){
+
+        let clan = clanovi[sifra];
+
+        if(
+            clan.ime.toLowerCase()===ime &&
+            clan.godiste===godiste &&
+        ){
+
+            alert("Vaša šifra je: " + sifra);
+
+            pronadjena = true;
+
+            break;
+
+        }
+
+    }
+
+    if(!pronadjena){
+
+        alert("Podaci nisu pronađeni.");
 
     }
 
