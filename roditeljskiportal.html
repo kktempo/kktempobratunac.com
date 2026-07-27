@@ -700,6 +700,7 @@ function normalizujTekst(tekst){
         .replace(/đ/g,"dj");
 }
 
+
 function pronadjiSifru(){
 
     let ime = normalizujTekst(
@@ -719,7 +720,80 @@ function pronadjiSifru(){
             clan.godiste === godiste
         ){
 
-            alert("Vaša šifra je: " + sifra);
+            document.body.insertAdjacentHTML("beforeend",`
+
+<div id="popupSifra" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.75);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+">
+
+<div style="
+background:white;
+padding:35px;
+border-radius:20px;
+text-align:center;
+width:380px;
+max-width:90%;
+box-shadow:0 15px 40px rgba(0,0,0,.35);
+">
+
+<h2 style="color:#c8102e;">
+🔑 Vaša šifra
+</h2>
+
+<h1 id="tekstSifre"
+style="
+color:#c8102e;
+font-size:32px;
+margin:20px 0;
+letter-spacing:2px;
+">
+${sifra}
+</h1>
+
+<button
+onclick="kopirajSifru(this)"
+style="
+padding:12px 30px;
+background:#c8102e;
+color:white;
+border:none;
+border-radius:50px;
+font-size:16px;
+cursor:pointer;
+margin-bottom:15px;
+">
+📋 Kopiraj šifru
+</button>
+
+<br><br>
+
+<button
+onclick="zatvoriPopupSifra()"
+style="
+padding:10px 30px;
+background:#555;
+color:white;
+border:none;
+border-radius:50px;
+font-size:15px;
+cursor:pointer;
+">
+Zatvori
+</button>
+
+</div>
+</div>
+
+`);
 
             pronadjena = true;
             break;
@@ -729,6 +803,29 @@ function pronadjiSifru(){
     if(!pronadjena){
         alert("Nismo pronašli člana sa tim podacima.");
     }
+}
+
+function kopirajSifru(dugme){
+
+    const sifra = document.getElementById("tekstSifre").innerText;
+
+    navigator.clipboard.writeText(sifra).then(function(){
+
+        dugme.innerHTML = "✅ Kopirano!";
+
+        setTimeout(function(){
+            dugme.innerHTML = "📋 Kopiraj šifru";
+        },2000);
+
+    }).catch(function(){
+        alert("Kopiranje nije uspelo.");
+    });
+
+}
+
+function zatvoriPopupSifra(){
+
+    document.getElementById("popupSifra").remove();
 
 }
 
