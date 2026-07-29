@@ -1138,6 +1138,9 @@ function proveriSifru(){
 
     if(unesena === ADMIN_SIFRA){
 
+        localStorage.setItem("adminPrijava","true");
+
+
         document.getElementById("loginBox").style.display="none";
 
         document.getElementById("adminPanel").style.display="block";
@@ -1146,7 +1149,7 @@ function proveriSifru(){
     }
     else{
 
-        document.getElementById("greska").innerHTML=
+        document.getElementById("greska").innerHTML =
         "Pogrešna šifra!";
 
     }
@@ -1158,9 +1161,20 @@ function proveriSifru(){
 
 window.onload=function(){
 
-    document.getElementById("loginBox").style.display="flex";
+    if(localStorage.getItem("adminPrijava") === "true"){
 
-    document.getElementById("adminPanel").style.display="none";
+        document.getElementById("loginBox").style.display="none";
+
+        document.getElementById("adminPanel").style.display="block";
+
+    }
+    else{
+
+        document.getElementById("loginBox").style.display="flex";
+
+        document.getElementById("adminPanel").style.display="none";
+
+    }
 
 }
 
