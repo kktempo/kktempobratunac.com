@@ -101,6 +101,7 @@ grid-template-columns:1fr;
 
 </head>
 
+
 <body>
 
 <section class="admin">
@@ -143,7 +144,7 @@ id="pretraga"
 placeholder="🔍 Pretraži po imenu ili šifri..."
 onkeyup="pretraziClanove()">
 
-</div>
+<div class="table-wrapper">
 
 <table>
 
@@ -157,6 +158,7 @@ onkeyup="pretraziClanove()">
 <th>Ukupan dug</th>
 <th>Status</th>
 <th>Akcija</th>
+<th>Pauza</th>
 </tr>
 
 </thead>
@@ -164,6 +166,8 @@ onkeyup="pretraziClanove()">
 <tbody id="tabela"></tbody>
 
 </table>
+
+</div>
 
 </section>
 
@@ -176,7 +180,8 @@ ime:"Matija Gligorević",
 program:"Program 2",
 cena:40,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "GRABOVACL2014":{
@@ -184,7 +189,8 @@ ime:"Lazar Grabovac",
 program:"Program 2",
 cena:40,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "DAMJANP2018":{
@@ -192,7 +198,8 @@ ime:"Damjan Petkovic",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "LUKAK2013":{
@@ -200,7 +207,8 @@ ime:"Luka Krsmanovic",
 program:"Program 2",
 cena:40,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "STEFANZ2016":{
@@ -208,7 +216,8 @@ ime:"Stefan Zivanovic",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "ANDREJN2015":{
@@ -216,7 +225,8 @@ ime:"Andrej Nikolic",
 program:"Program 2",
 cena:40,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "LUKAC2016":{
@@ -224,7 +234,8 @@ ime:"Luka Cvjetinovic",
 program:"Program 2",
 cena:40,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "NINAC2015":{
@@ -232,7 +243,8 @@ ime:"Nina Cvjetinovic",
 program:"Program 2",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "PETARG2017":{
@@ -240,7 +252,8 @@ ime:"Petar Grujicic",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "IVANR2012":{
@@ -248,7 +261,8 @@ ime:"Ivan Radic",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "MILOSR2014":{
@@ -256,7 +270,8 @@ ime:"Milos Radic",
 program:"Program 1",
 cena:20,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "KOSTAĆ2015":{
@@ -264,7 +279,8 @@ ime:"Kosta Cetkovic",
 program:"Program 2",
 cena:40,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "UROSC2015":{
@@ -272,7 +288,8 @@ ime:"Uros Cvjetinovic",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "MILOSM2014":{
@@ -280,7 +297,8 @@ ime:"Milos Mrakic",
 program:"Program 3",
 cena:50,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "VELJKOV2015":{
@@ -288,7 +306,8 @@ ime:"Veljko Vuksic",
 program:"Program 3",
 cena:50,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "АЛЕКСЕЈК2015":{
@@ -296,7 +315,8 @@ ime:"Aleksej Krsmanovic",
 program:"Program 3",
 cena:50,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "STEFANA2014":{
@@ -304,7 +324,8 @@ ime:"Stefan Ateljevic",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "NIKOLAP2016":{
@@ -312,7 +333,8 @@ ime:"Nikola Petrovic",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "KRISTIANM2013":{
@@ -320,7 +342,8 @@ ime:"Kristian Mijatovic",
 program:"Program 2",
 cena:40,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "VIKTORM2015":{
@@ -328,7 +351,8 @@ ime:"Viktor Mijatovic",
 program:"Program 2",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "DOSITEJL2015":{
@@ -336,7 +360,8 @@ ime:"Dositej Lazic",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "NEMANJAG2015":{
@@ -344,7 +369,8 @@ ime:"Nemanja Gavric",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "STRAHINJAR2014":{
@@ -352,7 +378,8 @@ ime:"Strahinja Radovic",
 program:"Program 3",
 cena:50,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "DUSANR2014":{
@@ -360,7 +387,8 @@ ime:"Dusan Radovic",
 program:"Program 3",
 cena:40,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "VUKT2015":{
@@ -368,7 +396,8 @@ ime:"Vuk Trisic",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "STEFANJ2015":{
@@ -376,7 +405,8 @@ ime:"Stefan Jovanovic",
 program:"Program 3",
 cena:50,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "TEODORJ2019":{
@@ -384,7 +414,8 @@ ime:"Teodor Jovanovic",
 program:"Program 3",
 cena:40,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "PAVLEA2014":{
@@ -392,7 +423,8 @@ ime:"Pavle Andric",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "NIKOLAJ2013":{
@@ -400,7 +432,8 @@ ime:"Nikola Jovanovic",
 program:"Program 2",
 cena:40,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "MATIJAĆ2018":{
@@ -408,7 +441,8 @@ ime:"Matija Cetkovic",
 program:"Program 1",
 cena:20,
 
-clanarine:{}
+clanarine:{},
+pauza:{}
 },
 
 "MIHAJLOD2018":{
@@ -416,8 +450,9 @@ ime:"Mihajlo Davidovic",
 program:"Program 1",
 cena:30,
 
-clanarine:{}
-},
+clanarine:{},
+pauza:{}
+}
 
 };
 
@@ -433,14 +468,28 @@ if(sacuvaneClanarine){
     for(let sifra in podaci){
 
         if(clanovi[sifra]){
+clanovi[sifra].clanarine = podaci[sifra].clanarine || {};
 
-            clanovi[sifra].clanarine = podaci[sifra];
+clanovi[sifra].pauza = podaci[sifra].pauza || {};
 
         }
 
     }
 
 }
+
+function imaPauzu(clan, mesec){
+
+    if(clan.pauza && clan.pauza[mesec]){
+
+        return true;
+
+    }
+
+    return false;
+
+}
+
 
 function proveriMesecneDugove(){
 
@@ -449,13 +498,11 @@ function proveriMesecneDugove(){
     let godina = datum.getFullYear();
     let mesec = datum.getMonth()+1;
 
-
     if(mesec < 10){
-        mesec = "0" + mesec;
+        mesec="0"+mesec;
     }
 
-
-    let trenutniMesec = godina + "-" + mesec;
+    let trenutniMesec = godina+"-"+mesec;
 
 
     for(let sifra in clanovi){
@@ -463,9 +510,13 @@ function proveriMesecneDugove(){
         let clan = clanovi[sifra];
 
 
-        // ako ne postoji zapis za ovaj mesec
-        if(!clan.clanarine[trenutniMesec]){
+        // ako je pauza preskoči
+        if(imaPauzu(clan, trenutniMesec)){
+            continue;
+        }
 
+
+        if(!clan.clanarine[trenutniMesec]){
 
             clan.clanarine[trenutniMesec]={
 
@@ -474,13 +525,11 @@ function proveriMesecneDugove(){
 
             };
 
-
         }
 
     }
 
 }
-
 
 // pokretanje pri otvaranju admin panela
 proveriMesecneDugove();
@@ -511,12 +560,14 @@ let aktivniMesec = godina+"-"+mesec;
 
 
 
-if(!clan.clanarine[aktivniMesec]){
+if(
+!clan.clanarine[aktivniMesec] &&
+!imaPauzu(clan,aktivniMesec)
+){
 
     clan.clanarine[aktivniMesec]={
 
         iznos: clan.cena,
-
         status:"NIJE PLAĆENO"
 
     };
@@ -581,6 +632,7 @@ ${clanarina.status}
 
 </td>
 
+
 <td>
 
 <button onclick="promeniStatus('${sifra}')">
@@ -593,6 +645,15 @@ clanarina.status==="PLAĆENO"
 "PLATIO"
 }
 
+</button>
+
+</td>
+
+
+<td>
+
+<button onclick="pauzirajMesec('${sifra}')">
+PAUZA MESEC
 </button>
 
 </td>
@@ -658,29 +719,37 @@ function promeniStatus(sifra){
 
     let datum = new Date();
 
-
     let godina = datum.getFullYear();
 
     let mesec = datum.getMonth()+1;
-
 
     if(mesec < 10){
         mesec="0"+mesec;
     }
 
-
     let trenutniMesec = godina+"-"+mesec;
 
+
+    // ako ne postoji zapis napravi ga
+
+    if(!clanovi[sifra].clanarine[trenutniMesec]){
+
+        clanovi[sifra].clanarine[trenutniMesec]={
+
+            iznos: clanovi[sifra].cena,
+
+            status:"NIJE PLAĆENO"
+
+        };
+
+    }
 
 
     let clanarina = clanovi[sifra].clanarine[trenutniMesec];
 
 
-
     if(clanarina.status==="PLAĆENO"){
 
-
-        // vraćanje na nije plaćeno
 
         clanovi[sifra].clanarine[trenutniMesec]={
 
@@ -694,8 +763,6 @@ function promeniStatus(sifra){
     }else{
 
 
-        // evidentiranje uplate
-
         clanovi[sifra].clanarine[trenutniMesec]={
 
             iznos: clanovi[sifra].cena,
@@ -706,13 +773,7 @@ function promeniStatus(sifra){
 
         };
 
-
     }
-
-
-
-    // čuvanje
-
 
 
     let zaCuvanje={};
@@ -720,7 +781,13 @@ function promeniStatus(sifra){
 
     for(let ime in clanovi){
 
-        zaCuvanje[ime]=clanovi[ime].clanarine;
+        zaCuvanje[ime]={
+
+            clanarine: clanovi[ime].clanarine,
+
+            pauza: clanovi[ime].pauza
+
+        };
 
     }
 
@@ -734,6 +801,41 @@ function promeniStatus(sifra){
     location.reload();
 
 }
+
+
+function zatvoriPauzu(){
+
+document.getElementById("pauzaModal").style.display="none";
+
+}
+
+function sacuvajSve(){
+
+    let podaci={};
+
+
+    for(let ime in clanovi){
+
+        podaci[ime]={
+
+            clanarine: clanovi[ime].clanarine,
+
+            pauza: clanovi[ime].pauza
+
+        };
+
+    }
+
+
+    localStorage.setItem(
+        "clanarine",
+        JSON.stringify(podaci)
+    );
+
+}
+
+
+  
 function izveziPDF(){
 
 
@@ -857,7 +959,177 @@ pdf.save(
 
 }
 
+let clanZaPauzu = null;
+
+
+function pauzirajMesec(sifra){
+
+
+    clanZaPauzu = sifra;
+
+
+    document.getElementById("imePauza").innerHTML =
+    clanovi[sifra].ime;
+
+
+    let html = "";
+
+    let godina = new Date().getFullYear();
+
+
+    for(let i=1; i<=12; i++){
+
+
+        let mesec = i < 10 ? "0"+i : i;
+
+
+        let vrednost = godina+"-"+mesec;
+
+
+        let oznaceno = 
+        clanovi[sifra].pauza &&
+        clanovi[sifra].pauza[vrednost]
+        ?
+        "checked"
+        :
+        "";
+
+
+
+        html += `
+
+        <div class="mesec">
+
+        <label>
+
+        <input 
+        type="checkbox"
+        value="${vrednost}"
+        ${oznaceno}>
+
+        ${vrednost}
+
+        </label>
+
+        </div>
+
+        `;
+
+
+    }
+
+
+    document.getElementById("listaMeseci").innerHTML = html;
+
+
+   let modal = document.getElementById("pauzaModal");
+
+modal.style.display = "flex";
+modal.style.position = "fixed";
+modal.style.top = "0";
+modal.style.left = "0";
+modal.style.width = "100%";
+modal.style.height = "100%";
+modal.style.background = "rgba(0,0,0,0.7)";
+modal.style.zIndex = "999999";
+modal.style.justifyContent = "center";
+modal.style.alignItems = "center";
+
+let sadrzaj = modal.querySelector(".modal-sadrzaj");
+
+sadrzaj.style.background = "white";
+sadrzaj.style.color = "#222";
+sadrzaj.style.width = "500px";
+sadrzaj.style.padding = "35px";
+sadrzaj.style.borderRadius = "20px";
+sadrzaj.style.boxShadow = "0 20px 50px rgba(0,0,0,0.4)";
+sadrzaj.style.textAlign = "center";
+
+}
+
+function sacuvajPauzu(){
+
+
+let cekirani=document.querySelectorAll(
+"#listaMeseci input:checked"
+);
+
+
+clanovi[clanZaPauzu].pauza={};
+
+
+cekirani.forEach(box=>{
+
+let mesec=box.value;
+
+clanovi[clanZaPauzu].pauza[mesec]=true;
+
+
+// obriši dug za taj mesec
+
+if(clanovi[clanZaPauzu].clanarine[mesec]){
+
+delete clanovi[clanZaPauzu].clanarine[mesec];
+
+}
+
+
+});
+
+
+
+let podaci={};
+
+
+for(let ime in clanovi){
+
+podaci[ime]={
+
+clanarine: clanovi[ime].clanarine,
+
+pauza: clanovi[ime].pauza
+
+};
+
+}
+
+
+
+localStorage.setItem(
+"clanarine",
+JSON.stringify(podaci)
+);
+
+
+
+location.reload();
+
+
+}
+
 </script>
+<div id="pauzaModal" class="modal">
+
+<div class="modal-sadrzaj">
+
+<h2 id="imePauza"></h2>
+
+<div id="listaMeseci"></div>
+
+
+<button onclick="sacuvajPauzu()">
+SAČUVAJ
+</button>
+
+
+<button onclick="zatvoriPauzu()">
+OTKAŽI
+</button>
+
+
+</div>
+
+</div>
 
 </body>
 </html>
