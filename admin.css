@@ -134,3 +134,34 @@ min-width:900px;
 overflow-x:auto;
 
 }
+
+.pdf-dugme{
+
+display:block;
+
+margin:20px auto;
+
+background:#c8102e;
+
+color:white;
+
+border:none;
+
+padding:12px 25px;
+
+font-size:18px;
+
+font-weight:bold;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+
+.pdf-dugme:hover{
+
+background:#9d0b22;
+
+}

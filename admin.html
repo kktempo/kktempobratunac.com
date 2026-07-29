@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="sr">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -102,6 +106,10 @@ grid-template-columns:1fr;
 <section class="admin">
 
 <h1>ADMIN PANEL</h1>
+
+<button onclick="izveziPDF()" class="pdf-dugme">
+📄 IZVEZI PDF
+</button>
 
 <div class="statistika">
 
@@ -724,6 +732,128 @@ function promeniStatus(sifra){
 
 
     location.reload();
+
+}
+function izveziPDF(){
+
+
+const { jsPDF } = window.jspdf;
+
+
+let pdf = new jsPDF("landscape");
+
+
+
+pdf.setFontSize(18);
+
+pdf.text(
+"KK TEMPO BRATUNAC - EVIDENCIJA CLANARINA",
+14,
+15
+);
+
+
+
+pdf.setFontSize(11);
+
+let datum = new Date().toLocaleDateString("sr-RS");
+
+
+pdf.text(
+"Datum izvoza: " + datum,
+14,
+23
+);
+
+
+
+let tabela = [];
+
+
+
+for(let sifra in clanovi){
+
+
+let clan = clanovi[sifra];
+
+
+let dug = izracunajDug(clan);
+
+
+
+let status = dug > 0 
+?
+"NIJE PLACENO"
+:
+"PLACENO";
+
+
+
+tabela.push([
+
+sifra,
+
+clan.ime,
+
+clan.program,
+
+clan.cena+" KM",
+
+dug+" KM",
+
+status
+
+]);
+
+
+}
+
+
+
+pdf.autoTable({
+
+startY:30,
+
+head:[
+
+[
+"Sifra",
+"Ime",
+"Program",
+"Cena",
+"Ukupan dug",
+"Status"
+
+]
+
+],
+
+
+body:tabela,
+
+
+styles:{
+
+fontSize:9
+
+},
+
+
+headStyles:{
+
+fillColor:[200,16,46]
+
+}
+
+
+});
+
+
+
+pdf.save(
+"KK_Tempo_clanarine.pdf"
+);
+
 
 }
 
