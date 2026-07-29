@@ -121,3 +121,16 @@ grid-template-columns:1fr;
 .pretraga input:focus{
     box-shadow:0 0 10px rgba(200,16,46,.3);
 }
+
+table{
+
+min-width:900px;
+
+}
+
+
+.admin{
+
+overflow-x:auto;
+
+}
