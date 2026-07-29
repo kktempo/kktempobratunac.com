@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin panel | KK Tempo</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    margin:0;
+}
+
+.admin{
+    width:95%;
+    max-width:1300px;
+    margin:40px auto;
+}
+
+h1{
+    text-align:center;
+    color:#c8102e;
+}
+
+.statistika{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin:30px 0;
+}
+
+.kartica{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.kartica h2{
+    color:#c8102e;
+    font-size:34px;
+    margin:0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+th{
+    background:#c8102e;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+.pl{
+    color:green;
+    font-weight:bold;
+}
+
+.npl{
+    color:red;
+    font-weight:bold;
+}
+
+@media(max-width:900px){
+
+.statistika{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:600px){
+
+.statistika{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section class="admin">
+
+<h1>ADMIN PANEL</h1>
+
+<div class="statistika">
+
+<div class="kartica">
+<h2 id="brojClanova">0</h2>
+<p>Članova</p>
+</div>
+
+<div class="kartica">
+<h2 id="ukupnoClanarine">0 KM</h2>
+<p>Ukupno članarine</p>
+</div>
+
+<div class="kartica">
+<h2 id="naplaceno">0 KM</h2>
+<p>Naplaćeno</p>
+</div>
+
+<div class="kartica">
+<h2 id="dugovanja">0 KM</h2>
+<p>Dugovanja</p>
+</div>
+
+</div>
+
+<div class="pretraga">
+
+<input
+type="text"
+id="pretraga"
+placeholder="🔍 Pretraži po imenu ili šifri..."
+onkeyup="pretraziClanove()">
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Šifra</th>
+<th>Ime</th>
+<th>Program</th>
+<th>Cena</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody id="tabela"></tbody>
+
+</table>
+
+</section>
+
+<script>
+
+const clanovi={
+
+"MATIJAG2014":{
+ime:"Matija Gligorević",
+program:"Program 2",
+cena:40,
+status:"NIJE PLAĆENO"
+},
+
+"GRABOVACL2014":{
+ime:"Lazar Grabovac",
+program:"Program 2",
+cena:40,
+status:"NIJE PLAĆENO"
+},
+
+"DAMJANP2018":{
+ime:"Damjan Petkovic",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"LUKAK2013":{
+ime:"Luka Krsmanovic",
+program:"Program 2",
+cena:40,
+status:"NIJE PLAĆENO"
+},
+
+"STEFANZ2016":{
+ime:"Stefan Zivanovic",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"ANDREJN2015":{
+ime:"Andrej Nikolic",
+program:"Program 2",
+cena:40,
+status:"NIJE PLAĆENO"
+},
+
+"LUKAC2016":{
+ime:"Luka Cvjetinovic",
+program:"Program 2",
+cena:40,
+status:"NIJE PLAĆENO"
+},
+
+"NINAC2015":{
+ime:"Nina Cvjetinovic",
+program:"Program 2",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"PETARG2017":{
+ime:"Petar Grujicic",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"IVANR2012":{
+ime:"Ivan Radic",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"MILOSR2014":{
+ime:"Milos Radic",
+program:"Program 1",
+cena:20,
+status:"NIJE PLAĆENO"
+},
+
+"KOSTAĆ2015":{
+ime:"Kosta Cetkovic",
+program:"Program 2",
+cena:40,
+status:"NIJE PLAĆENO"
+},
+
+"UROSC2015":{
+ime:"Uros Cvjetinovic",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"MILOSM2014":{
+ime:"Milos Mrakic",
+program:"Program 3",
+cena:50,
+status:"NIJE PLAĆENO"
+},
+
+"VELJKOV2015":{
+ime:"Veljko Vuksic",
+program:"Program 3",
+cena:50,
+status:"NIJE PLAĆENO"
+},
+
+"АЛЕКСЕЈК2015":{
+ime:"Aleksej Krsmanovic",
+program:"Program 3",
+cena:50,
+status:"NIJE PLAĆENO"
+},
+
+"STEFANA2014":{
+ime:"Stefan Ateljevic",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"NIKOLAP2016":{
+ime:"Nikola Petrovic",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"KRISTIANM2013":{
+ime:"Kristian Mijatovic",
+program:"Program 2",
+cena:40,
+status:"NIJE PLAĆENO"
+},
+
+"VIKTORM2015":{
+ime:"Viktor Mijatovic",
+program:"Program 2",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"DOSITEJL2015":{
+ime:"Dositej Lazic",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"NEMANJAG2015":{
+ime:"Nemanja Gavric",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"STRAHINJAR2014":{
+ime:"Strahinja Radovic",
+program:"Program 3",
+cena:50,
+status:"NIJE PLAĆENO"
+},
+
+"DUSANR2014":{
+ime:"Dusan Radovic",
+program:"Program 3",
+cena:40,
+status:"NIJE PLAĆENO"
+},
+
+"VUKT2015":{
+ime:"Vuk Trisic",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"STEFANJ2015":{
+ime:"Stefan Jovanovic",
+program:"Program 3",
+cena:50,
+status:"NIJE PLAĆENO"
+},
+
+"TEODORJ2019":{
+ime:"Teodor Jovanovic",
+program:"Program 3",
+cena:40,
+status:"NIJE PLAĆENO"
+},
+
+"PAVLEA2014":{
+ime:"Pavle Andric",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+"NIKOLAJ2013":{
+ime:"Nikola Jovanovic",
+program:"Program 2",
+cena:40,
+status:"NIJE PLAĆENO"
+},
+
+"MATIJAĆ2018":{
+ime:"Matija Cetkovic",
+program:"Program 1",
+cena:20,
+status:"NIJE PLAĆENO"
+},
+
+"MIHAJLOD2018":{
+ime:"Mihajlo Davidovic",
+program:"Program 1",
+cena:30,
+status:"NIJE PLAĆENO"
+},
+
+};
+
+let ukupno=0;
+let naplaceno=0;
+let dug=0;
+let broj=0;
+
+for(let sifra in clanovi){
+
+let clan=clanovi[sifra];
+
+broj++;
+
+ukupno+=clan.cena;
+
+if(clan.status==="PLAĆENO"){
+naplaceno+=clan.cena;
+}else{
+dug+=clan.cena;
+}
+
+document.getElementById("tabela").innerHTML+=`
+
+<tr>
+<td>${sifra}</td>
+<td>${clan.ime}</td>
+<td>${clan.program}</td>
+<td>${clan.cena} KM</td>
+<td class="${clan.status==="PLAĆENO" ? "pl" : "npl"}">
+${clan.status}
+</td>
+</tr>
+
+`;
+
+}
+
+document.getElementById("brojClanova").innerHTML=broj;
+document.getElementById("ukupnoClanarine").innerHTML=ukupno+" KM";
+document.getElementById("naplaceno").innerHTML=naplaceno+" KM";
+document.getElementById("dugovanja").innerHTML=dug+" KM";
+
+function pretraziClanove(){
+
+    let filter = document.getElementById("pretraga")
+        .value.toUpperCase();
+
+    let redovi = document.querySelectorAll("#tabela tr");
+
+    redovi.forEach(red=>{
+
+        let sifra = red.cells[0].textContent.toUpperCase();
+        let ime = red.cells[1].textContent.toUpperCase();
+
+        if(
+            sifra.includes(filter) ||
+            ime.includes(filter)
+        ){
+            red.style.display="";
+        }else{
+            red.style.display="none";
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
