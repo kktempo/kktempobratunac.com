@@ -104,7 +104,28 @@ grid-template-columns:1fr;
 
 <body>
 
-<section class="admin">
+<div id="loginBox">
+
+    <div class="login-kartica">
+
+        <h2>ADMIN PRISTUP</h2>
+
+        <input 
+        type="password" 
+        id="adminSifra" 
+        placeholder="Unesite šifru">
+
+        <button onclick="proveriSifru()">
+            ULAZ
+        </button>
+
+        <p id="greska"></p>
+
+    </div>
+
+</div>
+
+<section class="admin" id="adminPanel" style="display:none;">
 
 <h1>ADMIN PANEL</h1>
 
@@ -1104,6 +1125,42 @@ JSON.stringify(podaci)
 
 location.reload();
 
+
+}
+
+const ADMIN_SIFRA = "300321";
+
+
+function proveriSifru(){
+
+    let unesena = document.getElementById("adminSifra").value;
+
+
+    if(unesena === ADMIN_SIFRA){
+
+        document.getElementById("loginBox").style.display="none";
+
+        document.getElementById("adminPanel").style.display="block";
+
+
+    }
+    else{
+
+        document.getElementById("greska").innerHTML=
+        "Pogrešna šifra!";
+
+    }
+
+}
+
+
+// početno stanje - sakrij panel
+
+window.onload=function(){
+
+    document.getElementById("loginBox").style.display="flex";
+
+    document.getElementById("adminPanel").style.display="none";
 
 }
 
