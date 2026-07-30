@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Evidencija treninga</title>
+
+<link rel="stylesheet" href="evidencija.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>EVIDENCIJA TRENINGA</h1>
+
+<select id="grupa" onchange="ucitajGrupu()">
+
+<option value="mini">GRUPA 1</option>
+<option value="mladji">GRUPA 2</option>
+<option value="kadeti">GRUPA 3</option>
+
+</select>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Ime</th>
+<th>Prisutan</th>
+<th>Nije prisutan</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabela">
+
+</tbody>
+
+</table>
+
+<button onclick="sacuvaj()">
+SAČUVAJ EVIDENCIJU
+</button>
+
+</div>
+
+<script>
+
+const grupe={
+
+mini:[
+"Milos Radic",
+"Ivan Radic",
+"Luka Krsmanovic",
+"Marko Pajic",
+"Aleksije Reljic"
+],
+
+mladji:[
+"Matija Cetkovic",
+"Andrej Nikolic",
+"Damjan Petkovic",
+"Stefan Zivanovic",
+"Brano Tripunovic",
+"Mihajlo Ilic",
+"Luka Cvjetinovic",
+"Nina Cvjetinovic",
+"Petar Grujicic",
+"Stefan Jovanovic",
+"Teodor Jovanovic",
+"Mihajlo Davidovic",
+"Uros Blagojevic",
+"Zlatko Djuric",
+"Vuk Trifunovic"
+],
+
+kadeti:[
+"Matija Gligorevic",
+"Lazar Grabovac",
+"Kosta Cetkovic",
+"Uros Cvjetinovic",
+"Milos Mrakic",
+"Veljko Vuksic",
+"Aleksej Krsmanovic",
+"Stefan Ateljevic",
+"Nikola Petrovic",
+"Kristian Mijatovic",
+"Viktor Mijatovic",
+"Dositej Lazic",
+"Nemanja Gavric",
+"Strahinja Radovic",
+"Dusan Radovic",
+"Vuk Trisic",
+"Pavle Andric",
+"Nikola Jovanovic",
+"Pavle Pavlovic"
+]
+
+};
+
+function ucitajGrupu(){
+
+let grupa=document.getElementById("grupa").value;
+let tabela=document.getElementById("tabela");
+
+tabela.innerHTML="";
+
+grupe[grupa].forEach(ime=>{
+
+tabela.innerHTML+=`
+
+<tr>
+
+<td>${ime}</td>
+
+<td>
+
+<button
+class="status-btn prisutan"
+onclick="izaberiStatus(this,'${ime}','Prisutan')">
+PRISUTAN
+</button>
+
+</td>
+
+<td>
+
+<button
+class="status-btn odsutan"
+onclick="izaberiStatus(this,'${ime}','Nije prisutan')">
+NIJE PRISUTAN
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+ucitajGrupu();
+
+let statusi={};
+
+function izaberiStatus(dugme, ime, status){
+
+    statusi[ime]=status;
+
+    let red=dugme.parentElement.parentElement;
+
+    red.querySelectorAll(".status-btn").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    dugme.classList.add("active");
+
+}
+
+function sacuvaj(){
+
+let grupa=document.getElementById("grupa").value;
+
+let evidencija={};
+
+grupe[grupa].forEach(ime=>{
+
+evidencija[ime]=statusi[ime] || "Nije označeno";
+
+});
+
+localStorage.setItem(
+"evidencija_"+grupa,
+JSON.stringify(evidencija)
+);
+
+alert("Evidencija sačuvana.");
+
+}
+
+</script>
+
+</body>
+</html>

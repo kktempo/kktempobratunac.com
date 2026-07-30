@@ -757,3 +757,45 @@ cursor:pointer;
     cursor:pointer;
 
 }
+
+.admin-akcije{
+    display:flex;
+    justify-content:flex-end;
+    margin:25px 0;
+}
+
+.admin-btn{
+    background:#c8102e;
+    color:white;
+    padding:14px 28px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.admin-btn:hover{
+    background:#980c22;
+}
+
+.admin-akcije{
+    display:flex;
+    justify-content:flex-end;
+    margin:25px 0;
+}
+
+.admin-btn{
+    display:inline-block;
+    padding:12px 24px;
+    background:#c8102e;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.admin-btn:hover{
+    background:#980c22;
+    transform:translateY(-2px);
+}
