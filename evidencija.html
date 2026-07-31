@@ -15,7 +15,7 @@
 
 <div class="container">
 
-<h1>EVIDENCIJA TRENINGA</h1>
+<h1>EVIDENCIJA PRISUSTVA NA TRENZIMA</h1>
 
 <select id="grupa" onchange="ucitajGrupu()">
 
@@ -55,6 +55,10 @@
 
 <button onclick="sacuvaj()">
 SAČUVAJ EVIDENCIJU
+</button>
+
+<button onclick="izveziPDF()">
+📄 IZVEZI PDF
 </button>
 
 </div>
@@ -194,6 +198,73 @@ evidencija[ime]=statusi[ime] || "Nije označeno";
 
 });
 
+async function izveziPDF(){
+
+const { jsPDF } = window.jspdf;
+
+const pdf = new jsPDF();
+
+let grupa=document.getElementById("grupa").value;
+let datum=document.getElementById("datum").value;
+
+pdf.setFontSize(18);
+pdf.text("KK TEMPO BRATUNAC",105,15,{align:"center"});
+
+pdf.setFontSize(15);
+pdf.text("EVIDENCIJA TRENINGA",105,25,{align:"center"});
+
+pdf.setFontSize(12);
+pdf.text("Datum: "+datum,20,40);
+pdf.text("Grupa: "+grupa.toUpperCase(),20,48);
+
+let y=65;
+
+pdf.text("R.br",15,y);
+pdf.text("Ime",35,y);
+pdf.text("Status",150,y);
+
+y+=8;
+
+let prisutni=0;
+let odsutni=0;
+
+grupe[grupa].forEach((ime,index)=>{
+
+let status=statusi[ime] || "Nije označeno";
+
+pdf.text(String(index+1),15,y);
+pdf.text(ime,35,y);
+pdf.text(status,150,y);
+
+if(status==="Prisutan") prisutni++;
+if(status==="Nije prisutan") odsutni++;
+
+y+=8;
+
+if(y>270){
+
+pdf.addPage();
+
+y=20;
+
+}
+
+});
+
+y+=10;
+
+pdf.setFontSize(13);
+
+pdf.text("Prisutno: "+prisutni,20,y);
+
+pdf.text("Odsutno: "+odsutni,20,y+8);
+
+pdf.text("Ukupno: "+grupe[grupa].length,20,y+16);
+
+pdf.save("Evidencija_"+grupa+"_"+datum+".pdf");
+
+}
+
 let datum = document.getElementById("datum").value;
 
 localStorage.setItem(
@@ -206,6 +277,8 @@ alert("Evidencija sačuvana.");
 }
 
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 </body>
 </html>
