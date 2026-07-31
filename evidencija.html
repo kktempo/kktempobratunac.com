@@ -25,6 +25,14 @@
 
 </select>
 
+<div class="datum-box">
+
+<label>Datum treninga:</label>
+
+<input type="date" id="datum">
+
+</div>
+
 <table>
 
 <thead>
@@ -171,6 +179,9 @@ function izaberiStatus(dugme, ime, status){
 
 }
 
+document.getElementById("datum").value =
+new Date().toISOString().split("T")[0];
+
 function sacuvaj(){
 
 let grupa=document.getElementById("grupa").value;
@@ -183,8 +194,10 @@ evidencija[ime]=statusi[ime] || "Nije označeno";
 
 });
 
+let datum = document.getElementById("datum").value;
+
 localStorage.setItem(
-"evidencija_"+grupa,
+"evidencija_"+grupa+"_"+datum,
 JSON.stringify(evidencija)
 );
 
