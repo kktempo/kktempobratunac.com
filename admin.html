@@ -102,6 +102,8 @@ grid-template-columns:1fr;
 </head>
 
 
+
+
 <body>
 
 <div id="loginBox">
@@ -128,6 +130,10 @@ grid-template-columns:1fr;
 <section class="admin" id="adminPanel" style="display:none;">
 
 <h1>ADMIN PANEL</h1>
+
+<button class="duznici-btn" onclick="otvoriDuznike()">
+⚠️ Dužnici (3+ meseca)
+</button>
 
 <button onclick="izveziPDF()" class="pdf-dugme">
 📄 IZVEZI PDF
@@ -642,13 +648,7 @@ function proveriMesecneDugove(){
     let datum = new Date();
 
     let godina = datum.getFullYear();
-    let mesec = datum.getMonth()+1;
-
-    if(mesec < 10){
-        mesec="0"+mesec;
-    }
-
-    let trenutniMesec = godina+"-"+mesec;
+    let trenutniMesec = datum.getMonth()+1;
 
 
     for(let sifra in clanovi){
@@ -656,26 +656,57 @@ function proveriMesecneDugove(){
         let clan = clanovi[sifra];
 
 
-        // ako je pauza preskoči
-        if(imaPauzu(clan, trenutniMesec)){
-            continue;
+        // prolazi kroz sve mesece od januara do sada
+        for(let i = 7; i <= trenutniMesec; i++){
+
+
+            let brojMeseca = i;
+
+            if(brojMeseca < 10){
+                brojMeseca = "0" + brojMeseca;
+            }
+
+
+            let mesec = godina + "-" + brojMeseca;
+
+
+            // ako je pauza - preskoči
+            if(imaPauzu(clan, mesec)){
+                continue;
+            }
+
+
+            // ako mesec ne postoji, napravi dug
+            if(!clan.clanarine[mesec]){
+
+
+                clan.clanarine[mesec]={
+
+                    iznos: clan.cena,
+
+                    status:"NIJE PLAĆENO"
+
+                };
+
+
+            }
+
         }
 
-
-        if(!clan.clanarine[trenutniMesec]){
-
-            clan.clanarine[trenutniMesec]={
-
-                iznos: clan.cena,
-                status:"NIJE PLAĆENO"
-
-            };
-
-        }
 
     }
 
+
+    // sačuvaj izmene
+    localStorage.setItem(
+        "clanarine",
+        JSON.stringify(clanovi)
+    );
+
+
 }
+
+
 
 // pokretanje pri otvaranju admin panela
 proveriMesecneDugove();
@@ -1303,7 +1334,144 @@ window.onload=function(){
 
 }
 
+function zatvoriDuznike(){
+    document.getElementById("duzniciModal").style.display = "none";
+}
+
+function otvoriDuznike(){
+
+    let tabela = document.getElementById("listaDuznika");
+
+tabela.innerHTML="";
+
+    if(!tabela){
+        console.error("Nedostaje HTML element: listaDuznika");
+        return;
+    }
+
+    let tabelaHTML = "";
+
+    let brojDuznika = 0;
+
+
+    for(let sifra in clanovi){
+
+        let clan = clanovi[sifra];
+
+        let dugMeseci = 0;
+        let ukupanDug = 0;
+
+
+        for(let mesec in clan.clanarine){
+
+
+            let brojMeseca = parseInt(mesec.split("-")[1]);
+
+
+            // ignoriše januar-jul
+            if(brojMeseca < 8){
+                continue;
+            }
+
+
+            let uplata = clan.clanarine[mesec];
+
+
+            if(uplata.status === "NIJE PLAĆENO"){
+
+                dugMeseci++;
+
+                ukupanDug += uplata.iznos;
+
+            }
+
+
+        }
+
+
+        if(dugMeseci >= 3){
+
+            brojDuznika++;
+
+
+            tabela.innerHTML += `
+
+            <tr>
+                <td>${clan.ime}</td>
+                <td>${dugMeseci} meseca</td>
+                <td>${ukupanDug} KM</td>
+            </tr>
+
+            `;
+
+        }
+
+    }
+
+
+    if(brojDuznika === 0){
+
+        tabela.innerHTML = `
+
+        <tr>
+            <td colspan="3">
+                Nema članova sa dugom od 3 ili više meseci
+            </td>
+        </tr>
+
+        `;
+
+    }
+
+
+let modal = document.getElementById("duzniciModal");
+
+modal.style.display="flex";
+
+modal.style.position="fixed";
+modal.style.top="0";
+modal.style.left="0";
+modal.style.width="100%";
+modal.style.height="100%";
+modal.style.zIndex="99999999";
+modal.style.justifyContent="center";
+modal.style.alignItems="center";
+
+}
+
+
+
 </script>
+
+</section>
+
+<div id="duzniciModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Lista dužnika</h2>
+
+        <table>
+<thead>
+<tr>
+<th>Ime</th>
+<th>Dug</th>
+<th>Iznos</th>
+</tr>
+</thead>
+
+<tbody id="listaDuznika"></tbody>
+
+</table>
+
+        <button onclick="zatvoriDuznike()">Zatvori</button>
+
+    </div>
+
+</div>
+
+
+
 <div id="pauzaModal" class="modal">
 
 <div class="modal-sadrzaj">
@@ -1322,10 +1490,11 @@ SAČUVAJ
 OTKAŽI
 </button>
 
+    </div>
 
 </div>
 
-</div>
+
 
 </body>
 </html>

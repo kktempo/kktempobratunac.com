@@ -799,3 +799,317 @@ cursor:pointer;
     background:#980c22;
     transform:translateY(-2px);
 }
+
+.modal{
+display:none;
+position:fixed;
+z-index:9999;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+
+justify-content:center;
+align-items:center;
+}
+
+
+.modal-sadrzaj{
+
+background:white;
+width:90%;
+max-width:700px;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+
+}
+
+
+.modal-sadrzaj h2{
+
+text-align:center;
+color:#c8102e;
+font-size:30px;
+
+}
+
+
+.zatvori{
+
+float:right;
+font-size:35px;
+cursor:pointer;
+
+}
+
+
+table{
+
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+
+}
+
+
+th{
+
+background:#c8102e;
+color:white;
+padding:12px;
+
+}
+
+
+td{
+
+padding:12px;
+border-bottom:1px solid #ddd;
+text-align:center;
+
+}
+
+
+#duzniciModal .modal-sadrzaj{
+    background:#fff;
+    width:90%;
+    max-width:700px;
+    border-radius:20px;
+    padding:25px;
+}
+
+.duznici-btn{
+    background:#c8102e;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+
+
+.modal-sadrzaj{
+    background:#fff;
+    width:90%;
+    max-width:700px;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+    position:relative;
+}
+
+.zatvori{
+    position:absolute;
+    right:20px;
+    top:10px;
+    font-size:32px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.duznici-btn{
+    background:#c8102e;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    margin-bottom:20px;
+}
+
+.duznici-btn:hover{
+    background:#a80d26;
+}
+
+
+
+.modal-content{
+    background:white;
+    width:500px;
+    max-width:90%;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+
+
+.modal-content h2{
+    color:#c8102e;
+    margin-bottom:25px;
+}
+
+
+.modal-content table{
+    width:100%;
+    margin-top:20px;
+}
+
+
+.modal-content button{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    background:#c8102e;
+    color:white;
+    cursor:pointer;
+}
+
+
+/* animacija */
+
+@keyframes popupUlaz{
+
+    from{
+
+        transform:scale(.8);
+
+        opacity:0;
+
+    }
+
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+/* =========================
+   MODAL DUŽNICI
+========================= */
+
+#duzniciModal{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100vw;
+    height:100vh;
+
+    background:rgba(0,0,0,0.75);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:999999999;
+
+}
+
+
+#duzniciModal .modal-content{
+
+    background:white;
+
+    width:500px;
+
+    max-width:90%;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.5);
+
+    text-align:center;
+
+    animation:popup .3s ease;
+
+}
+
+
+#duzniciModal h2{
+
+    color:#c8102e;
+
+    font-size:28px;
+
+    margin-bottom:25px;
+
+}
+
+
+#duzniciModal table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+#duzniciModal th{
+
+    background:#c8102e;
+
+    color:white;
+
+    padding:12px;
+
+}
+
+
+#duzniciModal td{
+
+    padding:12px;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+
+#duzniciModal button{
+
+    margin-top:25px;
+
+    padding:12px 30px;
+
+    background:#c8102e;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+}
+
+
+@keyframes popup{
+
+from{
+
+transform:scale(.8);
+
+opacity:0;
+
+}
+
+to{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+}
