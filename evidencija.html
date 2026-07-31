@@ -198,6 +198,17 @@ evidencija[ime]=statusi[ime] || "Nije označeno";
 
 });
 
+    let datum=document.getElementById("datum").value;
+
+    localStorage.setItem(
+        "evidencija_"+grupa+"_"+datum,
+        JSON.stringify(evidencija)
+    );
+
+    alert("Evidencija sačuvana.");
+
+}
+
 async function izveziPDF(){
 
 const { jsPDF } = window.jspdf;
@@ -262,17 +273,6 @@ pdf.text("Odsutno: "+odsutni,20,y+8);
 pdf.text("Ukupno: "+grupe[grupa].length,20,y+16);
 
 pdf.save("Evidencija_"+grupa+"_"+datum+".pdf");
-
-}
-
-let datum = document.getElementById("datum").value;
-
-localStorage.setItem(
-"evidencija_"+grupa+"_"+datum,
-JSON.stringify(evidencija)
-);
-
-alert("Evidencija sačuvana.");
 
 }
 
