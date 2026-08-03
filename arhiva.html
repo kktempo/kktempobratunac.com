@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arhiva evidencija</title>
+
+<link rel="stylesheet" href="evidencija.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>ARHIVA EVIDENCIJA</h1>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Datum</th>
+<th>Grupa</th>
+<th>Akcije</th>
+
+</tr>
+
+</thead>
+
+<tbody id="lista">
+
+</tbody>
+
+</table>
+
+<hr style="margin:40px 0;">
+
+<div id="pregled"></div>
+
+</div>
+
+<script>
+
+let lista = JSON.parse(localStorage.getItem("listaEvidencija")) || [];
+
+function ucitajArhivu(){
+
+const tbody=document.getElementById("lista");
+
+tbody.innerHTML="";
+
+lista.forEach((e,index)=>{
+
+tbody.innerHTML+=`
+
+<tr>
+
+<td>${e.datum}</td>
+
+<td>${e.grupa.toUpperCase()}</td>
+
+<td>
+
+<button onclick="otvori('${e.grupa}','${e.datum}')">
+👁 Pregled
+</button>
+
+<button onclick="pdf('${e.grupa}','${e.datum}')">
+📄 PDF
+</button>
+
+<button onclick="obrisi(${index})">
+🗑 Obriši
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+ucitajArhivu();
+
+function otvori(grupa,datum){
+
+let podaci=JSON.parse(
+
+localStorage.getItem("evidencija_"+grupa+"_"+datum)
+
+);
+
+let html=`
+
+<h2>${datum}</h2>
+
+<h3>${grupa.toUpperCase()}</h3>
+
+<table>
+
+<tr>
+
+<th>Ime</th>
+
+<th>Status</th>
+
+</tr>
+
+`;
+
+let prisutni=0;
+let odsutni=0;
+
+for(let ime in podaci){
+
+let status=podaci[ime];
+
+if(status=="Prisutan") prisutni++;
+if(status=="Nije prisutan") odsutni++;
+
+html+=`
+
+<tr>
+
+<td>${ime}</td>
+
+<td style="color:${status=="Prisutan"?"green":"red"}">
+
+${status}
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+html+=`
+
+</table>
+
+<h3>
+
+Prisutno: ${prisutni}
+
+<br>
+
+Odsutno: ${odsutni}
+
+<br>
+
+Ukupno: ${prisutni+odsutni}
+
+</h3>
+
+`;
+
+document.getElementById("pregled").innerHTML=html;
+
+}
+
+async function pdf(grupa,datum){
+
+const podaci=JSON.parse(
+
+localStorage.getItem("evidencija_"+grupa+"_"+datum)
+
+);
+
+const {jsPDF}=window.jspdf;
+
+const doc=new jsPDF();
+
+doc.setFontSize(18);
+
+doc.text("KK TEMPO BRATUNAC",105,15,{align:"center"});
+
+doc.setFontSize(14);
+
+doc.text("EVIDENCIJA TRENINGA",105,25,{align:"center"});
+
+doc.text("Datum: "+datum,20,40);
+
+doc.text("Grupa: "+grupa.toUpperCase(),20,48);
+
+let y=65;
+
+let rb=1;
+
+for(let ime in podaci){
+
+doc.text(String(rb),15,y);
+
+doc.text(ime,30,y);
+
+doc.text(podaci[ime],150,y);
+
+y+=8;
+
+rb++;
+
+if(y>270){
+
+doc.addPage();
+
+y=20;
+
+}
+
+}
+
+doc.save("Evidencija_"+grupa+"_"+datum+".pdf");
+
+}
+
+function obrisi(index){
+
+if(!confirm("Obrisati evidenciju?")) return;
+
+let grupa=lista[index].grupa;
+
+let datum=lista[index].datum;
+
+localStorage.removeItem(
+
+"evidencija_"+grupa+"_"+datum
+
+);
+
+lista.splice(index,1);
+
+localStorage.setItem(
+
+"listaEvidencija",
+
+JSON.stringify(lista)
+
+);
+
+document.getElementById("pregled").innerHTML="";
+
+ucitajArhivu();
+
+}
+
+</script>
+
+</body>
+
+</html>
