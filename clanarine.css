@@ -1,0 +1,99 @@
+/* GORNJA DUGMAD */
+
+.top-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin:30px 0;
+    flex-wrap:wrap;
+}
+
+
+.top-buttons button{
+
+    min-width:170px;
+    height:50px;
+
+    border:none;
+    border-radius:30px;
+
+    color:white;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+
+    transition:0.3s;
+
+}
+
+
+/* NAZAD */
+
+.top-buttons button:first-child{
+
+    background:linear-gradient(135deg,#555,#222);
+
+}
+
+
+/* DUŽNICI */
+
+.top-buttons .duznici{
+
+    background:linear-gradient(135deg,#ff9800,#d35400);
+
+}
+
+
+/* PDF */
+
+.top-buttons .pdf{
+
+    background:linear-gradient(135deg,#c8102e,#8b001f);
+
+}
+
+
+
+/* HOVER */
+
+.top-buttons button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+
+}
+
+
+
+/* MOBILNI PRIKAZ */
+
+@media(max-width:600px){
+
+    .top-buttons{
+
+        flex-direction:column;
+        width:100%;
+
+    }
+
+
+    .top-buttons button{
+
+        width:90%;
+        max-width:300px;
+
+    }
+
+}

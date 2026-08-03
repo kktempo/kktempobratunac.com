@@ -2,6 +2,7 @@
 <html lang="sr">
 
 <head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,10 +14,13 @@
 
 <body>
 
+<button onclick="location.href='admin.html'" class="nazad-btn">
+⬅ NAZAD
+</button>
+
 <div class="container">
 
-<h1>EVIDENCIJA PRISUSTVA NA TRENZIMA</h1>
-
+<h1>EVIDENCIJA PRISUSTVA NA TRENINZIMA</h1>
 <select id="grupa" onchange="ucitajGrupu()">
 
 <option value="mini">GRUPA 1</option>
@@ -188,22 +192,39 @@ new Date().toISOString().split("T")[0];
 
 function sacuvaj(){
 
-let grupa=document.getElementById("grupa").value;
+    let grupa = document.getElementById("grupa").value;
+    let datum = document.getElementById("datum").value;
 
-let evidencija={};
+    let evidencija = {};
 
-grupe[grupa].forEach(ime=>{
+    grupe[grupa].forEach(ime => {
 
-evidencija[ime]=statusi[ime] || "Nije označeno";
+        evidencija[ime] = statusi[ime] || "Nije označeno";
 
-});
+    });
 
-    let datum=document.getElementById("datum").value;
-
+    // Čuvanje evidencije
     localStorage.setItem(
-        "evidencija_"+grupa+"_"+datum,
+        "evidencija_" + grupa + "_" + datum,
         JSON.stringify(evidencija)
     );
+
+    // Dodavanje u arhivu
+    let lista = JSON.parse(localStorage.getItem("listaEvidencija")) || [];
+
+    if(!lista.find(x => x.grupa === grupa && x.datum === datum)){
+
+        lista.push({
+            datum: datum,
+            grupa: grupa
+        });
+
+        localStorage.setItem(
+            "listaEvidencija",
+            JSON.stringify(lista)
+        );
+
+    }
 
     alert("Evidencija sačuvana.");
 
@@ -341,6 +362,7 @@ pdf.save(
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 
 </body>
 </html>

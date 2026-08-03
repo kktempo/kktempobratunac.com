@@ -1,891 +1,533 @@
 <!DOCTYPE html>
 <html lang="sr">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin panel | KK Tempo</title>
 
-<link rel="stylesheet" href="style.css">
+<title>KK Tempo - Admin Panel</title>
 
 <style>
 
-body{
-    font-family:Arial,sans-serif;
-    background:#f5f5f5;
-    margin:0;
+*{
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
-.admin{
-    width:95%;
-    max-width:1300px;
-    margin:40px auto;
+body{
+
+    margin:0;
+    min-height:100vh;
+
+    background:#ffffff;
+
+    color:#071d49;
+
 }
+
+
+/* HEADER */
+
+header{
+
+    text-align:center;
+    padding:40px 20px 30px;
+
+}
+
+
+.logo{
+
+    font-size:60px;
+    margin-bottom:10px;
+
+}
+
 
 h1{
-    text-align:center;
-    color:#c8102e;
-}
 
-.statistika{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    margin:30px 0;
-}
-
-.kartica{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
-}
-
-.kartica h2{
-    color:#c8102e;
-    font-size:34px;
     margin:0;
+    font-size:34px;
+    font-weight:800;
+    color:#c8102e;
+
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+h2{
+
+    margin:8px 0;
+    font-size:22px;
+    color:#071d49;
+
 }
 
-th{
+
+header p{
+
+    opacity:0.9;
+    font-size:16px;
+
+}
+
+
+
+/* DASHBOARD */
+
+.dashboard{
+
+    width:90%;
+    max-width:1200px;
+    margin:30px auto;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:30px;
+
+}
+
+
+
+/* KARTICE */
+
+
+.card{
+
     background:#c8102e;
+
     color:white;
-    padding:15px;
-}
 
-td{
-    padding:12px;
+    border-radius:25px;
+
+    padding:35px 20px;
+
     text-align:center;
-    border-bottom:1px solid #ddd;
+
+    text-decoration:none;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,0.35);
+
+    transition:0.3s;
+
+    position:relative;
+
+    overflow:hidden;
+
 }
 
-.pl{
-    color:green;
+
+
+.card:before{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    background:#c8102e;
+
+    border-radius:50%;
+
+    top:-60px;
+    right:-60px;
+
+    opacity:0.12;
+
+}
+
+
+
+.card:hover{
+
+    transform:translateY(-10px) scale(1.03);
+
+    box-shadow:
+    0 20px 45px rgba(0,0,0,0.5);
+
+}
+
+
+
+.icon{
+
+    font-size:55px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.card h3{
+
+    margin:10px 0;
+
+    font-size:25px;
+
+    color:white;
+
+}
+
+
+
+.card p{
+
+    margin:0;
+
+    font-size:16px;
+
+}
+
+
+
+/* INFO */
+
+.info{
+
+    width:90%;
+    max-width:1200px;
+
+    margin:30px auto;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+.info-box{
+
+    background:#c8102e;
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+
+.info-box span{
+
+    display:block;
+
+    font-size:30px;
+
     font-weight:bold;
-}
-
-.npl{
-    color:red;
-    font-weight:bold;
-}
-
-@media(max-width:900px){
-
-.statistika{
-grid-template-columns:repeat(2,1fr);
-}
 
 }
 
-@media(max-width:600px){
 
-.statistika{
-grid-template-columns:1fr;
+
+/* FOOTER */
+
+
+footer{
+
+    text-align:center;
+
+    padding:30px;
+
+    opacity:0.8;
+
 }
 
+
+
+
+/* MOBILNI */
+
+@media(max-width:800px){
+
+
+.dashboard{
+
+    grid-template-columns:1fr;
+
 }
+
+
+.info{
+
+    grid-template-columns:1fr;
+
+}
+
+
+h1{
+
+    font-size:27px;
+
+}
+
+
+.logo{
+
+    font-size:45px;
+
+}
+
+
+}
+
 
 </style>
 
 </head>
 
 
-
-
 <body>
 
-<div id="loginBox">
 
-    <div class="login-kartica">
+<header>
 
-        <h2>ADMIN PRISTUP</h2>
+<div class="logo">
+🏀
+</div>
 
-        <input 
-        type="password" 
-        id="adminSifra" 
-        placeholder="Unesite šifru">
+<h1>
+KK TEMPO BRATUNAC
+</h1>
 
-        <button onclick="proveriSifru()">
-            ULAZ
-        </button>
+<h2>
+ADMIN PANEL
+</h2>
 
-        <p id="greska"></p>
+<p>
+Sistem za upravljanje klubom
+</p>
 
-    </div>
+
+</header>
+
+
+
+<div class="info">
+
+
+<div class="info-box">
+
+Ukupno članova
+
+<span id="clanovi">
+0
+</span>
 
 </div>
 
-<section class="admin" id="adminPanel" style="display:none;">
 
-<h1>ADMIN PANEL</h1>
+<div class="info-box">
 
-<button class="duznici-btn" onclick="otvoriDuznike()">
-⚠️ Dužnici (3+ meseca)
-</button>
+Aktivne članarine
 
-<button onclick="izveziPDF()" class="pdf-dugme">
-📄 IZVEZI PDF
-</button>
-
-<div class="statistika">
-
-<div class="kartica">
-<h2 id="brojClanova">0</h2>
-<p>Članova</p>
-</div>
-
-<div class="kartica">
-<h2 id="ukupnoClanarine">0 KM</h2>
-<p>Ukupno članarine</p>
-</div>
-
-<div class="kartica">
-<h2 id="naplaceno">0 KM</h2>
-<p>Naplaćeno</p>
-</div>
-
-<div class="kartica">
-<h2 id="dugovanja">0 KM</h2>
-<p>Dugovanja</p>
-</div>
+<span id="aktivne">
+0
+</span>
 
 </div>
 
-<div class="pretraga">
 
-<input
-type="text"
-id="pretraga"
-placeholder="🔍 Pretraži po imenu ili šifri..."
-onkeyup="pretraziClanove()">
+<div class="info-box">
 
-<div class="table-wrapper">
+Dugovanja
 
-<div class="admin-akcije">
+<span id="dugovi">
+0
+</span>
 
-    <a href="evidencija.html" class="admin-btn">
-        📋 EVIDENCIJA DOLAZAKA
-    </a>
+</div>
 
-<a href="arhiva.html" class="admin-btn">
-📂 Arhiva evidencija
+
+</div>
+
+
+
+
+<div class="dashboard">
+
+
+<a href="clanarine.html" class="card">
+
+
+<div class="icon">
+
+</div>
+
+<h3>
+ČLANARINE
+</h3>
+
+<p>
+Upravljanje uplatama članova
+</p>
+
+
 </a>
 
-</div>
 
-<table>
 
-<thead>
 
-<tr>
-<th>Šifra</th>
-<th>Ime</th>
-<th>Program</th>
-<th>Cena</th>
-<th>Ukupan dug</th>
-<th>Status</th>
-<th>Akcija</th>
-<th>Pauza</th>
-</tr>
+<a href="evidencija.html" class="card">
 
-</thead>
 
-<tbody id="tabela"></tbody>
-
-</table>
+<div class="icon">
 
 </div>
 
-</section>
+
+<h3>
+EVIDENCIJA PRISUSTVA
+</h3>
+
+
+<p>
+Evidencija treninga igrača
+</p>
+
+
+</a>
+
+
+
+
+<a href="arhiva.html" class="card">
+
+
+<div class="icon">
+
+</div>
+
+
+<h3>
+ARHIVA EVIDENCIJA
+</h3>
+
+
+<p>
+Pregled svih treninga
+</p>
+
+
+</a>
+
+
+
+</div>
+
+
+
+
+<footer>
+
+© KK Tempo Bratunac
+
+</footer>
+
+
+
 
 <script>
 
-const clanovi={
-
-"MATIJAG2014":{
-ime:"Matija Gligorević",
-program:"Program 2",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"GRABOVACL2014":{
-ime:"Lazar Grabovac",
-program:"Program 2",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"DAMJANP2018":{
-ime:"Damjan Petkovic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"DUNJAI2018":{
-ime:"Dunja Ilic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"MARKOZ2012":{
-ime:"Marko Zolotic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"ALEKSIJER2012":{
-ime:"Aleksije Reljic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"MARKOP2014":{
-ime:"Marko Pajic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"LUKAK2013":{
-ime:"Luka Krsmanovic",
-program:"Program 2",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"RASTKOS2015":{
-ime:"Rastko Stevanovic",
-program:"Program 2",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"STEFANZ2016":{
-ime:"Stefan Zivanovic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"LAZARM2012":{
-ime:"Lazar Milicevic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"SRDJANB2012":{
-ime:"Srdjan Barjaktarevic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"BRANOT2016":{
-ime:"Brano Tripunovic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"MIHAJLOI2016":{
-ime:"Mihajlo Ilic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"ANDREJN2015":{
-ime:"Andrej Nikolic",
-program:"Program 2",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"LUKAC2016":{
-ime:"Luka Cvjetinovic",
-program:"Program 2",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"NINAC2015":{
-ime:"Nina Cvjetinovic",
-program:"Program 2",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"PETARG2017":{
-ime:"Petar Grujicic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"IVANR2012":{
-ime:"Ivan Radic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"MILOSR2014":{
-ime:"Milos Radic",
-program:"Program 1",
-cena:20,
-
-clanarine:{},
-pauza:{}
-},
-
-"KOSTAĆ2015":{
-ime:"Kosta Cetkovic",
-program:"Program 2",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"UROSC2015":{
-ime:"Uros Cvjetinovic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"MILOSM2014":{
-ime:"Milos Mrakic",
-program:"Program 3",
-cena:50,
-
-clanarine:{},
-pauza:{}
-},
-
-"VELJKOV2015":{
-ime:"Veljko Vuksic",
-program:"Program 3",
-cena:50,
-
-clanarine:{},
-pauza:{}
-},
-
-"АЛЕКСЕЈК2015":{
-ime:"Aleksej Krsmanovic",
-program:"Program 3",
-cena:50,
-
-clanarine:{},
-pauza:{}
-},
-
-"STEFANA2014":{
-ime:"Stefan Ateljevic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"NIKOLAP2016":{
-ime:"Nikola Petrovic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"KRISTIANM2013":{
-ime:"Kristian Mijatovic",
-program:"Program 2",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"VIKTORM2015":{
-ime:"Viktor Mijatovic",
-program:"Program 2",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"DOSITEJL2015":{
-ime:"Dositej Lazic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"NEMANJAG2015":{
-ime:"Nemanja Gavric",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"STRAHINJAR2014":{
-ime:"Strahinja Radovic",
-program:"Program 3",
-cena:50,
-
-clanarine:{},
-pauza:{}
-},
-
-"DUSANR2014":{
-ime:"Dusan Radovic",
-program:"Program 3",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"VUKT2015":{
-ime:"Vuk Trisic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"STEFANJ2015":{
-ime:"Stefan Jovanovic",
-program:"Program 3",
-cena:50,
-
-clanarine:{},
-pauza:{}
-},
-
-"TEODORJ2019":{
-ime:"Teodor Jovanovic",
-program:"Program 3",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"PAVLEA2014":{
-ime:"Pavle Andric",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"NIKOLAJ2013":{
-ime:"Nikola Jovanovic",
-program:"Program 2",
-cena:40,
-
-clanarine:{},
-pauza:{}
-},
-
-"MATIJAĆ2018":{
-ime:"Matija Cetkovic",
-program:"Program 1",
-cena:20,
-
-clanarine:{},
-pauza:{}
-},
-
-"MIHAJLOD2018":{
-ime:"Mihajlo Davidovic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"UROSB2015":{
-ime:"Uros Blagojevic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"ZLATKOD2015":{
-ime:"Zlatko Djuric",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"PAVLEP2016":{
-ime:"Pavle Pavlovic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-},
-
-"VUKT2017":{
-ime:"Vuk Trifunovic",
-program:"Program 1",
-cena:30,
-
-clanarine:{},
-pauza:{}
-}
-
-};
-
-// učitavanje sačuvanih uplata
-let sacuvaneClanarine = localStorage.getItem("clanarine");
-
-
-if(sacuvaneClanarine){
-
-    let podaci = JSON.parse(sacuvaneClanarine);
-
-
-    for(let sifra in podaci){
-
-        if(clanovi[sifra]){
-clanovi[sifra].clanarine = podaci[sifra].clanarine || {};
-
-clanovi[sifra].pauza = podaci[sifra].pauza || {};
+
+// kasnije se povezuje sa localStorage iz članarina
+
+let clanovi = JSON.parse(localStorage.getItem("clanarine")) || {};
+
+
+document.getElementById("clanovi").innerHTML =
+Object.keys(clanovi).length;
+
+
+let dugovi = 0;
+let aktivni = 0;
+
+
+Object.values(clanovi).forEach(c=>{
+
+
+let imaPlacenu = false;
+
+
+// proverava sve mesece
+
+if(c.clanarine){
+
+    Object.values(c.clanarine).forEach(mesec=>{
+
+
+        if(mesec.status === "PLAĆENO"){
+
+            imaPlacenu = true;
 
         }
 
-    }
-
-}
-
-function imaPauzu(clan, mesec){
-
-    if(clan.pauza && clan.pauza[mesec]){
-
-        return true;
-
-    }
-
-    return false;
-
-}
-
-
-function proveriMesecneDugove(){
-
-    let datum = new Date();
-
-    let godina = datum.getFullYear();
-    let trenutniMesec = datum.getMonth()+1;
-
-
-    for(let sifra in clanovi){
-
-        let clan = clanovi[sifra];
-
-
-        // prolazi kroz sve mesece od januara do sada
-        for(let i = 7; i <= trenutniMesec; i++){
-
-
-            let brojMeseca = i;
-
-            if(brojMeseca < 10){
-                brojMeseca = "0" + brojMeseca;
-            }
-
-
-            let mesec = godina + "-" + brojMeseca;
-
-
-            // ako je pauza - preskoči
-            if(imaPauzu(clan, mesec)){
-                continue;
-            }
-
-
-            // ako mesec ne postoji, napravi dug
-            if(!clan.clanarine[mesec]){
-
-
-                clan.clanarine[mesec]={
-
-                    iznos: clan.cena,
-
-                    status:"NIJE PLAĆENO"
-
-                };
-
-
-            }
-
-        }
-
-
-    }
-
-
-    // sačuvaj izmene
-    localStorage.setItem(
-        "clanarine",
-        JSON.stringify(clanovi)
-    );
-
-
-}
-
-
-
-// pokretanje pri otvaranju admin panela
-proveriMesecneDugove();
-
-let ukupno=0;
-let naplaceno=0;
-let dug=0;
-let broj=0;
-
-for(let sifra in clanovi){
-
-let clan=clanovi[sifra];
-
-broj++;
-
-
-let danas = new Date();
-
-let godina = danas.getFullYear();
-
-let mesec = danas.getMonth()+1;
-
-if(mesec<10){
-mesec="0"+mesec;
-}
-
-let aktivniMesec = godina+"-"+mesec;
-
-
-
-if(
-!clan.clanarine[aktivniMesec] &&
-!imaPauzu(clan,aktivniMesec)
-){
-
-    clan.clanarine[aktivniMesec]={
-
-        iznos: clan.cena,
-        status:"NIJE PLAĆENO"
-
-    };
-
-}
-
-
-let clanarina = clan.clanarine[aktivniMesec];
-
-
-// sigurnosna provera
-if(!clanarina){
-
-    clanarina = {
-
-        iznos: clan.cena,
-
-        status:"NIJE PLAĆENO"
-
-    };
-
-
-    clan.clanarine[aktivniMesec]=clanarina;
-
-}
-
-
-
-ukupno += clanarina.iznos;
-
-
-if(clanarina.status==="PLAĆENO"){
-
-    naplaceno += clanarina.iznos;
-
-}
-else{
-
-    dug += clanarina.iznos;
-
-}
-
-document.getElementById("tabela").innerHTML+=`
-
-<tr>
-<td>${sifra}</td>
-<td>${clan.ime}</td>
-<td>${clan.program}</td>
-<td>
-${clan.cena} KM
-</td>
-
-
-<td class="${izracunajDug(clan)>0 ? 'npl' : 'pl'}">
-${izracunajDug(clan)} KM
-</td>
-
-
-<td class="${clanarina.status==="PLAĆENO" ? "pl" : "npl"}">
-
-${clanarina.status}
-
-</td>
-
-
-<td>
-
-<button onclick="promeniStatus('${sifra}')">
-
-${
-clanarina.status==="PLAĆENO"
-?
-"PONIŠTI UPLATU"
-:
-"PLATIO"
-}
-
-</button>
-
-</td>
-
-
-<td>
-
-<button onclick="pauzirajMesec('${sifra}')">
-PAUZA MESEC
-</button>
-
-</td>
-</tr>
-
-`;
-
-}
-
-document.getElementById("brojClanova").innerHTML=broj;
-document.getElementById("ukupnoClanarine").innerHTML=ukupno+" KM";
-document.getElementById("naplaceno").innerHTML=naplaceno+" KM";
-document.getElementById("dugovanja").innerHTML=dug+" KM";
-
-function pretraziClanove(){
-
-    let filter = document.getElementById("pretraga")
-        .value.toUpperCase();
-
-    let redovi = document.querySelectorAll("#tabela tr");
-
-    redovi.forEach(red=>{
-
-        let sifra = red.cells[0].textContent.toUpperCase();
-        let ime = red.cells[1].textContent.toUpperCase();
-
-        if(
-            sifra.includes(filter) ||
-            ime.includes(filter)
-        ){
-            red.style.display="";
-        }else{
-            red.style.display="none";
-        }
 
     });
 
 }
+
+
+
+// aktivna članarina
+
+if(imaPlacenu){
+
+    aktivni++;
+
+}
+
+
+
+// dug
+
+dugovi += izracunajDug(c);
+
+
+
+});
+
+
+
+document.getElementById("aktivne").innerHTML = aktivni;
+
+
+document.getElementById("dugovi").innerHTML = dugovi + " KM";
+
+
+
 function izracunajDug(clan){
 
     let dug = 0;
 
 
-    for(let mesec in clan.clanarine){
+    if(clan.clanarine){
 
-        let zapis = clan.clanarine[mesec];
+        for(let mesec in clan.clanarine){
 
 
-        if(zapis && zapis.status==="NIJE PLAĆENO"){
+            let zapis = clan.clanarine[mesec];
 
-            dug += zapis.iznos;
+
+            if(zapis && zapis.status==="NIJE PLAĆENO"){
+
+                dug += zapis.iznos;
+
+            }
+
 
         }
 
@@ -896,608 +538,9 @@ function izracunajDug(clan){
 
 }
 
-function promeniStatus(sifra){
-
-    let datum = new Date();
-
-    let godina = datum.getFullYear();
-
-    let mesec = datum.getMonth()+1;
-
-    if(mesec < 10){
-        mesec="0"+mesec;
-    }
-
-    let trenutniMesec = godina+"-"+mesec;
-
-
-    // ako ne postoji zapis napravi ga
-
-    if(!clanovi[sifra].clanarine[trenutniMesec]){
-
-        clanovi[sifra].clanarine[trenutniMesec]={
-
-            iznos: clanovi[sifra].cena,
-
-            status:"NIJE PLAĆENO"
-
-        };
-
-    }
-
-
-    let clanarina = clanovi[sifra].clanarine[trenutniMesec];
-
-
-    if(clanarina.status==="PLAĆENO"){
-
-
-        clanovi[sifra].clanarine[trenutniMesec]={
-
-            iznos: clanovi[sifra].cena,
-
-            status:"NIJE PLAĆENO"
-
-        };
-
-
-    }else{
-
-
-        clanovi[sifra].clanarine[trenutniMesec]={
-
-            iznos: clanovi[sifra].cena,
-
-            status:"PLAĆENO",
-
-            datumUplate: datum.toISOString().split("T")[0]
-
-        };
-
-    }
-
-
-    let zaCuvanje={};
-
-
-    for(let ime in clanovi){
-
-        zaCuvanje[ime]={
-
-            clanarine: clanovi[ime].clanarine,
-
-            pauza: clanovi[ime].pauza
-
-        };
-
-    }
-
-
-    localStorage.setItem(
-        "clanarine",
-        JSON.stringify(zaCuvanje)
-    );
-
-
-    location.reload();
-
-}
-
-
-function zatvoriPauzu(){
-
-document.getElementById("pauzaModal").style.display="none";
-
-}
-
-function sacuvajSve(){
-
-    let podaci={};
-
-
-    for(let ime in clanovi){
-
-        podaci[ime]={
-
-            clanarine: clanovi[ime].clanarine,
-
-            pauza: clanovi[ime].pauza
-
-        };
-
-    }
-
-
-    localStorage.setItem(
-        "clanarine",
-        JSON.stringify(podaci)
-    );
-
-}
-
-
-  
-function izveziPDF(){
-
-
-const { jsPDF } = window.jspdf;
-
-
-let pdf = new jsPDF("landscape");
-
-
-
-pdf.setFontSize(18);
-
-pdf.text(
-"KK TEMPO BRATUNAC - EVIDENCIJA CLANARINA",
-14,
-15
-);
-
-
-
-pdf.setFontSize(11);
-
-let datum = new Date().toLocaleDateString("sr-RS");
-
-
-pdf.text(
-"Datum izvoza: " + datum,
-14,
-23
-);
-
-
-
-let tabela = [];
-
-
-
-for(let sifra in clanovi){
-
-
-let clan = clanovi[sifra];
-
-
-let dug = izracunajDug(clan);
-
-
-
-let status = dug > 0 
-?
-"NIJE PLACENO"
-:
-"PLACENO";
-
-
-
-tabela.push([
-
-sifra,
-
-clan.ime,
-
-clan.program,
-
-clan.cena+" KM",
-
-dug+" KM",
-
-status
-
-]);
-
-
-}
-
-
-
-pdf.autoTable({
-
-startY:30,
-
-head:[
-
-[
-"Sifra",
-"Ime",
-"Program",
-"Cena",
-"Ukupan dug",
-"Status"
-
-]
-
-],
-
-
-body:tabela,
-
-
-styles:{
-
-fontSize:9
-
-},
-
-
-headStyles:{
-
-fillColor:[200,16,46]
-
-}
-
-
-});
-
-
-
-pdf.save(
-"KK_Tempo_clanarine.pdf"
-);
-
-
-}
-
-let clanZaPauzu = null;
-
-
-function pauzirajMesec(sifra){
-
-
-    clanZaPauzu = sifra;
-
-
-    document.getElementById("imePauza").innerHTML =
-    clanovi[sifra].ime;
-
-
-    let html = "";
-
-    let godina = new Date().getFullYear();
-
-
-    for(let i=1; i<=12; i++){
-
-
-        let mesec = i < 10 ? "0"+i : i;
-
-
-        let vrednost = godina+"-"+mesec;
-
-
-        let oznaceno = 
-        clanovi[sifra].pauza &&
-        clanovi[sifra].pauza[vrednost]
-        ?
-        "checked"
-        :
-        "";
-
-
-
-        html += `
-
-        <div class="mesec">
-
-        <label>
-
-        <input 
-        type="checkbox"
-        value="${vrednost}"
-        ${oznaceno}>
-
-        ${vrednost}
-
-        </label>
-
-        </div>
-
-        `;
-
-
-    }
-
-
-    document.getElementById("listaMeseci").innerHTML = html;
-
-
-   let modal = document.getElementById("pauzaModal");
-
-modal.style.display = "flex";
-modal.style.position = "fixed";
-modal.style.top = "0";
-modal.style.left = "0";
-modal.style.width = "100%";
-modal.style.height = "100%";
-modal.style.background = "rgba(0,0,0,0.7)";
-modal.style.zIndex = "999999";
-modal.style.justifyContent = "center";
-modal.style.alignItems = "center";
-
-let sadrzaj = modal.querySelector(".modal-sadrzaj");
-
-sadrzaj.style.background = "white";
-sadrzaj.style.color = "#222";
-sadrzaj.style.width = "500px";
-sadrzaj.style.padding = "35px";
-sadrzaj.style.borderRadius = "20px";
-sadrzaj.style.boxShadow = "0 20px 50px rgba(0,0,0,0.4)";
-sadrzaj.style.textAlign = "center";
-
-}
-
-function sacuvajPauzu(){
-
-
-let cekirani=document.querySelectorAll(
-"#listaMeseci input:checked"
-);
-
-
-clanovi[clanZaPauzu].pauza={};
-
-
-cekirani.forEach(box=>{
-
-let mesec=box.value;
-
-clanovi[clanZaPauzu].pauza[mesec]=true;
-
-
-// obriši dug za taj mesec
-
-if(clanovi[clanZaPauzu].clanarine[mesec]){
-
-delete clanovi[clanZaPauzu].clanarine[mesec];
-
-}
-
-
-});
-
-
-
-let podaci={};
-
-
-for(let ime in clanovi){
-
-podaci[ime]={
-
-clanarine: clanovi[ime].clanarine,
-
-pauza: clanovi[ime].pauza
-
-};
-
-}
-
-
-
-localStorage.setItem(
-"clanarine",
-JSON.stringify(podaci)
-);
-
-
-
-location.reload();
-
-
-}
-
-const ADMIN_SIFRA = "300321";
-
-
-function proveriSifru(){
-
-    let unesena = document.getElementById("adminSifra").value;
-
-
-    if(unesena === ADMIN_SIFRA){
-
-        localStorage.setItem("adminPrijava","true");
-
-
-        document.getElementById("loginBox").style.display="none";
-
-        document.getElementById("adminPanel").style.display="block";
-
-
-    }
-    else{
-
-        document.getElementById("greska").innerHTML =
-        "Pogrešna šifra!";
-
-    }
-
-}
-
-
-// početno stanje - sakrij panel
-
-window.onload=function(){
-
-    if(localStorage.getItem("adminPrijava") === "true"){
-
-        document.getElementById("loginBox").style.display="none";
-
-        document.getElementById("adminPanel").style.display="block";
-
-    }
-    else{
-
-        document.getElementById("loginBox").style.display="flex";
-
-        document.getElementById("adminPanel").style.display="none";
-
-    }
-
-}
-
-function zatvoriDuznike(){
-    document.getElementById("duzniciModal").style.display = "none";
-}
-
-function otvoriDuznike(){
-
-    let tabela = document.getElementById("listaDuznika");
-
-tabela.innerHTML="";
-
-    if(!tabela){
-        console.error("Nedostaje HTML element: listaDuznika");
-        return;
-    }
-
-    let tabelaHTML = "";
-
-    let brojDuznika = 0;
-
-
-    for(let sifra in clanovi){
-
-        let clan = clanovi[sifra];
-
-        let dugMeseci = 0;
-        let ukupanDug = 0;
-
-
-        for(let mesec in clan.clanarine){
-
-
-            let brojMeseca = parseInt(mesec.split("-")[1]);
-
-
-            // ignoriše januar-jul
-            if(brojMeseca < 8){
-                continue;
-            }
-
-
-            let uplata = clan.clanarine[mesec];
-
-
-            if(uplata.status === "NIJE PLAĆENO"){
-
-                dugMeseci++;
-
-                ukupanDug += uplata.iznos;
-
-            }
-
-
-        }
-
-
-        if(dugMeseci >= 3){
-
-            brojDuznika++;
-
-
-            tabela.innerHTML += `
-
-            <tr>
-                <td>${clan.ime}</td>
-                <td>${dugMeseci} meseca</td>
-                <td>${ukupanDug} KM</td>
-            </tr>
-
-            `;
-
-        }
-
-    }
-
-
-    if(brojDuznika === 0){
-
-        tabela.innerHTML = `
-
-        <tr>
-            <td colspan="3">
-                Nema članova sa dugom od 3 ili više meseci
-            </td>
-        </tr>
-
-        `;
-
-    }
-
-
-let modal = document.getElementById("duzniciModal");
-
-modal.style.display="flex";
-
-modal.style.position="fixed";
-modal.style.top="0";
-modal.style.left="0";
-modal.style.width="100%";
-modal.style.height="100%";
-modal.style.zIndex="99999999";
-modal.style.justifyContent="center";
-modal.style.alignItems="center";
-
-}
-
 
 
 </script>
-
-</section>
-
-<div id="duzniciModal" class="modal">
-
-    <div class="modal-content">
-
-        <h2>Lista dužnika</h2>
-
-        <table>
-<thead>
-<tr>
-<th>Ime</th>
-<th>Dug</th>
-<th>Iznos</th>
-</tr>
-</thead>
-
-<tbody id="listaDuznika"></tbody>
-
-</table>
-
-        <button onclick="zatvoriDuznike()">Zatvori</button>
-
-    </div>
-
-</div>
-
-
-
-<div id="pauzaModal" class="modal">
-
-<div class="modal-sadrzaj">
-
-<h2 id="imePauza"></h2>
-
-<div id="listaMeseci"></div>
-
-
-<button onclick="sacuvajPauzu()">
-SAČUVAJ
-</button>
-
-
-<button onclick="zatvoriPauzu()">
-OTKAŽI
-</button>
-
-    </div>
-
-</div>
-
 
 
 </body>
