@@ -211,21 +211,22 @@ const LOZINKA="300321";
 
 function prijava(){
 
-let unos=document.getElementById("lozinka").value;
+    let sifra = document.getElementById("lozinka").value;
 
 
-if(unos===LOZINKA){
+    if(sifra === "300321"){
 
-window.location.href="admin.html";
+        sessionStorage.setItem("adminPrijava","true");
 
-}
+        window.location.href="admin.html";
 
-else{
+    }
+    else{
 
-document.getElementById("greska").innerHTML=
-"Pogrešna lozinka!";
+        document.getElementById("greska").innerHTML =
+        "Pogrešna lozinka!";
 
-}
+    }
 
 }
 
