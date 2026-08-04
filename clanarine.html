@@ -877,13 +877,14 @@ function izracunajDug(clan){
 
     let dug = 0;
 
-
     for(let mesec in clan.clanarine){
 
         let zapis = clan.clanarine[mesec];
 
-
-        if(zapis && zapis.status==="NIJE PLAĆENO"){
+        if(
+            zapis &&
+            zapis.status === "NIJE PLAĆENO"
+        ){
 
             dug += zapis.iznos;
 
@@ -891,10 +892,10 @@ function izracunajDug(clan){
 
     }
 
-
     return dug;
 
 }
+
 
 function promeniStatus(sifra){
 
@@ -1246,13 +1247,15 @@ let mesec=box.value;
 clanovi[clanZaPauzu].pauza[mesec]=true;
 
 
-// obriši dug za taj mesec
+// označi mesec kao pauzu
 
-if(clanovi[clanZaPauzu].clanarine[mesec]){
+clanovi[clanZaPauzu].clanarine[mesec] = {
 
-delete clanovi[clanZaPauzu].clanarine[mesec];
+    iznos:0,
 
-}
+    status:"PAUZA"
+
+};
 
 
 });
