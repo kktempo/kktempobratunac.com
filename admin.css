@@ -116,23 +116,6 @@ header p{
 /* GLAVNE PREČICE */
 
 
-.dashboard{
-
-    width:90%;
-
-    max-width:1200px;
-
-    margin:40px auto;
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:30px;
-
-}
-
-
 
 
 .card{
@@ -375,27 +358,26 @@ html{
 
 }
 
-/* ODJAVA ADMINISTRATORA */
+/* ===========================
+   ODJAVA ADMINISTRATORA
+=========================== */
 
 .odjava-box{
 
     width:100%;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 
-    margin:50px 0 30px;
+    margin:70px auto 40px;
 
 }
 
 
 .odjava-box button{
 
-    width:220px;
-
+    width:260px;
     height:55px;
 
     border:none;
@@ -412,6 +394,10 @@ html{
 
     cursor:pointer;
 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
     box-shadow:0 8px 20px rgba(200,16,46,0.35);
 
     transition:0.3s;
@@ -421,11 +407,11 @@ html{
 
 .odjava-box button:hover{
 
-    transform:translateY(-4px);
+    transform:translateY(-5px);
 
     background:linear-gradient(135deg,#e01438,#a00025);
 
-    box-shadow:0 12px 25px rgba(200,16,46,0.45);
+    box-shadow:0 12px 25px rgba(200,16,46,0.5);
 
 }
 
@@ -433,5 +419,15 @@ html{
 .odjava-box button:active{
 
     transform:scale(0.95);
+
+}
+
+@media(max-width:1000px){
+
+.dashboard{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
 
 }
