@@ -288,3 +288,89 @@ html{
     gap:30px;
 
 }
+
+/* ===========================
+   GORNJA ADMIN DUGMAD
+=========================== */
+
+.top-buttons{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin:30px auto;
+    flex-wrap:wrap;
+
+}
+
+
+.top-buttons button{
+
+    min-width:180px;
+    height:55px;
+
+    border:none !important;
+    border-radius:30px !important;
+
+    background:linear-gradient(135deg,#c8102e,#8b001f) !important;
+
+    color:white !important;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    box-shadow:
+    0 8px 20px rgba(200,16,46,0.35);
+
+    transition:0.3s;
+
+}
+
+
+.top-buttons button:hover{
+
+    transform:translateY(-5px);
+
+    background:
+    linear-gradient(135deg,#e01438,#a00025) !important;
+
+    box-shadow:
+    0 12px 25px rgba(200,16,46,0.5);
+
+}
+
+
+.top-buttons button:active{
+
+    transform:scale(0.95);
+
+}
+
+
+
+/* MOBILNI */
+
+@media(max-width:600px){
+
+.top-buttons{
+
+    flex-direction:column;
+
+}
+
+
+.top-buttons button{
+
+    width:90%;
+    max-width:300px;
+
+}
+
+}
