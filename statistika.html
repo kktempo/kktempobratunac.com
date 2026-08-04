@@ -10,6 +10,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 
 <style>
 
@@ -139,6 +143,12 @@ grid-template-columns:1fr;
 onclick="location.href='admin.html'">
 
 ⬅ NAZAD
+
+</button>
+
+<button class="dugme" onclick="izveziStatistikuPDF()">
+
+📄 IZVEZI STATISTIKU PDF
 
 </button>
 
@@ -668,6 +678,89 @@ napraviGrafikIgraca(grupa);
 // početni prikaz
 
 napraviGrafikIgraca("sve");
+
+async function izveziStatistikuPDF(){
+
+
+const { jsPDF } = window.jspdf;
+
+
+// element koji se slika
+
+let element = document.querySelector(".container");
+
+
+
+let canvas = await html2canvas(element,{
+
+scale:2
+
+});
+
+
+
+let imgData = canvas.toDataURL("image/png");
+
+
+
+let pdf = new jsPDF(
+"p",
+"mm",
+"A4"
+);
+
+
+
+let sirina = 190;
+
+let visina = 
+canvas.height * sirina / canvas.width;
+
+
+
+pdf.setFontSize(18);
+
+pdf.text(
+"KK TEMPO BRATUNAC",
+105,
+15,
+{
+align:"center"
+}
+);
+
+
+
+pdf.setFontSize(14);
+
+pdf.text(
+"STATISTIKA KLUBA",
+105,
+25,
+{
+align:"center"
+}
+);
+
+
+
+pdf.addImage(
+imgData,
+"PNG",
+10,
+35,
+sirina,
+visina
+);
+
+
+
+pdf.save(
+"KK_Tempo_Statistika.pdf"
+);
+
+
+}
 
 
 
