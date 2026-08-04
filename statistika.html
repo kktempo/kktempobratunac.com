@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Statistika | KK Tempo</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<style>
+
+body{
+
+font-family:Arial,sans-serif;
+background:#f3f3f3;
+margin:0;
+
+}
+
+
+.container{
+
+width:95%;
+max-width:1300px;
+margin:30px auto;
+
+}
+
+
+h1{
+
+text-align:center;
+color:#c8102e;
+
+}
+
+
+
+.dugme{
+
+background:#c8102e;
+color:white;
+padding:12px 25px;
+border-radius:25px;
+border:none;
+cursor:pointer;
+
+}
+
+
+
+.kartice{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin:30px 0;
+
+}
+
+
+.kartica{
+
+background:white;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 5px 15px #ccc;
+
+}
+
+
+.kartica h2{
+
+font-size:32px;
+color:#c8102e;
+
+}
+
+
+
+.grafici{
+
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+
+}
+
+
+
+.graf{
+
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 5px 15px #ccc;
+
+}
+
+
+
+canvas{
+
+max-height:350px;
+
+}
+
+
+
+@media(max-width:800px){
+
+.kartice,
+.grafici{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<button class="dugme"
+onclick="location.href='admin.html'">
+
+⬅ NAZAD
+
+</button>
+
+
+<h1>
+STATISTIKA KK TEMPO
+</h1>
+
+
+
+<div class="kartice">
+
+
+<div class="kartica">
+
+<h2 id="clanovi">0</h2>
+
+<p>Članova</p>
+
+</div>
+
+
+<div class="kartica">
+
+<h2 id="naplaceno">0 KM</h2>
+
+<p>Naplaćeno</p>
+
+</div>
+
+
+<div class="kartica">
+
+<h2 id="dug">0 KM</h2>
+
+<p>Dug</p>
+
+</div>
+
+
+<div class="kartica">
+
+<h2 id="procenat">0%</h2>
+
+<p>Procenat naplate</p>
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="grafici">
+
+
+<div class="graf">
+
+<h3>
+NAPLATA CLANARINA
+</h3>
+
+<canvas id="naplataGraf"></canvas>
+
+</div>
+
+
+
+<div class="graf">
+
+<h3>
+NAPLATA PO MESECIMA
+</h3>
+
+<canvas id="meseciGraf"></canvas>
+
+</div>
+
+
+
+<div class="graf">
+
+<h3>
+DOLAZNOST PO GRUPAMA
+</h3>
+
+<canvas id="grupeGraf"></canvas>
+
+</div>
+
+
+
+<div class="graf">
+
+<h3>
+NAJREDOVNIJI IGRACI
+</h3>
+
+<canvas id="igraciGraf"></canvas>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+// ===============================
+// UČITAVANJE ČLANARINA
+// ===============================
+
+
+let clanarine =
+JSON.parse(localStorage.getItem("clanarine"))
+|| {};
+
+
+
+let ukupno=0;
+let placeno=0;
+let dug=0;
+let brojClanova=0;
+
+
+
+let meseci={};
+
+
+
+for(let sifra in clanarine){
+
+
+brojClanova++;
+
+
+let clan=clanarine[sifra];
+
+
+for(let mesec in clan.clanarine){
+
+
+let zapis=clan.clanarine[mesec];
+
+
+if(!zapis) continue;
+
+
+ukupno+=zapis.iznos;
+
+
+
+if(zapis.status==="PLAĆENO"){
+
+placeno+=zapis.iznos;
+
+}
+else{
+
+dug+=zapis.iznos;
+
+}
+
+
+
+if(!meseci[mesec])
+meseci[mesec]=0;
+
+
+if(zapis.status==="PLAĆENO")
+meseci[mesec]+=zapis.iznos;
+
+
+}
+
+
+
+}
+
+
+
+document.getElementById("clanovi")
+.innerHTML=brojClanova;
+
+
+document.getElementById("naplaceno")
+.innerHTML=placeno+" KM";
+
+
+document.getElementById("dug")
+.innerHTML=dug+" KM";
+
+
+document.getElementById("procenat")
+.innerHTML=
+ukupno?
+Math.round((placeno/ukupno)*100)+"%"
+:
+"0%";
+
+
+
+
+// ===============================
+// GRAFIK NAPLATA
+// ===============================
+
+
+new Chart(
+document.getElementById("naplataGraf"),
+{
+
+type:"doughnut",
+
+data:{
+
+
+labels:[
+"Naplaćeno",
+"Dug"
+],
+
+
+datasets:[{
+
+data:[
+placeno,
+dug
+]
+
+}]
+
+
+}
+
+});
+
+
+
+// ===============================
+// MESEČNA NAPLATA
+// ===============================
+
+
+new Chart(
+document.getElementById("meseciGraf"),
+{
+
+type:"bar",
+
+data:{
+
+
+labels:Object.keys(meseci),
+
+
+datasets:[{
+
+label:"KM",
+
+data:Object.values(meseci)
+
+}]
+
+
+}
+
+
+});
+
+
+
+
+
+// ===============================
+// EVIDENCIJA TRENINGA
+// ===============================
+
+
+let evidencije =
+JSON.parse(localStorage.getItem("listaEvidencija"))
+|| [];
+
+
+
+let grupe={
+
+mini:0,
+mladji:0,
+kadeti:0
+
+};
+
+
+
+let igraci={};
+
+
+
+evidencije.forEach(e=>{
+
+
+let podaci =
+JSON.parse(
+localStorage.getItem(
+"evidencija_"+e.grupa+"_"+e.datum
+)
+);
+
+
+
+if(!podaci)return;
+
+
+
+for(let ime in podaci){
+
+
+if(!igraci[ime])
+igraci[ime]=0;
+
+
+
+if(podaci[ime]=="Prisutan"){
+
+grupe[e.grupa]++;
+
+igraci[ime]++;
+
+}
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+new Chart(
+document.getElementById("grupeGraf"),
+{
+
+type:"pie",
+
+data:{
+
+
+labels:[
+"GRUPA 1",
+"GRUPA 2",
+"GRUPA 3"
+],
+
+
+datasets:[{
+
+data:[
+grupe.mini,
+grupe.mladji,
+grupe.kadeti
+
+]
+
+}]
+
+
+}
+
+
+});
+
+
+
+
+
+let sortirani =
+Object.entries(igraci)
+.sort((a,b)=>b[1]-a[1])
+.slice(0,10);
+
+
+
+new Chart(
+document.getElementById("igraciGraf"),
+{
+
+type:"bar",
+
+data:{
+
+
+labels:
+sortirani.map(x=>x[0]),
+
+
+datasets:[{
+
+label:"Broj dolazaka",
+
+data:
+sortirani.map(x=>x[1])
+
+}]
+
+
+}
+
+
+});
+
+
+
+</script>
+
+
+</body>
+
+</html>
