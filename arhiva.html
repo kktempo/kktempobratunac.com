@@ -53,6 +53,23 @@
 
 let lista = JSON.parse(localStorage.getItem("listaEvidencija")) || [];
 
+function nazivGrupe(grupa){
+
+    let nazivi = {
+
+        mini:"GRUPA 1",
+
+        mladji:"GRUPA 2",
+
+        kadeti:"GRUPA 3"
+
+    };
+
+
+    return nazivi[grupa] || grupa.toUpperCase();
+
+}
+
 function ucitajArhivu(){
 
 const tbody=document.getElementById("lista");
@@ -67,7 +84,7 @@ tbody.innerHTML+=`
 
 <td>${e.datum}</td>
 
-<td>${e.grupa.toUpperCase()}</td>
+<td>${nazivGrupe(e.grupa)}</td>
 
 <td>
 
@@ -107,7 +124,7 @@ let html=`
 
 <h2>${datum}</h2>
 
-<h3>${grupa.toUpperCase()}</h3>
+<h3>${nazivGrupe(grupa)}</h3>
 
 <table>
 
@@ -195,7 +212,7 @@ doc.text("EVIDENCIJA TRENINGA",105,25,{align:"center"});
 
 doc.text("Datum: "+datum,20,40);
 
-doc.text("Grupa: "+grupa.toUpperCase(),20,48);
+doc.text("Grupa: "+nazivGrupe(grupa),20,48);
 
 let y=65;
 
