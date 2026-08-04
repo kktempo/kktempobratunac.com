@@ -238,6 +238,28 @@ DOLAZNOST PO GRUPAMA
 NAJREDOVNIJI IGRACI
 </h3>
 
+
+<select id="izborGrupe" onchange="promeniGrupu()">
+
+<option value="sve">
+SVE GRUPE
+</option>
+
+<option value="mini">
+GRUPA 1
+</option>
+
+<option value="mladji">
+GRUPA 2
+</option>
+
+<option value="kadeti">
+GRUPA 3
+</option>
+
+</select>
+
+
 <canvas id="igraciGraf"></canvas>
 
 </div>
@@ -525,14 +547,72 @@ grupe.kadeti
 
 
 
+let grafIgraci;
+
+
+function napraviGrafikIgraca(grupa="sve"){
+
+
+let lista={};
+
+
+for(let ime in igraci){
+
+
+let pripada=false;
+
+
+// proverava grupu
+
+if(grupa==="sve"){
+
+pripada=true;
+
+}
+else{
+
+
+if(grupe[grupa].includes(ime)){
+
+pripada=true;
+
+}
+
+
+}
+
+
+
+if(pripada){
+
+lista[ime]=igraci[ime];
+
+}
+
+
+}
+
+
+
+
 let sortirani =
-Object.entries(igraci)
+Object.entries(lista)
 .sort((a,b)=>b[1]-a[1])
-.slice(0,15);
+.slice(0,10);
 
 
 
-new Chart(
+// ako graf postoji obriši
+
+if(grafIgraci){
+
+grafIgraci.destroy();
+
+}
+
+
+
+grafIgraci = new Chart(
 document.getElementById("igraciGraf"),
 {
 
@@ -555,10 +635,39 @@ sortirani.map(x=>x[1])
 }]
 
 
+},
+
+
+options:{
+
+responsive:true
+
 }
 
 
 });
+
+
+}
+
+
+
+
+function promeniGrupu(){
+
+let grupa =
+document.getElementById("izborGrupe").value;
+
+
+napraviGrafikIgraca(grupa);
+
+
+}
+
+
+// početni prikaz
+
+napraviGrafikIgraca("sve");
 
 
 
