@@ -167,6 +167,8 @@ NIJE PRISUTAN
 
 });
 
+ucitajSacuvanuEvidenciju();
+
 }
 
 ucitajGrupu();
@@ -189,6 +191,9 @@ function izaberiStatus(dugme, ime, status){
 
 document.getElementById("datum").value =
 new Date().toISOString().split("T")[0];
+
+document.getElementById("datum")
+.addEventListener("change", ucitajSacuvanuEvidenciju);
 
 function sacuvaj(){
 
@@ -227,6 +232,67 @@ function sacuvaj(){
     }
 
     alert("Evidencija sačuvana.");
+
+}
+
+function ucitajSacuvanuEvidenciju(){
+
+    let grupa = document.getElementById("grupa").value;
+    let datum = document.getElementById("datum").value;
+
+    if(!datum) return;
+
+
+    let sacuvano = localStorage.getItem(
+        "evidencija_" + grupa + "_" + datum
+    );
+
+
+    if(!sacuvano){
+        statusi = {};
+        return;
+    }
+
+
+    statusi = JSON.parse(sacuvano);
+
+
+    let redovi = document.querySelectorAll("#tabela tr");
+
+
+    redovi.forEach(red=>{
+
+        let ime = red.cells[0].innerText;
+
+
+        let status = statusi[ime];
+
+
+        red.querySelectorAll(".status-btn")
+        .forEach(btn=>{
+
+            btn.classList.remove("active");
+
+        });
+
+
+        if(status==="Prisutan"){
+
+            red.querySelector(".prisutan")
+            .classList.add("active");
+
+        }
+
+
+        if(status==="Nije prisutan"){
+
+            red.querySelector(".odsutan")
+            .classList.add("active");
+
+        }
+
+
+    });
 
 }
 
