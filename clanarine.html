@@ -6,6 +6,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 
 <head>
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#c8102e">
+
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin panel | KK Tempo</title>
@@ -1515,6 +1520,16 @@ OTKAŽI
     </div>
 
 </div>
+
+<script>
+
+if("serviceWorker" in navigator){
+
+    navigator.serviceWorker.register("service-worker.js");
+
+}
+
+</script>
 
 
 

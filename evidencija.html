@@ -2,6 +2,11 @@
 <html lang="sr">
 
 <head>
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#c8102e">
+
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -428,6 +433,16 @@ pdf.save(
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+
+if("serviceWorker" in navigator){
+
+    navigator.serviceWorker.register("service-worker.js");
+
+}
+
+</script>
 
 
 </body>

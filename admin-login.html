@@ -2,6 +2,11 @@
 <html lang="sr">
 
 <head>
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#c8102e">
+
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="autocomplete" content="off">
 
 <meta charset="UTF-8">
@@ -230,6 +235,16 @@ function prijava(){
 
 }
 
+
+</script>
+
+<script>
+
+if("serviceWorker" in navigator){
+
+    navigator.serviceWorker.register("service-worker.js");
+
+}
 
 </script>
 
