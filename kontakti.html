@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#c8102e">
+
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Kontakt podaci | KK Tempo</title>
+
+
+
+<style>
+
+
+body{
+
+font-family:Arial,sans-serif;
+background:#f3f3f3;
+margin:0;
+
+}
+
+
+
+.container{
+
+width:95%;
+max-width:1300px;
+margin:30px auto;
+
+}
+
+
+
+h1{
+
+text-align:center;
+color:#c8102e;
+margin-bottom:35px;
+
+}
+
+
+
+.dugme{
+
+
+background:#c8102e;
+
+color:white;
+
+padding:12px 25px;
+
+border:none;
+
+border-radius:25px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+margin-bottom:20px;
+
+}
+
+
+
+
+.pretraga{
+
+
+width:100%;
+
+padding:14px;
+
+border-radius:15px;
+
+border:1px solid #ccc;
+
+font-size:16px;
+
+margin-bottom:25px;
+
+
+}
+
+
+
+
+
+.tabela{
+
+
+background:white;
+
+border-radius:20px;
+
+padding:20px;
+
+box-shadow:0 5px 15px #ccc;
+
+overflow-x:auto;
+
+
+}
+
+
+
+
+table{
+
+
+width:100%;
+
+border-collapse:collapse;
+
+
+}
+
+
+
+th{
+
+
+background:#c8102e;
+
+color:white;
+
+padding:15px;
+
+
+}
+
+
+
+td{
+
+
+padding:12px;
+
+border-bottom:1px solid #ddd;
+
+text-align:center;
+
+
+}
+
+
+
+
+tr:hover{
+
+
+background:#f8eeee;
+
+
+}
+
+
+
+
+
+@media(max-width:800px){
+
+
+table{
+
+font-size:13px;
+
+}
+
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+
+<body>
+
+
+
+
+<div class="container">
+
+
+
+
+
+<button class="dugme"
+onclick="location.href='baza.html'">
+
+⬅ NAZAD
+
+</button>
+
+
+
+
+
+<h1>
+
+📞 KONTAKT PODACI ČLANOVA
+
+</h1>
+
+
+
+
+
+<input 
+type="text"
+id="pretraga"
+class="pretraga"
+placeholder="🔍 Pretraži člana..."
+onkeyup="pretrazi()"
+>
+
+
+
+
+
+
+
+<div class="tabela">
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Šifra</th>
+
+<th>Ime deteta</th>
+
+<th>Roditelj</th>
+
+<th>Telefon</th>
+
+<th>Email</th>
+
+<th>Grupa</th>
+
+<th>Dugovanje</th>
+
+<th>Pošalji opomenu</th>
+
+<th>Akcija</th>
+
+
+</tr>
+
+</thead>
+
+
+
+
+<tbody id="tabelaClanovi">
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+
+// UČITAVANJE SVIH ČLANOVA IZ EVIDENCIJE ČLANARINE
+
+let clanovi = 
+JSON.parse(localStorage.getItem("clanarine"))
+|| {};
+
+
+
+let tabela = document.getElementById("tabelaClanovi");
+
+
+
+function ucitajClanove(){
+
+
+tabela.innerHTML="";
+
+
+
+for(let sifra in clanovi){
+
+
+
+let clan = clanovi[sifra];
+
+
+
+let red = document.createElement("tr");
+
+
+
+red.innerHTML = `
+
+<td>${sifra}</td>
+
+<td>
+${clan.ime || clan.imePrezime || sifra}
+</td>
+
+<td>
+${clan.roditelj || ""}
+</td>
+
+<td>
+<a href="tel:${clan.telefon || ''}">
+${clan.telefon || ""}
+</a>
+</td>
+
+<td>
+<a href="mailto:${clan.email || ''}">
+${clan.email || ""}
+</a>
+</td>
+
+<td>
+${clan.grupa || clan.program || ""}
+</td>
+
+<td>
+
+<button 
+class="dugmeDug"
+onclick="proveriDug('${sifra}')">
+
+DUG
+
+</button>
+
+</td>
+
+<td>
+
+<button 
+class="mailDug"
+onclick="posaljiMail('${sifra}')">
+
+POŠALJI
+
+</button>
+
+</td>
+
+
+<td>
+
+<button 
+onclick="urediClana('${sifra}')">
+
+UREDI
+
+</button>
+
+</td>
+
+`;
+
+
+tabela.appendChild(red);
+
+
+
+}
+
+
+
+}
+
+
+
+
+function pretrazi(){
+
+
+let unos =
+document.getElementById("pretraga")
+.value
+.toLowerCase();
+
+
+
+let redovi =
+tabela.getElementsByTagName("tr");
+
+
+
+for(let i=0;i<redovi.length;i++){
+
+
+let tekst =
+redovi[i].innerText.toLowerCase();
+
+
+
+if(tekst.includes(unos)){
+
+
+redovi[i].style.display="";
+
+
+}
+else{
+
+
+redovi[i].style.display="none";
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+ucitajClanove();
+
+
+
+if("serviceWorker" in navigator){
+
+navigator.serviceWorker.register("service-worker.js");
+
+}
+
+function urediClana(sifra){
+
+
+let clan = clanovi[sifra];
+
+
+let roditelj = prompt(
+"Unesi ime roditelja:",
+clan.roditelj || ""
+);
+
+
+
+if(roditelj===null)
+return;
+
+
+
+let telefon = prompt(
+"Unesi telefon:",
+clan.telefon || ""
+);
+
+
+
+if(telefon===null)
+return;
+
+
+
+
+let email = prompt(
+"Unesi email:",
+clan.email || ""
+);
+
+
+
+if(email===null)
+return;
+
+
+
+let grupa = prompt(
+"Unesi grupu:",
+clan.grupa || clan.program || ""
+);
+
+
+
+if(grupa===null)
+return;
+
+
+
+clan.roditelj = roditelj;
+
+clan.telefon = telefon;
+
+clan.email = email;
+
+clan.grupa = grupa;
+
+
+
+// snimanje nazad u bazu
+
+localStorage.setItem(
+"clanarine",
+JSON.stringify(clanovi)
+);
+
+
+
+alert("Podaci uspešno sačuvani!");
+
+
+
+location.reload();
+
+
+
+}
+
+function proveriDug(sifra){
+
+
+let clan = clanovi[sifra];
+
+
+let dug=0;
+let meseci=[];
+
+
+
+if(clan.clanarine){
+
+
+for(let mesec in clan.clanarine){
+
+
+let zapis = clan.clanarine[mesec];
+
+
+if(
+zapis &&
+zapis.status !== "PLAĆENO"
+){
+
+
+dug += zapis.iznos;
+
+meseci.push(mesec);
+
+
+}
+
+
+}
+
+
+
+}
+
+
+
+if(dug===0){
+
+
+alert(
+"✅ "+(clan.ime || sifra)+
+"\n\nNema dugovanja."
+);
+
+
+}
+
+else{
+
+
+alert(
+
+"⚠️ "+(clan.ime || sifra)+
+
+"\n\nDuguje: "+
+dug+" KM"+
+
+"\n\nMeseci:\n"+
+meseci.join("\n")
+
+);
+
+
+}
+
+
+}
+
+function posaljiMail(sifra){
+
+
+let clan = clanovi[sifra];
+
+
+if(!clan.email){
+
+alert("Ovaj član nema unet email!");
+
+return;
+
+}
+
+
+
+let dug = 0;
+let meseci = [];
+
+
+
+if(clan.clanarine){
+
+
+for(let mesec in clan.clanarine){
+
+
+let zapis = clan.clanarine[mesec];
+
+
+if(
+zapis &&
+zapis.status !== "PLAĆENO"
+){
+
+
+dug += zapis.iznos;
+
+meseci.push(mesec);
+
+
+}
+
+
+}
+
+
+}
+
+
+
+if(dug<=0){
+
+
+alert("Ovaj član nema dugovanja.");
+
+return;
+
+
+}
+
+
+
+
+let ime =
+clan.ime || sifra;
+
+
+
+let naslov =
+"Obaveštenje o dugovanju članarine košarkaškom klubu Tempo";
+
+
+
+let poruka =
+
+"Poštovani,\n\n"+
+
+"Obaveštavamo Vas da za člana "+ime+
+" postoji neizmireno dugovanje članarine.\n\n"+
+
+"Ukupan dug: "+dug+" KM\n\n"+
+
+"Neplaćeni meseci:\n"+
+meseci.join("\n")+
+
+"\n\nMolimo Vas da izvršite uplatu u najkraćem roku.\n\n"+
+
+"KK Tempo Bratunac";
+
+
+
+
+let gmailLink =
+
+"https://mail.google.com/mail/?view=cm&fs=1&to="+
+encodeURIComponent(clan.email)+
+
+"&su="+
+encodeURIComponent(naslov)+
+
+"&body="+
+encodeURIComponent(poruka);
+
+
+
+window.open(gmailLink,"_blank");
+
+
+
+window.location.href=link;
+
+
+}
+
+
+
+</script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+.uredi{
+
+background:#c8102e;
+color:white;
+border:none;
+padding:8px 15px;
+border-radius:20px;
+cursor:pointer;
+font-weight:bold;
+
+}
+
+.dugmeDug{
+
+background:#444;
+color:white;
+
+border:none;
+
+padding:8px 15px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+.mailDug{
+
+background:#008000;
+
+color:white;
+
+border:none;
+
+padding:8px 15px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}

@@ -918,8 +918,6 @@ function promeniStatus(sifra){
     let trenutniMesec = godina+"-"+mesec;
 
 
-    // ako ne postoji zapis napravi ga
-
     if(!clanovi[sifra].clanarine[trenutniMesec]){
 
         clanovi[sifra].clanarine[trenutniMesec]={
@@ -936,6 +934,8 @@ function promeniStatus(sifra){
     let clanarina = clanovi[sifra].clanarine[trenutniMesec];
 
 
+    // AKO JE VEĆ PLAĆENO - VRATI DUG
+
     if(clanarina.status==="PLAĆENO"){
 
 
@@ -948,7 +948,11 @@ function promeniStatus(sifra){
         };
 
 
-    }else{
+    }
+
+    // AKO NIJE PLAĆENO - EVIDENTIRAJ UPLATU
+
+    else{
 
 
         clanovi[sifra].clanarine[trenutniMesec]={
@@ -961,8 +965,12 @@ function promeniStatus(sifra){
 
         };
 
+
     }
 
+
+
+    // SAČUVAJ ODMAH
 
     let zaCuvanje={};
 
@@ -986,7 +994,200 @@ function promeniStatus(sifra){
     );
 
 
-    location.reload();
+
+    // AKO JE UPLATA - PITAJ ZA POTVRDU
+
+    if(clanarina.status==="PLAĆENO"){
+
+
+        let odgovor = confirm(
+        "✅ Uplata je evidentirana!\n\nDa li želite PDF potvrdu?"
+        );
+
+
+        if(odgovor){
+
+            napraviPotvrdu(sifra);
+
+        }
+
+
+    }
+
+
+
+    // tek sada osveži tabelu
+
+    setTimeout(()=>{
+
+        location.reload();
+
+    },500);
+
+
+}
+
+function napraviPotvrdu(sifra){
+
+
+const { jsPDF } = window.jspdf;
+
+
+let clan = clanovi[sifra];
+
+
+let datum = new Date();
+
+
+let mesec = datum.getFullYear()+"-"+String(datum.getMonth()+1).padStart(2,"0");
+
+
+
+let uplata = clan.clanarine[mesec] || {
+    iznos: clan.cena
+};
+
+
+
+let pdf = new jsPDF();
+
+
+
+pdf.setFontSize(20);
+
+pdf.text(
+"KK TEMPO BRATUNAC",
+105,
+25,
+{
+align:"center"
+}
+);
+
+
+
+pdf.setFontSize(16);
+
+pdf.text(
+"POTVRDA O UPLATI ČLANARINE",
+105,
+45,
+{
+align:"center"
+}
+);
+
+
+
+pdf.setFontSize(12);
+
+
+
+pdf.text(
+"Ime i prezime:",
+20,
+70
+);
+
+
+pdf.text(
+clan.ime,
+70,
+70
+);
+
+
+
+pdf.text(
+"Program:",
+20,
+85
+);
+
+
+pdf.text(
+clan.program,
+70,
+85
+);
+
+
+
+pdf.text(
+"Mesec:",
+20,
+100
+);
+
+
+pdf.text(
+mesec,
+70,
+100
+);
+
+
+
+pdf.text(
+"Iznos:",
+20,
+115
+);
+
+
+pdf.text(
+clan.cena+" KM",
+70,
+115
+);
+
+
+
+pdf.text(
+"Datum uplate:",
+20,
+130
+);
+
+
+pdf.text(
+datum.toLocaleDateString("sr-RS"),
+70,
+130
+);
+
+
+
+pdf.line(
+20,
+145,
+190,
+145
+);
+
+
+
+pdf.text(
+"Hvala na poverenju.",
+20,
+165
+);
+
+
+
+pdf.text(
+"KK Tempo Bratunac",
+20,
+185
+);
+
+
+
+pdf.save(
+"Potvrda_"+clan.ime+".pdf"
+);
+
+
 
 }
 
