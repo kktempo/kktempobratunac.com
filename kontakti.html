@@ -3,6 +3,10 @@
 
 <head>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <link rel="manifest" href="manifest.json">
 
 <meta name="theme-color" content="#c8102e">
@@ -640,6 +644,9 @@ function posaljiMail(sifra){
 
 let clan = clanovi[sifra];
 
+let mailProzor = window.open(
+    "mailto:" + clan.email
+);
 
 if(!clan.email){
 
@@ -705,7 +712,7 @@ clan.ime || sifra;
 
 
 let naslov =
-"Obaveštenje o dugovanju članarine košarkaškom klubu Tempo";
+"Obavestenje o dugovanju clanarine kosarkaskom klubu Tempo";
 
 
 
@@ -713,15 +720,15 @@ let poruka =
 
 "Poštovani,\n\n"+
 
-"Obaveštavamo Vas da za člana "+ime+
-" postoji neizmireno dugovanje članarine.\n\n"+
+"Obavestavamo Vas da za clana "+ime+
+" postoji neizmireno dugovanje clanarine.\n\n"+
 
 "Ukupan dug: "+dug+" KM\n\n"+
 
-"Neplaćeni meseci:\n"+
+"Neplaceni meseci:\n"+
 meseci.join("\n")+
 
-"\n\nMolimo Vas da izvršite uplatu u najkraćem roku.\n\n"+
+"\n\nMolimo Vas da izvrsite uplatu u najkracem roku.\n\n"+
 
 "KK Tempo Bratunac";
 
@@ -750,7 +757,607 @@ window.location.href=link;
 
 }
 
+function posaljiMail(sifra){
 
+
+let clan = clanovi[sifra];
+
+
+if(!clan){
+
+alert("Član nije pronađen");
+
+return;
+
+}
+
+
+
+if(!clan.email){
+
+alert("Član nema unet email");
+
+return;
+
+}
+
+
+
+let dug = 0;
+
+let meseci = [];
+
+
+
+if(clan.clanarine){
+
+
+for(let mesec in clan.clanarine){
+
+
+let zapis = clan.clanarine[mesec];
+
+
+if(
+zapis &&
+zapis.status !== "PLAĆENO"
+){
+
+
+dug += Number(zapis.iznos);
+
+meseci.push(
+    bezKvacica(mesec)
+);
+
+
+}
+
+
+}
+
+
+}
+
+
+
+if(dug <=0){
+
+alert("Član nema dugovanja");
+
+return;
+
+}
+
+
+
+let ime =
+bezKvacica(clan.ime || sifra);
+
+
+let program =
+bezKvacica(clan.program || "-");
+
+
+
+/*
+================================
+ QR VODI SAMO NA PORTAL
+================================
+*/
+
+
+let portalURL =
+window.location.origin+
+"/roditeljski-portal.html";
+
+
+
+let qrDiv =
+document.createElement("div");
+
+
+qrDiv.style.position="absolute";
+
+qrDiv.style.left="-9999px";
+
+
+document.body.appendChild(qrDiv);
+
+
+
+new QRCode(
+qrDiv,
+{
+
+text:portalURL,
+
+width:300,
+
+height:300
+
+}
+);
+
+
+
+setTimeout(()=>{
+
+
+let canvas =
+qrDiv.querySelector("canvas");
+
+
+let qrImage =
+canvas.toDataURL("image/png");
+
+
+
+const {jsPDF}=window.jspdf;
+
+
+let pdf =
+new jsPDF();
+
+
+
+/*
+=========================
+ MEMORANDUM
+=========================
+*/
+
+
+pdf.setFillColor(200,16,46);
+
+pdf.rect(
+0,
+0,
+210,
+8,
+"F"
+);
+
+
+
+pdf.setFontSize(20);
+
+pdf.setFont(
+"helvetica",
+"bold"
+);
+
+
+pdf.setTextColor(200,16,46);
+
+
+pdf.text(
+"KOSARKASKI KLUB TEMPO",
+105,
+25,
+{
+align:"center"
+}
+);
+
+
+
+pdf.setFontSize(10);
+
+pdf.setTextColor(80,80,80);
+
+
+pdf.text(
+"BRATUNAC",
+105,
+32,
+{
+align:"center"
+}
+);
+
+
+pdf.text(
+"Podsetnik za uplatu clanarine",
+105,
+38,
+{
+align:"center"
+}
+);
+
+
+
+pdf.line(
+20,
+45,
+190,
+45
+);
+
+
+
+
+/*
+=========================
+ NASLOV
+=========================
+*/
+
+
+pdf.setFontSize(17);
+
+pdf.setTextColor(40,40,40);
+
+
+pdf.text(
+"PODSETNIK ZA UPLATU CLANARINE",
+105,
+60,
+{
+align:"center"
+}
+);
+
+
+
+
+/*
+=========================
+ PODACI
+=========================
+*/
+
+
+pdf.setFontSize(12);
+
+
+let y=85;
+
+
+pdf.text(
+"Ime i prezime:",
+20,
+y
+);
+
+
+pdf.text(
+ime,
+75,
+y
+);
+
+
+
+y+=12;
+
+
+pdf.text(
+"Sifra clana:",
+20,
+y
+);
+
+
+pdf.text(
+sifra,
+75,
+y
+);
+
+
+
+y+=12;
+
+
+pdf.text(
+"Program:",
+20,
+y
+);
+
+
+pdf.text(
+program,
+75,
+y
+);
+
+
+
+y+=12;
+
+
+pdf.text(
+"Ukupno dugovanje:",
+20,
+y
+);
+
+
+
+pdf.setTextColor(200,16,46);
+
+
+pdf.text(
+dug+" KM",
+75,
+y
+);
+
+
+
+
+/*
+=========================
+ MESECI
+=========================
+*/
+
+
+y+=20;
+
+
+pdf.setTextColor(40,40,40);
+
+
+pdf.text(
+"Neplaceni meseci:",
+20,
+y
+);
+
+
+y+=10;
+
+
+meseci.forEach(m=>{
+
+
+pdf.text(
+"- "+m,
+25,
+y
+);
+
+
+y+=8;
+
+
+});
+
+
+
+
+
+/*
+=========================
+ QR SEKCIJA
+=========================
+*/
+
+
+pdf.setTextColor(200,16,46);
+
+pdf.setFontSize(12);
+
+
+pdf.text(
+"RODITELJSKI PORTAL",
+150,
+160,
+{
+align:"center"
+}
+);
+
+
+
+pdf.setTextColor(40,40,40);
+
+
+pdf.setFontSize(11);
+
+
+pdf.text(
+"SIFRA CLANA:",
+150,
+170,
+{
+align:"center"
+}
+);
+
+
+
+pdf.setFontSize(16);
+
+
+pdf.setTextColor(200,16,46);
+
+
+pdf.text(
+sifra,
+150,
+180,
+{
+align:"center"
+}
+);
+
+
+
+pdf.addImage(
+qrImage,
+"PNG",
+125,
+190,
+50,
+50
+);
+
+
+
+pdf.setFontSize(9);
+
+pdf.setTextColor(80,80,80);
+
+
+pdf.text(
+"Skenirajte QR kod za ulazak",
+150,
+250,
+{
+align:"center"
+}
+);
+
+
+pdf.text(
+"na roditeljski portal",
+150,
+256,
+{
+align:"center"
+}
+);
+
+
+
+/*
+=========================
+ DONJA LINIJA
+=========================
+*/
+
+
+pdf.setFillColor(200,16,46);
+
+
+pdf.rect(
+0,
+280,
+210,
+12,
+"F"
+);
+
+
+
+pdf.setTextColor(
+255,
+255,
+255
+);
+
+
+pdf.text(
+"KK TEMPO BRATUNAC",
+105,
+288,
+{
+align:"center"
+}
+);
+
+
+
+
+
+let naziv =
+
+"Podsetnik_"+
+
+sifra+
+
+".pdf";
+
+
+
+pdf.save(naziv);
+
+
+
+
+/*
+=========================
+ EMAIL
+=========================
+*/
+
+
+let naslov =
+
+"Podsetnik za uplatu članarine - "+ime;
+
+
+
+let tekst =
+
+"Poštovani,\n\n"+
+
+"u prilogu se nalazi podsetnik za uplatu članarine.\n\n"+
+
+"Član: "+ime+"\n"+
+
+"Ukupno dugovanje: "+dug+" KM\n\n"+
+
+"Šifra člana za Roditeljski portal je: "+sifra+"\n\n"+
+
+"KK Tempo Bratunac";
+
+
+
+
+let gmailLink =
+
+"https://mail.google.com/mail/?view=cm&fs=1" +
+
+"&to=" +
+encodeURIComponent(clan.email) +
+
+"&su=" +
+encodeURIComponent(naslov) +
+
+"&body=" +
+encodeURIComponent(tekst);
+
+
+window.open(
+    gmailLink,
+    "_blank"
+);
+
+
+
+qrDiv.remove();
+
+
+
+},500);
+
+
+
+}
+
+function bezKvacica(tekst){
+
+    if(!tekst) return "";
+
+    return tekst
+    .replace(/č/g,"c")
+    .replace(/ć/g,"c")
+    .replace(/š/g,"s")
+    .replace(/ž/g,"z")
+    .replace(/đ/g,"dj")
+    .replace(/Č/g,"C")
+    .replace(/Ć/g,"C")
+    .replace(/Š/g,"S")
+    .replace(/Ž/g,"Z")
+    .replace(/Đ/g,"Dj");
+
+}
 
 </script>
 
