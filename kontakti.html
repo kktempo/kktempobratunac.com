@@ -1312,7 +1312,7 @@ let tekst =
 
 let gmailLink =
 
-"https://mail.google.com/mail/?view=cm&fs=1" +
+"https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1" +
 
 "&to=" +
 encodeURIComponent(clan.email) +
@@ -1324,10 +1324,8 @@ encodeURIComponent(naslov) +
 encodeURIComponent(tekst);
 
 
-window.open(
-    gmailLink,
-    "_blank"
-);
+
+window.location.href = gmailLink;
 
 
 
