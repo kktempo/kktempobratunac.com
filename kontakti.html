@@ -1129,100 +1129,102 @@ y+=8;
 
 
 
+/* =====================
+   QR SEKCIJA
+===================== */
 
+let qrKontejner = document.createElement("div");
 
-/*
-=========================
- QR SEKCIJA
-=========================
-*/
+new QRCode(qrKontejner, {
+
+    text: "https://kktempo.github.io/kktempobratunac.com/roditeljskiportal.html",
+
+    width: 300,
+
+    height: 300,
+
+    correctLevel: QRCode.CorrectLevel.H
+
+});
+
+let qrCanvas = qrKontejner.querySelector("canvas");
+
+let qrSlika = qrCanvas.toDataURL("image/png");
 
 
 pdf.setTextColor(200,16,46);
 
 pdf.setFontSize(12);
 
-
 pdf.text(
-"RODITELJSKI PORTAL",
-150,
-160,
-{
-align:"center"
-}
+    "RODITELJSKI PORTAL",
+    150,
+    160,
+    {
+        align:"center"
+    }
 );
-
 
 
 pdf.setTextColor(40,40,40);
 
-
 pdf.setFontSize(11);
 
-
 pdf.text(
-"SIFRA CLANA:",
-150,
-170,
-{
-align:"center"
-}
+    "SIFRA CLANA:",
+    150,
+    170,
+    {
+        align:"center"
+    }
 );
-
 
 
 pdf.setFontSize(16);
 
-
 pdf.setTextColor(200,16,46);
 
-
 pdf.text(
-sifra,
-150,
-180,
-{
-align:"center"
-}
+    sifra,
+    150,
+    180,
+    {
+        align:"center"
+    }
 );
-
 
 
 pdf.addImage(
-qrImage,
-"PNG",
-125,
-190,
-50,
-50
+    qrSlika,
+    "PNG",
+    120,
+    190,
+    60,
+    60
 );
-
 
 
 pdf.setFontSize(9);
 
 pdf.setTextColor(80,80,80);
 
-
 pdf.text(
-"Skenirajte QR kod za ulazak",
-150,
-250,
-{
-align:"center"
-}
+    "Skenirajte QR kod za ulazak",
+    150,
+    260,
+    {
+        align:"center"
+    }
 );
 
-
 pdf.text(
-"na roditeljski portal",
-150,
-256,
-{
-align:"center"
-}
+    "na roditeljski portal",
+    150,
+    266,
+    {
+        align:"center"
+    }
 );
-
 
 
 /*
