@@ -44,3 +44,73 @@ cursor:pointer;
 font-weight:bold;
 
 }
+
+.provera-dug{
+
+background:white;
+
+border-radius:15px;
+
+padding:20px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+
+.provera-dug h2{
+
+color:#c8102e;
+
+text-align:center;
+
+}
+
+
+.duznik{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:12px;
+
+border-bottom:1px solid #eee;
+
+}
+
+
+.dug-crveno{
+
+color:#c8102e;
+
+font-weight:bold;
+
+}
+
+.dug-crveno button{
+
+background:#c8102e;
+
+color:white;
+
+border:none;
+
+padding:8px 14px;
+
+border-radius:20px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+font-size:12px;
+
+}
+
+
+.dug-crveno button:hover{
+
+background:#8b001f;
+
+}

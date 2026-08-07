@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dokumentacija igrača - KK Tempo</title>
+
+
+<style>
+
+body{
+
+font-family:Arial,sans-serif;
+background:#f3f3f3;
+margin:0;
+
+}
+
+
+header{
+
+background:#c8102e;
+color:white;
+
+padding:20px;
+
+text-align:center;
+
+font-size:24px;
+font-weight:bold;
+
+}
+
+
+
+.container{
+
+width:95%;
+max-width:1200px;
+
+margin:30px auto;
+
+}
+
+
+
+.dugmeNazad{
+
+background:#c8102e;
+
+color:white;
+
+padding:12px 25px;
+
+border-radius:30px;
+
+text-decoration:none;
+
+font-weight:bold;
+
+}
+
+
+
+.pretraga{
+
+width:100%;
+
+padding:15px;
+
+margin:25px 0;
+
+border-radius:25px;
+
+border:1px solid #ccc;
+
+font-size:16px;
+
+}
+
+
+
+.igraci{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:20px;
+
+}
+
+
+
+.kartica{
+
+
+background:white;
+
+padding:20px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px #ccc;
+
+text-align:center;
+
+
+}
+
+
+
+.kartica h3{
+
+color:#c8102e;
+
+}
+
+
+
+button{
+
+
+background:#c8102e;
+
+color:white;
+
+border:none;
+
+padding:10px 20px;
+
+border-radius:25px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+margin:5px;
+
+}
+
+
+
+.dokument{
+
+
+background:#eee;
+
+padding:10px;
+
+margin:8px;
+
+border-radius:10px;
+
+}
+
+
+
+img{
+
+max-width:120px;
+
+border-radius:10px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+DOKUMENTACIJA IGRACA
+
+</header>
+
+
+<div class="container">
+
+
+<a class="dugmeNazad" href="admin.html">
+⬅ NAZAD
+</a>
+
+
+
+<input 
+class="pretraga"
+id="pretraga"
+placeholder="Pretraži igrača..."
+onkeyup="pretrazi()">
+
+
+
+<div id="igraci" class="igraci"></div>
+
+
+
+</div>
+
+
+
+
+<script>
+
+
+let clanovi =
+JSON.parse(localStorage.getItem("clanarine"))
+|| {};
+
+
+
+let dokumenti =
+JSON.parse(localStorage.getItem("dokumenti"))
+|| {};
+
+
+
+let div =
+document.getElementById("igraci");
+
+
+
+function ucitaj(){
+
+
+div.innerHTML="";
+
+
+for(let sifra in clanovi){
+
+
+let clan=clanovi[sifra];
+
+console.log("IGRAČ:", sifra, clan);
+
+
+
+if(!dokumenti[sifra]){
+
+dokumenti[sifra]={};
+
+}
+
+
+
+let d=dokumenti[sifra];
+
+
+
+let imeIgraca =
+clan.ime ||
+clan.imePrezime ||
+clan.naziv ||
+clan.igrac ||
+sifra;
+
+
+let kartica = document.createElement("div");
+
+kartica.className="kartica";
+
+kartica.innerHTML = `
+
+<h3>
+${imeIgraca}
+</h3>
+
+<p>
+Šifra člana: ${sifra}
+</p>
+
+
+${d.slika ? 
+
+"<img src='"+d.slika+"'>" 
+
+:
+
+""
+
+}
+
+
+
+<div class="dokument">
+
+PRISTUPNICA
+
+<br>
+
+${d.pristupnica || "Nema dokumenta"}
+
+<br>
+
+<input type="file" 
+onchange="dodajFajl('${sifra}','pristupnica',this)">
+
+</div>
+
+
+
+<div class="dokument">
+
+LEKARSKI PREGLED
+
+<br>
+
+${d.lekarski || "Nema dokumenta"}
+
+<br>
+
+<input type="file" 
+onchange="dodajFajl('${sifra}','lekarski',this)">
+
+</div>
+
+
+
+<div class="dokument">
+
+SLIKA IGRACA
+
+<br>
+
+<input type="file" accept="image/*"
+onchange="dodajSliku('${sifra}',this)">
+
+</div>
+
+
+`;
+
+
+div.appendChild(kartica);
+
+
+
+}
+
+
+localStorage.setItem(
+"dokumenti",
+JSON.stringify(dokumenti)
+);
+
+
+}
+
+
+
+function dodajFajl(sifra,tip,input){
+
+
+let fajl=input.files[0];
+
+if(!fajl)return;
+
+
+
+dokumenti[sifra][tip]=fajl.name;
+
+
+
+localStorage.setItem(
+"dokumenti",
+JSON.stringify(dokumenti)
+);
+
+
+alert("Dokument dodat");
+
+
+ucitaj();
+
+
+}
+
+
+
+
+
+function dodajSliku(sifra,input){
+
+
+let fajl=input.files[0];
+
+
+let reader=new FileReader();
+
+
+
+reader.onload=function(e){
+
+
+dokumenti[sifra].slika=e.target.result;
+
+
+localStorage.setItem(
+"dokumenti",
+JSON.stringify(dokumenti)
+);
+
+
+ucitaj();
+
+
+}
+
+
+
+reader.readAsDataURL(fajl);
+
+
+
+}
+
+
+
+function normalizujTekst(tekst){
+
+    if(!tekst) return "";
+
+    return tekst
+        .toLowerCase()
+
+        // ĆIRILICA → LATINICA
+        .replace(/а/g,"a")
+        .replace(/б/g,"b")
+        .replace(/в/g,"v")
+        .replace(/г/g,"g")
+        .replace(/д/g,"d")
+        .replace(/ђ/g,"dj")
+        .replace(/е/g,"e")
+        .replace(/ж/g,"z")
+        .replace(/з/g,"z")
+        .replace(/и/g,"i")
+        .replace(/ј/g,"j")
+        .replace(/к/g,"k")
+        .replace(/л/g,"l")
+        .replace(/љ/g,"lj")
+        .replace(/м/g,"m")
+        .replace(/н/g,"n")
+        .replace(/њ/g,"nj")
+        .replace(/о/g,"o")
+        .replace(/п/g,"p")
+        .replace(/р/g,"r")
+        .replace(/с/g,"s")
+        .replace(/т/g,"t")
+        .replace(/ћ/g,"c")
+        .replace(/у/g,"u")
+        .replace(/ф/g,"f")
+        .replace(/х/g,"h")
+        .replace(/ц/g,"c")
+        .replace(/ч/g,"c")
+        .replace(/џ/g,"dz")
+        .replace(/ш/g,"s")
+
+        // LATINICA SA KVAČICAMA
+        .replace(/č/g,"c")
+        .replace(/ć/g,"c")
+        .replace(/š/g,"s")
+        .replace(/ž/g,"z")
+        .replace(/đ/g,"dj");
+}
+
+
+function pretrazi(){
+
+    let unos = normalizujTekst(
+        document.getElementById("pretraga").value
+    );
+
+    let kartice =
+        document.getElementsByClassName("kartica");
+
+
+    for(let k of kartice){
+
+        let tekst =
+            normalizujTekst(k.innerText);
+
+
+        if(tekst.includes(unos)){
+
+            k.style.display = "";
+
+        }else{
+
+            k.style.display = "none";
+
+        }
+
+    }
+
+}
+
+
+ucitaj();
+
+</script>
+
+
+
+</body>
+
+</html>
