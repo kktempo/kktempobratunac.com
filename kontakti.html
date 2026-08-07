@@ -1310,22 +1310,48 @@ let tekst =
 
 
 
-let gmailLink =
-
-"https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1" +
-
-"&to=" +
-encodeURIComponent(clan.email) +
-
-"&su=" +
-encodeURIComponent(naslov) +
-
-"&body=" +
-encodeURIComponent(tekst);
+let mobilni =
+/Android|iPhone|iPad/i.test(navigator.userAgent);
 
 
+if(mobilni){
 
-window.location.href = gmailLink;
+    let mailLink =
+
+    "mailto:"+
+    clan.email+
+    "?subject="+
+    encodeURIComponent(naslov)+
+    "&body="+
+    encodeURIComponent(tekst);
+
+
+    window.location.href = mailLink;
+
+
+}
+else{
+
+
+    let gmailLink =
+
+    "https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1" +
+
+    "&to=" +
+    encodeURIComponent(clan.email) +
+
+    "&su=" +
+    encodeURIComponent(naslov) +
+
+    "&body=" +
+    encodeURIComponent(tekst);
+
+
+
+    window.location.href = gmailLink;
+
+
+}
 
 
 
