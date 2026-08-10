@@ -2407,31 +2407,15 @@ function potvrdiMesecUplate(){
         "KK Tempo Bratunac";
 
 
-    let gmailLink =
+let mailtoLink =
+    "mailto:" +
+    encodeURIComponent(email) +
+    "?subject=" +
+    encodeURIComponent(naslov) +
+    "&body=" +
+    encodeURIComponent(poruka);
 
-        "https://mail.google.com/mail/?view=cm&fs=1" +
-
-        "&to=" +
-
-        encodeURIComponent(email) +
-
-        "&su=" +
-
-        encodeURIComponent(naslov) +
-
-        "&body=" +
-
-        encodeURIComponent(poruka);
-
-
-    // ==========================================
-    // OTVORI GMAIL
-    // ==========================================
-
-    window.open(
-        gmailLink,
-        "_blank"
-    );
+window.location.href = mailtoLink;
 
 
     // ==========================================
