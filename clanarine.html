@@ -1250,461 +1250,87 @@ window.open(gmailLink, "_blank");
 
 }
 
-function napraviPotvrdu(
-    sifra,
-    mesec,
-    iznos,
-    datum
-){
+function napraviPotvrdu(sifra, mesec, iznos, datum){
 
     const { jsPDF } = window.jspdf;
 
-
     let clan = clanovi[sifra];
 
-
-    if(!clan){
-
-        alert("Član nije pronađen.");
-
-        return;
-
-    }
-
-
-    let ime =
-        clan.ime ||
-        sifra;
-
-
-    let program =
-        clan.program ||
-        clan.grupa ||
-        "-";
-
-
-    let pdf =
-        new jsPDF();
-
-
-    // ==========================================
-    // GORNJA CRVENA LINIJA
-    // ==========================================
-
-    pdf.setFillColor(
-        200,
-        16,
-        46
-    );
-
-    pdf.rect(
-        0,
-        0,
-        210,
-        8,
-        "F"
-    );
-
-
-    // ==========================================
-    // NASLOV
-    // ==========================================
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
+    let pdf = new jsPDF();
 
     pdf.setFontSize(20);
-
-    pdf.setTextColor(
-        200,
-        16,
-        46
-    );
-
-    pdf.text(
-        "KOSARKASKI KLUB TEMPO",
-        105,
-        25,
-        {
-            align: "center"
-        }
-    );
-
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    pdf.setFontSize(10);
-
-    pdf.setTextColor(
-        80,
-        80,
-        80
-    );
-
-    pdf.text(
-        "BRATUNAC",
-        105,
-        32,
-        {
-            align: "center"
-        }
-    );
-
-
-    pdf.text(
-        "Potvrda o uplati clanarine",
-        105,
-        38,
-        {
-            align: "center"
-        }
-    );
-
-
-    pdf.line(
-        20,
-        45,
-        190,
-        45
-    );
-
-
-    // ==========================================
-    // NASLOV POTVRDE
-    // ==========================================
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.setFontSize(17);
-
-    pdf.setTextColor(
-        40,
-        40,
-        40
-    );
-
-    pdf.text(
-        "POTVRDA O UPLATI CLANARINE",
-        105,
-        60,
-        {
-            align: "center"
-        }
-    );
-
-
-    // ==========================================
-    // PODACI
-    // ==========================================
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    pdf.setFontSize(12);
-
-
-    let y = 85;
-
-
-    pdf.text(
-        "Ime i prezime:",
-        20,
-        y
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.text(
-        ime,
-        75,
-        y
-    );
-
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-
-    y += 12;
-
-
-    pdf.text(
-        "Sifra clana:",
-        20,
-        y
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.text(
-        sifra,
-        75,
-        y
-    );
-
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-
-    y += 12;
-
-
-    pdf.text(
-        "Program:",
-        20,
-        y
-    );
-
-    pdf.text(
-        program,
-        75,
-        y
-    );
-
-
-    y += 12;
-
-
-    pdf.text(
-        "Mesec:",
-        20,
-        y
-    );
-
-    pdf.text(
-        mesec,
-        75,
-        y
-    );
-
-
-    y += 12;
-
-
-    pdf.text(
-        "Iznos:",
-        20,
-        y
-    );
-
-
-    pdf.setTextColor(
-        200,
-        16,
-        46
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.text(
-        iznos + " KM",
-        75,
-        y
-    );
-
-
-    pdf.setTextColor(
-        40,
-        40,
-        40
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-
-    y += 12;
-
-
-    pdf.text(
-        "Datum uplate:",
-        20,
-        y
-    );
-
-    pdf.text(
-        datum.toLocaleDateString("sr-RS"),
-        75,
-        y
-    );
-
-
-    // ==========================================
-    // STATUS
-    // ==========================================
-
-    y += 20;
-
-
-    pdf.setFillColor(
-        200,
-        16,
-        46
-    );
-
-    pdf.roundedRect(
-        20,
-        y,
-        170,
-        18,
-        4,
-        4,
-        "F"
-    );
-
-
-    pdf.setTextColor(
-        255,
-        255,
-        255
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.setFontSize(13);
-
-    pdf.text(
-        "UPLATA EVIDENTIRANA",
-        105,
-        y + 12,
-        {
-            align: "center"
-        }
-    );
-
-
-    // ==========================================
-    // DONJI TEKST
-    // ==========================================
-
-    pdf.setTextColor(
-        60,
-        60,
-        60
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    pdf.setFontSize(11);
-
-
-    pdf.text(
-        "Hvala na poverenju i podrsci KK Tempo Bratunac.",
-        105,
-        165,
-        {
-            align: "center"
-        }
-    );
-
-
-    pdf.setFontSize(10);
-
-    pdf.text(
-        "Ova potvrda je elektronski generisana.",
-        105,
-        175,
-        {
-            align: "center"
-        }
-    );
-
-
-    // ==========================================
-    // DONJA CRVENA LINIJA
-    // ==========================================
-
-    pdf.setFillColor(
-        200,
-        16,
-        46
-    );
-
-    pdf.rect(
-        0,
-        280,
-        210,
-        12,
-        "F"
-    );
-
-
-    pdf.setTextColor(
-        255,
-        255,
-        255
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.setFontSize(10);
 
     pdf.text(
         "KK TEMPO BRATUNAC",
         105,
-        288,
-        {
-            align: "center"
-        }
+        25,
+        {align:"center"}
     );
 
+    pdf.setFontSize(16);
 
-    // ==========================================
-    // NAZIV PDF-a
-    // ==========================================
+    pdf.text(
+        "POTVRDA O UPLATI CLANARINE",
+        105,
+        45,
+        {align:"center"}
+    );
 
-    let naziv =
+    pdf.setFontSize(12);
 
-        "Potvrda_" +
-        sifra +
-        "_" +
-        mesec +
-        ".pdf";
+    pdf.text("Ime i prezime:",20,70);
+    pdf.text(
+        bezKvacica(clan.ime || sifra),
+        70,
+        70
+    );
 
+    pdf.text("Sifra clana:",20,85);
+    pdf.text(sifra,70,85);
 
-    // ==========================================
-    // SAČUVAJ PDF
-    // ==========================================
+    pdf.text("Program:",20,100);
+    pdf.text(
+        bezKvacica(clan.program || "-"),
+        70,
+        100
+    );
+
+    pdf.text("Mesec:",20,115);
+    pdf.text(mesec,70,115);
+
+    pdf.text("Iznos:",20,130);
+    pdf.text(iznos + " KM",70,130);
+
+    pdf.text("Datum uplate:",20,145);
+    pdf.text(
+        datum.toLocaleDateString("sr-RS"),
+        70,
+        145
+    );
+
+    pdf.line(20,160,190,160);
+
+    pdf.setFontSize(11);
+
+    pdf.text(
+        "Hvala na poverenju.",
+        20,
+        180
+    );
+
+    pdf.text(
+        "KK Tempo Bratunac",
+        20,
+        195
+    );
 
     pdf.save(
-        naziv
+        "Potvrda_" +
+        (clan.ime || sifra) +
+        "_" +
+        mesec +
+        ".pdf"
     );
-
 }
 
 
