@@ -1235,6 +1235,17 @@ function promeniStatus(sifra){
 
     },1000);
 
+let gmailLink =
+    "https://mail.google.com/mail/?view=cm&fs=1" +
+    "&to=" +
+    encodeURIComponent(email) +
+    "&su=" +
+    encodeURIComponent(naslov) +
+    "&body=" +
+    encodeURIComponent(poruka);
+
+window.open(gmailLink, "_blank");
+
 }
 
 function napraviPotvrdu(
