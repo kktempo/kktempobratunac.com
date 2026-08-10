@@ -26,6 +26,22 @@
 <div class="container">
 
 <h1>EVIDENCIJA PRISUSTVA NA TRENINZIMA</h1>
+
+<div class="pretraga-igraca">
+
+    <h2>PRETRAGA IGRAČA</h2>
+
+    <input
+        type="text"
+        id="pretragaIgraca"
+        placeholder="Unesite ime ili prezime..."
+        oninput="pretraziIgraca()"
+    >
+
+</div>
+
+<div id="rezultatPretrage"></div>
+
 <select id="grupa" onchange="ucitajGrupu()">
 
 <option value="mini">GRUPA 1</option>
@@ -439,6 +455,165 @@ pdf.save(
 if("serviceWorker" in navigator){
 
     navigator.serviceWorker.register("service-worker.js");
+
+}
+
+function pretraziIgraca(){
+
+    let unos = document
+        .getElementById("pretragaIgraca")
+        .value
+        .trim()
+        .toLowerCase();
+
+    let rezultat = document.getElementById("rezultatPretrage");
+
+    if(unos.length < 2){
+
+        rezultat.innerHTML = "";
+        return;
+
+    }
+
+    let pronadjeni = [];
+
+    /*
+        Prolazimo kroz sve tri grupe
+    */
+
+    for(let grupa in grupe){
+
+        grupe[grupa].forEach(ime => {
+
+            if(ime.toLowerCase().includes(unos)){
+
+                if(!pronadjeni.some(x => x.ime === ime)){
+
+                    pronadjeni.push({
+                        ime: ime,
+                        grupa: grupa
+                    });
+
+                }
+
+            }
+
+        });
+
+    }
+
+    if(pronadjeni.length === 0){
+
+        rezultat.innerHTML = `
+            <div class="nema-rezultata">
+                Nije pronađen igrač.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    let html = "";
+
+    pronadjeni.forEach(igrac => {
+
+        let ukupno = 0;
+        let prisutan = 0;
+        let odsutan = 0;
+
+        /*
+            Uzimamo sve sačuvane evidencije
+        */
+
+        let lista = JSON.parse(
+            localStorage.getItem("listaEvidencija")
+        ) || [];
+
+        lista.forEach(evidencija => {
+
+            if(evidencija.grupa !== igrac.grupa){
+                return;
+            }
+
+            let kljuc =
+                "evidencija_" +
+                evidencija.grupa +
+                "_" +
+                evidencija.datum;
+
+            let podaci =
+                JSON.parse(localStorage.getItem(kljuc));
+
+            if(!podaci) return;
+
+            if(podaci[igrac.ime]){
+
+                ukupno++;
+
+                if(podaci[igrac.ime] === "Prisutan"){
+                    prisutan++;
+                }
+
+                if(podaci[igrac.ime] === "Nije prisutan"){
+                    odsutan++;
+                }
+
+            }
+
+        });
+
+        let procenat = ukupno > 0
+            ? ((prisutan / ukupno) * 100).toFixed(1)
+            : 0;
+
+        html += `
+
+        <div class="igrac-statistika">
+
+            <h2>${igrac.ime}</h2>
+
+           <p class="grupa">
+     ${
+        igrac.grupa === "mini"
+        ? "GRUPA 1"
+        : igrac.grupa === "mladji"
+        ? "GRUPA 2"
+        : "GRUPA 3"
+    }
+</p>
+
+            <div class="statistika-dolazaka">
+
+                <div class="stat-box">
+                    <strong>${ukupno}</strong>
+                    <span>Ukupno treninga</span>
+                </div>
+
+                <div class="stat-box prisustvo">
+                    <strong>${prisutan}</strong>
+                    <span>Prisutan</span>
+                </div>
+
+                <div class="stat-box odsustvo">
+                    <strong>${odsutan}</strong>
+                    <span>Nije prisutan</span>
+                </div>
+
+                <div class="stat-box procenat">
+                    <strong>${procenat}%</strong>
+                    <span>Prisustvo</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    rezultat.innerHTML = html;
 
 }
 
