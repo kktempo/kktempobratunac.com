@@ -2419,15 +2419,14 @@ function potvrdiMesecUplate(){
         "KK Tempo Bratunac";
 
 
-let mailtoLink =
-    "mailto:" +
-    encodeURIComponent(email) +
-    "?subject=" +
-    encodeURIComponent(naslov) +
-    "&body=" +
-    encodeURIComponent(poruka);
+let gmailLink =
+    "https://mail.google.com/mail/?view=cm" +
+    "&fs=1" +
+    "&to=" + encodeURIComponent(email) +
+    "&su=" + encodeURIComponent(naslov) +
+    "&body=" + encodeURIComponent(poruka);
 
-window.location.href = mailtoLink;
+window.open(gmailLink, "_blank");
 
 
     // ==========================================
