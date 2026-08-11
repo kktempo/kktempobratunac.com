@@ -6,7 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 
 <head>
-<link rel="manifest" href="manifest.json">
+<!-- <link rel="manifest" href="manifest.json"> -->
 
 <meta name="theme-color" content="#c8102e">
 
@@ -15,7 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin panel | KK Tempo</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
 
 <style>
 
@@ -960,26 +960,36 @@ function izracunajDug(clan){
 }
 
 
+
 function promeniStatus(sifra){
 
     let clan = clanovi[sifra];
 
+
     if(!clan){
+
         alert("Član nije pronađen.");
+
         return;
+
     }
+
 
     let datum = new Date();
 
-    let godina = datum.getFullYear();
-    let trenutniBrojMeseca = datum.getMonth() + 1;
+    let godina =
+        datum.getFullYear();
+
+    let trenutniBrojMeseca =
+        datum.getMonth() + 1;
+
 
     // ==========================================
-    // NAPRAVI LISTU:
     // TEKUĆI MESEC + 3 MESECA UNAZAD
     // ==========================================
 
     let meseciZaUplatu = [];
+
 
     for(let i = 0; i < 4; i++){
 
@@ -989,11 +999,20 @@ function promeniStatus(sifra){
             1
         );
 
-        let g = d.getFullYear();
 
-        let m = String(d.getMonth() + 1).padStart(2,"0");
+        let g =
+            d.getFullYear();
 
-        meseciZaUplatu.push(g + "-" + m);
+
+        let m =
+            String(
+                d.getMonth() + 1
+            ).padStart(2,"0");
+
+
+        meseciZaUplatu.push(
+            g + "-" + m
+        );
 
     }
 
@@ -1003,35 +1022,46 @@ function promeniStatus(sifra){
     // ==========================================
 
     let izbor = prompt(
+
         "Za koji mesec je izvršena uplata?\n\n" +
+
         "1 - " + meseciZaUplatu[0] + "\n" +
+
         "2 - " + meseciZaUplatu[1] + "\n" +
+
         "3 - " + meseciZaUplatu[2] + "\n" +
+
         "4 - " + meseciZaUplatu[3] + "\n\n" +
+
         "Unesite broj 1, 2, 3 ili 4:"
+
     );
 
 
-    // Ako je korisnik zatvorio prozor
     if(izbor === null){
+
         return;
+
     }
 
 
-    let broj = Number(izbor);
+    let broj =
+        Number(izbor);
 
 
     if(![1,2,3,4].includes(broj)){
 
-        alert("Morate izabrati broj od 1 do 4.");
+        alert(
+            "Morate izabrati broj od 1 do 4."
+        );
 
         return;
 
     }
 
 
-    // Izabrani mesec
-    let izabraniMesec = meseciZaUplatu[broj - 1];
+    let izabraniMesec =
+        meseciZaUplatu[broj - 1];
 
 
     // ==========================================
@@ -1039,18 +1069,21 @@ function promeniStatus(sifra){
     // ==========================================
 
     if(!clan.clanarine){
+
         clan.clanarine = {};
+
     }
 
 
-    // Ako nema zapisa za izabrani mesec
     if(!clan.clanarine[izabraniMesec]){
 
         clan.clanarine[izabraniMesec] = {
 
-            iznos: Number(clan.cena) || 0,
+            iznos:
+                Number(clan.cena) || 0,
 
-            status: "NIJE PLAĆENO"
+            status:
+                "NIJE PLAĆENO"
 
         };
 
@@ -1061,7 +1094,6 @@ function promeniStatus(sifra){
         clan.clanarine[izabraniMesec];
 
 
-
     // ==========================================
     // PONIŠTI UPLATU
     // ==========================================
@@ -1070,14 +1102,15 @@ function promeniStatus(sifra){
 
         clan.clanarine[izabraniMesec] = {
 
-            iznos: Number(clan.cena) || 0,
+            iznos:
+                Number(clan.cena) || 0,
 
-            status: "NIJE PLAĆENO"
+            status:
+                "NIJE PLAĆENO"
 
         };
 
 
-        // Sačuvaj CEO objekat člana
         localStorage.setItem(
             "clanarine",
             JSON.stringify(clanovi)
@@ -1096,26 +1129,32 @@ function promeniStatus(sifra){
     // ==========================================
 
     let iznos =
+
         Number(clanarina.iznos) ||
+
         Number(clan.cena) ||
+
         0;
 
 
     clan.clanarine[izabraniMesec] = {
 
-        iznos: iznos,
+        iznos:
+            iznos,
 
-        status: "PLAĆENO",
+        status:
+            "PLAĆENO",
 
         datumUplate:
-            datum.toISOString().split("T")[0]
+            datum
+                .toISOString()
+                .split("T")[0]
 
     };
 
 
     // ==========================================
-    // VEOMA VAŽNO
-    // ČUVAMO CEO OBJEKAT CLANA
+    // SAČUVAJ PODATKE
     // ==========================================
 
     localStorage.setItem(
@@ -1132,10 +1171,12 @@ function promeniStatus(sifra){
         clan.ime ||
         sifra;
 
+
     let program =
         clan.program ||
         clan.grupa ||
         "-";
+
 
     let email =
         clan.email ||
@@ -1147,69 +1188,96 @@ function promeniStatus(sifra){
     // ==========================================
 
     napraviPotvrdu(
+
         sifra,
+
         izabraniMesec,
+
         iznos,
+
         datum
+
     );
 
 
     // ==========================================
-    // OTVORI MAIL
+    // AKO NEMA EMAIL
     // ==========================================
 
     if(!email){
 
         alert(
-            "✅ Uplata je evidentirana i PDF potvrda je napravljena.\n\n" +
+
+            "✅ Uplata je evidentirana.\n\n" +
+
+            "PDF potvrda je napravljena.\n\n" +
+
             "Ovaj član nema unet email."
+
         );
-
-        setTimeout(function(){
-
-            location.reload();
-
-        },500);
 
         return;
 
     }
 
 
+    // ==========================================
+    // NASLOV MAILA
+    // ==========================================
+
     let naslov =
+
         "Potvrda o uplati članarine - " +
+
         ime;
 
+
+    // ==========================================
+    // TEKST MAILA
+    // ==========================================
 
     let poruka =
 
         "Poštovani,\n\n" +
 
         "ovim putem potvrđujemo da je evidentirana " +
+
         "uplata članarine za igrača:\n\n" +
 
         "Ime i prezime: " +
+
         ime +
+
         "\n" +
 
         "Šifra člana: " +
+
         sifra +
+
         "\n" +
 
         "Program: " +
+
         program +
+
         "\n" +
 
         "Mesec: " +
+
         izabraniMesec +
+
         "\n" +
 
         "Iznos: " +
+
         iznos +
+
         " KM\n" +
 
         "Datum uplate: " +
+
         datum.toLocaleDateString("sr-RS") +
+
         "\n\n" +
 
         "U prilogu se nalazi PDF potvrda o uplati.\n\n" +
@@ -1219,35 +1287,76 @@ function promeniStatus(sifra){
         "KK Tempo Bratunac";
 
 
-    let gmailLink =
+    // ==========================================
+    // OTVARANJE MAILA
+    // ==========================================
 
-        "https://mail.google.com/mail/?view=cm&fs=1" +
+    let mobilniUredjaj =
 
-        "&to=" +
-        encodeURIComponent(email) +
+        /Android|iPhone|iPad|iPod/i.test(
 
-        "&su=" +
-        encodeURIComponent(naslov) +
+            navigator.userAgent
 
-        "&body=" +
-        encodeURIComponent(poruka);
-
-
-    // Otvori Gmail
-    window.open(
-        gmailLink,
-        "_blank"
-    );
+        );
 
 
-    // Osveži tabelu nakon kratkog vremena
-    setTimeout(function(){
+    if(mobilniUredjaj){
 
-        location.reload();
+        // TELEFON / TABLET
 
-    },1000);
+        let mailToLink =
+
+            "mailto:" +
+
+            email +
+
+            "?subject=" +
+
+            encodeURIComponent(naslov) +
+
+            "&body=" +
+
+            encodeURIComponent(poruka);
+
+
+        window.location.href =
+            mailToLink;
+
+
+    }else{
+
+        // RAČUNAR
+
+        let gmailLink =
+
+            "https://mail.google.com/mail/?view=cm&fs=1" +
+
+            "&to=" +
+
+            encodeURIComponent(email) +
+
+            "&su=" +
+
+            encodeURIComponent(naslov) +
+
+            "&body=" +
+
+            encodeURIComponent(poruka);
+
+
+        window.open(
+
+            gmailLink,
+
+            "_blank"
+
+        );
+
+    }
 
 }
+
+
 
 function napraviPotvrdu(
     sifra,
@@ -1276,1060 +1385,38 @@ function napraviPotvrdu(
         sifra;
 
 
-    let program =
-        clan.program ||
-        clan.grupa ||
-        "-";
-
-
-    let pdf =
-        new jsPDF();
-
-
-    // ==========================================
-    // GORNJA CRVENA LINIJA
-    // ==========================================
-
-    pdf.setFillColor(
-        200,
-        16,
-        46
-    );
-
-    pdf.rect(
-        0,
-        0,
-        210,
-        8,
-        "F"
-    );
-
-
-    // ==========================================
-    // NASLOV
-    // ==========================================
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.setFontSize(20);
-
-    pdf.setTextColor(
-        200,
-        16,
-        46
-    );
-
-    pdf.text(
-        "KOSARKASKI KLUB TEMPO",
-        105,
-        25,
-        {
-            align: "center"
-        }
-    );
-
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    pdf.setFontSize(10);
-
-    pdf.setTextColor(
-        80,
-        80,
-        80
-    );
-
-    pdf.text(
-        "BRATUNAC",
-        105,
-        32,
-        {
-            align: "center"
-        }
-    );
-
-
-    pdf.text(
-        "Potvrda o uplati clanarine",
-        105,
-        38,
-        {
-            align: "center"
-        }
-    );
-
-
-    pdf.line(
-        20,
-        45,
-        190,
-        45
-    );
-
-
-    // ==========================================
-    // NASLOV POTVRDE
-    // ==========================================
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.setFontSize(17);
-
-    pdf.setTextColor(
-        40,
-        40,
-        40
-    );
-
-    pdf.text(
-        "POTVRDA O UPLATI CLANARINE",
-        105,
-        60,
-        {
-            align: "center"
-        }
-    );
-
-
-    // ==========================================
-    // PODACI
-    // ==========================================
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    pdf.setFontSize(12);
-
-
-    let y = 85;
-
-
-    pdf.text(
-        "Ime i prezime:",
-        20,
-        y
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.text(
-        ime,
-        75,
-        y
-    );
-
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-
-    y += 12;
-
-
-    pdf.text(
-        "Sifra clana:",
-        20,
-        y
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.text(
-        sifra,
-        75,
-        y
-    );
-
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-
-    y += 12;
-
-
-    pdf.text(
-        "Program:",
-        20,
-        y
-    );
-
-    pdf.text(
-        program,
-        75,
-        y
-    );
-
-
-    y += 12;
-
-
-    pdf.text(
-        "Mesec:",
-        20,
-        y
-    );
-
-    pdf.text(
-        mesec,
-        75,
-        y
-    );
-
-
-    y += 12;
-
-
-    pdf.text(
-        "Iznos:",
-        20,
-        y
-    );
-
-
-    pdf.setTextColor(
-        200,
-        16,
-        46
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.text(
-        iznos + " KM",
-        75,
-        y
-    );
-
-
-    pdf.setTextColor(
-        40,
-        40,
-        40
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-
-    y += 12;
-
-
-    pdf.text(
-        "Datum uplate:",
-        20,
-        y
-    );
-
-    pdf.text(
-        datum.toLocaleDateString("sr-RS"),
-        75,
-        y
-    );
-
-
-    // ==========================================
-    // STATUS
-    // ==========================================
-
-    y += 20;
-
-
-    pdf.setFillColor(
-        200,
-        16,
-        46
-    );
-
-    pdf.roundedRect(
-        20,
-        y,
-        170,
-        18,
-        4,
-        4,
-        "F"
-    );
-
-
-    pdf.setTextColor(
-        255,
-        255,
-        255
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.setFontSize(13);
-
-    pdf.text(
-        "UPLATA EVIDENTIRANA",
-        105,
-        y + 12,
-        {
-            align: "center"
-        }
-    );
-
-
-    // ==========================================
-    // DONJI TEKST
-    // ==========================================
-
-    pdf.setTextColor(
-        60,
-        60,
-        60
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    pdf.setFontSize(11);
-
-
-    pdf.text(
-        "Hvala na poverenju i podrsci KK Tempo Bratunac.",
-        105,
-        165,
-        {
-            align: "center"
-        }
-    );
-
-
-    pdf.setFontSize(10);
-
-    pdf.text(
-        "Ova potvrda je elektronski generisana.",
-        105,
-        175,
-        {
-            align: "center"
-        }
-    );
-
-
-    // ==========================================
-    // DONJA CRVENA LINIJA
-    // ==========================================
-
-    pdf.setFillColor(
-        200,
-        16,
-        46
-    );
-
-    pdf.rect(
-        0,
-        280,
-        210,
-        12,
-        "F"
-    );
-
-
-    pdf.setTextColor(
-        255,
-        255,
-        255
-    );
-
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    pdf.setFontSize(10);
-
-    pdf.text(
-        "KK TEMPO BRATUNAC",
-        105,
-        288,
-        {
-            align: "center"
-        }
-    );
-
-
-    // ==========================================
-    // NAZIV PDF-a
-    // ==========================================
-
-    let naziv =
-
-        "Potvrda_" +
-        sifra +
-        "_" +
-        mesec +
-        ".pdf";
-
-
-    // ==========================================
-    // SAČUVAJ PDF
-    // ==========================================
-
-    pdf.save(
-        naziv
-    );
-
-}
-
-
-function zatvoriPauzu(){
-
-document.getElementById("pauzaModal").style.display="none";
-
-}
-
-function sacuvajSve(){
-
-    let podaci={};
-
-
-    for(let ime in clanovi){
-
-        podaci[ime]={
-
-            clanarine: clanovi[ime].clanarine,
-
-            pauza: clanovi[ime].pauza
-
-        };
-
-    }
-
-
-    localStorage.setItem(
-        "clanarine",
-        JSON.stringify(podaci)
-    );
-
-}
-
-
-  
-function izveziPDF(){
-
-
-const { jsPDF } = window.jspdf;
-
-
-let pdf = new jsPDF("landscape");
-
-
-
-pdf.setFontSize(18);
-
-pdf.text(
-"KK TEMPO BRATUNAC - EVIDENCIJA CLANARINA",
-14,
-15
-);
-
-
-
-pdf.setFontSize(11);
-
-let datum = new Date().toLocaleDateString("sr-RS");
-
-
-pdf.text(
-"Datum izvoza: " + datum,
-14,
-23
-);
-
-
-
-let tabela = [];
-
-
-
-for(let sifra in clanovi){
-
-
-let clan = clanovi[sifra];
-
-
-let dug = izracunajDug(clan);
-
-
-
-let status = dug > 0 
-?
-"NIJE PLACENO"
-:
-"PLACENO";
-
-
-
-tabela.push([
-
-sifra,
-
-clan.ime,
-
-clan.program,
-
-clan.cena+" KM",
-
-dug+" KM",
-
-status
-
-]);
-
-
-}
-
-
-
-pdf.autoTable({
-
-startY:30,
-
-head:[
-
-[
-"Sifra",
-"Ime",
-"Program",
-"Cena",
-"Ukupan dug",
-"Status"
-
-]
-
-],
-
-
-body:tabela,
-
-
-styles:{
-
-fontSize:9
-
-},
-
-
-headStyles:{
-
-fillColor:[200,16,46]
-
-}
-
-
-});
-
-
-
-pdf.save(
-"KK_Tempo_clanarine.pdf"
-);
-
-
-}
-
-let clanZaPauzu = null;
-
-
-function pauzirajMesec(sifra){
-
-
-    clanZaPauzu = sifra;
-
-
-    document.getElementById("imePauza").innerHTML =
-    clanovi[sifra].ime;
-
-
-    let html = "";
-
-    let godina = new Date().getFullYear();
-
-
-    for(let i=1; i<=12; i++){
-
-
-        let mesec = i < 10 ? "0"+i : i;
-
-
-        let vrednost = godina+"-"+mesec;
-
-
-        let oznaceno = 
-        clanovi[sifra].pauza &&
-        clanovi[sifra].pauza[vrednost]
-        ?
-        "checked"
-        :
-        "";
-
-
-
-        html += `
-
-        <div class="mesec">
-
-        <label>
-
-        <input 
-        type="checkbox"
-        value="${vrednost}"
-        ${oznaceno}>
-
-        ${vrednost}
-
-        </label>
-
-        </div>
-
-        `;
-
-
-    }
-
-
-    document.getElementById("listaMeseci").innerHTML = html;
-
-
-   let modal = document.getElementById("pauzaModal");
-
-modal.style.display = "flex";
-modal.style.position = "fixed";
-modal.style.top = "0";
-modal.style.left = "0";
-modal.style.width = "100%";
-modal.style.height = "100%";
-modal.style.background = "rgba(0,0,0,0.7)";
-modal.style.zIndex = "999999";
-modal.style.justifyContent = "center";
-modal.style.alignItems = "center";
-
-let sadrzaj = modal.querySelector(".modal-sadrzaj");
-
-sadrzaj.style.background = "white";
-sadrzaj.style.color = "#222";
-sadrzaj.style.width = "500px";
-sadrzaj.style.padding = "35px";
-sadrzaj.style.borderRadius = "20px";
-sadrzaj.style.boxShadow = "0 20px 50px rgba(0,0,0,0.4)";
-sadrzaj.style.textAlign = "center";
-
-}
-
-function sacuvajPauzu(){
-
-
-let cekirani=document.querySelectorAll(
-"#listaMeseci input:checked"
-);
-
-
-clanovi[clanZaPauzu].pauza={};
-
-
-cekirani.forEach(box=>{
-
-let mesec=box.value;
-
-clanovi[clanZaPauzu].pauza[mesec]=true;
-
-
-// označi mesec kao pauzu
-
-clanovi[clanZaPauzu].clanarine[mesec] = {
-
-    iznos:0,
-
-    status:"PAUZA"
-
-};
-
-
-});
-
-
-
-let podaci={};
-
-
-for(let ime in clanovi){
-
-podaci[ime]={
-
-clanarine: clanovi[ime].clanarine,
-
-pauza: clanovi[ime].pauza
-
-};
-
-}
-
-
-
-localStorage.setItem(
-"clanarine",
-JSON.stringify(podaci)
-);
-
-
-
-location.reload();
-
-
-}
-
-const ADMIN_SIFRA = "300321";
-
-
-function proveriSifru(){
-
-    let unesena = document.getElementById("adminSifra").value;
-
-
-    if(unesena === ADMIN_SIFRA){
-
-        localStorage.setItem("adminPrijava","true");
-
-
-        document.getElementById("loginBox").style.display="none";
-
-        document.getElementById("adminPanel").style.display="block";
-
-
-    }
-    else{
-
-        document.getElementById("greska").innerHTML =
-        "Pogrešna šifra!";
-
-    }
-
-}
-
-
-// početno stanje - sakrij panel
-
-window.onload=function(){
-
-    if(localStorage.getItem("adminPrijava") === "true"){
-
-        document.getElementById("loginBox").style.display="none";
-
-        document.getElementById("adminPanel").style.display="block";
-
-    }
-    else{
-
-        document.getElementById("loginBox").style.display="flex";
-
-        document.getElementById("adminPanel").style.display="none";
-
-    }
-
-}
-
-function zatvoriDuznike(){
-    document.getElementById("duzniciModal").style.display = "none";
-}
-
-function otvoriDuznike(){
-
-    let tabela = document.getElementById("listaDuznika");
-
-tabela.innerHTML="";
-
-    if(!tabela){
-        console.error("Nedostaje HTML element: listaDuznika");
-        return;
-    }
-
-    let tabelaHTML = "";
-
-    let brojDuznika = 0;
-
-
-    for(let sifra in clanovi){
-
-        let clan = clanovi[sifra];
-
-        let dugMeseci = 0;
-        let ukupanDug = 0;
-
-
-        for(let mesec in clan.clanarine){
-
-
-            let brojMeseca = parseInt(mesec.split("-")[1]);
-
-
-            // ignoriše januar-jul
-            if(brojMeseca < 8){
-                continue;
-            }
-
-
-            let uplata = clan.clanarine[mesec];
-
-
-            if(uplata.status === "NIJE PLAĆENO"){
-
-                dugMeseci++;
-
-                ukupanDug += uplata.iznos;
-
-            }
-
-
-        }
-
-
-        if(dugMeseci >= 3){
-
-            brojDuznika++;
-
-
-            tabela.innerHTML += `
-
-            <tr>
-                <td>${clan.ime}</td>
-                <td>${dugMeseci} meseca</td>
-                <td>${ukupanDug} KM</td>
-            </tr>
-
-            `;
-
-        }
-
-    }
-
-
-    if(brojDuznika === 0){
-
-        tabela.innerHTML = `
-
-        <tr>
-            <td colspan="3">
-                Nema članova sa dugom od 3 ili više meseci
-            </td>
-        </tr>
-
-        `;
-
-    }
-
-
-let modal = document.getElementById("duzniciModal");
-
-modal.style.display="flex";
-
-modal.style.position="fixed";
-modal.style.top="0";
-modal.style.left="0";
-modal.style.width="100%";
-modal.style.height="100%";
-modal.style.zIndex="99999999";
-modal.style.justifyContent="center";
-modal.style.alignItems="center";
-
-}
-
-function otvoriClanarine(){
-
-    document.getElementById("adminPocetna").style.display = "none";
-    document.getElementById("clanarinePanel").style.display = "block";
-
-}
-
-function nazadAdmin(){
-
-    document.getElementById("clanarinePanel").style.display = "none";
-    document.getElementById("adminPocetna").style.display = "block";
-
-}
-
-function potvrdiMesecUplate(){
-
-    let izbor = document.querySelector(
-        'input[name="izabraniMesec"]:checked'
-    );
-
-
-    if(!izbor){
-
-        alert("Molimo izaberite mesec za koji je izvršena uplata.");
-
-        return;
-
-    }
-
-
-    let sifra = window.clanZaUplatu;
-
-    let clan = clanovi[sifra];
-
-
-    if(!clan){
-
-        alert("Član nije pronađen.");
-
-        return;
-
-    }
-
-
-    let mesecUplate = izbor.value;
-
-
-    // ==========================================
-    // OSIGURAJ CLANARINE
-    // ==========================================
-
-    if(!clan.clanarine){
-
-        clan.clanarine = {};
-
-    }
-
-
-    // ==========================================
-    // IZNOS
-    // ==========================================
-
-    let iznos =
-
-        Number(
-            clan.clanarine[mesecUplate]?.iznos
-        ) ||
-
-        Number(clan.cena) ||
-
-        0;
-
-
-    // ==========================================
-    // PROVERA DA LI JE VEĆ PLAĆENO
-    // ==========================================
-
-    if(
-
-        clan.clanarine[mesecUplate] &&
-
-        clan.clanarine[mesecUplate].status === "PLAĆENO"
-
-    ){
-
-        alert("Ovaj mesec je već označen kao PLAĆEN.");
-
-        return;
-
-    }
-
-
-    // ==========================================
-    // STVARNI DATUM UPLATE
-    // ==========================================
-
-    let datum = new Date();
-
-
-    // ==========================================
-    // EVIDENTIRAJ UPLATU
-    // ==========================================
-
-    clan.clanarine[mesecUplate] = {
-
-        iznos: iznos,
-
-        status: "PLAĆENO",
-
-        datumUplate:
-            datum.toISOString().split("T")[0]
-
-    };
-
-
-    // ==========================================
-    // SAČUVAJ
-    // ==========================================
-
-    localStorage.setItem(
-        "clanarine",
-        JSON.stringify(clanovi)
-    );
-
-
-    // ==========================================
-    // PODACI
-    // ==========================================
-
-    let ime =
-        clan.ime ||
-        sifra;
-
-
-    let program =
+       let program =
         clan.program ||
         clan.grupa ||
         "-";
 
 
     let email =
-        clan.email ||
-        "";
+        (clan.email || "").trim();
 
 
     // ==========================================
     // GENERIŠI PDF
     // ==========================================
 
-    napraviPotvrdu(
-        sifra,
-        mesecUplate,
-        iznos,
-        datum
-    );
+    try{
 
+        napraviPotvrdu(
+            sifra,
+            mesecUplate,
+            iznos,
+            datum
+        );
 
-    // ==========================================
-    // ZATVORI PROZOR
-    // ==========================================
+    }
+    catch(error){
 
-    zatvoriUplatu();
+        console.error(
+            "Greška pri pravljenju PDF-a:",
+            error
+        );
+
+    }
 
 
     // ==========================================
@@ -2344,6 +1431,7 @@ function potvrdiMesecUplate(){
             "Ovaj član nema unet email."
         );
 
+        zatvoriUplatu();
 
         setTimeout(function(){
 
@@ -2351,65 +1439,53 @@ function potvrdiMesecUplate(){
 
         },500);
 
-
         return;
 
     }
 
 
     // ==========================================
-    // EMAIL
+    // NASLOV EMAILA
     // ==========================================
 
     let naslov =
-
         "Potvrda o uplati članarine - " +
-
         ime;
 
+
+    // ==========================================
+    // TEKST EMAILA
+    // ==========================================
 
     let poruka =
 
         "Poštovani,\n\n" +
 
         "ovim putem potvrđujemo da je evidentirana " +
-
         "uplata članarine za igrača:\n\n" +
 
         "Ime i prezime: " +
-
         ime +
-
         "\n" +
 
         "Šifra člana: " +
-
         sifra +
-
         "\n" +
 
         "Program: " +
-
         program +
-
         "\n" +
 
         "Mesec za koji je izvršena uplata: " +
-
         mesecUplate +
-
         "\n" +
 
         "Iznos: " +
-
         iznos +
-
         " KM\n" +
 
         "Datum uplate: " +
-
         datum.toLocaleDateString("sr-RS") +
-
         "\n\n" +
 
         "U prilogu se nalazi PDF potvrda o uplati.\n\n" +
@@ -2419,14 +1495,80 @@ function potvrdiMesecUplate(){
         "KK Tempo Bratunac";
 
 
-let gmailLink =
-    "https://mail.google.com/mail/?view=cm" +
-    "&fs=1" +
-    "&to=" + encodeURIComponent(email) +
-    "&su=" + encodeURIComponent(naslov) +
-    "&body=" + encodeURIComponent(poruka);
+    // ==========================================
+    // ENCODE
+    // ==========================================
 
-window.open(gmailLink, "_blank");
+    let subject =
+        encodeURIComponent(naslov);
+
+    let body =
+        encodeURIComponent(poruka);
+
+    let to =
+        encodeURIComponent(email);
+
+
+    // ==========================================
+    // PREPOZNAJ UREĐAJ
+    // ==========================================
+
+    let mobilniUredjaj =
+        /Android|iPhone|iPad|iPod/i.test(
+            navigator.userAgent
+        );
+
+
+    // ==========================================
+    // TELEFON / TABLET
+    // ==========================================
+
+    if(mobilniUredjaj){
+
+        let mailToLink =
+            "mailto:" +
+            to +
+            "?subject=" +
+            subject +
+            "&body=" +
+            body;
+
+
+        window.location.href =
+            mailToLink;
+
+    }
+
+
+    // ==========================================
+    // RAČUNAR
+    // ==========================================
+
+    else{
+
+        let gmailLink =
+            "https://mail.google.com/mail/?view=cm&fs=1" +
+            "&to=" +
+            to +
+            "&su=" +
+            subject +
+            "&body=" +
+            body;
+
+
+        window.open(
+            gmailLink,
+            "_blank"
+        );
+
+    }
+
+
+    // ==========================================
+    // ZATVORI MODAL
+    // ==========================================
+
+    zatvoriUplatu();
 
 
     // ==========================================
@@ -2437,14 +1579,19 @@ window.open(gmailLink, "_blank");
 
         location.reload();
 
-    },1000);
+    },5000);
 
 }
 
-
 </script>
 
+
 </section>
+
+
+<!-- ==========================================
+     MODAL DUŽNICI
+========================================== -->
 
 <div id="duzniciModal" class="modal">
 
@@ -2453,57 +1600,93 @@ window.open(gmailLink, "_blank");
         <h2>Lista dužnika</h2>
 
         <table>
-<thead>
-<tr>
-<th>Ime</th>
-<th>Dug</th>
-<th>Iznos</th>
-</tr>
-</thead>
 
-<tbody id="listaDuznika"></tbody>
+            <thead>
 
-</table>
+                <tr>
 
-        <button onclick="zatvoriDuznike()">Zatvori</button>
+                    <th>Ime</th>
+                    <th>Dug</th>
+                    <th>Iznos</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="listaDuznika"></tbody>
+
+        </table>
+
+
+        <button onclick="zatvoriDuznike()">
+            Zatvori
+        </button>
 
     </div>
 
 </div>
 
 
+<!-- ==========================================
+     MODAL PAUZA
+========================================== -->
 
 <div id="pauzaModal" class="modal">
 
-<div class="modal-sadrzaj">
+    <div class="modal-sadrzaj">
 
-<h2 id="imePauza"></h2>
+        <h2 id="imePauza"></h2>
 
-<div id="listaMeseci"></div>
-
-
-<button onclick="sacuvajPauzu()">
-SAČUVAJ
-</button>
+        <div id="listaMeseci"></div>
 
 
-<button onclick="zatvoriPauzu()">
-OTKAŽI
-</button>
+        <button onclick="sacuvajPauzu()">
+            SAČUVAJ
+        </button>
+
+
+        <button
+            onclick="zatvoriPauzu()">
+
+            OTKAŽI
+
+        </button>
 
     </div>
 
 </div>
 
+
+<!-- ==========================================
+     SERVICE WORKER
+========================================== -->
+
 <script>
 
-if("serviceWorker" in navigator){
+if(
+    "serviceWorker" in navigator &&
+    location.protocol !== "file:"
+){
 
-    navigator.serviceWorker.register("service-worker.js");
+    navigator.serviceWorker.register(
+        "service-worker.js"
+    ).catch(function(error){
+
+        console.log(
+            "Service Worker nije registrovan:",
+            error
+        );
+
+    });
 
 }
 
 </script>
+
+
+<!-- ==========================================
+     MODAL UPLATA
+========================================== -->
 
 <div id="uplataModal" class="uplata-modal">
 
@@ -2512,27 +1695,40 @@ if("serviceWorker" in navigator){
         <h2>EVIDENTIRAJ UPLATU</h2>
 
         <p>
+
             Igrač:
+
             <strong id="imeUplate"></strong>
+
         </p>
+
 
         <p>
+
             Izaberite za koji mesec je izvršena uplata:
+
         </p>
 
+
         <div id="listaMeseciUplate"></div>
+
 
         <div class="uplata-dugmad">
 
             <button
                 onclick="potvrdiMesecUplate()">
+
                 POTVRDI UPLATU
+
             </button>
+
 
             <button
                 onclick="zatvoriUplatu()"
                 class="otkazi">
+
                 OTKAZI
+
             </button>
 
         </div>
@@ -2543,4 +1739,5 @@ if("serviceWorker" in navigator){
 
 
 </body>
+
 </html>
