@@ -102,6 +102,662 @@ grid-template-columns:1fr;
 
 }
 
+/* ==========================================
+   POPUP ZA IZBOR MESECA
+========================================== */
+
+#izborMesecaOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    backdrop-filter:blur(5px);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:999999;
+
+}
+
+
+/* ==========================================
+   PROZOR
+========================================== */
+
+.izborMesecaPopup{
+
+    width:100%;
+
+    max-width:520px;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35);
+
+    animation:
+        popupMesec .25s ease;
+
+}
+
+
+@keyframes popupMesec{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            scale(.94)
+            translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.izborMesecaHeader{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
+
+
+.izborMesecaIkona{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:27px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c8102e,
+            #8b001f
+        );
+
+}
+
+
+.izborMesecaHeader h2{
+
+    margin:0;
+
+    color:#222;
+
+    font-size:21px;
+
+}
+
+
+.izborMesecaHeader p{
+
+    margin:5px 0 0;
+
+    color:#777;
+
+    font-size:13px;
+
+}
+
+
+/* ==========================================
+   MESECI
+========================================== */
+
+.meseciDugmad{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:14px;
+
+}
+
+
+.dugmeMesec{
+
+    border:2px solid #eee;
+
+    background:#fff;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:.2s;
+
+}
+
+
+.dugmeMesec:hover{
+
+    border-color:#c8102e;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(200,16,46,.15);
+
+}
+
+
+.mesecNaziv{
+
+    display:block;
+
+    color:#222;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+
+.mesecGodina{
+
+    display:block;
+
+    color:#888;
+
+    font-size:13px;
+
+    margin-top:3px;
+
+}
+
+
+.mesecStatus{
+
+    display:block;
+
+    margin-top:10px;
+
+    color:#999;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+}
+
+
+/* ==========================================
+   PLAĆENO
+========================================== */
+
+.dugmeMesec.mesecPlaceno{
+
+    background:#f2fff5;
+
+    border-color:#a8d8b2;
+
+}
+
+
+.dugmeMesec.mesecPlaceno .mesecStatus{
+
+    color:#218838;
+
+}
+
+
+/* ==========================================
+   OTKAŽI
+========================================== */
+
+.dugmeOtkaziMesec{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:14px;
+
+    border:0;
+
+    border-radius:12px;
+
+    background:#eee;
+
+    color:#555;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+.dugmeOtkaziMesec:hover{
+
+    background:#ddd;
+
+}
+
+
+/* ==========================================
+   TELEFON / TABLET
+========================================== */
+
+@media(max-width:600px){
+
+    .izborMesecaPopup{
+
+        padding:22px;
+
+        border-radius:18px;
+
+    }
+
+
+    .meseciDugmad{
+
+        gap:10px;
+
+    }
+
+
+    .dugmeMesec{
+
+        padding:15px;
+
+    }
+
+
+    .mesecNaziv{
+
+        font-size:16px;
+
+    }
+
+}
+
+/* ==========================================
+   POPUP - IZBOR MESECA
+========================================== */
+
+#izborMesecaOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(0,0,0,.65);
+
+    backdrop-filter:
+        blur(5px);
+
+}
+
+
+/* ==========================================
+   PROZOR
+========================================== */
+
+.izborMesecaPopup{
+
+    width:100%;
+
+    max-width:500px;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    box-sizing:border-box;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.35);
+
+    animation:
+        popupMesec .25s ease;
+
+}
+
+
+@keyframes popupMesec{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            scale(.94)
+            translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.izborMesecaHeader{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:24px;
+
+}
+
+
+.izborMesecaIkona{
+
+    width:55px;
+
+    height:55px;
+
+    min-width:55px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:27px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c8102e,
+            #8b001f
+        );
+
+}
+
+
+.izborMesecaHeader h2{
+
+    margin:0;
+
+    color:#222;
+
+    font-size:21px;
+
+}
+
+
+.izborMesecaHeader p{
+
+    margin:5px 0 0;
+
+    color:#777;
+
+    font-size:13px;
+
+}
+
+
+/* ==========================================
+   DUGMAD MESECI
+========================================== */
+
+.meseciDugmad{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+
+}
+
+
+.dugmeMesec{
+
+    border:2px solid #eeeeee;
+
+    background:#ffffff;
+
+    border-radius:16px;
+
+    padding:17px;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:.2s;
+
+}
+
+
+.dugmeMesec:hover{
+
+    border-color:#c8102e;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(200,16,46,.15);
+
+}
+
+
+.mesecNaziv{
+
+    display:block;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#222;
+
+}
+
+
+.mesecGodina{
+
+    display:block;
+
+    margin-top:3px;
+
+    font-size:13px;
+
+    color:#888;
+
+}
+
+
+.mesecStatus{
+
+    display:block;
+
+    margin-top:10px;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    color:#999;
+
+}
+
+
+/* ==========================================
+   PLAĆEN MESEC
+========================================== */
+
+.dugmeMesec.mesecPlaceno{
+
+    background:#f2fff5;
+
+    border-color:#a8d8b2;
+
+}
+
+
+.dugmeMesec.mesecPlaceno
+.mesecStatus{
+
+    color:#218838;
+
+}
+
+
+/* ==========================================
+   OTKAŽI
+========================================== */
+
+.dugmeOtkaziMesec{
+
+    width:100%;
+
+    margin-top:18px;
+
+    padding:14px;
+
+    border:0;
+
+    border-radius:12px;
+
+    background:#eeeeee;
+
+    color:#555;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+.dugmeOtkaziMesec:hover{
+
+    background:#dddddd;
+
+}
+
+
+/* ==========================================
+   TELEFON / TABLET
+========================================== */
+
+@media(max-width:600px){
+
+    .izborMesecaPopup{
+
+        padding:22px;
+
+        border-radius:18px;
+
+    }
+
+
+    .meseciDugmad{
+
+        gap:9px;
+
+    }
+
+
+    .dugmeMesec{
+
+        padding:15px;
+
+    }
+
+
+    .mesecNaziv{
+
+        font-size:16px;
+
+    }
+
+}
+
+
+
 </style>
 
 </head>
@@ -959,12 +1615,9 @@ function izracunajDug(clan){
 
 }
 
-
-
 function promeniStatus(sifra){
 
     let clan = clanovi[sifra];
-
 
     if(!clan){
 
@@ -977,82 +1630,243 @@ function promeniStatus(sifra){
 
     let datum = new Date();
 
-    let godina =
-        datum.getFullYear();
+    let godina = datum.getFullYear();
 
-    let trenutniBrojMeseca =
-        datum.getMonth() + 1;
+    let trenutniMesec = datum.getMonth();
 
 
     // ==========================================
-    // TEKUĆI MESEC + 3 MESECA UNAZAD
+    // 4 MESECA - TEKUĆI + 3 UNAZAD
     // ==========================================
 
-    let meseciZaUplatu = [];
+    let meseci = [];
+
+    let naziviMeseci = [
+
+        "Januar",
+        "Februar",
+        "Mart",
+        "April",
+        "Maj",
+        "Jun",
+        "Jul",
+        "Avgust",
+        "Septembar",
+        "Oktobar",
+        "Novembar",
+        "Decembar"
+
+    ];
 
 
     for(let i = 0; i < 4; i++){
 
         let d = new Date(
             godina,
-            trenutniBrojMeseca - 1 - i,
+            trenutniMesec - i,
             1
         );
 
-
-        let g =
-            d.getFullYear();
-
+        let g = d.getFullYear();
 
         let m =
-            String(
-                d.getMonth() + 1
-            ).padStart(2,"0");
+            String(d.getMonth() + 1)
+            .padStart(2,"0");
+
+        let naziv =
+            naziviMeseci[
+                d.getMonth()
+            ];
+
+        let vrednost =
+            g + "-" + m;
+
+        let placeno =
+            clan.clanarine &&
+            clan.clanarine[vrednost] &&
+            clan.clanarine[vrednost].status ===
+            "PLAĆENO";
 
 
-        meseciZaUplatu.push(
-            g + "-" + m
-        );
+        meseci.push({
+
+            vrednost: vrednost,
+
+            naziv: naziv,
+
+            godina: g,
+
+            placeno: placeno
+
+        });
 
     }
 
 
     // ==========================================
-    // IZBOR MESECA
+    // UKLONI STARI POPUP
     // ==========================================
 
-    let izbor = prompt(
+    let stari =
+        document.getElementById(
+            "izborMesecaOverlay"
+        );
 
-        "Za koji mesec je izvršena uplata?\n\n" +
+    if(stari){
 
-        "1 - " + meseciZaUplatu[0] + "\n" +
+        stari.remove();
 
-        "2 - " + meseciZaUplatu[1] + "\n" +
+    }
 
-        "3 - " + meseciZaUplatu[2] + "\n" +
 
-        "4 - " + meseciZaUplatu[3] + "\n\n" +
+    // ==========================================
+    // NAPRAVI POPUP
+    // ==========================================
 
-        "Unesite broj 1, 2, 3 ili 4:"
+    let overlay =
+        document.createElement("div");
 
+    overlay.id =
+        "izborMesecaOverlay";
+
+
+    let dugmad = "";
+
+
+    meseci.forEach(function(mesec){
+
+        dugmad += `
+
+            <button
+                type="button"
+                class="dugmeMesec ${
+                    mesec.placeno
+                    ? "mesecPlaceno"
+                    : ""
+                }"
+                onclick="
+                    obradiUplatuMeseca(
+                        '${sifra}',
+                        '${mesec.vrednost}'
+                    )
+                "
+            >
+
+                <span class="mesecNaziv">
+                    ${mesec.naziv}
+                </span>
+
+                <span class="mesecGodina">
+                    ${mesec.godina}
+                </span>
+
+                <span class="mesecStatus">
+
+                    ${
+                        mesec.placeno
+                        ? "✓ PLAĆENO"
+                        : "NIJE PLAĆENO"
+                    }
+
+                </span>
+
+            </button>
+
+        `;
+
+    });
+
+
+    overlay.innerHTML = `
+
+        <div
+            class="izborMesecaPopup"
+            onclick="event.stopPropagation()"
+        >
+
+            <div class="izborMesecaHeader">
+
+                <div class="izborMesecaIkona">
+                    📅
+                </div>
+
+                <div>
+
+                    <h2>
+                        IZBOR MESECA
+                    </h2>
+
+                    <p>
+                        Izaberite mesec za uplatu
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="meseciDugmad">
+
+                ${dugmad}
+
+            </div>
+
+
+            <button
+                type="button"
+                class="dugmeOtkaziMesec"
+                onclick="zatvoriIzborMeseca()"
+            >
+
+                ✕ &nbsp; OTKAŽI
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        overlay
     );
 
 
-    if(izbor === null){
+    overlay.addEventListener(
+        "click",
+        function(){
 
-        return;
+            zatvoriIzborMeseca();
 
-    }
+        }
+    );
+
+}
 
 
-    let broj =
-        Number(izbor);
 
 
-    if(![1,2,3,4].includes(broj)){
+
+function obradiUplatuMeseca(
+    sifra,
+    izabraniMesec
+){
+
+    // ==========================================
+    // ZATVORI POPUP
+    // ==========================================
+
+    zatvoriIzborMeseca();
+
+
+    let clan =
+        clanovi[sifra];
+
+
+    if(!clan){
 
         alert(
-            "Morate izabrati broj od 1 do 4."
+            "Član nije pronađen."
         );
 
         return;
@@ -1060,8 +1874,8 @@ function promeniStatus(sifra){
     }
 
 
-    let izabraniMesec =
-        meseciZaUplatu[broj - 1];
+    let datum =
+        new Date();
 
 
     // ==========================================
@@ -1098,7 +1912,29 @@ function promeniStatus(sifra){
     // PONIŠTI UPLATU
     // ==========================================
 
-    if(clanarina.status === "PLAĆENO"){
+    if(
+        clanarina.status ===
+        "PLAĆENO"
+    ){
+
+        let potvrda =
+            confirm(
+
+                "Mesec " +
+                izabraniMesec +
+                " je već označen kao PLAĆEN.\n\n" +
+
+                "Da li želite da poništite uplatu?"
+
+            );
+
+
+        if(!potvrda){
+
+            return;
+
+        }
+
 
         clan.clanarine[izabraniMesec] = {
 
@@ -1302,8 +2138,6 @@ function promeniStatus(sifra){
 
     if(mobilniUredjaj){
 
-        // TELEFON / TABLET
-
         let mailToLink =
 
             "mailto:" +
@@ -1324,8 +2158,6 @@ function promeniStatus(sifra){
 
 
     }else{
-
-        // RAČUNAR
 
         let gmailLink =
 
@@ -1355,6 +2187,24 @@ function promeniStatus(sifra){
     }
 
 }
+
+
+function zatvoriIzborMeseca(){
+
+    let overlay =
+        document.getElementById(
+            "izborMesecaOverlay"
+        );
+
+
+    if(overlay){
+
+        overlay.remove();
+
+    }
+
+}
+
 
 
 
@@ -1399,24 +2249,7 @@ function napraviPotvrdu(
     // GENERIŠI PDF
     // ==========================================
 
-    try{
 
-        napraviPotvrdu(
-            sifra,
-            mesecUplate,
-            iznos,
-            datum
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Greška pri pravljenju PDF-a:",
-            error
-        );
-
-    }
 
 
     // ==========================================
@@ -1677,6 +2510,16 @@ if(
         );
 
     });
+
+}
+
+function zatvoriUplatu(){
+
+    let overlay = document.getElementById("izborMesecaOverlay");
+
+    if(overlay){
+        overlay.remove();
+    }
 
 }
 
