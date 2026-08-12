@@ -1337,13 +1337,11 @@ clanovi[sifra].pauza = podaci[sifra].pauza || {};
 
 function imaPauzu(clan, mesec){
 
-    if(clan.pauza && clan.pauza[mesec]){
-
-        return true;
-
-    }
-
-    return false;
+    return !!(
+        clan &&
+        clan.pauza &&
+        clan.pauza[mesec] === true
+    );
 
 }
 
@@ -1596,16 +1594,26 @@ function izracunajDug(clan){
 
     let dug = 0;
 
+    if(!clan || !clan.clanarine){
+        return 0;
+    }
+
     for(let mesec in clan.clanarine){
 
         let zapis = clan.clanarine[mesec];
 
-        if(
-            zapis &&
-            zapis.status === "NIJE PLAĆENO"
-        ){
+        if(!zapis){
+            continue;
+        }
 
-            dug += zapis.iznos;
+        // AKO JE MESEC NA PAUZI - NE RAČUNAJ DUG
+        if(imaPauzu(clan, mesec)){
+            continue;
+        }
+
+        if(zapis.status === "NIJE PLAĆENO"){
+
+            dug += Number(zapis.iznos) || 0;
 
         }
 
@@ -1827,9 +1835,11 @@ function promeniStatus(sifra){
     `;
 
 
-    document.body.appendChild(
-        overlay
-    );
+// UVEK UBACI POPUP DIREKTNO U BODY
+document.body.appendChild(overlay);
+
+// Zaključaj skrol stranice dok je popup otvoren
+document.body.style.overflow = "hidden";
 
 
     overlay.addEventListener(
@@ -2192,20 +2202,14 @@ function obradiUplatuMeseca(
 function zatvoriIzborMeseca(){
 
     let overlay =
-        document.getElementById(
-            "izborMesecaOverlay"
-        );
-
+        document.getElementById("izborMesecaOverlay");
 
     if(overlay){
-
         overlay.remove();
-
     }
 
+    document.body.style.overflow = "";
 }
-
-
 
 
 function napraviPotvrdu(
@@ -2520,6 +2524,291 @@ function zatvoriUplatu(){
     if(overlay){
         overlay.remove();
     }
+
+}
+
+function pauzirajMesec(sifra){
+
+    let clan = clanovi[sifra];
+
+    if(!clan){
+
+        alert("Član nije pronađen.");
+
+        return;
+
+    }
+
+
+    if(!clan.pauza){
+        clan.pauza = {};
+    }
+
+
+    if(!clan.clanarine){
+        clan.clanarine = {};
+    }
+
+
+    let datum = new Date();
+
+    let godina = datum.getFullYear();
+
+    let trenutniMesec =
+        datum.getMonth() + 1;
+
+
+    let meseci = [];
+
+
+    let naziviMeseci = [
+
+        "Januar",
+        "Februar",
+        "Mart",
+        "April",
+        "Maj",
+        "Jun",
+        "Jul",
+        "Avgust",
+        "Septembar",
+        "Oktobar",
+        "Novembar",
+        "Decembar"
+
+    ];
+
+
+    // ==========================================
+    // AVGUST → TEKUĆI MESEC
+    // ==========================================
+
+    for(let i = 7; i <= trenutniMesec; i++){
+
+        let broj =
+            String(i).padStart(2,"0");
+
+        let vrednost =
+            godina + "-" + broj;
+
+
+        meseci.push({
+
+            vrednost: vrednost,
+
+            naziv:
+                naziviMeseci[i - 1],
+
+            pauza:
+                !!clan.pauza[vrednost]
+
+        });
+
+    }
+
+
+    // ==========================================
+    // POPUP
+    // ==========================================
+
+    let overlay =
+        document.createElement("div");
+
+    overlay.id =
+        "pauzaIzborOverlay";
+
+
+    let dugmad = "";
+
+
+    meseci.forEach(function(mesec){
+
+        dugmad += `
+
+            <button
+                type="button"
+                class="dugmeMesec ${
+                    mesec.pauza
+                    ? "mesecNaPauzi"
+                    : ""
+                }"
+                onclick="
+                    promeniPauzu(
+                        '${sifra}',
+                        '${mesec.vrednost}'
+                    )
+                "
+            >
+
+                <span class="mesecNaziv">
+                    ${mesec.naziv}
+                </span>
+
+                <span class="mesecGodina">
+                    ${godina}
+                </span>
+
+                <span class="mesecStatus">
+
+                    ${
+                        mesec.pauza
+                        ? "⏸ NA PAUZI"
+                        : "AKTIVAN"
+                    }
+
+                </span>
+
+            </button>
+
+        `;
+
+    });
+
+
+    overlay.innerHTML = `
+
+        <div
+            class="izborMesecaPopup"
+            onclick="event.stopPropagation()"
+        >
+
+            <div class="izborMesecaHeader">
+
+                <div class="izborMesecaIkona">
+                    ⏸
+                </div>
+
+                <div>
+
+                    <h2>
+                        PAUZA ČLANARINE
+                    </h2>
+
+                    <p>
+                        ${clan.ime}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="meseciDugmad">
+
+                ${dugmad}
+
+            </div>
+
+
+            <button
+                type="button"
+                class="dugmeOtkaziMesec"
+                onclick="
+                    document
+                    .getElementById('pauzaIzborOverlay')
+                    .remove()
+                "
+            >
+
+                ✕ &nbsp; ZATVORI
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(overlay);
+
+
+    overlay.addEventListener(
+        "click",
+        function(){
+
+            overlay.remove();
+
+        }
+    );
+
+}
+
+function promeniPauzu(sifra, mesec){
+
+    let clan = clanovi[sifra];
+
+    if(!clan){
+        return;
+    }
+
+
+    if(!clan.pauza){
+        clan.pauza = {};
+    }
+
+
+    // ==========================================
+    // AKO JE VEĆ PAUZA → UKLONI PAUZU
+    // ==========================================
+
+    if(clan.pauza[mesec]){
+
+        delete clan.pauza[mesec];
+
+
+        // vrati članarinu
+        if(!clan.clanarine[mesec]){
+
+            clan.clanarine[mesec] = {
+
+                iznos:
+                    Number(clan.cena) || 0,
+
+                status:
+                    "NIJE PLAĆENO"
+
+            };
+
+        }
+
+    }
+
+    // ==========================================
+    // UKLJUČI PAUZU
+    // ==========================================
+
+    else{
+
+        clan.pauza[mesec] = true;
+
+
+        // ukloni članarinu za taj mesec
+        if(clan.clanarine){
+
+            delete clan.clanarine[mesec];
+
+        }
+
+    }
+
+
+    // ==========================================
+    // SAČUVAJ
+    // ==========================================
+
+    localStorage.setItem(
+        "clanarine",
+        JSON.stringify(clanovi)
+    );
+
+
+    // ==========================================
+    // OSVEŽI
+    // ==========================================
+
+    proveriMesecneDugove();
+
+    location.reload();
 
 }
 
