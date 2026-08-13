@@ -470,9 +470,23 @@ Podaci o članovima kluba
 </p>
 
 </a>
+<a href="programi-treninga.html" class="card">
+
+<div class="icon">
 
 </div>
 
+<h3>
+PROGRAMI TRENINGA
+</h3>
+
+<p>
+Izbor programa i spiskovi
+</p>
+
+</a>
+
+</div>
 
 
 
@@ -608,6 +622,254 @@ ODJAVA ADMINISTRATORA
 if("serviceWorker" in navigator){
 
     navigator.serviceWorker.register("service-worker.js");
+
+}
+
+function pronadjiClana(sifra){
+
+
+let red =
+document.getElementById(
+    "red-" + sifra
+);
+
+
+
+if(red){
+
+
+    red.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"center"
+
+    });
+
+
+
+    red.style.background="#ffe5e8";
+
+
+    setTimeout(function(){
+
+
+        red.style.background="";
+
+
+    },3000);
+
+
+
+}
+else{
+
+
+    alert(
+    "Član nije pronađen u tabeli: "+sifra
+    );
+
+
+}
+
+
+}
+
+function pronadjiClana(sifra){
+
+
+let red = document.getElementById(
+    "red-" + sifra
+);
+
+
+
+if(red){
+
+
+    red.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"center"
+
+    });
+
+
+    red.style.backgroundColor="#ffe5e8";
+
+
+    setTimeout(function(){
+
+        red.style.backgroundColor="";
+
+    },3000);
+
+
+
+}
+else{
+
+
+alert(
+"Ne postoji red za člana: "+sifra
+);
+
+
+}
+
+
+}
+
+function scrollDoClana(sifra){
+
+
+let red = document.getElementById(
+    "red-" + sifra
+);
+
+
+
+if(red){
+
+
+    red.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"center"
+
+    });
+
+
+
+    red.style.background="#ffe5e8";
+
+
+    setTimeout(()=>{
+
+        red.style.background="";
+
+    },3000);
+
+
+}
+else{
+
+
+alert(
+"Nije pronađen član: "+sifra
+);
+
+
+}
+
+
+}
+
+function scrollDoClana(sifra){
+
+let red = document.getElementById("red-"+sifra);
+
+
+if(red){
+
+red.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+});
+
+
+red.style.background="#ffe5e5";
+
+
+setTimeout(()=>{
+
+red.style.background="";
+
+},3000);
+
+
+}
+else{
+
+alert("Nema reda za: "+sifra);
+
+}
+
+}
+
+function proveriPronadjiClana(){
+
+
+let sifra = localStorage.getItem(
+"pronadjiClana"
+);
+
+
+
+if(!sifra){
+return;
+}
+
+
+
+localStorage.removeItem(
+"pronadjiClana"
+);
+
+
+
+let red = document.getElementById(
+"red-" + sifra
+);
+
+
+
+console.log("Tražim red:", "red-"+sifra);
+
+console.log("Pronađen:", red);
+
+
+
+if(red){
+
+
+red.scrollIntoView({
+
+behavior:"smooth",
+
+block:"center"
+
+});
+
+
+
+red.style.background="#ffe5e5";
+
+
+
+setTimeout(()=>{
+
+red.style.background="";
+
+},3000);
+
+
+
+}
+
+else{
+
+
+alert(
+"Nisam našao člana: "+sifra
+);
+
+
+}
+
+
 
 }
 

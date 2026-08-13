@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KK Tempo | Programi treninga</title>
+
+<style>
+
+:root{
+    --crvena:#c8102e;
+    --crvena2:#980c22;
+    --bela:#ffffff;
+    --siva:#666666;
+    --svetla:#f5f5f5;
+    --border:#dddddd;
+    --crvena-bg:#fff1f3;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+    background:#ffffff;
+
+    color:var(--crvena);
+
+    min-height:100vh;
+
+}
+
+
+/* ==========================================
+   GLAVNI KONTEJNER
+========================================== */
+
+.admin{
+
+    max-width:1450px;
+
+    margin:auto;
+
+    padding:30px;
+
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+    flex-wrap:wrap;
+
+}
+
+.header-left h1{
+
+    margin:0;
+
+    font-size:32px;
+
+    color:var(--crvena);
+
+    letter-spacing:1px;
+
+}
+
+.header-left p{
+
+    margin:8px 0 0;
+
+    color:#666;
+
+}
+
+
+/* ==========================================
+   NAZAD
+========================================== */
+
+.nazad{
+
+    display:inline-block;
+
+    padding:12px 22px;
+
+    background:var(--crvena);
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:.25s;
+
+}
+
+.nazad:hover{
+
+    background:var(--crvena2);
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 6px 18px rgba(200,16,46,.25);
+
+}
+
+
+/* ==========================================
+   STATISTIKA
+========================================== */
+
+.statistika{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(6,1fr);
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.stat{
+
+    background:white;
+
+    border:2px solid #eeeeee;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    text-align:center;
+
+    box-shadow:
+    0 5px 18px rgba(0,0,0,.08);
+
+}
+
+.stat strong{
+
+    display:block;
+
+    font-size:28px;
+
+    margin-bottom:7px;
+
+    color:var(--crvena);
+
+}
+
+.stat span{
+
+    color:#666;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+}
+
+.stat.crvena strong,
+.stat.plava strong,
+.stat.zuta strong,
+.stat.zelena strong{
+
+    color:var(--crvena);
+
+}
+
+
+/* ==========================================
+   PRETRAGA
+========================================== */
+
+.pretraga{
+
+    background:white;
+
+    border:2px solid #eeeeee;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+    0 5px 18px rgba(0,0,0,.07);
+
+}
+
+.pretraga input{
+
+    width:100%;
+
+    padding:15px 18px;
+
+    border-radius:10px;
+
+    border:2px solid #dddddd;
+
+    background:white;
+
+    color:var(--crvena);
+
+    font-size:16px;
+
+    outline:none;
+
+}
+
+.pretraga input::placeholder{
+
+    color:#999;
+
+}
+
+.pretraga input:focus{
+
+    border-color:var(--crvena);
+
+    box-shadow:
+    0 0 0 3px rgba(200,16,46,.10);
+
+}
+
+
+/* ==========================================
+   TABELA
+========================================== */
+
+.tabela-box{
+
+    background:white;
+
+    border:2px solid #eeeeee;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.08);
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:var(--crvena);
+
+    color:white;
+
+}
+
+th{
+
+    padding:16px 12px;
+
+    text-align:left;
+
+    font-size:13px;
+
+    text-transform:uppercase;
+
+}
+
+td{
+
+    padding:14px 12px;
+
+    border-bottom:1px solid #eeeeee;
+
+    color:#333;
+
+}
+
+tbody tr{
+
+    transition:.2s;
+
+}
+
+tbody tr:hover{
+
+    background:var(--crvena-bg);
+
+}
+
+
+/* ==========================================
+   ŠIFRA
+========================================== */
+
+.sifra{
+
+    color:var(--crvena);
+
+    font-weight:bold;
+
+}
+
+
+/* ==========================================
+   SELECT
+========================================== */
+
+select{
+
+    background:white;
+
+    color:var(--crvena);
+
+    border:2px solid #dddddd;
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    min-width:145px;
+
+    font-weight:bold;
+
+}
+
+select:focus{
+
+    border-color:var(--crvena);
+
+    outline:none;
+
+}
+
+
+/* ==========================================
+   OPCIJE
+========================================== */
+
+.opcije{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+
+.opcija{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:8px 11px;
+
+    border-radius:8px;
+
+    background:#fff;
+
+    border:2px solid #eeeeee;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    color:var(--crvena);
+
+}
+
+.opcija:hover{
+
+    border-color:var(--crvena);
+
+    background:var(--crvena-bg);
+
+}
+
+.opcija input{
+
+    accent-color:var(--crvena);
+
+}
+
+
+/* ==========================================
+   INDIVIDUALNI / TERETANA
+========================================== */
+
+.individualni{
+
+    color:var(--crvena);
+
+    font-weight:bold;
+
+}
+
+.teretana{
+
+    color:var(--crvena);
+
+    font-weight:bold;
+
+}
+
+
+/* ==========================================
+   DUGME
+========================================== */
+
+.sacuvaj{
+
+    background:var(--crvena);
+
+    color:white;
+
+    border:none;
+
+    padding:11px 18px;
+
+    border-radius:9px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.sacuvaj:hover{
+
+    background:var(--crvena2);
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 6px 18px rgba(200,16,46,.25);
+
+}
+
+
+/* ==========================================
+   PRAZNO
+========================================== */
+
+.prazno{
+
+    text-align:center;
+
+    padding:50px;
+
+    color:#999;
+
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:1100px){
+
+    .statistika{
+
+        grid-template-columns:
+        repeat(3,1fr);
+
+    }
+
+}
+
+@media(max-width:800px){
+
+    .admin{
+
+        padding:15px;
+
+    }
+
+    .statistika{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+    .tabela-box{
+
+        overflow-x:auto;
+
+    }
+
+    table{
+
+        min-width:1000px;
+
+    }
+
+}
+
+@media(max-width:500px){
+
+    .statistika{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .header-left h1{
+
+        font-size:25px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="admin">
+
+
+<!-- ======================================
+     HEADER
+====================================== -->
+
+<div class="header">
+
+    <div class="header-left">
+
+        <h1>PROGRAMI TRENINGA</h1>
+
+        <p>
+            Pregled i raspoređivanje članova po programima
+        </p>
+
+    </div>
+
+  <a
+        href="pregled.html"
+        class="nazad"
+    >
+        PREGLED RASPOREDA TRENINGA
+    </a>
+
+
+    <a
+        href="admin.html"
+        class="nazad"
+    >
+        ← NAZAD NA ADMIN PANEL
+    </a>
+
+
+
+</div>
+
+
+
+<!-- ======================================
+     STATISTIKA
+====================================== -->
+
+<div class="statistika">
+
+
+    <div class="stat">
+
+        <strong id="ukupnoClanova">
+            0
+        </strong>
+
+        <span>
+            UKUPNO ČLANOVA
+        </span>
+
+    </div>
+
+
+    <div class="stat plava">
+
+        <strong id="program1">
+            0
+        </strong>
+
+        <span>
+            PROGRAM 1
+        </span>
+
+    </div>
+
+
+    <div class="stat crvena">
+
+        <strong id="program2">
+            0
+        </strong>
+
+        <span>
+            PROGRAM 2
+        </span>
+
+    </div>
+
+
+    <div class="stat zuta">
+
+        <strong id="program3">
+            0
+        </strong>
+
+        <span>
+            PROGRAM 3
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong id="individualni">
+            0
+        </strong>
+
+        <span>
+            INDIVIDUALNI RAD
+        </span>
+
+    </div>
+
+
+    <div class="stat zelena">
+
+        <strong id="teretana">
+            0
+        </strong>
+
+        <span>
+            TERETANA
+        </span>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ======================================
+     PRETRAGA
+====================================== -->
+
+<div class="pretraga">
+
+    <input
+        type="text"
+        id="pretraga"
+        placeholder="🔍 Pretraži po imenu, prezimenu ili šifri..."
+        oninput="prikaziClanove()"
+    >
+
+</div>
+
+
+
+<!-- ======================================
+     TABELA
+====================================== -->
+
+<div class="tabela-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Šifra</th>
+
+<th>Ime i prezime</th>
+
+<th>Program</th>
+
+<th>Individualni rad</th>
+
+<th>Teretana</th>
+
+<th>Akcija</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="tabela">
+
+</tbody>
+
+
+</table>
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ==========================================
+   UČITAJ ČLANOVE
+========================================== */
+
+let clanovi =
+    JSON.parse(
+        localStorage.getItem("clanarine")
+    ) || {};
+
+
+/*
+Ako nema članova u localStorage,
+ovde možeš ostaviti podatke kao rezervu.
+*/
+
+if(Object.keys(clanovi).length === 0){
+
+    clanovi = {
+
+        "MATIJAG2014":{
+
+            ime:"Matija Gligorević",
+
+            program:"Program 2",
+
+            individualni:false,
+
+            teretana:false
+
+        },
+
+        "KOSTAC2015":{
+
+            ime:"Kosta Ćetković",
+
+            program:"Program 3",
+
+            individualni:false,
+
+            teretana:true
+
+        },
+
+        "MATIJAC2018":{
+
+            ime:"Matija Ćetković",
+
+            program:"Program 1",
+
+            individualni:true,
+
+            teretana:false
+
+        }
+
+    };
+
+}
+
+
+
+/* ==========================================
+   NORMALIZACIJA
+========================================== */
+
+function normalizujTekst(tekst){
+
+    return String(tekst || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/đ/g,"d")
+        .replace(/č/g,"c")
+        .replace(/ć/g,"c")
+        .replace(/ž/g,"z")
+        .replace(/š/g,"s");
+
+}
+
+
+
+/* ==========================================
+   PRIKAZ ČLANOVA
+========================================== */
+
+function prikaziClanove(){
+
+    let unos =
+        normalizujTekst(
+            document.getElementById("pretraga").value
+        );
+
+
+    let tabela =
+        document.getElementById("tabela");
+
+
+    tabela.innerHTML="";
+
+
+    let broj = 0;
+
+    let p1 = 0;
+    let p2 = 0;
+    let p3 = 0;
+
+    let ind = 0;
+    let ter = 0;
+
+
+    for(let sifra in clanovi){
+
+        let clan = clanovi[sifra];
+
+
+        let ime =
+            normalizujTekst(
+                clan.ime
+            );
+
+
+        let sifraNormal =
+            normalizujTekst(
+                sifra
+            );
+
+
+        if(
+            unos &&
+            !ime.includes(unos) &&
+            !sifraNormal.includes(unos)
+        ){
+
+            continue;
+
+        }
+
+
+        broj++;
+
+
+        let program =
+            clan.program ||
+            "Nije izabran";
+
+
+        if(program === "Program 1")
+            p1++;
+
+        if(program === "Program 2")
+            p2++;
+
+        if(program === "Program 3")
+            p3++;
+
+
+        if(clan.individualni)
+            ind++;
+
+        if(clan.teretana)
+            ter++;
+
+
+        let programKlasa =
+
+            program === "Program 1"
+            ? "program1"
+
+            : program === "Program 2"
+            ? "program2"
+
+            : "program3";
+
+
+        tabela.innerHTML += `
+
+        <tr>
+
+            <td class="sifra">
+                ${sifra}
+            </td>
+
+
+            <td>
+                ${clan.ime || "-"}
+            </td>
+
+
+            <td>
+
+                <select
+                    onchange="promeniProgram('${sifra}',this.value)"
+                >
+
+                    <option value="">
+                        Izaberi program
+                    </option>
+
+                    <option
+                        value="Program 1"
+                        ${program==="Program 1"?"selected":""}
+                    >
+                        Program 1
+                    </option>
+
+                    <option
+                        value="Program 2"
+                        ${program==="Program 2"?"selected":""}
+                    >
+                        Program 2
+                    </option>
+
+                    <option
+                        value="Program 3"
+                        ${program==="Program 3"?"selected":""}
+                    >
+                        Program 3
+                    </option>
+
+                </select>
+
+            </td>
+
+
+            <td>
+
+                <label class="opcija">
+
+                    <input
+                        type="checkbox"
+                        ${clan.individualni ? "checked" : ""}
+                        onchange="
+                            promeniIndividualni(
+                                '${sifra}',
+                                this.checked
+                            )
+                        "
+                    >
+
+                    <span class="individualni">
+                        Individualni rad
+                    </span>
+
+                </label>
+
+            </td>
+
+
+            <td>
+
+                <label class="opcija">
+
+                    <input
+                        type="checkbox"
+                        ${clan.teretana ? "checked" : ""}
+                        onchange="
+                            promeniTeretanu(
+                                '${sifra}',
+                                this.checked
+                            )
+                        "
+                    >
+
+                    <span class="teretana">
+                        Teretana
+                    </span>
+
+                </label>
+
+            </td>
+
+
+            <td>
+
+                <button
+                    class="sacuvaj"
+                    onclick="sacuvajSve('${sifra}')"
+                >
+                    SAČUVAJ
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    }
+
+
+    document.getElementById("ukupnoClanova").textContent =
+        broj;
+
+    document.getElementById("program1").textContent =
+        p1;
+
+    document.getElementById("program2").textContent =
+        p2;
+
+    document.getElementById("program3").textContent =
+        p3;
+
+    document.getElementById("individualni").textContent =
+        ind;
+
+    document.getElementById("teretana").textContent =
+        ter;
+
+
+    if(broj === 0){
+
+        tabela.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="6"
+                class="prazno"
+            >
+                Nema pronađenih članova.
+            </td>
+
+        </tr>
+
+        `;
+
+    }
+
+}
+
+
+
+/* ==========================================
+   PROMENA PROGRAMA
+========================================== */
+
+function promeniProgram(
+    sifra,
+    program
+){
+
+    if(!clanovi[sifra])
+        return;
+
+
+    clanovi[sifra].program =
+        program;
+
+}
+
+
+
+/* ==========================================
+   INDIVIDUALNI
+========================================== */
+
+function promeniIndividualni(
+    sifra,
+    vrednost
+){
+
+    if(!clanovi[sifra])
+        return;
+
+
+    clanovi[sifra].individualni =
+        vrednost;
+
+}
+
+
+
+/* ==========================================
+   TERETANA
+========================================== */
+
+function promeniTeretanu(
+    sifra,
+    vrednost
+){
+
+    if(!clanovi[sifra])
+        return;
+
+
+    clanovi[sifra].teretana =
+        vrednost;
+
+}
+
+
+
+/* ==========================================
+   SAČUVAJ
+========================================== */
+
+function sacuvajSve(sifra){
+
+    localStorage.setItem(
+        "clanarine",
+        JSON.stringify(clanovi)
+    );
+
+
+    alert(
+        "✅ Podaci za člana su sačuvani."
+    );
+
+
+    prikaziClanove();
+
+}
+
+
+
+/* ==========================================
+   START
+========================================== */
+
+prikaziClanove();
+
+
+</script>
+
+</body>
+
+</html>

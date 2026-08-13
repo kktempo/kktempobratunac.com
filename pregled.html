@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KK Tempo | Pregled grupa</title>
+
+<style>
+
+:root{
+    --crvena:#c8102e;
+    --crvena2:#980c22;
+    --svetla:#f6f6f6;
+    --border:#e2e2e2;
+    --tekst:#333;
+    --siva:#777;
+    --zelena:#168a50;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+    background:#fff;
+
+    color:var(--tekst);
+
+}
+
+.container{
+
+    max-width:1450px;
+
+    margin:auto;
+
+    padding:30px;
+
+}
+
+
+/* ==============================
+   HEADER
+============================== */
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+    flex-wrap:wrap;
+
+}
+
+.header h1{
+
+    margin:0;
+
+    color:var(--crvena);
+
+    font-size:32px;
+
+}
+
+.header p{
+
+    margin:7px 0 0;
+
+    color:var(--siva);
+
+}
+
+.nazad{
+
+    background:var(--crvena);
+
+    color:#fff;
+
+    text-decoration:none;
+
+    padding:12px 22px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:.2s;
+
+}
+
+.nazad:hover{
+
+    background:var(--crvena2);
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ==============================
+   STATISTIKA
+============================== */
+
+.statistika{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.stat{
+
+    background:#fff;
+
+    border:2px solid var(--border);
+
+    border-radius:15px;
+
+    padding:22px;
+
+    text-align:center;
+
+    box-shadow:
+    0 5px 18px rgba(0,0,0,.07);
+
+}
+
+.stat strong{
+
+    display:block;
+
+    font-size:30px;
+
+    color:var(--crvena);
+
+    margin-bottom:6px;
+
+}
+
+.stat span{
+
+    color:var(--siva);
+
+    font-weight:bold;
+
+    font-size:13px;
+
+}
+
+
+/* ==============================
+   GRUPE
+============================== */
+
+.grupe{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+.grupa{
+
+    border:2px solid var(--border);
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    background:white;
+
+    box-shadow:
+    0 6px 20px rgba(0,0,0,.07);
+
+}
+
+.grupa-header{
+
+    background:var(--crvena);
+
+    color:white;
+
+    padding:18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.grupa-header h2{
+
+    margin:0;
+
+    font-size:21px;
+
+}
+
+.broj{
+
+    background:white;
+
+    color:var(--crvena);
+
+    border-radius:30px;
+
+    padding:6px 12px;
+
+    font-weight:bold;
+
+}
+
+.lista{
+
+    padding:15px;
+
+    max-height:400px;
+
+    overflow-y:auto;
+
+}
+
+.clan{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:11px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.clan:last-child{
+
+    border-bottom:none;
+
+}
+
+.clan-ime{
+
+    font-weight:bold;
+
+}
+
+.clan-sifra{
+
+    font-size:12px;
+
+    color:var(--crvena);
+
+    font-weight:bold;
+
+}
+
+.prazno{
+
+    color:#999;
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+
+/* ==============================
+   DONJI PANELI
+============================== */
+
+.paneli{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:20px;
+
+}
+
+.panel{
+
+    background:white;
+
+    border:2px solid var(--border);
+
+    border-radius:16px;
+
+    padding:25px;
+
+    box-shadow:
+    0 6px 20px rgba(0,0,0,.07);
+
+}
+
+.panel h2{
+
+    margin-top:0;
+
+    color:var(--crvena);
+
+    border-bottom:2px solid #eee;
+
+    padding-bottom:12px;
+
+}
+
+
+/* ==============================
+   RASPORED
+============================== */
+
+.raspored{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.raspored th{
+
+    background:var(--crvena);
+
+    color:white;
+
+    padding:12px;
+
+}
+
+.raspored td{
+
+    padding:11px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.raspored input{
+
+    width:100%;
+
+    padding:9px;
+
+    border:1px solid #ddd;
+
+    border-radius:7px;
+
+}
+
+
+/* ==============================
+   TRENING
+============================== */
+
+.trening-kontrola{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:12px;
+
+    margin-bottom:15px;
+
+}
+
+label{
+
+    display:block;
+
+    font-weight:bold;
+
+    color:var(--crvena);
+
+    margin-bottom:6px;
+
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:11px;
+
+    border:2px solid #ddd;
+
+    border-radius:8px;
+
+    font-family:inherit;
+
+}
+
+textarea{
+
+    min-height:230px;
+
+    resize:vertical;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:var(--crvena);
+
+}
+
+.dugme{
+
+    border:none;
+
+    background:var(--crvena);
+
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:9px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    margin-top:10px;
+
+}
+
+.dugme:hover{
+
+    background:var(--crvena2);
+
+}
+
+.dugme.sivo{
+
+    background:#555;
+
+}
+
+.dugme.zeleno{
+
+    background:var(--zelena);
+
+}
+
+
+/* ==============================
+   PRETHODNI TRENING
+============================== */
+
+.arhiva{
+
+    margin-top:20px;
+
+    border-top:2px solid #eee;
+
+    padding-top:15px;
+
+}
+
+.arhiva-item{
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    margin-bottom:8px;
+
+    cursor:pointer;
+
+}
+
+.arhiva-item:hover{
+
+    background:#fff3f5;
+
+}
+
+
+/* ==============================
+   PRETRAGA
+============================== */
+
+.pretraga{
+
+    margin-bottom:20px;
+
+}
+
+.pretraga input{
+
+    font-size:16px;
+
+    padding:14px;
+
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media(max-width:1000px){
+
+    .grupe{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .paneli{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .statistika{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .container{
+
+        padding:15px;
+
+    }
+
+    .statistika{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .header h1{
+
+        font-size:25px;
+
+    }
+
+    .trening-kontrola{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<div class="header">
+
+    <div>
+
+        <h1>PREGLED GRUPA</h1>
+
+        <p>
+            Članovi, raspored i pripremljeni treninzi
+        </p>
+
+    </div>
+
+    <a
+        href="programi-treninga.html"
+        class="nazad"
+    >
+        ← NAZAD
+    </a>
+
+</div>
+
+
+
+<!-- =====================================
+     STATISTIKA
+===================================== -->
+
+<div class="statistika">
+
+    <div class="stat">
+
+        <strong id="ukupno">
+            0
+        </strong>
+
+        <span>
+            UKUPNO ČLANOVA
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong id="broj1">
+            0
+        </strong>
+
+        <span>
+            GRUPA 1
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong id="broj2">
+            0
+        </strong>
+
+        <span>
+            GRUPA 2
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong id="broj3">
+            0
+        </strong>
+
+        <span>
+            GRUPA 3
+        </span>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+     PRETRAGA
+===================================== -->
+
+<div class="pretraga">
+
+    <input
+        type="text"
+        id="pretraga"
+        placeholder="🔎 Pretraži člana po imenu, prezimenu ili šifri..."
+        oninput="prikaziGrupe()"
+    >
+
+</div>
+
+
+
+<!-- =====================================
+     GRUPE
+===================================== -->
+
+<div class="grupe">
+
+
+    <!-- GRUPA 1 -->
+
+    <div class="grupa">
+
+        <div class="grupa-header">
+
+            <h2>GRUPA 1</h2>
+
+            <span
+                class="broj"
+                id="g1"
+            >
+                0
+            </span>
+
+        </div>
+
+        <div
+            class="lista"
+            id="lista1"
+        ></div>
+
+    </div>
+
+
+
+    <!-- GRUPA 2 -->
+
+    <div class="grupa">
+
+        <div class="grupa-header">
+
+            <h2>GRUPA 2</h2>
+
+            <span
+                class="broj"
+                id="g2"
+            >
+                0
+            </span>
+
+        </div>
+
+        <div
+            class="lista"
+            id="lista2"
+        ></div>
+
+    </div>
+
+
+
+    <!-- GRUPA 3 -->
+
+    <div class="grupa">
+
+        <div class="grupa-header">
+
+            <h2>GRUPA 3</h2>
+
+            <span
+                class="broj"
+                id="g3"
+            >
+                0
+            </span>
+
+        </div>
+
+        <div
+            class="lista"
+            id="lista3"
+        ></div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+     DONJI PANELI
+===================================== -->
+
+<div class="paneli">
+
+
+<!-- =====================================
+     RASPORED
+===================================== -->
+
+<div class="panel">
+
+<h2>📅 RASPORED I TERMINI TRENINGA</h2>
+
+
+<table class="raspored">
+
+<thead>
+
+<tr>
+
+<th>Grupa</th>
+
+<th>Dan</th>
+
+<th>Termin</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+<tr>
+
+<td>GRUPA 1</td>
+
+<td>
+<input
+type="text"
+id="dan1"
+placeholder="npr. Ponedeljak">
+</td>
+
+<td>
+<input
+type="text"
+id="termin1"
+placeholder="npr. 18:00">
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>GRUPA 2</td>
+
+<td>
+<input
+type="text"
+id="dan2"
+placeholder="npr. Utorak">
+</td>
+
+<td>
+<input
+type="text"
+id="termin2"
+placeholder="npr. 19:00">
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>GRUPA 3</td>
+
+<td>
+<input
+type="text"
+id="dan3"
+placeholder="npr. Sreda">
+</td>
+
+<td>
+<input
+type="text"
+id="termin3"
+placeholder="npr. 20:00">
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+
+<button
+class="dugme"
+onclick="sacuvajRaspored()"
+>
+SAČUVAJ RASPORED
+</button>
+
+
+</div>
+
+
+
+<!-- =====================================
+     PRIPREMLJEN TRENING
+===================================== -->
+
+<div class="panel">
+
+<h2>🏀 PRIPREMLJEN TRENING</h2>
+
+
+<div class="trening-kontrola">
+
+<div>
+
+<label>
+Grupa
+</label>
+
+<select id="treningGrupa">
+
+<option value="1">
+GRUPA 1
+</option>
+
+<option value="2">
+GRUPA 2
+</option>
+
+<option value="3">
+GRUPA 3
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Datum
+</label>
+
+<input
+type="date"
+id="treningDatum"
+>
+
+</div>
+
+</div>
+
+
+<label>
+Naziv treninga
+</label>
+
+<input
+type="text"
+id="nazivTreninga"
+placeholder="npr. Šut i igra 1 na 1"
+>
+
+
+<br>
+
+
+<label style="margin-top:15px;">
+Sadržaj treninga
+</label>
+
+<textarea
+id="sadrzajTreninga"
+placeholder="
+1. Zagrijavanje – 10 min
+2. Vođenje lopte – 10 min
+3. Šut – 15 min
+4. Igra 1 na 1 – 15 min
+5. Igra 5 na 5 – 20 min
+"></textarea>
+
+
+<button
+class="dugme zeleno"
+onclick="sacuvajTrening()"
+>
+SAČUVAJ TRENING
+</button>
+
+
+<button
+class="dugme sivo"
+onclick="ocistiTrening()"
+>
+OČISTI
+</button>
+
+
+<div class="arhiva">
+
+<h3>
+PRETHODNO SAČUVANI TRENINZI
+</h3>
+
+<div id="arhivaTreninga">
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ==========================================
+   UČITAVANJE ČLANOVA
+========================================== */
+
+let clanovi =
+    JSON.parse(
+        localStorage.getItem("clanarine")
+    ) || {};
+
+
+
+/* ==========================================
+   NORMALIZACIJA
+========================================== */
+
+function normalizujTekst(tekst){
+
+    return String(tekst || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/đ/g,"d")
+        .replace(/č/g,"c")
+        .replace(/ć/g,"c")
+        .replace(/ž/g,"z")
+        .replace(/š/g,"s");
+
+}
+
+
+
+/* ==========================================
+   PROGRAM → GRUPA
+========================================== */
+
+function odrediGrupu(clan){
+
+    if(clan.program === "Program 1")
+        return 1;
+
+    if(clan.program === "Program 2")
+        return 2;
+
+    if(clan.program === "Program 3")
+        return 3;
+
+    return null;
+
+}
+
+
+
+/* ==========================================
+   PRIKAZ GRUPA
+========================================== */
+
+function prikaziGrupe(){
+
+    let unos =
+        normalizujTekst(
+            document.getElementById("pretraga").value
+        );
+
+
+    let liste = {
+
+        1:[],
+        2:[],
+        3:[]
+
+    };
+
+
+    for(let sifra in clanovi){
+
+        let clan = clanovi[sifra];
+
+        let grupa =
+            odrediGrupu(clan);
+
+
+        if(!grupa)
+            continue;
+
+
+        let ime =
+            normalizujTekst(
+                clan.ime
+            );
+
+        let sifraNormal =
+            normalizujTekst(
+                sifra
+            );
+
+
+        if(
+            unos &&
+            !ime.includes(unos) &&
+            !sifraNormal.includes(unos)
+        ){
+
+            continue;
+
+        }
+
+
+        liste[grupa].push({
+
+            sifra:sifra,
+
+            ime:clan.ime || "-"
+
+        });
+
+    }
+
+
+    for(let i=1;i<=3;i++){
+
+        let lista =
+            document.getElementById(
+                "lista"+i
+            );
+
+
+        lista.innerHTML="";
+
+
+        if(liste[i].length===0){
+
+            lista.innerHTML=`
+
+                <div class="prazno">
+                    Nema članova.
+                </div>
+
+            `;
+
+        }
+        else{
+
+            liste[i].forEach(clan=>{
+
+                lista.innerHTML += `
+
+                    <div class="clan">
+
+                        <div>
+
+                            <div class="clan-ime">
+                                ${clan.ime}
+                            </div>
+
+                            <div class="clan-sifra">
+                                ${clan.sifra}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        document.getElementById(
+            "g"+i
+        ).textContent =
+            liste[i].length;
+
+
+        document.getElementById(
+            "broj"+i
+        ).textContent =
+            liste[i].length;
+
+    }
+
+
+    document.getElementById("ukupno").textContent =
+
+        liste[1].length +
+        liste[2].length +
+        liste[3].length;
+
+}
+
+
+
+/* ==========================================
+   RASPORED
+========================================== */
+
+function sacuvajRaspored(){
+
+    let raspored={
+
+        grupa1:{
+            dan:document.getElementById("dan1").value,
+            termin:document.getElementById("termin1").value
+        },
+
+        grupa2:{
+            dan:document.getElementById("dan2").value,
+            termin:document.getElementById("termin2").value
+        },
+
+        grupa3:{
+            dan:document.getElementById("dan3").value,
+            termin:document.getElementById("termin3").value
+        }
+
+    };
+
+
+    localStorage.setItem(
+        "tempoRaspored",
+        JSON.stringify(raspored)
+    );
+
+
+    alert(
+        "✅ Raspored je sačuvan."
+    );
+
+}
+
+
+
+/* ==========================================
+   UČITAJ RASPORED
+========================================== */
+
+function ucitajRaspored(){
+
+    let raspored =
+        JSON.parse(
+            localStorage.getItem(
+                "tempoRaspored"
+            )
+        );
+
+
+    if(!raspored)
+        return;
+
+
+    for(let i=1;i<=3;i++){
+
+        let podaci =
+            raspored["grupa"+i];
+
+
+        if(!podaci)
+            continue;
+
+
+        document.getElementById(
+            "dan"+i
+        ).value =
+            podaci.dan || "";
+
+
+        document.getElementById(
+            "termin"+i
+        ).value =
+            podaci.termin || "";
+
+    }
+
+}
+
+
+
+/* ==========================================
+   DATUM
+========================================== */
+
+document.getElementById(
+    "treningDatum"
+).value =
+    new Date()
+    .toISOString()
+    .split("T")[0];
+
+
+
+/* ==========================================
+   SAČUVAJ TRENING
+========================================== */
+
+function sacuvajTrening(){
+
+    let grupa =
+        document.getElementById(
+            "treningGrupa"
+        ).value;
+
+
+    let datum =
+        document.getElementById(
+            "treningDatum"
+        ).value;
+
+
+    let naziv =
+        document.getElementById(
+            "nazivTreninga"
+        ).value.trim();
+
+
+    let sadrzaj =
+        document.getElementById(
+            "sadrzajTreninga"
+        ).value.trim();
+
+
+    if(!datum){
+
+        alert(
+            "Izaberite datum treninga."
+        );
+
+        return;
+
+    }
+
+
+    if(!naziv){
+
+        alert(
+            "Unesite naziv treninga."
+        );
+
+        return;
+
+    }
+
+
+    let treninzi =
+        JSON.parse(
+            localStorage.getItem(
+                "tempoTreninzi"
+            )
+        ) || [];
+
+
+    treninzi.push({
+
+        grupa:grupa,
+
+        datum:datum,
+
+        naziv:naziv,
+
+        sadrzaj:sadrzaj
+
+    });
+
+
+    localStorage.setItem(
+        "tempoTreninzi",
+        JSON.stringify(treninzi)
+    );
+
+
+    alert(
+        "✅ Trening je sačuvan."
+    );
+
+
+    prikaziArhivuTreninga();
+
+}
+
+
+
+/* ==========================================
+   ARHIVA TRENINGA
+========================================== */
+
+function prikaziArhivuTreninga(){
+
+    let treninzi =
+        JSON.parse(
+            localStorage.getItem(
+                "tempoTreninzi"
+            )
+        ) || [];
+
+
+    let div =
+        document.getElementById(
+            "arhivaTreninga"
+        );
+
+
+    div.innerHTML="";
+
+
+    if(treninzi.length===0){
+
+        div.innerHTML=`
+
+            <div class="prazno">
+                Još nema sačuvanih treninga.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    treninzi
+        .slice()
+        .reverse()
+        .forEach((trening,index)=>{
+
+            div.innerHTML += `
+
+                <div
+                    class="arhiva-item"
+                    onclick="
+                        ucitajTrening(
+                            ${treninzi.length-1-index}
+                        )
+                    "
+                >
+
+                    <strong>
+                        GRUPA ${trening.grupa}
+                    </strong>
+
+                    <br>
+
+                    ${trening.datum}
+
+                    <br>
+
+                    <b>
+                        ${trening.naziv}
+                    </b>
+
+                </div>
+
+            `;
+
+        });
+
+}
+
+
+
+/* ==========================================
+   UČITAJ TRENING
+========================================== */
+
+function ucitajTrening(index){
+
+    let treninzi =
+        JSON.parse(
+            localStorage.getItem(
+                "tempoTreninzi"
+            )
+        ) || [];
+
+
+    let trening =
+        treninzi[index];
+
+
+    if(!trening)
+        return;
+
+
+    document.getElementById(
+        "treningGrupa"
+    ).value =
+        trening.grupa;
+
+
+    document.getElementById(
+        "treningDatum"
+    ).value =
+        trening.datum;
+
+
+    document.getElementById(
+        "nazivTreninga"
+    ).value =
+        trening.naziv;
+
+
+    document.getElementById(
+        "sadrzajTreninga"
+    ).value =
+        trening.sadrzaj;
+
+
+    window.scrollTo({
+
+        top:
+        document.body.scrollHeight,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+
+/* ==========================================
+   OČISTI
+========================================== */
+
+function ocistiTrening(){
+
+    document.getElementById(
+        "nazivTreninga"
+    ).value="";
+
+
+    document.getElementById(
+        "sadrzajTreninga"
+    ).value="";
+
+}
+
+
+
+/* ==========================================
+   START
+========================================== */
+
+prikaziGrupe();
+
+ucitajRaspored();
+
+prikaziArhivuTreninga();
+
+
+</script>
+
+
+</body>
+
+</html>
