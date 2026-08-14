@@ -6,167 +6,724 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dokumentacija igrača - KK Tempo</title>
-
+<title>KK Tempo | Komunikacija</title>
 
 <style>
 
+:root{
+    --crvena:#c8102e;
+    --crvena2:#980c22;
+    --svetla:#f7f7f7;
+    --border:#e3e3e3;
+    --tekst:#333;
+    --siva:#777;
+    --zelena:#168a50;
+    --zelena2:#0d693d;
+    --zuta:#d99b00;
+}
+
+*{
+    box-sizing:border-box;
+}
+
 body{
 
-font-family:Arial,sans-serif;
-background:#f3f3f3;
-margin:0;
+    margin:0;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+    background:#fff;
+
+    color:var(--tekst);
 
 }
-
-
-header{
-
-background:#c8102e;
-color:white;
-
-padding:20px;
-
-text-align:center;
-
-font-size:24px;
-font-weight:bold;
-
-}
-
-
 
 .container{
 
-width:95%;
-max-width:1200px;
+    max-width:1450px;
 
-margin:30px auto;
+    margin:auto;
 
-}
-
-
-
-.dugmeNazad{
-
-background:#c8102e;
-
-color:white;
-
-padding:12px 25px;
-
-border-radius:30px;
-
-text-decoration:none;
-
-font-weight:bold;
+    padding:30px;
 
 }
 
 
+/* =========================================
+   HEADER
+========================================= */
 
-.pretraga{
+.header{
 
-width:100%;
+    display:flex;
 
-padding:15px;
+    justify-content:space-between;
 
-margin:25px 0;
+    align-items:center;
 
-border-radius:25px;
+    gap:20px;
 
-border:1px solid #ccc;
+    flex-wrap:wrap;
 
-font-size:16px;
+    margin-bottom:30px;
+
+}
+
+.header h1{
+
+    margin:0;
+
+    color:var(--crvena);
+
+    font-size:32px;
+
+}
+
+.header p{
+
+    margin:7px 0 0;
+
+    color:var(--siva);
+
+}
+
+.nazad{
+
+    background:var(--crvena);
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 22px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:.2s;
+
+}
+
+.nazad:hover{
+
+    background:var(--crvena2);
+
+    transform:translateY(-2px);
 
 }
 
 
+/* =========================================
+   STATISTIKA
+========================================= */
 
-.igraci{
+.statistika{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    grid-template-columns:
+    repeat(4,1fr);
 
-gap:20px;
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.stat{
+
+    background:#fff;
+
+    border:2px solid var(--border);
+
+    border-radius:15px;
+
+    padding:22px;
+
+    text-align:center;
+
+    box-shadow:
+    0 5px 18px rgba(0,0,0,.07);
+
+}
+
+.stat strong{
+
+    display:block;
+
+    font-size:30px;
+
+    color:var(--crvena);
+
+    margin-bottom:7px;
+
+}
+
+.stat span{
+
+    color:var(--siva);
+
+    font-size:13px;
+
+    font-weight:bold;
 
 }
 
 
+/* =========================================
+   GLAVNI IZBOR
+========================================= */
 
-.kartica{
+.naslov-sekcije{
 
+    color:var(--crvena);
 
-background:white;
+    margin:0 0 15px;
 
-padding:20px;
+    font-size:22px;
 
-border-radius:15px;
+}
 
-box-shadow:0 5px 15px #ccc;
+.izbori{
 
-text-align:center;
+    display:grid;
 
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:18px;
+
+    margin-bottom:30px;
+
+}
+
+.izbor{
+
+    border:2px solid var(--border);
+
+    border-radius:16px;
+
+    padding:22px;
+
+    background:#fff;
+
+    box-shadow:
+    0 5px 18px rgba(0,0,0,.06);
+
+}
+
+.izbor h2{
+
+    color:var(--crvena);
+
+    margin-top:0;
+
+    font-size:19px;
+
+}
+
+.izbor p{
+
+    color:var(--siva);
+
+    min-height:38px;
+
+    line-height:1.4;
 
 }
 
 
+/* =========================================
+   DUGMAD
+========================================= */
 
-.kartica h3{
+.dugmad{
 
-color:#c8102e;
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:9px;
+
+}
+
+.dugme{
+
+    border:none;
+
+    border-radius:9px;
+
+    padding:11px 15px;
+
+    background:var(--crvena);
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.dugme:hover{
+
+    background:var(--crvena2);
+
+    transform:translateY(-2px);
+
+}
+
+.dugme.sivo{
+
+    background:#555;
+
+}
+
+.dugme.zeleno{
+
+    background:var(--zelena);
+
+}
+
+.dugme.zeleno:hover{
+
+    background:var(--zelena2);
+
+}
+
+.dugme.zuto{
+
+    background:var(--zuta);
+
+}
+
+.dugme.belo{
+
+    background:white;
+
+    color:var(--crvena);
+
+    border:2px solid var(--crvena);
 
 }
 
 
+/* =========================================
+   PRETRAGA
+========================================= */
 
-button{
+.pretraga-box{
 
+    border:2px solid var(--border);
 
-background:#c8102e;
+    border-radius:16px;
 
-color:white;
+    padding:22px;
 
-border:none;
+    background:#fff;
 
-padding:10px 20px;
+    margin-bottom:25px;
 
-border-radius:25px;
+    box-shadow:
+    0 5px 18px rgba(0,0,0,.06);
 
-cursor:pointer;
+}
 
-font-weight:bold;
+.pretraga-red{
 
-margin:5px;
+    display:flex;
+
+    gap:10px;
+
+}
+
+.pretraga-red input{
+
+    flex:1;
+
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    border:2px solid #ddd;
+
+    border-radius:9px;
+
+    padding:12px;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:var(--crvena);
 
 }
 
 
+/* =========================================
+   REZULTAT
+========================================= */
 
-.dokument{
+.rezultat{
 
+    display:none;
 
-background:#eee;
+    background:#fff;
 
-padding:10px;
+    border:2px solid var(--border);
 
-margin:8px;
+    border-radius:16px;
 
-border-radius:10px;
+    padding:22px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+    0 7px 22px rgba(0,0,0,.07);
+
+}
+
+.rezultat.prikazi{
+
+    display:block;
+
+}
+
+.rezultat-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:15px;
+
+}
+
+.rezultat-header h2{
+
+    margin:0;
+
+    color:var(--crvena);
 
 }
 
 
+/* =========================================
+   TABELA
+========================================= */
 
-img{
+.tabela-box{
 
-max-width:120px;
-
-border-radius:10px;
+    overflow:auto;
 
 }
 
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:900px;
+
+}
+
+thead{
+
+    background:var(--crvena);
+
+    color:#fff;
+
+}
+
+th{
+
+    padding:14px 12px;
+
+    text-align:left;
+
+    font-size:13px;
+
+}
+
+td{
+
+    padding:13px 12px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+tbody tr:hover{
+
+    background:#fff3f5;
+
+}
+
+.dug-veliki{
+
+    display:inline-block;
+
+    background:#ffe1e6;
+
+    color:#a4001d;
+
+    border-radius:7px;
+
+    padding:5px 9px;
+
+    font-weight:bold;
+
+}
+
+.dug-3{
+
+    display:inline-block;
+
+    background:var(--crvena);
+
+    color:#fff;
+
+    border-radius:7px;
+
+    padding:5px 9px;
+
+    font-weight:bold;
+
+}
+
+.email-da{
+
+    color:var(--zelena);
+
+    font-weight:bold;
+
+}
+
+.email-ne{
+
+    color:var(--crvena);
+
+    font-weight:bold;
+
+}
+
+
+/* =========================================
+   PRAZNO
+========================================= */
+
+.prazno{
+
+    text-align:center;
+
+    padding:40px;
+
+    color:#999;
+
+}
+
+
+/* =========================================
+   EMAIL CENTAR
+========================================= */
+
+.email-centar{
+
+    display:none;
+
+    border:2px solid var(--border);
+
+    border-radius:16px;
+
+    padding:25px;
+
+    background:#fff;
+
+    box-shadow:
+    0 7px 22px rgba(0,0,0,.07);
+
+    margin-bottom:25px;
+
+}
+
+.email-centar.prikazi{
+
+    display:block;
+
+}
+
+.email-centar h2{
+
+    margin-top:0;
+
+    color:var(--crvena);
+
+}
+
+.email-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:15px;
+
+}
+
+.email-polje{
+
+    margin-bottom:15px;
+
+}
+
+.email-polje.puno{
+
+    grid-column:1 / -1;
+
+}
+
+.email-polje label{
+
+    display:block;
+
+    color:var(--crvena);
+
+    font-weight:bold;
+
+    margin-bottom:7px;
+
+}
+
+textarea{
+
+    min-height:280px;
+
+    resize:vertical;
+
+    line-height:1.5;
+
+}
+
+.email-akcije{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:5px;
+
+}
+
+
+/* =========================================
+   INFO PORUKA
+========================================= */
+
+.info{
+
+    padding:13px 15px;
+
+    background:#fff3f5;
+
+    border-left:5px solid var(--crvena);
+
+    border-radius:7px;
+
+    color:#555;
+
+    margin-bottom:18px;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:1000px){
+
+    .izbori{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .statistika{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:650px){
+
+    .container{
+
+        padding:15px;
+
+    }
+
+    .statistika{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .header h1{
+
+        font-size:25px;
+
+    }
+
+    .pretraga-red{
+
+        flex-direction:column;
+
+    }
+
+    .email-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .email-polje.puno{
+
+        grid-column:auto;
+
+    }
+
+}
 
 </style>
 
@@ -176,338 +733,1400 @@ border-radius:10px;
 <body>
 
 
-<header>
-
-DOKUMENTACIJA IGRACA
-
-</header>
-
-
 <div class="container">
 
 
-<a class="dugmeNazad" href="admin.html">
-⬅ NAZAD
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<div class="header">
+
+<div>
+
+<h1>📢 KOMUNIKACIJA</h1>
+
+<p>
+Komunikacioni centar KK Tempo Bratunac
+</p>
+
+</div>
+
+
+<a
+href="admin.html"
+class="nazad"
+>
+← ADMIN PANEL
 </a>
 
+</div>
 
 
-<input 
-class="pretraga"
+
+<!-- =========================================
+     STATISTIKA
+========================================= -->
+
+<div class="statistika">
+
+<div class="stat">
+
+<strong id="statDuznici">
+0
+</strong>
+
+<span>
+UKUPNO DUŽNIKA
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong id="statDug">
+0 KM
+</strong>
+
+<span>
+UKUPNO DUGOVANJE
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong id="statTri">
+0
+</strong>
+
+<span>
+DUGUJU 3+ ČLANARINE
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong id="statEmail">
+0
+</strong>
+
+<span>
+IMAJU EMAIL
+</span>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================
+     IZBORI
+========================================= -->
+
+<h2 class="naslov-sekcije">
+ŠTA ŽELITE DA PROVERITE?
+</h2>
+
+
+<div class="izbori">
+
+
+<!-- DUŽNICI -->
+
+<div class="izbor">
+
+<h2>
+💰 DUŽNICI
+</h2>
+
+<p>
+Pregled dužnika po programu i visini dugovanja.
+</p>
+
+<div class="dugmad">
+
+<button
+class="dugme"
+onclick="prikaziDuznike('svi')"
+>
+SVI DUŽNICI
+</button>
+
+<button
+class="dugme"
+onclick="prikaziDuznike('Program 1')"
+>
+PROGRAM 1
+</button>
+
+<button
+class="dugme"
+onclick="prikaziDuznike('Program 2')"
+>
+PROGRAM 2
+</button>
+
+<button
+class="dugme"
+onclick="prikaziDuznike('Program 3')"
+>
+PROGRAM 3
+</button>
+
+<button
+class="dugme zuto"
+onclick="prikaziDuznike('3plus')"
+>
+3+ ČLANARINE
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- EMAIL -->
+
+<div class="izbor">
+
+<h2>
+📧 EMAIL ADRESE
+</h2>
+
+<p>
+Proveri koji roditelji imaju ili nemaju email.
+</p>
+
+<div class="dugmad">
+
+<button
+class="dugme zeleno"
+onclick="prikaziEmail('ima')"
+>
+✓ IMAJU EMAIL
+</button>
+
+<button
+class="dugme"
+onclick="prikaziEmail('nema')"
+>
+✕ NEMAJU EMAIL
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- NOVI EMAIL -->
+
+<div class="izbor">
+
+<h2>
+✉️ NOVI EMAIL
+</h2>
+
+<p>
+Napiši email roditelju i otvori Gmail sa popunjenim podacima.
+</p>
+
+<div class="dugmad">
+
+<button
+class="dugme zeleno"
+onclick="otvoriEmailCentar()"
+>
+✉️ NAPIŠI EMAIL
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================
+     PRETRAGA ČLANA
+========================================= -->
+
+<div class="pretraga-box">
+
+<h2 class="naslov-sekcije">
+🔎 PRETRAGA ČLANA
+</h2>
+
+<div class="pretraga-red">
+
+<input
+type="text"
 id="pretraga"
-placeholder="Pretraži igrača..."
-onkeyup="pretrazi()">
+placeholder="Ime, prezime ili šifra..."
+onkeydown="
+if(event.key==='Enter'){
+pretraziClana();
+}
+"
+>
+
+<button
+class="dugme"
+onclick="pretraziClana()"
+>
+PRETRAŽI
+</button>
+
+</div>
+
+</div>
 
 
 
-<div id="igraci" class="igraci"></div>
+<!-- =========================================
+     REZULTAT
+========================================= -->
 
+<div
+class="rezultat"
+id="rezultat"
+>
+
+<div class="rezultat-header">
+
+<h2 id="naslovRezultata">
+REZULTAT
+</h2>
+
+<button
+class="dugme belo"
+onclick="zatvoriRezultat()"
+>
+✕ ZATVORI
+</button>
+
+</div>
+
+
+<div class="tabela-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Šifra</th>
+
+<th>Ime i prezime</th>
+
+<th>Program</th>
+
+<th>Email</th>
+
+<th>Broj dugovanja</th>
+
+<th>Ukupan dug</th>
+
+<th>Akcija</th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="tabela"
+>
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================
+     EMAIL CENTAR
+========================================= -->
+
+<div
+class="email-centar"
+id="emailCentar"
+>
+
+<h2>
+✉️ NAPIŠI EMAIL
+</h2>
+
+
+<div class="info">
+
+Ovde možeš ručno napisati poruku. Kada klikneš
+<strong>OTVORI GMAIL</strong>, Gmail će se otvoriti sa
+popunjenim primaocem, naslovom i porukom.
+
+</div>
+
+
+<div class="email-grid">
+
+
+<div class="email-polje">
+
+<label>
+Primaoc
+</label>
+
+<input
+type="email"
+id="emailPrimaoc"
+placeholder="email@primer.com"
+>
+
+</div>
+
+
+<div class="email-polje">
+
+<label>
+Naslov
+</label>
+
+<input
+type="text"
+id="emailNaslov"
+placeholder="Naslov emaila"
+>
+
+</div>
+
+
+<div class="email-polje puno">
+
+<label>
+Poruka
+</label>
+
+<textarea
+id="emailPoruka"
+placeholder="Napišite poruku roditelju..."
+></textarea>
+
+</div>
 
 
 </div>
 
+
+<div class="email-akcije">
+
+<button
+class="dugme zeleno"
+onclick="otvoriGmail()"
+>
+📧 OTVORI GMAIL
+</button>
+
+
+<button
+class="dugme"
+onclick="posaljiPrekoMailto()"
+>
+✉️ OTVORI EMAIL APLIKACIJU
+</button>
+
+
+<button
+class="dugme sivo"
+onclick="ocistiEmail()"
+>
+OČISTI
+</button>
+
+</div>
+
+</div>
+
+
+</div>
 
 
 
 <script>
 
 
+/* =====================================================
+   POSTOJEĆA BAZA
+===================================================== */
+
 let clanovi =
-JSON.parse(localStorage.getItem("clanarine"))
-|| {};
+JSON.parse(
+localStorage.getItem("clanarine")
+) || {};
 
 
 
-let dokumenti =
-JSON.parse(localStorage.getItem("dokumenti"))
-|| {};
-
-
-
-let div =
-document.getElementById("igraci");
-
-
-
-function ucitaj(){
-
-
-div.innerHTML="";
-
-
-for(let sifra in clanovi){
-
-
-let clan=clanovi[sifra];
-
-console.log("IGRAČ:", sifra, clan);
-
-
-
-if(!dokumenti[sifra]){
-
-dokumenti[sifra]={};
-
-}
-
-
-
-let d=dokumenti[sifra];
-
-
-
-let imeIgraca =
-clan.ime ||
-clan.imePrezime ||
-clan.naziv ||
-clan.igrac ||
-sifra;
-
-
-let kartica = document.createElement("div");
-
-kartica.className="kartica";
-
-kartica.innerHTML = `
-
-<h3>
-${imeIgraca}
-</h3>
-
-<p>
-Šifra člana: ${sifra}
-</p>
-
-
-${d.slika ? 
-
-"<img src='"+d.slika+"'>" 
-
-:
-
-""
-
-}
-
-
-
-<div class="dokument">
-
-PRISTUPNICA
-
-<br>
-
-${d.pristupnica || "Nema dokumenta"}
-
-<br>
-
-<input type="file" 
-onchange="dodajFajl('${sifra}','pristupnica',this)">
-
-</div>
-
-
-
-<div class="dokument">
-
-LEKARSKI PREGLED
-
-<br>
-
-${d.lekarski || "Nema dokumenta"}
-
-<br>
-
-<input type="file" 
-onchange="dodajFajl('${sifra}','lekarski',this)">
-
-</div>
-
-
-
-<div class="dokument">
-
-SLIKA IGRACA
-
-<br>
-
-<input type="file" accept="image/*"
-onchange="dodajSliku('${sifra}',this)">
-
-</div>
-
-
-`;
-
-
-div.appendChild(kartica);
-
-
-
-}
-
-
-localStorage.setItem(
-"dokumenti",
-JSON.stringify(dokumenti)
-);
-
-
-}
-
-
-
-function dodajFajl(sifra,tip,input){
-
-
-let fajl=input.files[0];
-
-if(!fajl)return;
-
-
-
-dokumenti[sifra][tip]=fajl.name;
-
-
-
-localStorage.setItem(
-"dokumenti",
-JSON.stringify(dokumenti)
-);
-
-
-alert("Dokument dodat");
-
-
-ucitaj();
-
-
-}
-
-
-
-
-
-function dodajSliku(sifra,input){
-
-
-let fajl=input.files[0];
-
-
-let reader=new FileReader();
-
-
-
-reader.onload=function(e){
-
-
-dokumenti[sifra].slika=e.target.result;
-
-
-localStorage.setItem(
-"dokumenti",
-JSON.stringify(dokumenti)
-);
-
-
-ucitaj();
-
-
-}
-
-
-
-reader.readAsDataURL(fajl);
-
-
-
-}
-
-
+/* =====================================================
+   NORMALIZACIJA
+===================================================== */
 
 function normalizujTekst(tekst){
 
-    if(!tekst) return "";
-
-    return tekst
-        .toLowerCase()
-
-        // ĆIRILICA → LATINICA
-        .replace(/а/g,"a")
-        .replace(/б/g,"b")
-        .replace(/в/g,"v")
-        .replace(/г/g,"g")
-        .replace(/д/g,"d")
-        .replace(/ђ/g,"dj")
-        .replace(/е/g,"e")
-        .replace(/ж/g,"z")
-        .replace(/з/g,"z")
-        .replace(/и/g,"i")
-        .replace(/ј/g,"j")
-        .replace(/к/g,"k")
-        .replace(/л/g,"l")
-        .replace(/љ/g,"lj")
-        .replace(/м/g,"m")
-        .replace(/н/g,"n")
-        .replace(/њ/g,"nj")
-        .replace(/о/g,"o")
-        .replace(/п/g,"p")
-        .replace(/р/g,"r")
-        .replace(/с/g,"s")
-        .replace(/т/g,"t")
-        .replace(/ћ/g,"c")
-        .replace(/у/g,"u")
-        .replace(/ф/g,"f")
-        .replace(/х/g,"h")
-        .replace(/ц/g,"c")
-        .replace(/ч/g,"c")
-        .replace(/џ/g,"dz")
-        .replace(/ш/g,"s")
-
-        // LATINICA SA KVAČICAMA
-        .replace(/č/g,"c")
-        .replace(/ć/g,"c")
-        .replace(/š/g,"s")
-        .replace(/ž/g,"z")
-        .replace(/đ/g,"dj");
-}
-
-
-function pretrazi(){
-
-    let unos = normalizujTekst(
-        document.getElementById("pretraga").value
-    );
-
-    let kartice =
-        document.getElementsByClassName("kartica");
-
-
-    for(let k of kartice){
-
-        let tekst =
-            normalizujTekst(k.innerText);
-
-
-        if(tekst.includes(unos)){
-
-            k.style.display = "";
-
-        }else{
-
-            k.style.display = "none";
-
-        }
-
-    }
+return String(tekst || "")
+.toLowerCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/đ/g,"d")
+.replace(/č/g,"c")
+.replace(/ć/g,"c")
+.replace(/ž/g,"z")
+.replace(/š/g,"s");
 
 }
 
 
-ucitaj();
+
+/* =====================================================
+   PODACI O DUGU
+===================================================== */
+
+function podaciODugu(clan){
+
+let dug=0;
+
+let broj=0;
+
+
+if(!clan || !clan.clanarine){
+
+return {
+
+dug:0,
+
+broj:0
+
+};
+
+}
+
+
+for(
+let mesec in clan.clanarine
+){
+
+let podatak =
+clan.clanarine[mesec];
+
+
+if(
+podatak &&
+podatak.status !== "PLAĆENO"
+){
+
+let iznos =
+
+Number(
+podatak.iznos
+)
+
+||
+
+Number(
+clan.cena
+)
+
+||
+
+0;
+
+
+dug += iznos;
+
+broj++;
+
+}
+
+}
+
+
+return {
+
+dug:dug,
+
+broj:broj
+
+};
+
+}
+
+
+
+/* =====================================================
+   LISTA DUŽNIKA
+===================================================== */
+
+function listaDuznika(){
+
+let lista=[];
+
+
+for(
+let sifra in clanovi
+){
+
+let clan =
+clanovi[sifra];
+
+
+let podaci =
+podaciODugu(clan);
+
+
+if(
+podaci.dug > 0
+){
+
+lista.push({
+
+sifra:sifra,
+
+ime:
+clan.ime ||
+sifra,
+
+program:
+clan.program ||
+"-",
+
+email:
+clan.email ||
+"",
+
+broj:
+podaci.broj,
+
+dug:
+podaci.dug
+
+});
+
+}
+
+}
+
+
+/* najveći dug prvi */
+
+lista.sort(
+(a,b)=>b.dug-a.dug
+);
+
+
+return lista;
+
+}
+
+
+
+/* =====================================================
+   PRIKAZ DUŽNIKA
+===================================================== */
+
+function prikaziDuznike(filter){
+
+let lista =
+listaDuznika();
+
+
+if(filter==="3plus"){
+
+lista =
+lista.filter(
+x=>x.broj>=3
+);
+
+}
+
+else if(
+filter==="Program 1" ||
+filter==="Program 2" ||
+filter==="Program 3"
+){
+
+lista =
+lista.filter(
+x=>x.program===filter
+);
+
+}
+
+
+prikaziTabelu(
+lista,
+
+filter==="3plus"
+?
+"DUGUJU 3+ ČLANARINE"
+
+:
+filter==="svi"
+?
+"SVI DUŽNICI"
+
+:
+"Dužnici - "+filter
+);
+
+}
+
+
+
+/* =====================================================
+   EMAIL LISTA
+===================================================== */
+
+function prikaziEmail(tip){
+
+let lista=[];
+
+
+for(
+let sifra in clanovi
+){
+
+let clan =
+clanovi[sifra];
+
+
+let email =
+(clan.email || "").trim();
+
+
+if(
+tip==="ima" &&
+email
+){
+
+lista.push({
+
+sifra:sifra,
+
+ime:clan.ime || sifra,
+
+program:clan.program || "-",
+
+email:email,
+
+broj:podaciODugu(clan).broj,
+
+dug:podaciODugu(clan).dug
+
+});
+
+}
+
+
+if(
+tip==="nema" &&
+!email
+){
+
+lista.push({
+
+sifra:sifra,
+
+ime:clan.ime || sifra,
+
+program:clan.program || "-",
+
+email:"",
+
+broj:podaciODugu(clan).broj,
+
+dug:podaciODugu(clan).dug
+
+});
+
+}
+
+}
+
+
+prikaziTabelu(
+
+lista,
+
+tip==="ima"
+
+?
+
+"ČLANOVI KOJI IMAJU EMAIL"
+
+:
+
+"ČLANOVI KOJI NEMAJU EMAIL"
+
+);
+
+}
+
+
+
+/* =====================================================
+   PRETRAGA
+===================================================== */
+
+function pretraziClana(){
+
+let unos =
+normalizujTekst(
+document.getElementById(
+"pretraga"
+).value
+);
+
+
+if(!unos){
+
+alert(
+"Unesite ime, prezime ili šifru."
+);
+
+return;
+
+}
+
+
+let lista=[];
+
+
+for(
+let sifra in clanovi
+){
+
+let clan =
+clanovi[sifra];
+
+
+let ime =
+normalizujTekst(
+clan.ime || ""
+);
+
+
+let sifraNormal =
+normalizujTekst(
+sifra
+);
+
+
+if(
+ime.includes(unos)
+||
+sifraNormal.includes(unos)
+){
+
+let podaci =
+podaciODugu(clan);
+
+
+lista.push({
+
+sifra:sifra,
+
+ime:clan.ime || sifra,
+
+program:clan.program || "-",
+
+email:clan.email || "",
+
+broj:podaci.broj,
+
+dug:podaci.dug
+
+});
+
+}
+
+}
+
+
+prikaziTabelu(
+
+lista,
+
+"REZULTAT PRETRAGE"
+
+);
+
+}
+
+
+
+/* =====================================================
+   TABELA
+===================================================== */
+
+function prikaziTabelu(lista,naslov){
+
+let tabela =
+document.getElementById(
+"tabela"
+);
+
+
+tabela.innerHTML="";
+
+
+document.getElementById(
+"naslovRezultata"
+).textContent =
+naslov;
+
+
+document.getElementById(
+"rezultat"
+).classList.add(
+"prikazi"
+);
+
+
+if(lista.length===0){
+
+tabela.innerHTML=`
+
+<tr>
+
+<td
+colspan="7"
+class="prazno"
+>
+Nema podataka za izabranu opciju.
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+lista.forEach(
+clan=>{
+
+
+let brojDuga =
+
+clan.broj>=3
+
+?
+
+`<span class="dug-3">
+${clan.broj}
+</span>`
+
+:
+
+clan.broj;
+
+
+let dug =
+
+clan.dug>0
+
+?
+
+`<span class="dug-veliki">
+${clan.dug} KM
+</span>`
+
+:
+
+"0 KM";
+
+
+let email =
+
+clan.email
+
+?
+
+`<span class="email-da">
+✓ ${clan.email}
+</span>`
+
+:
+
+`<span class="email-ne">
+✕ Nema email
+</span>`;
+
+
+let akcija =
+
+clan.email
+
+?
+
+`
+
+<button
+class="dugme"
+onclick="popuniEmail(
+'${clan.sifra}'
+)"
+>
+📧 EMAIL
+</button>
+
+`
+
+:
+
+`<span class="email-ne">
+NEMA EMAILA
+</span>`;
+
+
+tabela.innerHTML += `
+
+<tr>
+
+<td>
+<strong>
+${clan.sifra}
+</strong>
+</td>
+
+<td>
+<strong>
+${clan.ime}
+</strong>
+</td>
+
+<td>
+${clan.program}
+</td>
+
+<td>
+${email}
+</td>
+
+<td>
+${brojDuga}
+</td>
+
+<td>
+${dug}
+</td>
+
+<td>
+${akcija}
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+
+
+/* =====================================================
+   POPUNI EMAIL IZ ČLANA
+===================================================== */
+
+function popuniEmail(sifra){
+
+let clan =
+clanovi[sifra];
+
+
+if(!clan){
+
+alert(
+"Član nije pronađen."
+);
+
+return;
+
+}
+
+
+if(!clan.email){
+
+alert(
+"Ovaj član nema unet email."
+);
+
+return;
+
+}
+
+
+let podaci =
+podaciODugu(clan);
+
+
+let ime =
+clan.ime ||
+sifra;
+
+
+document.getElementById(
+"emailPrimaoc"
+).value =
+clan.email;
+
+
+document.getElementById(
+"emailNaslov"
+).value =
+"Obaveštenje - KK Tempo Bratunac";
+
+
+document.getElementById(
+"emailPoruka"
+).value =
+
+"Poštovani,\n\n"+
+
+"obraćamo Vam se povodom članarine za:\n\n"+
+
+"Ime i prezime: "+
+ime+
+"\n"+
+
+"Šifra člana: "+
+sifra+
+"\n"+
+
+"Program: "+
+(clan.program || "-")+
+"\n\n"+
+
+"Trenutno dugovanje iznosi: "+
+podaci.dug+
+" KM.\n"+
+
+"Broj neizmirenih članarina: "+
+podaci.broj+
+"\n\n"+
+
+"Molimo Vas da izmirite navedeno dugovanje.\n\n"+
+
+"Ukoliko je uplata već izvršena, molimo Vas da zanemarite ovu poruku.\n\n"+
+
+"Hvala na razumevanju.\n\n"+
+
+"KK Tempo Bratunac";
+
+
+otvoriEmailCentar();
+
+
+document.getElementById(
+"emailCentar"
+).scrollIntoView({
+
+behavior:"smooth",
+
+block:"start"
+
+});
+
+}
+
+
+
+/* =====================================================
+   EMAIL CENTAR
+===================================================== */
+
+function otvoriEmailCentar(){
+
+document.getElementById(
+"emailCentar"
+).classList.add(
+"prikazi"
+);
+
+
+if(
+!document.getElementById(
+"emailNaslov"
+).value
+){
+
+document.getElementById(
+"emailNaslov"
+).value =
+"KK Tempo Bratunac";
+
+}
+
+}
+
+
+
+/* =====================================================
+   GMAIL
+===================================================== */
+
+function otvoriGmail(){
+
+let email =
+document.getElementById(
+"emailPrimaoc"
+).value.trim();
+
+
+let naslov =
+document.getElementById(
+"emailNaslov"
+).value;
+
+
+let poruka =
+document.getElementById(
+"emailPoruka"
+).value;
+
+
+if(!email){
+
+alert(
+"Unesite email primaoca."
+);
+
+return;
+
+}
+
+
+if(!naslov){
+
+alert(
+"Unesite naslov emaila."
+);
+
+return;
+
+}
+
+
+let gmailURL =
+
+"https://mail.google.com/mail/?view=cm&fs=1"+
+
+"&to="+
+encodeURIComponent(email)+
+
+"&su="+
+encodeURIComponent(naslov)+
+
+"&body="+
+encodeURIComponent(poruka);
+
+
+window.open(
+gmailURL,
+"_blank"
+);
+
+}
+
+
+
+/* =====================================================
+   EMAIL APLIKACIJA
+===================================================== */
+
+function posaljiPrekoMailto(){
+
+let email =
+document.getElementById(
+"emailPrimaoc"
+).value.trim();
+
+
+let naslov =
+document.getElementById(
+"emailNaslov"
+).value;
+
+
+let poruka =
+document.getElementById(
+"emailPoruka"
+).value;
+
+
+if(!email){
+
+alert(
+"Unesite email primaoca."
+);
+
+return;
+
+}
+
+
+let link =
+
+"mailto:"+
+encodeURIComponent(email)+
+
+"?subject="+
+encodeURIComponent(naslov)+
+
+"&body="+
+encodeURIComponent(poruka);
+
+
+window.location.href =
+link;
+
+}
+
+
+
+/* =====================================================
+   OČISTI EMAIL
+===================================================== */
+
+function ocistiEmail(){
+
+document.getElementById(
+"emailPrimaoc"
+).value="";
+
+
+document.getElementById(
+"emailNaslov"
+).value="";
+
+
+document.getElementById(
+"emailPoruka"
+).value="";
+
+}
+
+
+
+/* =====================================================
+   ZATVORI REZULTAT
+===================================================== */
+
+function zatvoriRezultat(){
+
+document.getElementById(
+"rezultat"
+).classList.remove(
+"prikazi"
+);
+
+
+document.getElementById(
+"tabela"
+).innerHTML="";
+
+}
+
+
+
+/* =====================================================
+   STATISTIKA
+===================================================== */
+
+function ucitajStatistiku(){
+
+let lista =
+listaDuznika();
+
+
+let ukupnoDug =
+lista.reduce(
+(sum,x)=>sum+x.dug,
+0
+);
+
+
+let triPlus =
+lista.filter(
+x=>x.broj>=3
+).length;
+
+
+let email=0;
+
+
+for(
+let sifra in clanovi
+){
+
+if(
+(clanovi[sifra].email || "")
+.trim()
+){
+
+email++;
+
+}
+
+}
+
+
+document.getElementById(
+"statDuznici"
+).textContent =
+lista.length;
+
+
+document.getElementById(
+"statDug"
+).textContent =
+ukupnoDug+" KM";
+
+
+document.getElementById(
+"statTri"
+).textContent =
+triPlus;
+
+
+document.getElementById(
+"statEmail"
+).textContent =
+email;
+
+}
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+ucitajStatistiku();
 
 </script>
-
 
 
 </body>
