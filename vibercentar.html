@@ -5,46 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>KK TEMPO | Viber Centar</title>
-
-<meta name="theme-color" content="#c8102e">
+<title>KK TEMPO | VIBER CENTAR</title>
 
 <style>
 
-/* =========================================================
-   KK TEMPO — VIBER CENTAR
-   ADMIN PANEL + VIBER STYLE
-========================================================= */
-
-:root{
-
-    --red:#c8102e;
-    --red-dark:#9d0b22;
-    --red-light:#fff0f3;
-
-    --viber:#665cac;
-    --viber-dark:#51499a;
-    --viber-light:#f1efff;
-
-    --white:#ffffff;
-    --bg:#f4f5f7;
-
-    --text:#202124;
-    --muted:#858991;
-
-    --border:#e5e6e9;
-
-    --green:#17a673;
-    --orange:#ed8a1c;
-
-    --shadow:
-        0 8px 25px rgba(0,0,0,.06);
-
-    --shadow-hover:
-        0 18px 45px rgba(0,0,0,.12);
-
-}
-
+/* =====================================================
+   OSNOVNO
+===================================================== */
 
 *{
     box-sizing:border-box;
@@ -52,499 +19,135 @@
     padding:0;
 }
 
-
-html{
-    scroll-behavior:smooth;
-}
-
-
 body{
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background:var(--bg);
-
-    color:var(--text);
-
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f6f8;
+    color:#171717;
     min-height:100vh;
-
 }
 
 
-/* =========================================================
+/* =====================================================
    HEADER
-========================================================= */
+===================================================== */
 
 .header{
+    height:78px;
 
-    height:74px;
+    background:#c8102e;
 
-    background:#fff;
-
-    border-bottom:
-        1px solid var(--border);
+    color:white;
 
     display:flex;
-
+    align-items:center;
     justify-content:space-between;
 
-    align-items:center;
+    padding:0 35px;
 
-    padding:0 30px;
+    box-shadow:
+        0 4px 18px rgba(0,0,0,.15);
 
     position:sticky;
-
     top:0;
-
-    z-index:1000;
-
-    box-shadow:
-        0 2px 12px rgba(0,0,0,.04);
-
+    z-index:100;
 }
-
 
 .header-left{
-
     display:flex;
-
     align-items:center;
-
-    gap:13px;
-
+    gap:15px;
 }
 
+.header-icon{
+    width:48px;
+    height:48px;
 
-.logo{
+    border-radius:14px;
 
-    width:44px;
+    background:white;
 
-    height:44px;
-
-    border-radius:11px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--red),
-            var(--red-dark)
-        );
-
-    color:#fff;
+    color:#c8102e;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
-    font-weight:900;
-
-    font-size:16px;
+    font-size:25px;
 
     box-shadow:
-        0 5px 15px
-        rgba(200,16,46,.2);
-
+        0 4px 12px rgba(0,0,0,.12);
 }
-
 
 .header-title{
-
-    font-size:18px;
-
-    font-weight:900;
-
+    font-size:22px;
+    font-weight:800;
 }
-
 
 .header-subtitle{
-
-    font-size:10px;
-
-    color:#999;
-
+    font-size:12px;
+    opacity:.85;
     margin-top:3px;
-
 }
 
+.back-button{
+    border:1px solid rgba(255,255,255,.5);
 
-.header-right{
+    background:rgba(255,255,255,.12);
 
-    display:flex;
+    color:white;
 
-    align-items:center;
+    padding:11px 18px;
 
-    gap:10px;
-
-}
-
-
-.system-status{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    background:#f1fbf7;
-
-    border:
-        1px solid #d8eee5;
-
-    color:#159366;
-
-    padding:8px 12px;
-
-    border-radius:20px;
-
-    font-size:9px;
-
-    font-weight:900;
-
-}
-
-
-.system-dot{
-
-    width:7px;
-
-    height:7px;
-
-    background:#1bb77b;
-
-    border-radius:50%;
-
-}
-
-
-.header-button{
-
-    height:38px;
-
-    padding:0 14px;
-
-    border-radius:8px;
-
-    border:1px solid var(--border);
-
-    background:#fff;
-
-    color:#555;
-
-    font-size:10px;
-
-    font-weight:900;
+    border-radius:25px;
 
     cursor:pointer;
 
+    font-size:14px;
+    font-weight:700;
+
+    transition:.25s;
+}
+
+.back-button:hover{
+    background:white;
+    color:#c8102e;
 }
 
 
-.header-button:hover{
+/* =====================================================
+   GLAVNI KONTEJNER
+===================================================== */
 
-    border-color:var(--red);
-
-    color:var(--red);
-
-}
-
-
-/* =========================================================
-   PAGE
-========================================================= */
-
-.page{
-
-    max-width:1550px;
+.container{
+    width:100%;
+    max-width:1450px;
 
     margin:auto;
 
-    padding:28px;
-
+    padding:35px;
 }
 
-
-/* =========================================================
-   TOP
-========================================================= */
-
-.page-top{
-
-    display:flex;
-
-    align-items:flex-end;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-    margin-bottom:25px;
-
-}
-
-
-.page-title h1{
-
-    font-size:30px;
-
-    font-weight:950;
+.page-title{
+    font-size:32px;
+    font-weight:900;
 
     margin-bottom:7px;
+}
 
+.page-description{
+    color:#777;
+
+    font-size:15px;
+
+    margin-bottom:30px;
 }
 
 
-.page-title p{
-
-    font-size:12px;
-
-    color:var(--muted);
-
-}
-
-
-.top-actions{
-
-    display:flex;
-
-    gap:8px;
-
-}
-
-
-.btn{
-
-    border:none;
-
-    height:40px;
-
-    padding:0 15px;
-
-    border-radius:9px;
-
-    font-size:10px;
-
-    font-weight:900;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-
-.btn-red{
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--red),
-            var(--red-dark)
-        );
-
-    color:#fff;
-
-    box-shadow:
-        0 5px 15px
-        rgba(200,16,46,.18);
-
-}
-
-
-.btn-red:hover{
-
-    transform:translateY(-1px);
-
-}
-
-
-.btn-light{
-
-    background:#fff;
-
-    border:1px solid var(--border);
-
-    color:#555;
-
-}
-
-
-.btn-light:hover{
-
-    color:var(--red);
-
-    border-color:var(--red);
-
-}
-
-
-/* =========================================================
-   OVERVIEW
-========================================================= */
-
-.overview{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:14px;
-
-    margin-bottom:28px;
-
-}
-
-
-.overview-card{
-
-    background:#fff;
-
-    border:1px solid var(--border);
-
-    border-radius:14px;
-
-    padding:17px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:13px;
-
-    box-shadow:var(--shadow);
-
-}
-
-
-.overview-icon{
-
-    width:43px;
-
-    height:43px;
-
-    border-radius:11px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:18px;
-
-}
-
-
-.overview-icon.red{
-    background:#fff0f2;
-}
-
-
-.overview-icon.viber{
-    background:var(--viber-light);
-}
-
-
-.overview-icon.green{
-    background:#edf9f4;
-}
-
-
-.overview-icon.orange{
-    background:#fff6e9;
-}
-
-
-.overview-label{
-
-    color:#8a8d93;
-
-    font-size:9px;
-
-    font-weight:700;
-
-    margin-bottom:5px;
-
-}
-
-
-.overview-number{
-
-    font-size:22px;
-
-    font-weight:950;
-
-}
-
-
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
-.section-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:14px;
-
-}
-
-
-.section-title{
-
-    font-size:18px;
-
-    font-weight:950;
-
-}
-
-
-.section-description{
-
-    font-size:10px;
-
-    color:#999;
-
-    margin-top:4px;
-
-}
-
-
-.section-badge{
-
-    padding:7px 11px;
-
-    border-radius:20px;
-
-    background:#fff;
-
-    border:1px solid var(--border);
-
-    color:#888;
-
-    font-size:9px;
-
-    font-weight:900;
-
-}
-
-
-/* =========================================================
-   GROUP CARDS
-========================================================= */
-
-.groups{
-
+/* =====================================================
+   STATISTIKA
+===================================================== */
+
+.stats{
     display:grid;
 
     grid-template-columns:
@@ -552,1624 +155,632 @@ body{
 
     gap:20px;
 
+    margin-bottom:30px;
 }
 
-
-.group-card{
-
-    background:#fff;
-
-    border:
-        1px solid var(--border);
+.stat-card{
+    background:white;
 
     border-radius:18px;
 
-    overflow:hidden;
-
-    box-shadow:var(--shadow);
-
-    transition:
-        transform .25s,
-        box-shadow .25s;
-
-    cursor:pointer;
-
-}
-
-
-.group-card:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:var(--shadow-hover);
-
-}
-
-
-/* =========================================================
-   GROUP CARD HEADER
-========================================================= */
-
-.group-header{
-
-    height:125px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    padding:19px;
-
-    color:#fff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #c8102e,
-            #a70d25
-        );
-
-}
-
-
-.group-header::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:230px;
-
-    height:230px;
-
-    border-radius:50%;
-
-    right:-100px;
-
-    top:-150px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.18);
-
-}
-
-
-.group-header::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:100px;
-
-    height:100px;
-
-    border-radius:50%;
-
-    right:-25px;
-
-    bottom:-65px;
-
-    background:
-        rgba(255,255,255,.08);
-
-}
-
-
-.group-header-row{
+    padding:22px;
 
     display:flex;
-
-    align-items:flex-start;
-
-    justify-content:space-between;
-
-    position:relative;
-
-    z-index:2;
-
-}
-
-
-.group-icon{
-
-    width:48px;
-
-    height:48px;
-
-    border-radius:12px;
-
-    background:
-        rgba(255,255,255,.16);
-
-    border:
-        1px solid
-        rgba(255,255,255,.25);
-
-    display:flex;
-
     align-items:center;
 
-    justify-content:center;
+    gap:17px;
 
-    font-size:23px;
+    box-shadow:
+        0 7px 25px rgba(0,0,0,.07);
 
+    border:1px solid #eeeeee;
+
+    transition:.25s;
 }
 
+.stat-card:hover{
+    transform:translateY(-3px);
 
-.group-status{
-
-    background:
-        rgba(255,255,255,.13);
-
-    border:
-        1px solid
-        rgba(255,255,255,.22);
-
-    border-radius:20px;
-
-    padding:7px 9px;
-
-    font-size:7px;
-
-    font-weight:900;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:5px;
-
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.10);
 }
-
-
-.group-status-dot{
-
-    width:6px;
-
-    height:6px;
-
-    border-radius:50%;
-
-    background:#68e4b0;
-
-}
-
-
-.group-title{
-
-    position:absolute;
-
-    left:19px;
-
-    bottom:18px;
-
-    z-index:2;
-
-}
-
-
-.group-title-small{
-
-    font-size:8px;
-
-    opacity:.7;
-
-    letter-spacing:1px;
-
-    margin-bottom:4px;
-
-}
-
-
-.group-title h2{
-
-    font-size:18px;
-
-    font-weight:950;
-
-}
-
-
-/* =========================================================
-   GROUP BODY
-========================================================= */
-
-.group-body{
-
-    padding:19px;
-
-}
-
-
-.primary-stat{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin-bottom:18px;
-
-}
-
-
-.primary-number{
-
-    font-size:37px;
-
-    font-weight:950;
-
-    line-height:1;
-
-}
-
-
-.primary-label{
-
-    font-size:9px;
-
-    font-weight:900;
-
-    color:#555;
-
-}
-
-
-.primary-description{
-
-    font-size:8px;
-
-    color:#999;
-
-    margin-top:4px;
-
-}
-
-
-/* =========================================================
-   SMALL STATS
-========================================================= */
-
-.stats{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:7px;
-
-}
-
-
-.stat{
-
-    border:
-        1px solid #ececef;
-
-    background:#fafafa;
-
-    border-radius:10px;
-
-    padding:11px 8px;
-
-}
-
-
-.stat-top{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    margin-bottom:5px;
-
-}
-
 
 .stat-icon{
+    width:55px;
+    height:55px;
 
-    font-size:12px;
+    border-radius:15px;
 
+    background:#c8102e;
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
 }
-
 
 .stat-value{
-
-    font-size:14px;
-
-    font-weight:950;
-
-}
-
-
-.stat-label{
-
-    color:#999;
-
-    font-size:7px;
-
-    font-weight:800;
-
-}
-
-
-.stat.viber .stat-value{
-
-    color:var(--viber);
-
-}
-
-
-.stat.debt .stat-value{
-
-    color:var(--red);
-
-}
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress{
-
-    margin-top:18px;
-
-}
-
-
-.progress-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    font-size:8px;
-
-    color:#888;
-
-    font-weight:800;
-
-    margin-bottom:6px;
-
-}
-
-
-.progress-top strong{
-
-    color:var(--viber);
-
-}
-
-
-.progress-track{
-
-    height:6px;
-
-    background:#ededf0;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-}
-
-
-.progress-bar{
-
-    height:100%;
-
-    width:0%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #665cac,
-            #8379ce
-        );
-
-    border-radius:20px;
-
-    transition:
-        width .5s;
-
-}
-
-
-/* =========================================================
-   VIBER PREVIEW
-========================================================= */
-
-.viber-preview{
-
-    margin-top:18px;
-
-    background:#f6f5fb;
-
-    border:
-        1px solid #e8e6f3;
-
-    border-radius:11px;
-
-    padding:10px;
-
-}
-
-
-.preview-top{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    margin-bottom:8px;
-
-}
-
-
-.preview-avatar{
-
-    width:27px;
-
-    height:27px;
-
-    background:var(--viber);
-
-    color:#fff;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:11px;
-
-}
-
-
-.preview-name{
-
-    font-size:8px;
-
+    font-size:23px;
     font-weight:900;
 
+    display:block;
+}
+
+.stat-label{
+    color:#777;
+
+    font-size:13px;
+
+    margin-top:4px;
 }
 
 
-.preview-time{
+/* =====================================================
+   PRETRAGA
+===================================================== */
 
-    margin-left:auto;
+.search-wrapper{
+    margin-bottom:25px;
 
-    font-size:7px;
-
-    color:#999;
-
+    position:relative;
 }
 
-
-.preview-message{
-
-    background:#fff;
-
-    border-radius:8px 8px 8px 2px;
-
-    padding:8px;
-
-    color:#666;
-
-    font-size:8px;
-
-    line-height:1.4;
-
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.card-actions{
-
-    margin-top:15px;
-
-}
-
-
-.open-viber{
-
+.search-wrapper input{
     width:100%;
 
-    height:42px;
+    height:55px;
 
-    border:none;
+    border:1px solid #ddd;
 
-    border-radius:9px;
+    border-radius:15px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #665cac,
-            #554b9c
-        );
+    background:white;
 
-    color:#fff;
+    padding:
+        0 20px;
 
-    font-size:9px;
+    font-size:15px;
 
-    font-weight:950;
+    outline:none;
 
-    cursor:pointer;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:7px;
+    transition:.2s;
 
     box-shadow:
-        0 5px 14px
-        rgba(102,92,172,.2);
+        0 5px 18px rgba(0,0,0,.04);
+}
 
+.search-wrapper input:focus{
+    border-color:#c8102e;
+
+    box-shadow:
+        0 0 0 3px rgba(200,16,46,.10);
 }
 
 
-.open-viber:hover{
+/* =====================================================
+   GRUPE
+===================================================== */
 
-    background:
-        linear-gradient(
-            135deg,
-            #7167bc,
-            #514799
-        );
-
-}
-
-
-.card-buttons{
-
+.groups{
     display:grid;
 
     grid-template-columns:
         repeat(3,1fr);
 
-    gap:6px;
+    gap:25px;
 
-    margin-top:7px;
-
+    margin-bottom:30px;
 }
 
+.group-card{
+    background:white;
 
-.card-buttons button{
+    border-radius:22px;
 
-    height:33px;
+    overflow:hidden;
 
     border:
-        1px solid #e5e6e9;
+        1px solid #e5e5e5;
 
-    background:#fff;
+    box-shadow:
+        0 8px 28px rgba(0,0,0,.07);
 
-    border-radius:8px;
+    transition:.3s;
+}
 
-    color:#555;
+.group-card:hover{
+    transform:translateY(-5px);
 
-    font-size:7px;
+    border-color:#c8102e;
 
-    font-weight:900;
-
-    cursor:pointer;
-
+    box-shadow:
+        0 14px 35px rgba(0,0,0,.12);
 }
 
 
-.card-buttons button:hover{
+/* crveni vrh svake kartice */
 
-    color:var(--red);
+.group-top{
+    background:#c8102e;
 
-    border-color:
-        rgba(200,16,46,.35);
+    color:white;
 
-    background:#fff8f9;
-
+    padding:25px;
 }
 
-
-/* =========================================================
-   CARD FOOTER
-========================================================= */
-
-.group-footer{
-
-    height:33px;
-
-    padding:0 18px;
-
-    border-top:
-        1px solid #f0f0f2;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    color:#aaa;
-
-    font-size:7px;
-
-    font-weight:900;
-
-    letter-spacing:.7px;
-
-}
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-.tools{
-
-    margin-top:25px;
-
-    display:grid;
-
-    grid-template-columns:
-        1.5fr 1fr;
-
-    gap:16px;
-
-}
-
-
-.tool-card{
-
-    background:#fff;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:14px;
-
-    padding:18px;
-
-    box-shadow:var(--shadow);
-
-}
-
-
-.tool-title{
-
-    font-size:14px;
-
-    font-weight:950;
-
-    margin-bottom:5px;
-
-}
-
-
-.tool-description{
-
-    font-size:9px;
-
-    color:#999;
-
-    margin-bottom:12px;
-
-}
-
-
-.search{
-
-    position:relative;
-
-}
-
-
-.search-icon{
-
-    position:absolute;
-
-    left:14px;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    color:#999;
-
-}
-
-
-.search input{
-
-    width:100%;
-
-    height:43px;
-
-    border:
-        1px solid var(--border);
-
-    background:#fafafa;
-
-    border-radius:9px;
-
-    padding:
-        0 14px 0 40px;
-
-    outline:none;
-
+.group-label{
     font-size:11px;
 
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    opacity:.85;
 }
 
-
-.search input:focus{
-
-    border-color:
-        rgba(200,16,46,.4);
-
-    background:#fff;
-
-}
-
-
-/* =========================================================
-   DETAIL VIEW
-========================================================= */
-
-.detail-view{
-
-    display:none;
-
-    margin-top:25px;
-
-}
-
-
-.detail-view.active{
-
-    display:block;
-
-}
-
-
-.detail-layout{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 340px;
-
-    gap:18px;
-
-}
-
-
-.detail-main{
-
-    background:#fff;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:15px;
-
-    overflow:hidden;
-
-    box-shadow:var(--shadow);
-
-}
-
-
-.detail-header{
-
-    height:95px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--red),
-            var(--red-dark)
-        );
-
-    color:#fff;
-
-    padding:18px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-
-.detail-header-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-}
-
-
-.detail-header-icon{
-
-    width:48px;
-
-    height:48px;
-
-    border-radius:12px;
-
-    background:
-        rgba(255,255,255,.15);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:22px;
-
-}
-
-
-.detail-header h2{
-
-    font-size:19px;
-
-}
-
-
-.detail-header p{
-
-    font-size:9px;
-
-    opacity:.7;
-
-    margin-top:4px;
-
-}
-
-
-.close-detail{
-
-    border:
-        1px solid
-        rgba(255,255,255,.25);
-
-    background:
-        rgba(255,255,255,.1);
-
-    color:#fff;
-
-    width:35px;
-
-    height:35px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-}
-
-
-/* =========================================================
-   DETAIL TABS
-========================================================= */
-
-.tabs{
-
-    display:flex;
-
-    border-bottom:
-        1px solid var(--border);
-
-    padding:0 15px;
-
-}
-
-
-.tab{
-
-    border:none;
-
-    background:none;
-
-    height:45px;
-
-    padding:0 12px;
-
-    font-size:9px;
+.group-title{
+    font-size:23px;
 
     font-weight:900;
 
-    color:#999;
-
-    cursor:pointer;
-
-    position:relative;
-
+    margin-top:8px;
 }
 
-
-.tab.active{
-
-    color:var(--red);
-
+.group-body{
+    padding:25px;
 }
 
-
-.tab.active::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:12px;
-
-    right:12px;
-
-    bottom:-1px;
-
-    height:2px;
-
-    background:var(--red);
-
-}
-
-
-/* =========================================================
-   MEMBER LIST
-========================================================= */
-
-.detail-content{
-
-    padding:17px;
-
-}
-
-
-.member-row{
-
+.group-status{
     display:flex;
 
     align-items:center;
 
-    gap:10px;
-
-    padding:10px;
-
-    border-bottom:
-        1px solid #f0f0f2;
-
-}
-
-
-.member-row:last-child{
-
-    border-bottom:none;
-
-}
-
-
-.member-avatar{
-
-    width:34px;
-
-    height:34px;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #665cac,
-            #8379ce
-        );
-
-    color:#fff;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:10px;
-
-    font-weight:900;
-
-}
-
-
-.member-info{
-
-    flex:1;
-
-}
-
-
-.member-name{
-
-    font-size:10px;
-
-    font-weight:900;
-
-}
-
-
-.member-meta{
-
-    font-size:8px;
-
-    color:#999;
-
-    margin-top:3px;
-
-}
-
-
-.member-debt{
-
-    color:var(--red);
-
-    font-size:9px;
-
-    font-weight:950;
-
-}
-
-
-.member-ok{
-
-    color:var(--green);
-
-    font-size:9px;
-
-    font-weight:900;
-
-}
-
-
-/* =========================================================
-   CHAT
-========================================================= */
-
-.chat-card{
-
-    background:#fff;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:15px;
-
-    overflow:hidden;
-
-    box-shadow:var(--shadow);
-
-}
-
-
-.chat-header{
-
-    height:65px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #665cac,
-            #564c9e
-        );
-
-    color:#fff;
-
-    padding:13px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-}
-
-
-.chat-avatar{
-
-    width:37px;
-
-    height:37px;
-
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.17);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:16px;
-
-}
-
-
-.chat-name{
-
-    font-size:10px;
-
-    font-weight:950;
-
-}
-
-
-.chat-online{
-
-    font-size:7px;
-
-    opacity:.7;
-
-    margin-top:3px;
-
-}
-
-
-.chat-body{
-
-    min-height:250px;
-
-    padding:13px;
-
-    background:
-        #f7f6fb;
-
-}
-
-
-.chat-date{
-
-    text-align:center;
-
-    font-size:7px;
-
-    color:#aaa;
-
-    margin-bottom:10px;
-
-}
-
-
-.chat-message{
-
-    background:#fff;
-
-    border-radius:
-        9px 9px 9px 2px;
-
-    padding:9px;
-
-    margin-bottom:7px;
-
-    font-size:8px;
+    gap:9px;
 
     color:#666;
 
-    box-shadow:
-        0 2px 5px
-        rgba(0,0,0,.04);
+    font-size:14px;
 
+    margin-bottom:20px;
 }
 
+.status-dot{
+    width:10px;
+    height:10px;
 
-.chat-message.mine{
+    border-radius:50%;
 
-    background:#e9e5ff;
-
-    border-radius:
-        9px 9px 2px 9px;
-
-    margin-left:30px;
-
+    background:#27b84b;
 }
 
-
-.chat-time{
-
-    font-size:6px;
-
-    color:#aaa;
-
-    margin-top:4px;
-
-    text-align:right;
-
-}
-
-
-/* =========================================================
-   COMPOSER
-========================================================= */
-
-.composer{
-
-    border-top:
-        1px solid var(--border);
-
-    padding:10px;
-
-}
-
-
-.composer textarea{
-
+.group-button{
     width:100%;
 
-    min-height:70px;
-
-    resize:none;
-
-    border:
-        1px solid var(--border);
-
-    background:#fafafa;
-
-    border-radius:9px;
-
-    padding:9px;
-
-    font-family:Arial;
-
-    font-size:9px;
-
-    outline:none;
-
-}
-
-
-.composer-actions{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:7px;
-
-}
-
-
-.viber-send{
+    height:52px;
 
     border:none;
 
-    background:var(--viber);
+    border-radius:13px;
 
-    color:#fff;
+    background:#c8102e;
 
-    padding:8px 12px;
+    color:white;
 
-    border-radius:7px;
-
-    font-size:8px;
-
-    font-weight:900;
-
-    cursor:pointer;
-
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:5000;
-
-    background:
-        rgba(0,0,0,.45);
-
-    backdrop-filter:blur(4px);
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-}
-
-
-.modal.active{
-
-    display:flex;
-
-}
-
-
-.modal-box{
-
-    background:#fff;
-
-    width:min(550px,100%);
-
-    border-radius:15px;
-
-    overflow:hidden;
-
-    box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.25);
-
-}
-
-
-.modal-top{
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--red),
-            var(--red-dark)
-        );
-
-    color:#fff;
-
-    padding:18px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-
-.modal-top h2{
-
-    font-size:17px;
-
-}
-
-
-.modal-close{
-
-    width:32px;
-
-    height:32px;
-
-    border:none;
-
-    border-radius:7px;
-
-    background:
-        rgba(255,255,255,.13);
-
-    color:#fff;
-
-    font-size:20px;
-
-    cursor:pointer;
-
-}
-
-
-.modal-body{
-
-    padding:18px;
-
-}
-
-
-.modal-body textarea{
-
-    width:100%;
-
-    min-height:150px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:10px;
-
-    padding:12px;
-
-    resize:vertical;
-
-    outline:none;
-
-    font-family:Arial;
-
-    font-size:11px;
-
-}
-
-
-.modal-footer{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:8px;
-
-    margin-top:10px;
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-
-    position:fixed;
-
-    right:22px;
-
-    bottom:22px;
-
-    z-index:8000;
-
-    background:#202124;
-
-    color:#fff;
-
-    padding:12px 16px;
-
-    border-radius:9px;
-
-    font-size:10px;
+    font-size:15px;
 
     font-weight:800;
 
-    opacity:0;
-
-    transform:translateY(15px);
-
-    pointer-events:none;
+    cursor:pointer;
 
     transition:.25s;
 
+    box-shadow:
+        0 5px 15px rgba(200,16,46,.20);
 }
 
+.group-button:hover{
+    background:#a80d26;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(200,16,46,.30);
+}
+
+
+/* =====================================================
+   MESSAGE CENTAR
+===================================================== */
+
+.message-center{
+    background:white;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    border:
+        1px solid #e5e5e5;
+
+    box-shadow:
+        0 8px 28px rgba(0,0,0,.07);
+}
+
+.message-header{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    margin-bottom:20px;
+}
+
+.message-title{
+    font-size:23px;
+
+    font-weight:900;
+}
+
+.selected-group{
+    padding:
+        9px 15px;
+
+    border-radius:20px;
+
+    background:#fff0f2;
+
+    color:#c8102e;
+
+    border:
+        1px solid #ffd1d8;
+
+    font-size:13px;
+
+    font-weight:800;
+}
+
+
+/* =====================================================
+   TEXTAREA
+===================================================== */
+
+textarea{
+    width:100%;
+
+    min-height:180px;
+
+    resize:vertical;
+
+    border:
+        2px solid #e5e5e5;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    font-size:16px;
+
+    line-height:1.5;
+
+    outline:none;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    transition:.2s;
+}
+
+textarea:focus{
+    border-color:#c8102e;
+
+    box-shadow:
+        0 0 0 3px rgba(200,16,46,.08);
+}
+
+
+/* =====================================================
+   BRZE PORUKE
+===================================================== */
+
+.quick-title{
+    font-size:15px;
+
+    font-weight:800;
+
+    margin:
+        24px 0 12px;
+}
+
+.quick-buttons{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+}
+
+.quick-button{
+    border:
+        1px solid #ddd;
+
+    background:#fafafa;
+
+    color:#444;
+
+    padding:
+        10px 15px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    transition:.2s;
+}
+
+.quick-button:hover{
+    background:#c8102e;
+
+    color:white;
+
+    border-color:#c8102e;
+}
+
+
+/* =====================================================
+   AKCIJE
+===================================================== */
+
+.actions{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:15px;
+
+    margin-top:25px;
+}
+
+.action-button{
+    height:55px;
+
+    border:none;
+
+    border-radius:13px;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.action-primary{
+    background:#c8102e;
+
+    color:white;
+
+    box-shadow:
+        0 5px 15px rgba(200,16,46,.20);
+}
+
+.action-primary:hover{
+    background:#a80d26;
+
+    transform:translateY(-2px);
+}
+
+.action-secondary{
+    background:#fff0f2;
+
+    color:#c8102e;
+
+    border:
+        1px solid #ffd0d6;
+}
+
+.action-secondary:hover{
+    background:#c8102e;
+
+    color:white;
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+.info-box{
+    margin-top:25px;
+
+    padding:18px;
+
+    background:#fff5f6;
+
+    border-left:
+        5px solid #c8102e;
+
+    border-radius:12px;
+
+    color:#555;
+
+    font-size:14px;
+
+    line-height:1.6;
+}
+
+.info-box strong{
+    color:#c8102e;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.no-results{
+    display:none;
+
+    background:white;
+
+    padding:30px;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    color:#777;
+
+    margin-bottom:25px;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    background:#222;
+
+    color:white;
+
+    padding:
+        14px 20px;
+
+    border-radius:12px;
+
+    font-size:14px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
+
+    opacity:0;
+
+    transform:
+        translateY(20px);
+
+    pointer-events:none;
+
+    transition:.3s;
+
+    z-index:999;
+}
 
 .toast.show{
-
     opacity:1;
 
-    transform:translateY(0);
-
+    transform:
+        translateY(0);
 }
 
 
-/* =========================================================
+/* =====================================================
    RESPONSIVE
-========================================================= */
+===================================================== */
 
-@media(max-width:1150px){
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
 
     .groups{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
-    }
-
-    .overview{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
-    }
-
-    .detail-layout{
-
         grid-template-columns:1fr;
-
     }
 
 }
 
-
-@media(max-width:750px){
+@media(max-width:700px){
 
     .header{
+        padding:
+            0 15px;
 
-        padding:0 14px;
-
+        height:70px;
     }
 
-    .system-status{
-
-        display:none;
-
+    .header-icon{
+        width:42px;
+        height:42px;
     }
 
-    .header-button{
-
-        display:none;
-
+    .header-title{
+        font-size:18px;
     }
 
-    .page{
-
-        padding:18px 12px;
-
+    .header-subtitle{
+        font-size:10px;
     }
 
-    .page-top{
+    .back-button{
+        padding:
+            9px 12px;
 
-        flex-direction:column;
+        font-size:12px;
+    }
 
+    .container{
+        padding:20px 15px;
+    }
+
+    .page-title{
+        font-size:27px;
+    }
+
+    .message-header{
         align-items:flex-start;
 
+        flex-direction:column;
     }
 
-    .groups{
-
+    .actions{
         grid-template-columns:1fr;
-
-    }
-
-    .overview{
-
-        grid-template-columns:
-            1fr 1fr;
-
-    }
-
-    .tools{
-
-        grid-template-columns:1fr;
-
     }
 
 }
 
 
-@media(max-width:450px){
+/* =====================================================
+   VERY SMALL SCREEN
+===================================================== */
 
-    .overview{
+@media(max-width:430px){
 
-        grid-template-columns:1fr;
-
+    .header-title{
+        font-size:16px;
     }
 
-    .group-card{
+    .header-subtitle{
+        display:none;
+    }
 
-        border-radius:14px;
+    .back-button{
+        font-size:11px;
 
+        padding:
+            8px 10px;
+    }
+
+    .group-title{
+        font-size:21px;
+    }
+
+    .message-title{
+        font-size:20px;
     }
 
 }
@@ -2182,24 +793,26 @@ body{
 <body>
 
 
-<!-- =========================================================
+<!-- =====================================================
      HEADER
-========================================================= -->
+===================================================== -->
 
 <header class="header">
 
     <div class="header-left">
 
- 
+        <div class="header-icon">
+            
+        </div>
 
         <div>
 
             <div class="header-title">
-                KK TEMPO | VIBER CENTAR
+                VIBER SISTEM
             </div>
 
             <div class="header-subtitle">
-                Komunikacija • Roditelji • Trening grupe
+                KK TEMPO BRATUNAC
             </div>
 
         </div>
@@ -2207,2595 +820,933 @@ body{
     </div>
 
 
-    <div class="header-right">
-
-        <div class="system-status">
-
-            <span class="system-dot"></span>
-
-            SISTEM AKTIVAN
-
-        </div>
-
-        <button
-            class="header-button"
-            onclick="baza.html"
-        >
-            ← NAZAD
-        </button>
-
-    </div>
+    <button
+        class="back-button"
+        onclick="baza.html"
+    >
+        ← NAZAD
+    </button>
 
 </header>
 
 
 
-<!-- =========================================================
-     PAGE
-========================================================= -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
-<main class="page">
-
-
-<!-- PAGE TITLE -->
-
-<section class="page-top">
-
-    <div class="page-title">
-
-        <h1>
-            Viber centar
-        </h1>
-
-        <p>
-            Centralno mjesto za komunikaciju KK TEMPO sa roditeljima.
-        </p>
-
-    </div>
+<main class="container">
 
 
-    <div class="top-actions">
+    <h1 class="page-title">
+        VIBER KOMUNIKACIJA
+    </h1>
 
-        <button
-            class="btn btn-light"
-            onclick="ucitajPodatke()"
-        >
-            ↻ OSVEŽI
-        </button>
-
-        <button
-            class="btn btn-red"
-            onclick="novaPoruka()"
-        >
-            + NOVA PORUKA
-        </button>
-
-    </div>
-
-</section>
+    <p class="page-description">
+        Upravljanje Viber grupama i priprema poruka za roditelje
+    </p>
 
 
 
-<!-- =========================================================
-     OVERVIEW
-========================================================= -->
+    <!-- =================================================
+         STATISTIKA
+    ================================================= -->
 
-<section class="overview">
+    <section class="stats">
 
 
-    <div class="overview-card">
+        <div class="stat-card">
 
-        <div class="overview-icon red">
-           
-        </div>
-
-        <div>
-
-            <div class="overview-label">
-                UKUPNO ČLANOVA
+            <div class="stat-icon">
+                
             </div>
 
-            <div
-                class="overview-number"
-                id="totalMembers"
-            >
-                0
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="overview-card">
-
-        <div class="overview-icon viber">
-            
-        </div>
-
-        <div>
-
-            <div class="overview-label">
-                VIBER KONTAKTI
-            </div>
-
-            <div
-                class="overview-number"
-                id="totalViber"
-            >
-                0
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="overview-card">
-
-        <div class="overview-icon red">
-            
-        </div>
-
-        <div>
-
-            <div class="overview-label">
-                DUŽNICI
-            </div>
-
-            <div
-                class="overview-number"
-                id="totalDebtors"
-            >
-                0
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="overview-card">
-
-        <div class="overview-icon orange">
-            
-        </div>
-
-        <div>
-
-            <div class="overview-label">
-                UKUPNO DUGOVANJE
-            </div>
-
-            <div
-                class="overview-number"
-                id="totalDebt"
-            >
-                0 KM
-            </div>
-
-        </div>
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     GROUPS
-========================================================= -->
-
-<section>
-
-    <div class="section-header">
-
-        <div>
-
-            <div class="section-title">
-                VIBER GRUPE
-            </div>
-
-            <div class="section-description">
-                Izaberite trening grupu kojom želite da upravljate.
-            </div>
-
-        </div>
-
-        <div class="section-badge">
-            3 AKTIVNE GRUPE
-        </div>
-
-    </div>
-
-
-    <div class="groups">
-
-
-        <!-- =================================================
-             ŠKOLICA
-        ================================================= -->
-
-        <article
-            class="group-card"
-            onclick="otvoriDetalje('Školica košarke')"
-        >
-
-            <div class="group-header">
-
-                <div class="group-header-row">
-
-                    <div class="group-icon">
-                        
-                    </div>
-
-                    <div class="group-status">
-
-                        <span class="group-status-dot"></span>
-
-                        VIBER AKTIVAN
-
-                    </div>
-
-                </div>
-
-
-                <div class="group-title">
-
-                    <div class="group-title-small">
-                        TRENING GRUPA
-                    </div>
-
-                    <h2>
-                        GRUPA 1
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="group-body">
-
-
-                <div class="primary-stat">
-
-                    <div
-                        class="primary-number"
-                        id="schoolMembers"
-                    >
-                        0
-                    </div>
-
-                    <div>
-
-                        <div class="primary-label">
-                            ČLANOVA GRUPE
-                        </div>
-
-                        <div class="primary-description">
-                            aktivna članstva
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="stats">
-
-
-                    <div class="stat">
-
-                        <div class="stat-top">
-
-                            <span class="stat-icon">
-                                
-                            </span>
-
-                            <span
-                                class="stat-value"
-                                id="schoolMembers2"
-                            >
-                                0
-                            </span>
-
-                        </div>
-
-                        <div class="stat-label">
-                            ČLANOVI
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat viber">
-
-                        <div class="stat-top">
-
-                            <span class="stat-icon">
-                                
-                            </span>
-
-                            <span
-                                class="stat-value"
-                                id="schoolViber"
-                            >
-                                0
-                            </span>
-
-                        </div>
-
-                        <div class="stat-label">
-                            VIBER
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat debt">
-
-                        <div class="stat-top">
-
-                            <span class="stat-icon">
-                                
-                            </span>
-
-                            <span
-                                class="stat-value"
-                                id="schoolDebt"
-                            >
-                                0
-                            </span>
-
-                        </div>
-
-                        <div class="stat-label">
-                            DUŽNICI
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="progress">
-
-                    <div class="progress-top">
-
-                        <span>
-                            VIBER KONTAKTI
-                        </span>
-
-                        <strong
-                            id="schoolPercent"
-                        >
-                            0%
-                        </strong>
-
-                    </div>
-
-                    <div class="progress-track">
-
-                        <div
-                            class="progress-bar"
-                            id="schoolProgress"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="viber-preview">
-
-                    <div class="preview-top">
-
-                        <div class="preview-avatar">
-                            1
-                        </div>
-
-                        <div class="preview-name">
-                            Grupa 1
-                        </div>
-
-                        <div class="preview-time">
-                            sada
-                        </div>
-
-                    </div>
-
-                    <div class="preview-message">
-                        Dobrodošli u Viber grupu KK TEMPO. Sve važne informacije o treninzima biće objavljivane ovdje.
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="card-actions"
-                    onclick="event.stopPropagation()"
+            <div>
+
+                <span
+                    class="stat-value"
+                    id="groupCount"
                 >
-
-                    <button
-                        class="open-viber"
-                        onclick="otvoriGrupu('school')"
-                    >
-                         OTVORI VIBER GRUPU
-                        <span>→</span>
-                    </button>
-
-
-                    <div class="card-buttons">
-
-                        <button
-                            onclick="
-                            otvoriClanove(
-                                'Školica košarke'
-                            )
-                            "
-                        >
-                             ČLANOVI
-                        </button>
-
-                        <button
-                            onclick="
-                            otvoriDuznike(
-                                'Školica košarke'
-                            )
-                            "
-                        >
-                             DUŽNICI
-                        </button>
-
-                        <button
-                            onclick="
-                            posaljiGrupnuPoruku(
-                                'Školica košarke'
-                            )
-                            "
-                        >
-                             PORUKA
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="group-footer">
-
-                <span>
-                    KK TEMPO
+                    3
                 </span>
 
-                <span>
-                    GRUPA 1
+                <span class="stat-label">
+                    VIBER GRUPE
                 </span>
 
             </div>
 
-        </article>
+        </div>
 
 
 
-        <!-- =================================================
-             MINI BASKET
-        ================================================= -->
+        <div class="stat-card">
 
-        <article
-            class="group-card"
-            onclick="otvoriDetalje('Mini basket')"
-        >
-
-            <div class="group-header">
-
-                <div class="group-header-row">
-
-                    <div class="group-icon">
-                        
-                    </div>
-
-                    <div class="group-status">
-
-                        <span class="group-status-dot"></span>
-
-                        VIBER AKTIVAN
-
-                    </div>
-
-                </div>
-
-
-                <div class="group-title">
-
-                    <div class="group-title-small">
-                        TRENING GRUPA
-                    </div>
-
-                    <h2>
-                        GRUPA 2
-                    </h2>
-
-                </div>
-
+            <div class="stat-icon">
+                
             </div>
 
+            <div>
 
-            <div class="group-body">
-
-
-                <div class="primary-stat">
-
-                    <div
-                        class="primary-number"
-                        id="miniMembers"
-                    >
-                        0
-                    </div>
-
-                    <div>
-
-                        <div class="primary-label">
-                            ČLANOVA GRUPE
-                        </div>
-
-                        <div class="primary-description">
-                            aktivna članstva
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="stats">
-
-
-                    <div class="stat">
-
-                        <div class="stat-top">
-
-                            <span class="stat-icon">
-                                
-                            </span>
-
-                            <span
-                                class="stat-value"
-                                id="miniMembers2"
-                            >
-                                0
-                            </span>
-
-                        </div>
-
-                        <div class="stat-label">
-                            ČLANOVI
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat viber">
-
-                        <div class="stat-top">
-
-                            <span class="stat-icon">
-                                
-                            </span>
-
-                            <span
-                                class="stat-value"
-                                id="miniViber"
-                            >
-                                0
-                            </span>
-
-                        </div>
-
-                        <div class="stat-label">
-                            VIBER
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat debt">
-
-                        <div class="stat-top">
-
-                            <span class="stat-icon">
-                                
-                            </span>
-
-                            <span
-                                class="stat-value"
-                                id="miniDebt"
-                            >
-                                0
-                            </span>
-
-                        </div>
-
-                        <div class="stat-label">
-                            DUŽNICI
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="progress">
-
-                    <div class="progress-top">
-
-                        <span>
-                            VIBER KONTAKTI
-                        </span>
-
-                        <strong
-                            id="miniPercent"
-                        >
-                            0%
-                        </strong>
-
-                    </div>
-
-                    <div class="progress-track">
-
-                        <div
-                            class="progress-bar"
-                            id="miniProgress"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="viber-preview">
-
-                    <div class="preview-top">
-
-                        <div class="preview-avatar">
-                            2
-                        </div>
-
-                        <div class="preview-name">
-                            Grupa 2
-                        </div>
-
-                        <div class="preview-time">
-                            sada
-                        </div>
-
-                    </div>
-
-                    <div class="preview-message">
-                        Dobrodošli u Viber grupu  KK TEMPO. Sve informacije biće dostupne u ovoj grupi.
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="card-actions"
-                    onclick="event.stopPropagation()"
+                <span
+                    class="stat-value"
+                    id="messageCount"
                 >
-
-                    <button
-                        class="open-viber"
-                        onclick="otvoriGrupu('mini')"
-                    >
-                         OTVORI VIBER GRUPU
-                        <span>→</span>
-                    </button>
-
-
-                    <div class="card-buttons">
-
-                        <button
-                            onclick="
-                            otvoriClanove(
-                                'Mini basket'
-                            )
-                            "
-                        >
-                             ČLANOVI
-                        </button>
-
-                        <button
-                            onclick="
-                            otvoriDuznike(
-                                'Mini basket'
-                            )
-                            "
-                        >
-                             DUŽNICI
-                        </button>
-
-                        <button
-                            onclick="
-                            posaljiGrupnuPoruku(
-                                'Mini basket'
-                            )
-                            "
-                        >
-                             PORUKA
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="group-footer">
-
-                <span>
-                    KK TEMPO
+                    0
                 </span>
 
-                <span>
-                    GRUPA 2
+                <span class="stat-label">
+                    PRIMLJENE PORUKE
                 </span>
 
             </div>
 
-        </article>
+        </div>
 
 
 
-        <!-- =================================================
-             PIONIRI
-        ================================================= -->
+        <div class="stat-card">
 
-        <article
-            class="group-card"
-            onclick="otvoriDetalje('Mlađi pioniri')"
+            <div class="stat-icon">
+                
+            </div>
+
+            <div>
+
+                <span class="stat-value">
+                    ONLINE
+                </span>
+
+                <span class="stat-label">
+                    VIBER SISTEM
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         PRETRAGA
+    ================================================= -->
+
+    <div class="search-wrapper">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔎 Pretrazi Viber grupe..."
+            oninput="pretraziGrupe()"
         >
-
-            <div class="group-header">
-
-                <div class="group-header-row">
-
-                    <div class="group-icon">
-                        
-                    </div>
-
-                    <div class="group-status">
-
-                        <span class="group-status-dot"></span>
-
-                        VIBER AKTIVAN
-
-                    </div>
-
-                </div>
-
-
-                <div class="group-title">
-
-                    <div class="group-title-small">
-                        TRENING GRUPA
-                    </div>
-
-                    <h2>
-                        GRUPA 3
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="group-body">
-
-
-                <div class="primary-stat">
-
-                    <div
-                        class="primary-number"
-                        id="pioniriMembers"
-                    >
-                        0
-                    </div>
-
-                    <div>
-
-                        <div class="primary-label">
-                            ČLANOVA GRUPE
-                        </div>
-
-                        <div class="primary-description">
-                            aktivna članstva
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="stats">
-
-
-                    <div class="stat">
-
-                        <div class="stat-top">
-
-                            <span class="stat-icon">
-                                
-                            </span>
-
-                            <span
-                                class="stat-value"
-                                id="pioniriMembers2"
-                            >
-                                0
-                            </span>
-
-                        </div>
-
-                        <div class="stat-label">
-                            ČLANOVI
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat viber">
-
-                        <div class="stat-top">
-
-                            <span class="stat-icon">
-                                
-                            </span>
-
-                            <span
-                                class="stat-value"
-                                id="pioniriViber"
-                            >
-                                0
-                            </span>
-
-                        </div>
-
-                        <div class="stat-label">
-                            VIBER
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat debt">
-
-                        <div class="stat-top">
-
-                            <span class="stat-icon">
-                                
-                            </span>
-
-                            <span
-                                class="stat-value"
-                                id="pioniriDebt"
-                            >
-                                0
-                            </span>
-
-                        </div>
-
-                        <div class="stat-label">
-                            DUŽNICI
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="progress">
-
-                    <div class="progress-top">
-
-                        <span>
-                            VIBER KONTAKTI
-                        </span>
-
-                        <strong
-                            id="pioniriPercent"
-                        >
-                            0%
-                        </strong>
-
-                    </div>
-
-                    <div class="progress-track">
-
-                        <div
-                            class="progress-bar"
-                            id="pioniriProgress"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="viber-preview">
-
-                    <div class="preview-top">
-
-                        <div class="preview-avatar">
-                            V
-                        </div>
-
-                        <div class="preview-name">
-                            Grupa 3
-                        </div>
-
-                        <div class="preview-time">
-                            sada
-                        </div>
-
-                    </div>
-
-                    <div class="preview-message">
-                        Dobrodošli u Viber grupu KK TEMPO. Pratite obavještenja o treninzima.
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="card-actions"
-                    onclick="event.stopPropagation()"
-                >
-
-                    <button
-                        class="open-viber"
-                        onclick="otvoriGrupu('pioniri')"
-                    >
-                        OTVORI VIBER GRUPU
-                        <span>→</span>
-                    </button>
-
-
-                    <div class="card-buttons">
-
-                        <button
-                            onclick="
-                            otvoriClanove(
-                                'Mlađi pioniri'
-                            )
-                            "
-                        >
-                             ČLANOVI
-                        </button>
-
-                        <button
-                            onclick="
-                            otvoriDuznike(
-                                'Mlađi pioniri'
-                            )
-                            "
-                        >
-                             DUŽNICI
-                        </button>
-
-                        <button
-                            onclick="
-                            posaljiGrupnuPoruku(
-                                'Mlađi pioniri'
-                            )
-                            "
-                        >
-                             PORUKA
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="group-footer">
-
-                <span>
-                    KK TEMPO
-                </span>
-
-                <span>
-                    GRUPA 3
-                </span>
-
-            </div>
-
-        </article>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     TOOLS
-========================================================= -->
-
-<section class="tools">
-
-
-    <div class="tool-card">
-
-        <div class="tool-title">
-            🔎 Pretraga članova
-        </div>
-
-        <div class="tool-description">
-            Pretražite članove po imenu, šifri, telefonu ili grupi.
-        </div>
-
-        <div class="search">
-
-            <span class="search-icon">
-                🔎
-            </span>
-
-            <input
-                id="search"
-                type="text"
-                placeholder="Pretraži člana..."
-                oninput="pretraga()"
-            >
-
-        </div>
 
     </div>
 
 
-    <div class="tool-card">
 
-        <div class="tool-title">
-            📢 Brze akcije
-        </div>
+    <!-- =================================================
+         GRUPE
+    ================================================= -->
 
-        <div class="tool-description">
-            Najčešće funkcije Viber centra.
-        </div>
+    <section
+        class="groups"
+        id="groupsContainer"
+    >
+
+
+        <!-- GRUPA 1 -->
 
         <div
-            style="
-            display:flex;
-            gap:7px;
-            flex-wrap:wrap;
-            "
+            class="group-card"
+            data-group="1"
+            data-name="kk tempo grupa 1"
         >
 
-            <button
-                class="btn btn-red"
-                onclick="prikaziSveDuznike()"
-            >
-                ⚠ SVI DUŽNICI
-            </button>
+            <div class="group-top">
 
-            <button
-                class="btn btn-light"
-                onclick="novaPoruka()"
-            >
-                💬 NOVA PORUKA
-            </button>
+                <div class="group-label">
+                    Viber grupa
+                </div>
 
-        </div>
+                <div class="group-title">
+                    KK TEMPO - GRUPA 1
+                </div>
 
-    </div>
+            </div>
 
 
-</section>
+            <div class="group-body">
 
+                <div class="group-status">
 
+                    <span class="status-dot"></span>
 
-<!-- =========================================================
-     DETAIL VIEW
-========================================================= -->
-
-<section
-    class="detail-view"
-    id="detailView"
->
-
-
-    <div class="detail-layout">
-
-
-        <!-- MAIN -->
-
-        <div class="detail-main">
-
-
-            <div class="detail-header">
-
-                <div class="detail-header-left">
-
-                    <div class="detail-header-icon">
-                        🏀
-                    </div>
-
-                    <div>
-
-                        <h2 id="detailTitle">
-                            Grupa
-                        </h2>
-
-                        <p id="detailSubtitle">
-                            KK TEMPO Viber grupa
-                        </p>
-
-                    </div>
+                    Grupa je dostupna
 
                 </div>
 
 
                 <button
-                    class="close-detail"
-                    onclick="zatvoriDetalje()"
+                    class="group-button"
+                    onclick="izaberiGrupu(1)"
                 >
-                    ×
+                    UDJI U GRUPU 1 →
                 </button>
 
             </div>
 
+        </div>
 
-            <div class="tabs">
+
+
+        <!-- GRUPA 2 -->
+
+        <div
+            class="group-card"
+            data-group="2"
+            data-name="kk tempo grupa 2"
+        >
+
+            <div class="group-top">
+
+                <div class="group-label">
+                    Viber grupa
+                </div>
+
+                <div class="group-title">
+                    KK TEMPO - GRUPA 2
+                </div>
+
+            </div>
+
+
+            <div class="group-body">
+
+                <div class="group-status">
+
+                    <span class="status-dot"></span>
+
+                    Grupa je dostupna
+
+                </div>
+
 
                 <button
-                    class="tab active"
-                    onclick="promeniTab('members',this)"
+                    class="group-button"
+                    onclick="izaberiGrupu(2)"
                 >
-                    ČLANOVI
+                    UDJI U GRUPU 2 →
                 </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GRUPA 3 -->
+
+        <div
+            class="group-card"
+            data-group="3"
+            data-name="kk tempo grupa 3"
+        >
+
+            <div class="group-top">
+
+                <div class="group-label">
+                    Viber grupa
+                </div>
+
+                <div class="group-title">
+                    KK TEMPO - GRUPA 3
+                </div>
+
+            </div>
+
+
+            <div class="group-body">
+
+                <div class="group-status">
+
+                    <span class="status-dot"></span>
+
+                    30 ucesnika
+
+                </div>
+
 
                 <button
-                    class="tab"
-                    onclick="promeniTab('debt',this)"
+                    class="group-button"
+                    onclick="izaberiGrupu(3)"
                 >
-                    DUŽNICI
+                    UDJI U GRUPU 3 →
                 </button>
 
-                <button
-                    class="tab"
-                    onclick="promeniTab('viber',this)"
-                >
-                    VIBER KONTAKTI
-                </button>
+            </div>
 
+        </div>
+
+
+    </section>
+
+
+
+    <div
+        class="no-results"
+        id="noResults"
+    >
+        Nije pronadjena nijedna Viber grupa.
+    </div>
+
+
+
+    <!-- =================================================
+         MESSAGE CENTER
+    ================================================= -->
+
+    <section class="message-center">
+
+
+        <div class="message-header">
+
+
+            <div class="message-title">
+                 SLANJE PORUKE
             </div>
 
 
             <div
-                class="detail-content"
-                id="detailContent"
-            ></div>
+                class="selected-group"
+                id="selectedGroup"
+            >
+                Nije izabrana grupa
+            </div>
 
 
         </div>
 
 
 
-        <!-- CHAT -->
-
-        <aside class="chat-card">
-
-
-            <div class="chat-header">
-
-                <div class="chat-avatar">
-                    💬
-                </div>
-
-                <div>
-
-                    <div
-                        class="chat-name"
-                        id="chatName"
-                    >
-                        Viber grupa
-                    </div>
-
-                    <div class="chat-online">
-                        Viber komunikacija
-                    </div>
-
-                </div>
-
-            </div>
+        <textarea
+            id="messageInput"
+            placeholder="Unesite poruku koju zelite da posaljete roditeljima..."
+            oninput="azurirajBrojac()"
+        ></textarea>
 
 
-            <div class="chat-body">
+
+        <!-- =================================================
+             BRZE PORUKE
+        ================================================= -->
+
+        <div class="quick-title">
+            Brze poruke
+        </div>
 
 
-                <div class="chat-date">
-                    DANAS
-                </div>
+        <div class="quick-buttons">
 
 
-                <div class="chat-message">
-
-                    Dobrodošli u Viber grupu KK TEMPO.
-
-                    <div class="chat-time">
-                        09:15
-                    </div>
-
-                </div>
-
-
-                <div class="chat-message">
-
-                    Sve informacije o treninzima i rasporedu biće objavljivane ovdje.
-
-                    <div class="chat-time">
-                        09:16
-                    </div>
-
-                </div>
+            <button
+                class="quick-button"
+                onclick="brzaPoruka(
+                'Trening je danas u 18:00 casova. Vidimo se na treningu! 🏀'
+                )"
+            >
+                🏀 Trening danas
+            </button>
 
 
-                <div class="chat-message mine">
-
-                    Hvala svima na saradnji! 🏀
-
-                    <div class="chat-time">
-                        09:18
-                    </div>
-
-                </div>
-
-
-            </div>
+            <button
+                class="quick-button"
+                onclick="brzaPoruka(
+                'Podsecamo vas da je trening danas u 18:00 casova.'
+                )"
+            >
+                ⏰ Podsetnik za trening
+            </button>
 
 
-            <div class="composer">
-
-                <textarea
-                    id="messageInput"
-                    placeholder="Napiši poruku..."
-                ></textarea>
-
-
-                <div class="composer-actions">
-
-                    <button
-                        class="btn btn-light"
-                        onclick="ubaciPodsetnik()"
-                    >
-                        💰 Podsetnik
-                    </button>
-
-                    <button
-                        class="viber-send"
-                        onclick="kopirajPoruku()"
-                    >
-                        POŠALJI →
-                    </button>
-
-                </div>
-
-            </div>
+            <button
+                class="quick-button"
+                onclick="brzaPoruka(
+                'Postovani roditelji, molimo vas da redovno pratite informacije u grupi. Hvala!'
+                )"
+            >
+                📢 Obavestenje
+            </button>
 
 
-        </aside>
+            <button
+                class="quick-button"
+                onclick="brzaPoruka(
+                'Postovani roditelji, molimo vas da potvrdite dolazak deteta na trening.'
+                )"
+            >
+                ✅ Potvrda dolaska
+            </button>
 
 
-    </div>
+            <button
+                class="quick-button"
+                onclick="brzaPoruka(
+                'Obavestavamo vas da je doslo do promene termina treninga.'
+                )"
+            >
+                🔄 Promena termina
+            </button>
 
-</section>
+
+        </div>
+
+
+
+        <!-- =================================================
+             AKCIJE
+        ================================================= -->
+
+        <div class="actions">
+
+
+            <button
+                class="action-button action-secondary"
+                onclick="kopirajPoruku()"
+            >
+                 KOPIRAJ PORUKU
+            </button>
+
+
+            <button
+                class="action-button action-primary"
+                onclick="otvoriViber()"
+            >
+                 OTVORI VIBER GRUPU
+            </button>
+
+
+            <button
+                class="action-button action-primary"
+                onclick="podeliPoruku()"
+            >
+                 PODELI PORUKU
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             INFORMACIJE
+        ================================================= -->
+
+        <div class="info-box">
+
+            <strong>Kako funkcionise slanje poruke?</strong>
+
+            <br><br>
+
+            1. Izaberite Viber grupu.
+
+            <br>
+
+            2. Napisite poruku.
+
+            <br>
+
+            3. Kliknite na
+            <strong>"Kopiraj poruku"</strong>.
+
+            <br>
+
+            4. Kliknite na
+            <strong>"Otvori Viber grupu"</strong>.
+
+            <br>
+
+            5. U Viberu nalepite poruku i posaljite je.
+
+            <br><br>
+
+           
+
+        </div>
+
+
+    </section>
 
 
 </main>
 
 
 
-<!-- =========================================================
-     MESSAGE MODAL
-========================================================= -->
-
-<div
-    class="modal"
-    id="messageModal"
-    onclick="modalBackground(event)"
->
-
-    <div class="modal-box">
-
-        <div class="modal-top">
-
-            <h2>
-                💬 Nova Viber poruka
-            </h2>
-
-            <button
-                class="modal-close"
-                onclick="zatvoriModal()"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="modal-body">
-
-            <div
-                style="
-                color:#888;
-                font-size:9px;
-                margin-bottom:8px;
-                "
-                id="messageTarget"
-            >
-                Poruka
-            </div>
-
-
-            <textarea
-                id="modalMessage"
-                placeholder="Napišite poruku..."
-            ></textarea>
-
-
-            <div class="modal-footer">
-
-                <button
-                    class="btn btn-light"
-                    onclick="zatvoriModal()"
-                >
-                    ODUSTANI
-                </button>
-
-                <button
-                    class="btn btn-red"
-                    onclick="kopirajModalPoruku()"
-                >
-                    📋 KOPIRAJ PORUKU
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- TOAST -->
+<!-- =====================================================
+     TOAST
+===================================================== -->
 
 <div
     class="toast"
     id="toast"
 >
-    Sačuvano.
 </div>
 
 
 
 <script>
 
-/* =========================================================
-   VIBER LINKOVI
-========================================================= */
+
+/* =====================================================
+   VIBER GRUPE
+===================================================== */
 
 const viberGrupe = {
 
-    school:"",
-    mini:"",
-    pioniri:""
+    1: {
+        naziv:"KK TEMPO - GRUPA 1",
+
+        link:"https://invite.viber.com/?g=yZa0CMtJ61X2FA1cLVT68pDV65VsnZM_"
+
+    },
+
+    2: {
+        naziv:"KK TEMPO - GRUPA 2",
+
+        link:"https://invite.viber.com/?g=h5T0_cdM61U6cBmsbtOneDeYKMWcWUl0"
+
+    },
+
+    3: {
+        naziv:"KK TEMPO - GRUPA 3",
+
+        link:
+        "https://invite.viber.com/?g=uiX1Edzar1Uzu8fO5cJXyVpQ5nA9Jleu"
+
+    }
 
 };
 
 
-/* =========================================================
-   PODACI
-========================================================= */
 
-let clanovi = [];
+/* =====================================================
+   TRENUTNA GRUPA
+===================================================== */
 
-let aktivnaGrupa = "";
-
-let aktivniTab = "members";
+let trenutnaGrupa = null;
 
 
-const demo = [
 
-    {
-        sifra:"MATIJAG2014",
-        ime:"Matija Gligorević",
-        program:"Mini basket",
-        telefon:"067123456",
-        dug:60
-    },
+/* =====================================================
+   IZBOR GRUPE
+===================================================== */
 
-    {
-        sifra:"MARKOM2015",
-        ime:"Marko Marković",
-        program:"Mini basket",
-        telefon:"065222333",
-        dug:0
-    },
+function izaberiGrupu(broj){
 
-    {
-        sifra:"PETARP2014",
-        ime:"Petar Petrović",
-        program:"Mlađi pioniri",
-        telefon:"066333444",
-        dug:30
-    },
+    trenutnaGrupa = broj;
 
-    {
-        sifra:"NIKOLAJ2016",
-        ime:"Nikola Jovanović",
-        program:"Školica košarke",
-        telefon:"064555666",
-        dug:0
-    },
-
-    {
-        sifra:"LUKAS2015",
-        ime:"Luka Savić",
-        program:"Mini basket",
-        telefon:"065777888",
-        dug:90
-    },
-
-    {
-        sifra:"FILIPD2014",
-        ime:"Filip Đurić",
-        program:"Mlađi pioniri",
-        telefon:"062111222",
-        dug:0
-    }
-
-];
+    const grupa =
+        viberGrupe[broj];
 
 
-/* =========================================================
-   LOAD
-========================================================= */
-
-function ucitajPodatke(){
-
-    clanovi=[];
-
-    try{
-
-        const raw=
-            localStorage.getItem(
-                "clanarine"
-            );
-
-        if(raw){
-
-            const data=
-                JSON.parse(raw);
-
-            if(Array.isArray(data)){
-
-                clanovi=
-                    data
-                    .map(normalizuj)
-                    .filter(Boolean);
-
-            }else if(
-                data &&
-                typeof data==="object"
-            ){
-
-                clanovi=
-                    Object.values(data)
-                    .map(normalizuj)
-                    .filter(Boolean);
-
-            }
-
-        }
-
-    }catch(e){
-
-        console.log(e);
-
-    }
+    document.getElementById(
+        "selectedGroup"
+    ).innerText =
+        grupa.naziv;
 
 
-    if(!clanovi.length){
-
-        clanovi=
-            demo.map(normalizuj);
-
-    }
-
-
-    updateDashboard();
-
-}
-
-
-/* =========================================================
-   NORMALIZE
-========================================================= */
-
-function normalizuj(c,index){
-
-    return {
-
-        sifra:
-            c.sifra ||
-            c["Šifra"] ||
-            c.code ||
-            c.id ||
-            "CLAN"+index,
-
-        ime:
-            c.ime ||
-            c.imePrezime ||
-            c["Ime i prezime"] ||
-            c.name ||
-            "Nepoznat član",
-
-        program:
-            c.program ||
-            c.Program ||
-            c.grupa ||
-            "",
-
-        telefon:
-            c.telefon ||
-            c.Telefon ||
-            c.phone ||
-            c.viber ||
-            "",
-
-        dug:Number(
-            c.dug ||
-            c.dugovanje ||
-            c.ukupanDug ||
-            c["Ukupan dug"] ||
-            0
-        )
-
-    };
-
-}
-
-
-/* =========================================================
-   GROUP
-========================================================= */
-
-function getGroup(program){
-
-    return clanovi.filter(
-        c =>
-            c.program
-            .toLowerCase()
-            .trim()
-            ===
-            program
-            .toLowerCase()
-            .trim()
+    showToast(
+        "Izabrana je " +
+        grupa.naziv
     );
 
 }
 
 
-/* =========================================================
-   UPDATE DASHBOARD
-========================================================= */
 
-function updateDashboard(){
+/* =====================================================
+   BRZA PORUKA
+===================================================== */
 
-    const total=
-        clanovi.length;
-
-
-    const viber=
-        clanovi.filter(
-            c=>c.telefon
-        ).length;
-
-
-    const debtors=
-        clanovi.filter(
-            c=>c.dug>0
-        );
-
-
-    const debt=
-        debtors.reduce(
-            (s,c)=>
-                s+
-                Number(c.dug||0),
-            0
-        );
-
+function brzaPoruka(tekst){
 
     document.getElementById(
-        "totalMembers"
-    ).textContent=total;
+        "messageInput"
+    ).value = tekst;
 
 
-    document.getElementById(
-        "totalViber"
-    ).textContent=viber;
-
-
-    document.getElementById(
-        "totalDebtors"
-    ).textContent=
-        debtors.length;
-
-
-    document.getElementById(
-        "totalDebt"
-    ).textContent=
-        money(debt);
-
-
-    updateGroup(
-        "Školica košarke",
-        "school"
-    );
-
-
-    updateGroup(
-        "Mini basket",
-        "mini"
-    );
-
-
-    updateGroup(
-        "Mlađi pioniri",
-        "pioniri"
-    );
+    azurirajBrojac();
 
 }
 
 
-/* =========================================================
-   UPDATE GROUP
-========================================================= */
 
-function updateGroup(
-    program,
-    prefix
-){
+/* =====================================================
+   KOPIRAJ PORUKU
+===================================================== */
 
-    const list=
-        getGroup(program);
+async function kopirajPoruku(){
 
-
-    const viber=
-        list.filter(
-            c=>c.telefon
-        ).length;
-
-
-    const debts=
-        list.filter(
-            c=>c.dug>0
-        ).length;
-
-
-    const percent=
-        list.length
-        ?
-        Math.round(
-            viber/
-            list.length*
-            100
-        )
-        :
-        0;
-
-
-    set(prefix+"Members",list.length);
-
-    set(prefix+"Members2",list.length);
-
-    set(prefix+"Viber",viber);
-
-    set(prefix+"Debt",debts);
-
-    set(prefix+"Percent",percent+"%");
-
-
-    const progress=
+    const poruka =
         document.getElementById(
-            prefix+"Progress"
-        );
+            "messageInput"
+        ).value.trim();
 
 
-    if(progress){
+    if(!poruka){
 
-        progress.style.width=
-            percent+"%";
-
-    }
-
-}
-
-
-function set(id,value){
-
-    const el=
-        document.getElementById(id);
-
-    if(el){
-
-        el.textContent=value;
-
-    }
-
-}
-
-
-/* =========================================================
-   OPEN VIBER GROUP
-========================================================= */
-
-function otvoriGrupu(group){
-
-    const url=
-        viberGrupe[group];
-
-
-    if(!url){
-
-        toast(
-            "Dodaj link Viber grupe u viberGrupe objektu."
+        showToast(
+            "Prvo unesite poruku."
         );
 
         return;
+    }
+
+
+    try{
+
+        await navigator.clipboard.writeText(
+            poruka
+        );
+
+        sacuvajPoruku();
+
+        showToast(
+            "Poruka je kopirana."
+        );
+
+    }
+
+    catch(error){
+
+        const textarea =
+            document.getElementById(
+                "messageInput"
+            );
+
+        textarea.select();
+
+        document.execCommand("copy");
+
+        sacuvajPoruku();
+
+        showToast(
+            "Poruka je kopirana."
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SACUVAJ BROJ PORUKA
+===================================================== */
+
+function sacuvajPoruku(){
+
+    let broj =
+        parseInt(
+            localStorage.getItem(
+                "tempoViberPoruke"
+            ) || "0"
+        );
+
+
+    broj++;
+
+
+    localStorage.setItem(
+        "tempoViberPoruke",
+        broj
+    );
+
+
+    azurirajBrojac();
+
+}
+
+
+
+/* =====================================================
+   BROJAC
+===================================================== */
+
+function azurirajBrojac(){
+
+    const broj =
+        localStorage.getItem(
+            "tempoViberPoruke"
+        ) || "0";
+
+
+    document.getElementById(
+        "messageCount"
+    ).innerText = broj;
+
+}
+
+
+
+/* =====================================================
+   OTVORI VIBER
+===================================================== */
+
+async function otvoriViber(){
+
+    if(!trenutnaGrupa){
+
+        showToast(
+            "Prvo izaberite Viber grupu."
+        );
+
+        return;
+    }
+
+
+    const grupa =
+        viberGrupe[
+            trenutnaGrupa
+        ];
+
+
+    if(!grupa.link){
+
+        showToast(
+            "Link za ovu grupu jos nije dodat."
+        );
+
+        return;
+    }
+
+
+    const poruka =
+        document.getElementById(
+            "messageInput"
+        ).value.trim();
+
+
+    if(poruka){
+
+        try{
+
+            await navigator.clipboard.writeText(
+                poruka
+            );
+
+        }
+
+        catch(error){}
 
     }
 
 
     window.open(
-        url,
+        grupa.link,
         "_blank"
     );
 
 }
 
 
-/* =========================================================
-   DETAILS
-========================================================= */
 
-function otvoriDetalje(program){
+/* =====================================================
+   DELJENJE PORUKE
+===================================================== */
 
-    aktivnaGrupa=
-        program;
+async function podeliPoruku(){
 
-
-    aktivniTab=
-        "members";
-
-
-    document.getElementById(
-        "detailTitle"
-    ).textContent=
-        program;
-
-
-    document.getElementById(
-        "detailSubtitle"
-    ).textContent=
-        "KK TEMPO • Viber grupa";
-
-
-    document.getElementById(
-        "chatName"
-    ).textContent=
-        program;
-
-
-    document.getElementById(
-        "detailView"
-    ).classList.add(
-        "active"
-    );
-
-
-    renderDetail();
-
-
-    document.getElementById(
-        "detailView"
-    ).scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-    });
-
-}
-
-
-/* =========================================================
-   TABS
-========================================================= */
-
-function promeniTab(
-    tab,
-    button
-){
-
-    aktivniTab=
-        tab;
-
-
-    document
-        .querySelectorAll(
-            ".tab"
-        )
-        .forEach(
-            x=>
-                x.classList.remove(
-                    "active"
-                )
-        );
-
-
-    button.classList.add(
-        "active"
-    );
-
-
-    renderDetail();
-
-}
-
-
-/* =========================================================
-   RENDER DETAIL
-========================================================= */
-
-function renderDetail(){
-
-    let lista=
-        getGroup(
-            aktivnaGrupa
-        );
-
-
-    if(
-        aktivniTab==="debt"
-    ){
-
-        lista=
-            lista.filter(
-                c=>c.dug>0
-            );
-
-    }
-
-
-    if(
-        aktivniTab==="viber"
-    ){
-
-        lista=
-            lista.filter(
-                c=>c.telefon
-            );
-
-    }
-
-
-    const container=
+    const poruka =
         document.getElementById(
-            "detailContent"
+            "messageInput"
+        ).value.trim();
+
+
+    if(!poruka){
+
+        showToast(
+            "Prvo unesite poruku."
         );
-
-
-    if(!lista.length){
-
-        container.innerHTML=`
-
-            <div
-                style="
-                text-align:center;
-                padding:40px;
-                color:#999;
-                font-size:10px;
-                "
-            >
-                Nema podataka za prikaz.
-            </div>
-
-        `;
 
         return;
-
     }
 
 
-    container.innerHTML=
-        lista.map(
-            c=>`
+    if(navigator.share){
 
-                <div class="member-row">
+        try{
 
-                    <div class="member-avatar">
-                        ${initials(c.ime)}
-                    </div>
+            await navigator.share({
 
-                    <div class="member-info">
+                title:
+                    trenutnaGrupa
+                    ? viberGrupe[
+                        trenutnaGrupa
+                      ].naziv
+                    : "KK TEMPO Viber",
 
-                        <div class="member-name">
-                            ${esc(c.ime)}
-                        </div>
+                text:poruka
 
-                        <div class="member-meta">
+            });
 
-                            ${esc(c.sifra)}
+        }
 
-                            •
+        catch(error){}
 
-                            ${
-                                c.telefon
-                                ?
-                                esc(c.telefon)
-                                :
-                                "Nema Viber"
-                            }
+    }
 
-                        </div>
+    else{
 
-                    </div>
+        try{
 
+            await navigator.clipboard.writeText(
+                poruka
+            );
 
-                    ${
-                        c.dug>0
-                        ?
-                        `
-                        <div class="member-debt">
-                            ${money(c.dug)}
-                        </div>
-                        `
-                        :
-                        `
-                        <div class="member-ok">
-                            ✓ UREDNO
-                        </div>
-                        `
-                    }
+        }
 
-                </div>
-
-            `
-        )
-        .join("");
-
-}
+        catch(error){}
 
 
-/* =========================================================
-   MEMBERS
-========================================================= */
-
-function otvoriClanove(program){
-
-    aktivnaGrupa=
-        program;
-
-    aktivniTab=
-        "members";
-
-
-    document.getElementById(
-        "detailView"
-    ).classList.add(
-        "active"
-    );
-
-
-    renderDetail();
-
-
-    document.getElementById(
-        "detailView"
-    ).scrollIntoView({
-        behavior:"smooth"
-    });
-
-}
-
-
-/* =========================================================
-   DEBTORS
-========================================================= */
-
-function otvoriDuznike(program){
-
-    aktivnaGrupa=
-        program;
-
-    aktivniTab=
-        "debt";
-
-
-    document.getElementById(
-        "detailView"
-    ).classList.add(
-        "active"
-    );
-
-
-    renderDetail();
-
-
-    document.getElementById(
-        "detailView"
-    ).scrollIntoView({
-        behavior:"smooth"
-    });
-
-}
-
-
-function prikaziSveDuznike(){
-
-    aktivnaGrupa=
-        "SVE";
-
-
-    aktivniTab=
-        "debt";
-
-
-    document.getElementById(
-        "detailTitle"
-    ).textContent=
-        "Svi dužnici";
-
-
-    document.getElementById(
-        "detailSubtitle"
-    ).textContent=
-        "KK TEMPO • pregled dugovanja";
-
-
-    document.getElementById(
-        "chatName"
-    ).textContent=
-        "Svi dužnici";
-
-
-    const lista=
-        clanovi.filter(
-            c=>c.dug>0
+        showToast(
+            "Poruka je kopirana."
         );
 
-
-    const container=
-        document.getElementById(
-            "detailContent"
-        );
-
-
-    container.innerHTML=
-        lista.map(
-            c=>`
-
-                <div class="member-row">
-
-                    <div class="member-avatar">
-                        ${initials(c.ime)}
-                    </div>
-
-                    <div class="member-info">
-
-                        <div class="member-name">
-                            ${esc(c.ime)}
-                        </div>
-
-                        <div class="member-meta">
-                            ${esc(c.program)}
-                        </div>
-
-                    </div>
-
-                    <div class="member-debt">
-                        ${money(c.dug)}
-                    </div>
-
-                </div>
-
-            `
-        )
-        .join("");
-
-
-    document.getElementById(
-        "detailView"
-    ).classList.add(
-        "active"
-    );
-
-
-    document.getElementById(
-        "detailView"
-    ).scrollIntoView({
-        behavior:"smooth"
-    });
+    }
 
 }
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
 
-function pretraga(){
+/* =====================================================
+   PRETRAGA
+===================================================== */
 
-    const q=
+function pretraziGrupe(){
+
+    const tekst =
         document.getElementById(
-            "search"
-        )
-        .value
+            "searchInput"
+        ).value
         .toLowerCase()
         .trim();
 
 
-    if(!q){
-
-        return;
-
-    }
-
-
-    const results=
-        clanovi.filter(
-            c=>
-                (
-                    c.ime+
-                    " "+
-                    c.sifra+
-                    " "+
-                    c.program+
-                    " "+
-                    c.telefon
-                )
-                .toLowerCase()
-                .includes(q)
+    const kartice =
+        document.querySelectorAll(
+            ".group-card"
         );
 
 
-    document.getElementById(
-        "detailTitle"
-    ).textContent=
-        "Rezultati pretrage";
+    let pronadjeno = 0;
 
 
-    document.getElementById(
-        "detailSubtitle"
-    ).textContent=
-        results.length+
-        " pronađenih članova";
+    kartice.forEach(
+        kartica => {
 
+            const naziv =
+                kartica.dataset.name
+                .toLowerCase();
 
-    const container=
-        document.getElementById(
-            "detailContent"
-        );
 
+            if(
+                naziv.includes(tekst)
+            ){
 
-    container.innerHTML=
-        results.map(
-            c=>`
+                kartica.style.display =
+                    "block";
 
-                <div class="member-row">
+                pronadjeno++;
 
-                    <div class="member-avatar">
-                        ${initials(c.ime)}
-                    </div>
-
-                    <div class="member-info">
-
-                        <div class="member-name">
-                            ${esc(c.ime)}
-                        </div>
-
-                        <div class="member-meta">
-                            ${esc(c.program)}
-                            •
-                            ${esc(c.sifra)}
-                        </div>
-
-                    </div>
-
-                    ${
-                        c.dug>0
-                        ?
-                        `
-                        <div class="member-debt">
-                            ${money(c.dug)}
-                        </div>
-                        `
-                        :
-                        `
-                        <div class="member-ok">
-                            ✓
-                        </div>
-                        `
-                    }
-
-                </div>
-
-            `
-        )
-        .join("");
-
-
-    document.getElementById(
-        "detailView"
-    ).classList.add(
-        "active"
-    );
-
-}
-
-
-/* =========================================================
-   CLOSE DETAILS
-========================================================= */
-
-function zatvoriDetalje(){
-
-    document.getElementById(
-        "detailView"
-    ).classList.remove(
-        "active"
-    );
-
-}
-
-
-/* =========================================================
-   GROUP MESSAGE
-========================================================= */
-
-function posaljiGrupnuPoruku(
-    program
-){
-
-    document.getElementById(
-        "messageTarget"
-    ).textContent=
-        "Poruka za: "+
-        program;
-
-
-    document.getElementById(
-        "modalMessage"
-    ).value=
-
-`Poštovani roditelji,
-
-obavještavamo Vas da je u vezi sa treninzima KK TEMPO potrebno pratiti informacije u Viber grupi.
-
-Hvala na razumijevanju.
-
-KK TEMPO`;
-
-
-    document.getElementById(
-        "messageModal"
-    ).classList.add(
-        "active"
-    );
-
-}
-
-
-function novaPoruka(){
-
-    document.getElementById(
-        "messageTarget"
-    ).textContent=
-        "Nova poruka za roditelje";
-
-
-    document.getElementById(
-        "modalMessage"
-    ).value="";
-
-
-    document.getElementById(
-        "messageModal"
-    ).classList.add(
-        "active"
-    );
-
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-function zatvoriModal(){
-
-    document.getElementById(
-        "messageModal"
-    ).classList.remove(
-        "active"
-    );
-
-}
-
-
-function modalBackground(e){
-
-    if(
-        e.target.id===
-        "messageModal"
-    ){
-
-        zatvoriModal();
-
-    }
-
-}
-
-
-/* =========================================================
-   COPY
-========================================================= */
-
-function kopirajModalPoruku(){
-
-    const text=
-        document.getElementById(
-            "modalMessage"
-        ).value;
-
-
-    if(!text){
-
-        toast(
-            "Napišite poruku."
-        );
-
-        return;
-
-    }
-
-
-    navigator.clipboard
-        .writeText(text)
-        .then(
-            ()=>{
-                toast(
-                    "Poruka je kopirana."
-                );
             }
-        );
 
-}
+            else{
 
+                kartica.style.display =
+                    "none";
 
-function kopirajPoruku(){
-
-    const text=
-        document.getElementById(
-            "messageInput"
-        ).value;
-
-
-    if(!text){
-
-        toast(
-            "Napišite poruku."
-        );
-
-        return;
-
-    }
-
-
-    navigator.clipboard
-        .writeText(text)
-        .then(
-            ()=>{
-                toast(
-                    "Poruka je kopirana."
-                );
             }
-        );
 
-}
+        }
+    );
 
-
-/* =========================================================
-   REMINDER
-========================================================= */
-
-function ubaciPodsetnik(){
 
     document.getElementById(
-        "messageInput"
-    ).value=
-
-`Poštovani roditelji,
-
-ljubazno Vas podsjećamo na neizmirenu članarinu za KK TEMPO.
-
-Molimo Vas da uplatu izvršite u narednom periodu.
-
-Hvala na razumijevanju.
-
-KK TEMPO`;
+        "noResults"
+    ).style.display =
+        pronadjeno === 0
+        ? "block"
+        : "none";
 
 }
 
 
-/* =========================================================
-   UTILS
-========================================================= */
 
-function money(n){
-
-    return Number(
-        n||0
-    )
-    .toLocaleString(
-        "sr-RS"
-    )+
-    " KM";
-
-}
-
-
-function initials(name){
-
-    return String(name)
-        .split(" ")
-        .slice(0,2)
-        .map(
-            x=>x.charAt(0)
-        )
-        .join("")
-        .toUpperCase();
-
-}
-
-
-function esc(v){
-
-    return String(v??"")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =========================================================
+/* =====================================================
    TOAST
-========================================================= */
+===================================================== */
 
-let toastTimer;
+function showToast(tekst){
 
-
-function toast(message){
-
-    const el=
+    const toast =
         document.getElementById(
             "toast"
         );
 
 
-    el.textContent=
-        message;
+    toast.innerText =
+        tekst;
 
 
-    el.classList.add(
+    toast.classList.add(
         "show"
     );
 
 
-    clearTimeout(
-        toastTimer
+    setTimeout(
+        () => {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },
+        3000
     );
 
+}
 
-    toastTimer=
-        setTimeout(
-            ()=>{
-                el.classList.remove(
-                    "show"
-                );
-            },
-            2600
-        );
+
+
+/* =====================================================
+   ADMIN PANEL
+===================================================== */
+
+function vratiNaAdmin(){
+
+    window.location.href =
+        "admin.html";
 
 }
 
 
-/* =========================================================
-   KONTROLNA SOBA
-========================================================= */
 
-function idiNaKontrolnuSobu(){
-
-    window.location.href=
-        "kontrolnasoba.html";
-
-}
-
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
-window.addEventListener(
-    "storage",
-    e=>{
-
-        if(
-            e.key===
-            "clanarine"
-        ){
-
-            ucitajPodatke();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
+/* =====================================================
    START
-========================================================= */
+===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
-    ()=>{
-        ucitajPodatke();
+    function(){
+
+        azurirajBrojac();
+
     }
 );
+
 
 </script>
 
