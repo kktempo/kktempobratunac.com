@@ -1,0 +1,5323 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KK TEMPO | Skauting mlađi pioniri</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f4f5f7;
+    color:#202124;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    height:74px;
+    background:#c8102e;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo-box{
+    width:44px;
+    height:44px;
+    border:2px solid white;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:18px;
+}
+
+.logo-title{
+    font-size:21px;
+    font-weight:900;
+    letter-spacing:.5px;
+}
+
+.logo-subtitle{
+    font-size:12px;
+    opacity:.85;
+    margin-top:2px;
+}
+
+.back-btn{
+    border:1px solid rgba(255,255,255,.35);
+    background:rgba(255,255,255,.12);
+    color:white;
+    padding:11px 17px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.back-btn:hover{
+    background:white;
+    color:#c8102e;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    max-width:1450px;
+    margin:auto;
+    padding:28px;
+}
+
+.page-title{
+    margin-bottom:22px;
+}
+
+.page-title h1{
+    font-size:30px;
+    color:#c8102e;
+    font-weight:900;
+}
+
+.page-title p{
+    color:#666;
+    margin-top:6px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:15px;
+    padding:21px;
+    border-left:5px solid #c8102e;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.stat-label{
+    color:#777;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.stat-value{
+    font-size:30px;
+    font-weight:900;
+    color:#c8102e;
+    margin-top:8px;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    background:white;
+    padding:18px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:22px;
+}
+
+input,
+select{
+    border:1px solid #ddd;
+    border-radius:9px;
+    padding:12px 13px;
+    outline:none;
+    background:white;
+}
+
+input:focus,
+select:focus{
+    border-color:#c8102e;
+    box-shadow:0 0 0 3px rgba(200,16,46,.08);
+}
+
+.search{
+    flex:1;
+    min-width:220px;
+}
+
+.btn{
+    border:none;
+    border-radius:9px;
+    padding:12px 17px;
+    cursor:pointer;
+    font-weight:800;
+    transition:.2s;
+}
+
+.btn-red{
+    background:#c8102e;
+    color:white;
+}
+
+.btn-red:hover{
+    background:#a80d26;
+}
+
+.btn-light{
+    background:#f1f1f1;
+    color:#333;
+}
+
+.btn-light:hover{
+    background:#e5e5e5;
+}
+
+/* =========================
+   TEAMS
+========================= */
+
+.teams-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.team-card{
+    background:white;
+    border-radius:17px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+    border:1px solid #eee;
+}
+
+.team-head{
+    background:linear-gradient(135deg,#c8102e,#9e0d24);
+    color:white;
+    padding:20px;
+}
+
+.team-name{
+    font-size:21px;
+    font-weight:900;
+}
+
+.team-place{
+    margin-top:6px;
+    opacity:.9;
+}
+
+.team-body{
+    padding:18px;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    background:#fcecef;
+    color:#c8102e;
+    font-size:12px;
+    font-weight:800;
+}
+
+.team-mini-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:16px;
+}
+
+.mini{
+    background:#f7f7f7;
+    padding:10px;
+    border-radius:9px;
+    text-align:center;
+}
+
+.mini strong{
+    display:block;
+    font-size:19px;
+    color:#c8102e;
+}
+
+.mini span{
+    font-size:11px;
+    color:#777;
+}
+
+.team-actions{
+    display:flex;
+    gap:8px;
+    margin-top:16px;
+}
+
+.team-actions button{
+    flex:1;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+    background:white;
+    border-radius:15px;
+    padding:50px 20px;
+    text-align:center;
+    color:#777;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:500;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:700px;
+    max-height:92vh;
+    overflow:auto;
+    border-radius:18px;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+
+.modal-header{
+    background:#c8102e;
+    color:white;
+    padding:20px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.modal-header h2{
+    font-size:21px;
+}
+
+.close{
+    background:none;
+    border:none;
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.modal-content{
+    padding:24px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    font-size:13px;
+    font-weight:800;
+    color:#555;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+}
+
+.modal-footer{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:22px;
+}
+
+/* =========================
+   DETAIL
+========================= */
+
+.detail-modal{
+    max-width:1200px;
+}
+
+.detail-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.detail-main{
+    padding:24px;
+}
+
+.detail-top{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.info-card{
+    background:#fafafa;
+    border:1px solid #eee;
+    border-radius:14px;
+    padding:18px;
+}
+
+.info-card h3{
+    color:#c8102e;
+    margin-bottom:14px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.info-item{
+    background:white;
+    padding:12px;
+    border-radius:9px;
+    border:1px solid #eee;
+}
+
+.info-item small{
+    display:block;
+    color:#777;
+    font-size:11px;
+    margin-bottom:5px;
+}
+
+.info-item strong{
+    font-size:18px;
+}
+
+/* =========================
+   ANALYSIS
+========================= */
+
+.analysis{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.analysis-card{
+    border-radius:13px;
+    padding:16px;
+    color:white;
+}
+
+.analysis-card.red{
+    background:#c8102e;
+}
+
+.analysis-card.dark{
+    background:#333;
+}
+
+.analysis-card.green{
+    background:#16834b;
+}
+
+.analysis-card.orange{
+    background:#d97800;
+}
+
+.analysis-card small{
+    opacity:.85;
+}
+
+.analysis-card strong{
+    display:block;
+    font-size:23px;
+    margin-top:6px;
+}
+
+/* =========================
+   CHART
+========================= */
+
+.chart-box{
+    background:white;
+    border:1px solid #eee;
+    border-radius:14px;
+    padding:20px;
+    margin-top:20px;
+}
+
+.chart-box h3{
+    margin-bottom:15px;
+    color:#c8102e;
+}
+
+/* =========================
+   MATCHES
+========================= */
+
+.matches-box{
+    background:white;
+    border:1px solid #eee;
+    border-radius:14px;
+    padding:20px;
+    margin-top:20px;
+}
+
+.matches-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#f5f5f5;
+    color:#555;
+    font-size:12px;
+    text-transform:uppercase;
+}
+
+th,
+td{
+    padding:12px 10px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+}
+
+td:first-child,
+th:first-child{
+    text-align:left;
+}
+
+.win{
+    color:#16834b;
+    font-weight:900;
+}
+
+.loss{
+    color:#c8102e;
+    font-weight:900;
+}
+
+.delete-btn{
+    border:none;
+    background:#fcecef;
+    color:#c8102e;
+    padding:7px 10px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:800;
+}
+
+/* =========================
+   MATCH MODAL
+========================= */
+
+.quarters{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.quarter{
+    background:#f8f8f8;
+    padding:12px;
+    border-radius:10px;
+}
+
+.quarter label{
+    display:block;
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:7px;
+    color:#555;
+}
+
+.result-preview{
+    margin-top:18px;
+    padding:15px;
+    border-radius:10px;
+    background:#f7f7f7;
+    text-align:center;
+    font-weight:800;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .teams-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .detail-top{
+        grid-template-columns:1fr;
+    }
+
+    .analysis{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+    .header{
+        padding:0 15px;
+    }
+
+    .logo-title{
+        font-size:16px;
+    }
+
+    .logo-subtitle{
+        display:none;
+    }
+
+    .container{
+        padding:16px;
+    }
+
+    .page-title h1{
+        font-size:24px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .teams-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .analysis{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .quarters{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .detail-title{
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <div>
+            <div class="logo-title">
+                KOSARKASKI KLUB TEMPO
+            </div>
+
+            <div class="logo-subtitle">
+                SKAUTING • MLAĐI PIONIRI
+            </div>
+        </div>
+
+    </div>
+
+    <button class="back-btn" onclick="idiNazad()">
+        ← ADMIN PANEL
+    </button>
+
+</header>
+
+
+<main class="container">
+
+    <div class="page-title">
+
+        <h1>SKAUTING PROTIVNIKA</h1>
+
+        <p>
+            Praćenje ekipa mlađih pionira i automatska analiza rezultata.
+        </p>
+
+    </div>
+
+
+    <!-- STATISTIKA -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <div class="stat-label">
+                Broj ekipa
+            </div>
+
+            <div class="stat-value" id="statEkipe">
+                0
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-label">
+                Odigrane utakmice
+            </div>
+
+            <div class="stat-value" id="statUtakmice">
+                0
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-label">
+                Ukupno pobeda
+            </div>
+
+            <div class="stat-value" id="statPobede">
+                0
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-label">
+                Ukupno poraza
+            </div>
+
+            <div class="stat-value" id="statPorazi">
+                0
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- TOOLBAR -->
+
+    <section class="toolbar">
+
+        <input
+            id="pretraga"
+            class="search"
+            type="text"
+            placeholder="🔎 Pretraži ekipu..."
+            oninput="prikaziEkipe()"
+        >
+
+        <select id="filterMesto" onchange="prikaziEkipe()">
+            <option value="">Sva mesta</option>
+        </select>
+
+        <button
+            class="btn btn-red"
+            onclick="otvoriDodavanjeEkipe()"
+        >
+            + DODAJ EKIPU
+        </button>
+
+    </section>
+
+
+    <!-- EKIPE -->
+
+    <section id="teamsContainer"></section>
+
+</main>
+
+
+<!-- =========================
+     MODAL EKIPA
+========================= -->
+
+<div class="modal" id="teamModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2 id="teamModalTitle">
+                Nova ekipa
+            </h2>
+
+            <button class="close" onclick="zatvoriModal('teamModal')">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-content">
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+
+                    <label>
+                        Naziv ekipe
+                    </label>
+
+                    <input
+                        id="teamName"
+                        type="text"
+                        placeholder="npr. KK Borac"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Uzrasna kategorija
+                    </label>
+
+                    <input
+                        id="teamCategory"
+                        type="text"
+                        value="Mladji pioniri"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Mesto
+                    </label>
+
+                    <input
+                        id="teamPlace"
+                        type="text"
+                        placeholder="npr. Bratunac"
+                    >
+
+                </div>
+<div class="form-group full">
+
+    <label>
+        Logo protivnika
+    </label>
+
+    <input
+        id="teamLogo"
+        type="file"
+        accept="image/png,image/jpeg,image/jpg,image/webp"
+        onchange="previewTeamLogo(event)"
+    >
+
+    <div
+        id="teamLogoPreview"
+        style="
+            margin-top:10px;
+            display:none;
+            text-align:center;
+            padding:15px;
+            background:#f7f7f7;
+            border-radius:12px;
+            border:1px solid #eee;
+        "
+    >
+
+        <img
+            id="teamLogoImage"
+            src=""
+            alt="Logo protivnika"
+            style="
+                max-width:140px;
+                max-height:140px;
+                object-fit:contain;
+            "
+        >
+
+        <br>
+
+        <button
+            type="button"
+            class="btn btn-light"
+            style="margin-top:10px;"
+            onclick="obrisiLogoPreview()"
+        >
+            🗑️ Ukloni logo
+        </button>
+
+    </div>
+
+<div class="form-group full">
+
+    <label>📸 AKCIJE / FOTOGRAFIJE</label>
+
+    <input
+        type="file"
+        id="scoutingPhotos"
+        accept="image/*"
+        multiple
+        onchange="ucitajScoutingFotografije(event)"
+    >
+
+    <div
+        id="scoutingPhotosPreview"
+        style="
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+            gap:12px;
+            margin-top:15px;
+        "
+    ></div>
+
+</div>
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-light"
+                    onclick="zatvoriModal('teamModal')"
+                >
+                    Otkaži
+                </button>
+
+                <button
+                    class="btn btn-red"
+                    onclick="sacuvajEkipu()"
+                >
+                    SAČUVAJ EKIPU
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     DETALJI EKIPA
+========================= -->
+
+<div class="modal" id="detailModal">
+
+    <div class="modal-box detail-modal">
+
+        <div class="modal-header">
+
+            <div class="detail-title">
+
+                <div>
+
+                    <h2 id="detailTeamName">
+                        Ekipa
+                    </h2>
+
+                    <div id="detailTeamInfo"></div>
+
+                </div>
+
+            </div>
+
+            <button
+                class="close"
+                onclick="zatvoriModal('detailModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="detail-main">
+
+            <!-- ANALIZA -->
+
+            <div class="analysis">
+
+                <div class="analysis-card red">
+
+                    <small>
+                        Najviše poena
+                    </small>
+
+                    <strong id="najboljaCetvrtina">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="analysis-card dark">
+
+                    <small>
+                        Najmanje poena
+                    </small>
+
+                    <strong id="najslabijaCetvrtina">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="analysis-card green">
+
+                    <small>
+                        Pobede
+                    </small>
+
+                    <strong id="detailPobede">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="analysis-card orange">
+
+                    <small>
+                        Porazi
+                    </small>
+
+                    <strong id="detailPorazi">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- INFORMACIJE -->
+
+            <div class="detail-top">
+
+                <div class="info-card">
+
+                    <h3>
+                        📊 Statistika ekipe
+                    </h3>
+
+                    <div class="info-grid">
+
+                        <div class="info-item">
+                            <small>Odigrano</small>
+                            <strong id="detailUtakmice">0</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <small>Prosek datih</small>
+                            <strong id="prosekDatih">0</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <small>Prosek primljenih</small>
+                            <strong id="prosekPrimljenih">0</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <small>Koš razlika</small>
+                            <strong id="kosRazlika">0</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <small>Prosek 1/4</small>
+                            <strong id="prosekQ1">0</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <small>Prosek 2/4</small>
+                            <strong id="prosekQ2">0</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <small>Prosek 3/4</small>
+                            <strong id="prosekQ3">0</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <small>Prosek 4/4</small>
+                            <strong id="prosekQ4">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>
+                        🧠 Skauting zaključak
+                    </h3>
+
+                    <div id="scoutingConclusion"
+                         style="line-height:1.6;color:#555;">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- GRAFIK -->
+
+            <div class="chart-box">
+
+                <h3>
+                    📈 Prosek poena po četvrtinama
+                </h3>
+
+                <canvas id="quarterChart" height="100"></canvas>
+
+            </div>
+
+
+            <!-- UTAKMICE -->
+
+            <div class="matches-box">
+
+                <div class="matches-head">
+
+    <h3>
+         Rezultati utakmica
+    </h3>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+
+        <button
+            class="btn btn-light"
+            onclick="izveziKompletanSkautingPDF()"
+        >
+            📄 IZVEZI SKAUTING PDF
+        </button>
+
+        <button
+            class="btn btn-red"
+            onclick="otvoriDodavanjeUtakmice()"
+        >
+            + DODAJ REZULTAT
+        </button>
+
+    </div>
+
+</div>
+
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Datum</th>
+
+                                <th>Protivnik</th>
+
+                                <th>1/4</th>
+
+                                <th>2/4</th>
+
+                                <th>3/4</th>
+
+                                <th>4/4</th>
+
+                                <th>Ukupno</th>
+
+                                <th>Protivnik</th>
+
+                                <th>Ishod</th>
+
+                                <th></th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="matchesBody"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MODAL UTAKMICA
+========================= -->
+
+<div class="modal" id="matchModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+                Dodaj rezultat
+            </h2>
+
+            <button
+                class="close"
+                onclick="zatvoriModal('matchModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-content">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        Datum
+                    </label>
+
+                    <input
+                        id="matchDate"
+                        type="date"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Protivnik
+                    </label>
+
+                    <input
+                        id="matchOpponent"
+                        type="text"
+                        placeholder="Naziv protivnika"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Ekipa A rezultat - ukupno
+                    </label>
+
+                    <input
+                        id="matchOurTotal"
+                        type="number"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Ekipa B rezultat - ukupno
+                    </label>
+
+                    <input
+                        id="matchTheirTotal"
+                        type="number"
+                        readonly
+                    >
+
+                </div>
+
+            </div>
+
+
+            <h3 style="margin:22px 0 12px;color:#c8102e;">
+                Ekipa A poeni po četvrtinama
+            </h3>
+
+
+            <div class="quarters">
+
+                <div class="quarter">
+
+                    <label>1. četvrtina</label>
+
+                    <input
+                        id="ourQ1"
+                        type="number"
+                        min="0"
+                        value="0"
+                        oninput="izracunajRezultat()"
+                    >
+
+                </div>
+
+
+                <div class="quarter">
+
+                    <label>2. četvrtina</label>
+
+                    <input
+                        id="ourQ2"
+                        type="number"
+                        min="0"
+                        value="0"
+                        oninput="izracunajRezultat()"
+                    >
+
+                </div>
+
+
+                <div class="quarter">
+
+                    <label>3. četvrtina</label>
+
+                    <input
+                        id="ourQ3"
+                        type="number"
+                        min="0"
+                        value="0"
+                        oninput="izracunajRezultat()"
+                    >
+
+                </div>
+
+
+                <div class="quarter">
+
+                    <label>4. četvrtina</label>
+
+                    <input
+                        id="ourQ4"
+                        type="number"
+                        min="0"
+                        value="0"
+                        oninput="izracunajRezultat()"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <h3 style="margin:22px 0 12px;color:#c8102e;">
+                Ekipa B poeni po četvrtinama
+            </h3>
+
+
+            <div class="quarters">
+
+                <div class="quarter">
+
+                    <label>1. četvrtina</label>
+
+                    <input
+                        id="theirQ1"
+                        type="number"
+                        min="0"
+                        value="0"
+                        oninput="izracunajRezultat()"
+                    >
+
+                </div>
+
+
+                <div class="quarter">
+
+                    <label>2. četvrtina</label>
+
+                    <input
+                        id="theirQ2"
+                        type="number"
+                        min="0"
+                        value="0"
+                        oninput="izracunajRezultat()"
+                    >
+
+                </div>
+
+
+                <div class="quarter">
+
+                    <label>3. četvrtina</label>
+
+                    <input
+                        id="theirQ3"
+                        type="number"
+                        min="0"
+                        value="0"
+                        oninput="izracunajRezultat()"
+                    >
+
+                </div>
+
+
+                <div class="quarter">
+
+                    <label>4. četvrtina</label>
+
+                    <input
+                        id="theirQ4"
+                        type="number"
+                        min="0"
+                        value="0"
+                        oninput="izracunajRezultat()"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="resultPreview"
+                class="result-preview"
+            >
+                Unesite rezultat
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-light"
+                    onclick="zatvoriModal('matchModal')"
+                >
+                    Otkaži
+                </button>
+
+                <button
+                    class="btn btn-red"
+                    onclick="sacuvajUtakmicu()"
+                >
+                    SAČUVAJ REZULTAT
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   PODACI
+========================================== */
+
+const STORAGE_KEY = "kkTempoSkautingMladjiPioniri";
+
+let ekipe = JSON.parse(
+    localStorage.getItem(STORAGE_KEY) || "[]"
+);
+
+let aktivnaEkipaId = null;
+
+let quarterChart = null;
+
+
+/* ==========================================
+   GENERISANJE ID
+========================================== */
+
+function generisiId(){
+
+    return Date.now().toString() +
+           Math.random().toString(36).substring(2);
+
+}
+
+
+/* ==========================================
+   ČUVANJE
+========================================== */
+
+function sacuvajPodatke(){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(ekipe)
+    );
+
+}
+
+
+/* ==========================================
+   STATISTIKA
+========================================== */
+
+function izracunajStatistiku(ekipa){
+
+    const utakmice = ekipa.utakmice || [];
+
+    let pobede = 0;
+    let porazi = 0;
+
+    let dati = 0;
+    let primljeni = 0;
+
+    let q = [0,0,0,0];
+
+    utakmice.forEach(u => {
+
+        const nasi =
+            Number(u.ourQ1) +
+            Number(u.ourQ2) +
+            Number(u.ourQ3) +
+            Number(u.ourQ4);
+
+        const njihovi =
+            Number(u.theirQ1) +
+            Number(u.theirQ2) +
+            Number(u.theirQ3) +
+            Number(u.theirQ4);
+
+        dati += nasi;
+
+        primljeni += njihovi;
+
+        q[0] += Number(u.ourQ1);
+        q[1] += Number(u.ourQ2);
+        q[2] += Number(u.ourQ3);
+        q[3] += Number(u.ourQ4);
+
+        if(nasi > njihovi){
+
+            pobede++;
+
+        }else if(nasi < njihovi){
+
+            porazi++;
+
+        }
+
+    });
+
+
+    const broj = utakmice.length;
+
+
+    const proseci = broj
+        ? q.map(x => x / broj)
+        : [0,0,0,0];
+
+
+    let maxIndex = 0;
+    let minIndex = 0;
+
+
+    if(broj){
+
+        maxIndex = proseci.indexOf(
+            Math.max(...proseci)
+        );
+
+        minIndex = proseci.indexOf(
+            Math.min(...proseci)
+        );
+
+    }
+
+
+    return {
+
+        utakmice:broj,
+
+        pobede,
+
+        porazi,
+
+        dati,
+
+        primljeni,
+
+        prosekDatih:
+            broj ? dati / broj : 0,
+
+        prosekPrimljenih:
+            broj ? primljeni / broj : 0,
+
+        kosRazlika:
+            dati - primljeni,
+
+        proseci,
+
+        maxIndex,
+
+        minIndex
+
+    };
+
+}
+
+
+/* ==========================================
+   PRIKAZ EKIPA
+========================================== */
+
+function prikaziEkipe(){
+
+    const container =
+        document.getElementById("teamsContainer");
+
+    const search =
+        document.getElementById("pretraga")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const filter =
+        document.getElementById("filterMesto")
+        .value;
+
+
+    const filtrirane = ekipe.filter(ekipa => {
+
+        const odgovaraPretraga =
+            ekipa.naziv
+            .toLowerCase()
+            .includes(search) ||
+
+            ekipa.mesto
+            .toLowerCase()
+            .includes(search);
+
+
+        const odgovaraMestu =
+            !filter ||
+            ekipa.mesto === filter;
+
+
+        return odgovaraPretraga &&
+               odgovaraMestu;
+
+    });
+
+
+    if(!filtrirane.length){
+
+        container.innerHTML = `
+            <div class="empty">
+                <h2>Nema unetih ekipa</h2>
+                <p style="margin-top:8px;">
+                    Kliknite na „DODAJ EKIPU“ da dodate prvog protivnika.
+                </p>
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+        <div class="teams-grid">
+
+            ${filtrirane.map(ekipa => {
+
+                const s =
+                    izracunajStatistiku(ekipa);
+
+                return `
+
+                    <div class="team-card">
+
+                        <div class="team-head">
+
+                            <div class="team-name">
+                                ${escapeHtml(ekipa.naziv)}
+                            </div>
+
+                            <div class="team-place">
+                                📍 ${escapeHtml(ekipa.mesto)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="team-body">
+
+                            <span class="badge">
+                                ${escapeHtml(ekipa.kategorija)}
+                            </span>
+
+
+                            <div class="team-mini-stats">
+
+                                <div class="mini">
+                                    <strong>${s.utakmice}</strong>
+                                    <span>utakmica</span>
+                                </div>
+
+                                <div class="mini">
+                                    <strong>${s.pobede}</strong>
+                                    <span>pobede</span>
+                                </div>
+
+                                <div class="mini">
+                                    <strong>${s.porazi}</strong>
+                                    <span>porazi</span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="team-actions">
+
+                                <button
+                                    class="btn btn-red"
+                                    onclick="otvoriDetalje('${ekipa.id}')"
+                                >
+                                    SKAUTING
+                                </button>
+
+                                <button
+                                    class="btn btn-light"
+                                    onclick="izmeniEkipu('${ekipa.id}')"
+                                >
+                                    ✏️
+                                </button>
+
+                                <button
+                                    class="btn btn-light"
+                                    onclick="obrisiEkipu('${ekipa.id}')"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }).join("")}
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==========================================
+   FILTER MESTA
+========================================== */
+
+function osveziFilterMesta(){
+
+    const select =
+        document.getElementById("filterMesto");
+
+    const mesta =
+        [...new Set(
+            ekipe
+            .map(e => e.mesto)
+            .filter(Boolean)
+        )].sort();
+
+
+    select.innerHTML =
+        `<option value="">Sva mesta</option>`;
+
+
+    mesta.forEach(mesto => {
+
+        select.innerHTML += `
+            <option value="${escapeHtml(mesto)}">
+                ${escapeHtml(mesto)}
+            </option>
+        `;
+
+    });
+
+}
+
+
+/* ==========================================
+   DODAVANJE EKIPE
+========================================== */
+
+function otvoriDodavanjeEkipe(){
+
+    trenutniLogo = "";
+
+    document.getElementById("teamModalTitle")
+        .textContent =
+        "Nova skauting ekipa";
+
+    document.getElementById("teamName").value = "";
+
+    document.getElementById("teamCategory").value =
+        "Mlađi pioniri";
+
+    document.getElementById("teamPlace").value = "";
+
+    document.getElementById("teamLogo").value = "";
+
+    document.getElementById("teamLogoImage").src = "";
+
+    document.getElementById("teamLogoPreview")
+        .style.display = "none";
+
+    document.getElementById("teamModal")
+        .dataset.editId = "";
+
+    document.getElementById("teamModal")
+        .classList.add("active");
+
+}
+
+
+/* ==========================================
+   IZMENI EKIPU
+========================================== */
+
+function sacuvajEkipu(){
+
+    const naziv =
+        document.getElementById("teamName")
+        .value
+        .trim();
+
+
+    const kategorija =
+        document.getElementById("teamCategory")
+        .value
+        .trim();
+
+
+    const mesto =
+        document.getElementById("teamPlace")
+        .value
+        .trim();
+
+
+    if(!naziv){
+
+        alert("Unesite naziv ekipe.");
+
+        return;
+
+    }
+
+
+    if(!mesto){
+
+        alert("Unesite mesto ekipe.");
+
+        return;
+
+    }
+
+
+    const editId =
+        document.getElementById("teamModal")
+        .dataset.editId;
+
+
+    if(editId){
+
+        const ekipa =
+            ekipe.find(e => e.id === editId);
+
+
+        ekipa.naziv =
+            naziv;
+
+
+        ekipa.kategorija =
+            kategorija;
+
+
+        ekipa.mesto =
+            mesto;
+
+
+        ekipa.logo =
+            trenutniLogo || "";
+
+
+    }else{
+
+        ekipe.push({
+
+            id:
+                generisiId(),
+
+            naziv:
+                naziv,
+
+            kategorija:
+                kategorija,
+
+            mesto:
+                mesto,
+
+            logo:
+                trenutniLogo || "",
+
+            utakmice:[]
+
+        });
+
+    }
+
+
+    sacuvajPodatke();
+
+
+    zatvoriModal(
+        "teamModal"
+    );
+
+
+    osveziSve();
+
+}
+
+
+/* ==========================================
+   SAČUVAJ EKIPU
+========================================== */
+
+function sacuvajEkipu(){
+
+    const naziv =
+        document.getElementById("teamName")
+        .value
+        .trim();
+
+    const kategorija =
+        document.getElementById("teamCategory")
+        .value
+        .trim();
+
+    const mesto =
+        document.getElementById("teamPlace")
+        .value
+        .trim();
+
+
+    if(!naziv){
+
+        alert("Unesite naziv ekipe.");
+
+        return;
+
+    }
+
+
+    if(!mesto){
+
+        alert("Unesite mesto ekipe.");
+
+        return;
+
+    }
+
+
+    const editId =
+        document.getElementById("teamModal")
+        .dataset.editId;
+
+
+    if(editId){
+
+        const ekipa =
+            ekipe.find(e => e.id === editId);
+
+        ekipa.naziv = naziv;
+
+        ekipa.kategorija = kategorija;
+
+        ekipa.mesto = mesto;
+
+    }else{
+
+        ekipe.push({
+
+            id:generisiId(),
+
+            naziv,
+
+            kategorija,
+
+            mesto,
+
+            utakmice:[]
+
+        });
+
+    }
+
+
+    sacuvajPodatke();
+
+    zatvoriModal("teamModal");
+
+    osveziSve();
+
+}
+
+
+/* ==========================================
+   OBRIŠI EKIPU
+========================================== */
+
+function obrisiEkipu(id){
+
+    const ekipa =
+        ekipe.find(e => e.id === id);
+
+    if(!ekipa) return;
+
+
+    const potvrda =
+        confirm(
+            `Da li želite da obrišete ekipu "${ekipa.naziv}" i sve njene rezultate?`
+        );
+
+
+    if(!potvrda) return;
+
+
+    ekipe =
+        ekipe.filter(e => e.id !== id);
+
+
+    sacuvajPodatke();
+
+    osveziSve();
+
+}
+
+
+/* ==========================================
+   OTVORI DETALJE
+========================================== */
+
+function otvoriDetalje(id){
+
+    aktivnaEkipaId = id;
+
+    const ekipa =
+        ekipe.find(e => e.id === id);
+
+    if(!ekipa) return;
+
+
+    document.getElementById("detailTeamName")
+        .textContent =
+        ekipa.naziv;
+
+
+    document.getElementById("detailTeamInfo")
+        .textContent =
+        `${ekipa.kategorija} • ${ekipa.mesto}`;
+
+
+    document.getElementById("detailModal")
+        .classList.add("active");
+
+
+    prikaziDetalje(ekipa);
+
+}
+
+
+/* ==========================================
+   DETALJI
+========================================== */
+
+function prikaziDetalje(ekipa){
+
+    const s =
+        izracunajStatistiku(ekipa);
+
+
+    document.getElementById("detailUtakmice")
+        .textContent =
+        s.utakmice;
+
+
+    document.getElementById("detailPobede")
+        .textContent =
+        s.pobede;
+
+
+    document.getElementById("detailPorazi")
+        .textContent =
+        s.porazi;
+
+
+    document.getElementById("prosekDatih")
+        .textContent =
+        s.prosekDatih.toFixed(1);
+
+
+    document.getElementById("prosekPrimljenih")
+        .textContent =
+        s.prosekPrimljenih.toFixed(1);
+
+
+    document.getElementById("kosRazlika")
+        .textContent =
+        (s.kosRazlika >= 0 ? "+" : "") +
+        s.kosRazlika;
+
+
+    document.getElementById("prosekQ1")
+        .textContent =
+        s.proseci[0].toFixed(1);
+
+
+    document.getElementById("prosekQ2")
+        .textContent =
+        s.proseci[1].toFixed(1);
+
+
+    document.getElementById("prosekQ3")
+        .textContent =
+        s.proseci[2].toFixed(1);
+
+
+    document.getElementById("prosekQ4")
+        .textContent =
+        s.proseci[3].toFixed(1);
+
+
+    const cetvrtine = [
+        "1. četvrtina",
+        "2. četvrtina",
+        "3. četvrtina",
+        "4. četvrtina"
+    ];
+
+
+    if(s.utakmice){
+
+        document.getElementById("najboljaCetvrtina")
+            .textContent =
+            `${cetvrtine[s.maxIndex]} (${s.proseci[s.maxIndex].toFixed(1)})`;
+
+
+        document.getElementById("najslabijaCetvrtina")
+            .textContent =
+            `${cetvrtine[s.minIndex]} (${s.proseci[s.minIndex].toFixed(1)})`;
+
+
+        document.getElementById("scoutingConclusion")
+            .innerHTML = `
+
+                <p>
+                    Ekipa u proseku postiže
+                    <strong>${s.prosekDatih.toFixed(1)}</strong>
+                    poena po utakmici.
+                </p>
+
+                <p style="margin-top:8px;">
+                    Najviše poena postižu u
+                    <strong>${cetvrtine[s.maxIndex]}</strong>,
+                    sa prosekom od
+                    <strong>${s.proseci[s.maxIndex].toFixed(1)}</strong>
+                    poena.
+                </p>
+
+                <p style="margin-top:8px;">
+                    Najmanje poena postižu u
+                    <strong>${cetvrtine[s.minIndex]}</strong>,
+                    sa prosekom od
+                    <strong>${s.proseci[s.minIndex].toFixed(1)}</strong>
+                    poena.
+                </p>
+
+                <p style="margin-top:8px;">
+                    U dosadašnjem delu sezone imaju
+                    <strong>${s.pobede}</strong> pobeda i
+                    <strong>${s.porazi}</strong> poraza.
+                </p>
+
+            `;
+
+    }else{
+
+        document.getElementById("najboljaCetvrtina")
+            .textContent = "-";
+
+        document.getElementById("najslabijaCetvrtina")
+            .textContent = "-";
+
+        document.getElementById("scoutingConclusion")
+            .innerHTML = `
+                <p>
+                    Još nema unetih rezultata za ovu ekipu.
+                </p>
+            `;
+
+    }
+
+
+    prikaziUtakmice(ekipa);
+
+    napraviGrafik(s.proseci);
+
+}
+
+
+/* ==========================================
+   GRAFIK
+========================================== */
+
+function napraviGrafik(proseci){
+
+    const ctx =
+        document.getElementById("quarterChart")
+        .getContext("2d");
+
+
+    if(quarterChart){
+
+        quarterChart.destroy();
+
+    }
+
+
+    quarterChart =
+        new Chart(ctx,{
+
+            type:"bar",
+
+            data:{
+
+                labels:[
+                    "1. četvrtina",
+                    "2. četvrtina",
+                    "3. četvrtina",
+                    "4. četvrtina"
+                ],
+
+                datasets:[{
+
+                    label:"Prosečno poena",
+
+                    data:proseci.map(
+                        x => Number(x.toFixed(1))
+                    ),
+
+                    backgroundColor:[
+                        "#c8102e",
+                        "#d82a46",
+                        "#e24c64",
+                        "#ec7183"
+                    ],
+
+                    borderRadius:8
+
+                }]
+
+            },
+
+            options:{
+
+                responsive:true,
+
+                plugins:{
+                    legend:{
+                        display:false
+                    }
+                },
+
+                scales:{
+                    y:{
+                        beginAtZero:true
+                    }
+                }
+
+            }
+
+        });
+
+}
+
+
+/* ==========================================
+   PRIKAZ UTAKMICA
+========================================== */
+
+function prikaziUtakmice(ekipa){
+
+    const tbody =
+        document.getElementById("matchesBody");
+
+
+    const utakmice =
+        [...(ekipa.utakmice || [])]
+        .sort(
+            (a,b) =>
+            new Date(b.datum) -
+            new Date(a.datum)
+        );
+
+
+    if(!utakmice.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td colspan="10"
+                    style="text-align:center;color:#777;padding:30px;">
+
+                    Nema unetih rezultata.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        utakmice.map(u => {
+
+            const nasi =
+                Number(u.ourQ1) +
+                Number(u.ourQ2) +
+                Number(u.ourQ3) +
+                Number(u.ourQ4);
+
+
+            const njihovi =
+                Number(u.theirQ1) +
+                Number(u.theirQ2) +
+                Number(u.theirQ3) +
+                Number(u.theirQ4);
+
+
+            const pobeda =
+                nasi > njihovi;
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${formatDatum(u.datum)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(u.protivnik)}
+                    </td>
+
+                    <td>${u.ourQ1}</td>
+
+                    <td>${u.ourQ2}</td>
+
+                    <td>${u.ourQ3}</td>
+
+                    <td>${u.ourQ4}</td>
+
+                    <td>
+                        <strong>
+                            ${nasi}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${njihovi}
+                    </td>
+
+                    <td class="${pobeda ? "win":"loss"}">
+                        ${pobeda ? "POBEDA":"PORAZ"}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="delete-btn"
+                            onclick="obrisiUtakmicu('${u.id}')"
+                        >
+                            🗑️
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* ==========================================
+   DODAJ UTAKMICU
+========================================== */
+
+function otvoriDodavanjeUtakmice(){
+
+    if(!aktivnaEkipaId) return;
+
+
+    document.getElementById("matchDate").value =
+        new Date().toISOString().split("T")[0];
+
+    document.getElementById("matchOpponent").value = "";
+
+    [
+        "ourQ1",
+        "ourQ2",
+        "ourQ3",
+        "ourQ4",
+        "theirQ1",
+        "theirQ2",
+        "theirQ3",
+        "theirQ4"
+    ].forEach(id => {
+
+        document.getElementById(id).value = 0;
+
+    });
+
+
+    izracunajRezultat();
+
+
+    document.getElementById("matchModal")
+        .classList.add("active");
+
+}
+
+
+/* ==========================================
+   RAČUNANJE REZULTATA
+========================================== */
+
+function izracunajRezultat(){
+
+    const nasi = [
+
+        Number(document.getElementById("ourQ1").value) || 0,
+
+        Number(document.getElementById("ourQ2").value) || 0,
+
+        Number(document.getElementById("ourQ3").value) || 0,
+
+        Number(document.getElementById("ourQ4").value) || 0
+
+    ];
+
+
+    const njihovi = [
+
+        Number(document.getElementById("theirQ1").value) || 0,
+
+        Number(document.getElementById("theirQ2").value) || 0,
+
+        Number(document.getElementById("theirQ3").value) || 0,
+
+        Number(document.getElementById("theirQ4").value) || 0
+
+    ];
+
+
+    const totalNasi =
+        nasi.reduce((a,b)=>a+b,0);
+
+
+    const totalNjihovi =
+        njihovi.reduce((a,b)=>a+b,0);
+
+
+    document.getElementById("matchOurTotal")
+        .value = totalNasi;
+
+
+    document.getElementById("matchTheirTotal")
+        .value = totalNjihovi;
+
+
+    let tekst;
+
+
+    if(totalNasi > totalNjihovi){
+
+        tekst =
+            `🏆 POBEDA — ${totalNasi} : ${totalNjihovi}`;
+
+    }else if(totalNasi < totalNjihovi){
+
+        tekst =
+            `❌ PORAZ — ${totalNasi} : ${totalNjihovi}`;
+
+    }else{
+
+        tekst =
+            `🤝 NEREŠENO — ${totalNasi} : ${totalNjihovi}`;
+
+    }
+
+
+    document.getElementById("resultPreview")
+        .textContent = tekst;
+
+}
+
+
+/* ==========================================
+   SAČUVAJ UTAKMICU
+========================================== */
+
+function sacuvajUtakmicu(){
+
+    const ekipa =
+        ekipe.find(e => e.id === aktivnaEkipaId);
+
+    if(!ekipa) return;
+
+
+    const protivnik =
+        document.getElementById("matchOpponent")
+        .value
+        .trim();
+
+
+    const datum =
+        document.getElementById("matchDate")
+        .value;
+
+
+    if(!protivnik){
+
+        alert("Unesite naziv protivnika.");
+
+        return;
+
+    }
+
+
+    if(!datum){
+
+        alert("Unesite datum utakmice.");
+
+        return;
+
+    }
+
+
+    const utakmica = {
+
+        id:generisiId(),
+
+        datum,
+
+        protivnik,
+
+        ourQ1:
+            Number(document.getElementById("ourQ1").value) || 0,
+
+        ourQ2:
+            Number(document.getElementById("ourQ2").value) || 0,
+
+        ourQ3:
+            Number(document.getElementById("ourQ3").value) || 0,
+
+        ourQ4:
+            Number(document.getElementById("ourQ4").value) || 0,
+
+        theirQ1:
+            Number(document.getElementById("theirQ1").value) || 0,
+
+        theirQ2:
+            Number(document.getElementById("theirQ2").value) || 0,
+
+        theirQ3:
+            Number(document.getElementById("theirQ3").value) || 0,
+
+        theirQ4:
+            Number(document.getElementById("theirQ4").value) || 0
+
+    };
+
+
+    if(!ekipa.utakmice){
+
+        ekipa.utakmice = [];
+
+    }
+
+
+    ekipa.utakmice.push(utakmica);
+
+
+    sacuvajPodatke();
+
+
+    zatvoriModal("matchModal");
+
+
+    prikaziDetalje(ekipa);
+
+    prikaziEkipe();
+
+    azurirajStatistiku();
+
+}
+
+
+/* ==========================================
+   OBRIŠI UTAKMICU
+========================================== */
+
+function obrisiUtakmicu(id){
+
+    const ekipa =
+        ekipe.find(e => e.id === aktivnaEkipaId);
+
+    if(!ekipa) return;
+
+
+    if(!confirm("Da li želite da obrišete ovaj rezultat?")){
+
+        return;
+
+    }
+
+
+    ekipa.utakmice =
+        ekipa.utakmice.filter(
+            u => u.id !== id
+        );
+
+
+    sacuvajPodatke();
+
+
+    prikaziDetalje(ekipa);
+
+    prikaziEkipe();
+
+    azurirajStatistiku();
+
+}
+
+
+/* ==========================================
+   UKUPNA STATISTIKA
+========================================== */
+
+function azurirajStatistiku(){
+
+    let utakmice = 0;
+    let pobede = 0;
+    let porazi = 0;
+
+
+    ekipe.forEach(ekipa => {
+
+        const s =
+            izracunajStatistiku(ekipa);
+
+        utakmice += s.utakmice;
+
+        pobede += s.pobede;
+
+        porazi += s.porazi;
+
+    });
+
+
+    document.getElementById("statEkipe")
+        .textContent =
+        ekipe.length;
+
+
+    document.getElementById("statUtakmice")
+        .textContent =
+        utakmice;
+
+
+    document.getElementById("statPobede")
+        .textContent =
+        pobede;
+
+
+    document.getElementById("statPorazi")
+        .textContent =
+        porazi;
+
+}
+
+
+/* ==========================================
+   DATUM
+========================================== */
+
+function formatDatum(datum){
+
+    if(!datum) return "-";
+
+
+    const parts =
+        datum.split("-");
+
+
+    if(parts.length !== 3){
+
+        return datum;
+
+    }
+
+
+    return `${parts[2]}.${parts[1]}.${parts[0]}.`;
+
+}
+
+
+/* ==========================================
+   MODAL
+========================================== */
+
+function zatvoriModal(id){
+
+    document.getElementById(id)
+        .classList.remove("active");
+
+}
+
+
+/* ==========================================
+   NAZAD
+========================================== */
+
+function idiNazad(){
+
+    window.location.href = "admin.html";
+
+}
+
+
+/* ==========================================
+   ESCAPE HTML
+========================================== */
+
+function escapeHtml(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ==========================================
+   OSVEŽAVANJE
+========================================== */
+
+function osveziSve(){
+
+    osveziFilterMesta();
+
+    prikaziEkipe();
+
+    azurirajStatistiku();
+
+}
+
+
+/* ==========================================
+   ZATVARANJE MODALA KLIKOM VAN
+========================================== */
+
+document.querySelectorAll(".modal")
+.forEach(modal => {
+
+    modal.addEventListener("click", function(e){
+
+        if(e.target === modal){
+
+            modal.classList.remove("active");
+
+        }
+
+    });
+
+});
+
+
+/* ==========================================
+   ESC
+========================================== */
+
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "Escape"){
+
+        document.querySelectorAll(".modal")
+        .forEach(m => {
+
+            m.classList.remove("active");
+
+        });
+
+    }
+
+});
+
+
+/* ==========================================
+   START
+========================================== */
+
+osveziSve();
+
+/* =========================================================
+   KOMPLETAN SKAUTING PDF
+========================================================= */
+
+async function izveziKompletanSkautingPDF(){
+
+    if(!aktivnaEkipaId){
+
+        alert("Prvo otvorite skauting ekipe.");
+
+        return;
+
+    }
+
+    const ekipa = ekipe.find(
+        e => e.id === aktivnaEkipaId
+    );
+
+    if(!ekipa){
+
+        alert("Ekipa nije pronađena.");
+
+        return;
+
+    }
+
+    if(!ekipa.utakmice || ekipa.utakmice.length === 0){
+
+        alert(
+            "Za ovu ekipu još nema unetih utakmica."
+        );
+
+        return;
+
+    }
+
+
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF({
+        orientation:"portrait",
+        unit:"mm",
+        format:"a4"
+    });
+
+
+    const crvena = [200,16,46];
+    const tamna = [35,35,35];
+    const siva = [110,110,110];
+    const svetla = [245,245,245];
+    const zelena = [22,131,75];
+
+
+    const sirina =
+        pdf.internal.pageSize.getWidth();
+
+    const visina =
+        pdf.internal.pageSize.getHeight();
+
+
+    /* =====================================================
+       FUNKCIJE
+    ===================================================== */
+
+    function naslovStrane(){
+
+        pdf.setFillColor(
+            crvena[0],
+            crvena[1],
+            crvena[2]
+        );
+
+        pdf.rect(
+            0,
+            0,
+            sirina,
+            18,
+            "F"
+        );
+
+
+        pdf.setTextColor(255,255,255);
+
+        pdf.setFontSize(9);
+
+        pdf.setFont("helvetica","bold");
+
+        pdf.text(
+            "KK TEMPO",
+            15,
+            11
+        );
+
+
+        pdf.setFontSize(8);
+
+        pdf.setFont("helvetica","normal");
+
+        pdf.text(
+            "SKAUTING • MLAĐI PIONIRI",
+            sirina - 15,
+            11,
+            {
+                align:"right"
+            }
+        );
+
+
+        pdf.setTextColor(
+            tamna[0],
+            tamna[1],
+            tamna[2]
+        );
+
+    }
+
+
+    function footer(){
+
+        const brojStrana =
+            pdf.internal.getNumberOfPages();
+
+        pdf.setDrawColor(220,220,220);
+
+        pdf.line(
+            15,
+            visina - 12,
+            sirina - 15,
+            visina - 12
+        );
+
+
+        pdf.setFontSize(7);
+
+        pdf.setTextColor(
+            siva[0],
+            siva[1],
+            siva[2]
+        );
+
+
+        pdf.text(
+            "KK TEMPO • Interni skauting dokument",
+            15,
+            visina - 7
+        );
+
+
+        pdf.text(
+            `Strana ${brojStrana}`,
+            sirina - 15,
+            visina - 7,
+            {
+                align:"right"
+            }
+        );
+
+    }
+
+
+    function novaStrana(){
+
+        pdf.addPage();
+
+        naslovStrane();
+
+    }
+
+
+    function kartica(
+        x,
+        y,
+        w,
+        h,
+        naslov,
+        vrednost,
+        boja = crvena
+    ){
+
+        pdf.setFillColor(250,250,250);
+
+        pdf.roundedRect(
+            x,
+            y,
+            w,
+            h,
+            3,
+            3,
+            "F"
+        );
+
+
+        pdf.setFillColor(
+            boja[0],
+            boja[1],
+            boja[2]
+        );
+
+        pdf.roundedRect(
+            x,
+            y,
+            2.5,
+            h,
+            1,
+            1,
+            "F"
+        );
+
+
+        pdf.setFont("helvetica","bold");
+
+        pdf.setFontSize(7);
+
+        pdf.setTextColor(
+            siva[0],
+            siva[1],
+            siva[2]
+        );
+
+
+        pdf.text(
+            naslov.toUpperCase(),
+            x + 7,
+            y + 8
+        );
+
+
+        pdf.setFontSize(17);
+
+        pdf.setTextColor(
+            tamna[0],
+            tamna[1],
+            tamna[2]
+        );
+
+
+        pdf.text(
+            String(vrednost),
+            x + 7,
+            y + 19
+        );
+
+    }
+
+
+    function centriranTekst(
+        tekst,
+        x,
+        y,
+        velicina = 10,
+        bold = false
+    ){
+
+        pdf.setFont(
+            "helvetica",
+            bold ? "bold" : "normal"
+        );
+
+        pdf.setFontSize(velicina);
+
+        pdf.setTextColor(
+            tamna[0],
+            tamna[1],
+            tamna[2]
+        );
+
+        pdf.text(
+            tekst,
+            x,
+            y,
+            {
+                align:"center"
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       STATISTIKA
+    ===================================================== */
+
+    const s =
+        izracunajStatistiku(ekipa);
+
+
+    const procenatPobeda =
+        s.utakmice
+        ? (s.pobede / s.utakmice) * 100
+        : 0;
+
+
+    const cetvrtine = [
+        "1. cetvrtina",
+        "2. cetvrtina",
+        "3. cetvrtina",
+        "4. cetvrtina"
+    ];
+
+
+    const najbolja =
+        cetvrtine[s.maxIndex];
+
+
+    const najslabija =
+        cetvrtine[s.minIndex];
+
+
+    /* =====================================================
+       NASLOVNA STRANA
+    ===================================================== */
+
+    pdf.setFillColor(
+        crvena[0],
+        crvena[1],
+        crvena[2]
+    );
+
+    pdf.rect(
+        0,
+        0,
+        sirina,
+        70,
+        "F"
+    );
+
+
+    pdf.setTextColor(255,255,255);
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    pdf.setFontSize(30);
+
+    pdf.text(
+        "KK TEMPO",
+        sirina / 2,
+        30,
+        {
+            align:"center"
+        }
+    );
+
+
+    pdf.setFontSize(17);
+
+    pdf.text(
+        "KOMPLETAN SKAUTING",
+        sirina / 2,
+        44,
+        {
+            align:"center"
+        }
+    );
+
+
+    pdf.setFontSize(11);
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+    pdf.text(
+        "MLADJI PIONIRI",
+        sirina / 2,
+        55,
+        {
+            align:"center"
+        }
+    );
+
+
+    pdf.setTextColor(
+        tamna[0],
+        tamna[1],
+        tamna[2]
+    );
+
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    pdf.setFontSize(22);
+
+/* =====================================================
+   LOGO PROTIVNIKA NA NASLOVNOJ STRANI
+===================================================== */
+
+let logoY = 78;
+
+
+/* NAZIV EKIPE */
+
+pdf.setTextColor(
+    tamna[0],
+    tamna[1],
+    tamna[2]
+);
+
+pdf.setFont(
+    "helvetica",
+    "bold"
+);
+
+pdf.setFontSize(22);
+
+
+/* AKO POSTOJI LOGO */
+
+if(ekipa.logo){
+
+    try{
+
+        const logoDimenzije =
+            await ucitajDimenzijeSlike(
+                ekipa.logo
+            );
+
+
+        const maxLogoW = 42;
+        const maxLogoH = 42;
+
+
+        let logoW =
+            logoDimenzije.width;
+
+        let logoH =
+            logoDimenzije.height;
+
+
+        const odnos =
+            Math.min(
+                maxLogoW / logoW,
+                maxLogoH / logoH
+            );
+
+
+        logoW *= odnos;
+        logoH *= odnos;
+
+
+        const logoX =
+            (sirina - logoW) / 2;
+
+
+        const logoStartY =
+            76;
+
+
+        /* BELA PODLOGA */
+
+        pdf.setFillColor(
+            255,
+            255,
+            255
+        );
+
+
+        pdf.setDrawColor(
+            225,
+            225,
+            225
+        );
+
+
+        pdf.roundedRect(
+            logoX - 5,
+            logoStartY - 5,
+            logoW + 10,
+            logoH + 10,
+            4,
+            4,
+            "FD"
+        );
+
+
+        pdf.addImage(
+            ekipa.logo,
+            "PNG",
+            logoX,
+            logoStartY,
+            logoW,
+            logoH
+        );
+
+
+        logoY =
+            logoStartY +
+            logoH +
+            17;
+
+
+    }catch(error){
+
+        console.log(
+            "Logo nije moguće ubaciti:",
+            error
+        );
+
+        logoY = 95;
+
+    }
+
+}
+
+
+/* NAZIV EKIPE */
+
+pdf.text(
+    ekipa.naziv,
+    sirina / 2,
+    logoY,
+    {
+        align:"center"
+    }
+);
+
+
+pdf.setFont(
+    "helvetica",
+    "normal"
+);
+
+pdf.setFontSize(11);
+
+pdf.setTextColor(
+    siva[0],
+    siva[1],
+    siva[2]
+);
+
+
+pdf.text(
+    `${ekipa.kategorija} • ${ekipa.mesto}`,
+    sirina / 2,
+    logoY + 9,
+    {
+        align:"center"
+    }
+);
+
+
+pdf.setDrawColor(
+    crvena[0],
+    crvena[1],
+    crvena[2]
+);
+
+
+pdf.line(
+    55,
+    logoY + 17,
+    sirina - 55,
+    logoY + 17
+);
+
+
+pdf.setFontSize(10);
+
+pdf.setTextColor(
+    tamna[0],
+    tamna[1],
+    tamna[2]
+);
+
+
+pdf.text(
+    "Skauting izveštaj na osnovu dosadašnjih rezultata sezone",
+    sirina / 2,
+    logoY + 28,
+    {
+        align:"center"
+    }
+);
+
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+    pdf.setFontSize(11);
+
+    pdf.setTextColor(
+        siva[0],
+        siva[1],
+        siva[2]
+    );
+
+
+    pdf.text(
+        `${ekipa.kategorija} • ${ekipa.mesto}`,
+        sirina / 2,
+        104,
+        {
+            align:"center"
+        }
+    );
+
+
+    pdf.setDrawColor(
+        crvena[0],
+        crvena[1],
+        crvena[2]
+    );
+
+    pdf.line(
+        55,
+        112,
+        sirina - 55,
+        112
+    );
+
+
+    pdf.setTextColor(
+        tamna[0],
+        tamna[1],
+        tamna[2]
+    );
+
+
+    pdf.setFontSize(10);
+
+    pdf.text(
+        "Skauting izvestaj na osnovu dosadasnjih rezultata sezone",
+        sirina / 2,
+        123,
+        {
+            align:"center"
+        }
+    );
+
+
+    const datumIzvestaja =
+        new Date().toLocaleDateString(
+            "sr-Latn-RS"
+        );
+
+
+    pdf.setFontSize(9);
+
+    pdf.setTextColor(
+        siva[0],
+        siva[1],
+        siva[2]
+    );
+
+
+    pdf.text(
+        `Izvestaj napravljen: ${datumIzvestaja}`,
+        sirina / 2,
+        132,
+        {
+            align:"center"
+        }
+    );
+
+
+    /* =====================================================
+       KRATAK REZIME
+    ===================================================== */
+
+    kartica(
+        18,
+        155,
+        40,
+        28,
+        "Utakmice",
+        s.utakmice
+    );
+
+
+    kartica(
+        62,
+        155,
+        40,
+        28,
+        "Pobede",
+        s.pobede,
+        zelena
+    );
+
+
+    kartica(
+        106,
+        155,
+        40,
+        28,
+        "Porazi",
+        s.porazi,
+        crvena
+    );
+
+
+    kartica(
+        150,
+        155,
+        42,
+        28,
+        "% pobeda",
+        `${procenatPobeda.toFixed(0)}%`,
+        [70,70,70]
+    );
+
+
+    pdf.setFontSize(8);
+
+    pdf.setTextColor(
+        siva[0],
+        siva[1],
+        siva[2]
+    );
+
+
+    pdf.text(
+        "Ovaj dokument predstavlja interni trenerski skauting.",
+        sirina / 2,
+        205,
+        {
+            align:"center"
+        }
+    );
+
+
+    pdf.text(
+        "Podaci su zasnovani iskljucivo na rucno unetim rezultatima.",
+        sirina / 2,
+        211,
+        {
+            align:"center"
+        }
+    );
+
+
+    footer();
+
+
+    /* =====================================================
+       STRANA 2 — OPŠTA STATISTIKA
+    ===================================================== */
+
+    novaStrana();
+
+
+    pdf.setFontSize(19);
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    pdf.text(
+        "1. OPSTA STATISTIKA",
+        15,
+        32
+    );
+
+
+    kartica(
+        15,
+        45,
+        43,
+        27,
+        "Odigrano",
+        s.utakmice
+    );
+
+
+    kartica(
+        62,
+        45,
+        43,
+        27,
+        "Pobede",
+        s.pobede,
+        zelena
+    );
+
+
+    kartica(
+        109,
+        45,
+        43,
+        27,
+        "Porazi",
+        s.porazi,
+        crvena
+    );
+
+
+    kartica(
+        156,
+        45,
+        39,
+        27,
+        "Kos razlika",
+        `${s.kosRazlika >= 0 ? "+" : ""}${s.kosRazlika}`,
+        [70,70,70]
+    );
+
+
+    kartica(
+        15,
+        80,
+        57,
+        27,
+        "Prosek datih",
+        s.prosekDatih.toFixed(1)
+    );
+
+
+    kartica(
+        76,
+        80,
+        57,
+        27,
+        "Prosek primljenih",
+        s.prosekPrimljenih.toFixed(1),
+        [70,70,70]
+    );
+
+
+    kartica(
+        137,
+        80,
+        58,
+        27,
+        "Procenat pobeda",
+        `${procenatPobeda.toFixed(1)}%`,
+        zelena
+    );
+
+
+    /* =====================================================
+       GRAFIK PROSEKA
+    ===================================================== */
+
+    const chartCanvas =
+        document.createElement("canvas");
+
+    chartCanvas.width = 900;
+    chartCanvas.height = 450;
+
+
+    const chartCtx =
+        chartCanvas.getContext("2d");
+
+
+    const chart =
+        new Chart(
+            chartCtx,
+            {
+                type:"bar",
+
+                data:{
+                    labels:[
+                        "1. četvrtina",
+                        "2. četvrtina",
+                        "3. četvrtina",
+                        "4. četvrtina"
+                    ],
+
+                    datasets:[{
+
+                        label:"Prosečno poena",
+
+                        data:s.proseci.map(
+                            x => Number(x.toFixed(1))
+                        ),
+
+                        backgroundColor:[
+                            "#c8102e",
+                            "#d82a46",
+                            "#e24c64",
+                            "#ef8a99"
+                        ],
+
+                        borderRadius:8
+
+                    }]
+
+                },
+
+                options:{
+
+                    responsive:false,
+
+                    animation:false,
+
+                    plugins:{
+                        legend:{
+                            display:false
+                        }
+                    },
+
+                    scales:{
+
+                        y:{
+                            beginAtZero:true,
+
+                            ticks:{
+                                precision:0
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+
+    await new Promise(
+        resolve => setTimeout(resolve,150)
+    );
+
+
+    const chartImage =
+        chartCanvas.toDataURL(
+            "image/png",
+            1.0
+        );
+
+
+    pdf.setFontSize(13);
+
+    pdf.setTextColor(
+        tamna[0],
+        tamna[1],
+        tamna[2]
+    );
+
+
+    pdf.text(
+        "Prosek postignutih poena po cetvrtinama",
+        15,
+        128
+    );
+
+
+    pdf.addImage(
+        chartImage,
+        "PNG",
+        18,
+        135,
+        174,
+        87
+    );
+
+
+    chart.destroy();
+
+
+    /* =====================================================
+       ZAKLJUČAK O ČETVRTINAMA
+    ===================================================== */
+
+    pdf.setFillColor(
+        250,
+        250,
+        250
+    );
+
+
+    pdf.roundedRect(
+        15,
+        230,
+        180,
+        43,
+        4,
+        4,
+        "F"
+    );
+
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    pdf.setFontSize(11);
+
+    pdf.setTextColor(
+        crvena[0],
+        crvena[1],
+        crvena[2]
+    );
+
+
+    pdf.text(
+        "ANALIZA CETVRTINA",
+        23,
+        241
+    );
+
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+    pdf.setFontSize(9);
+
+    pdf.setTextColor(
+        tamna[0],
+        tamna[1],
+        tamna[2]
+    );
+
+
+    pdf.text(
+        `Najvise poena prosecno postizu u: ${najbolja}`,
+        23,
+        251
+    );
+
+
+    pdf.text(
+        `Prosek u toj cetvrtini: ${s.proseci[s.maxIndex].toFixed(1)} poena`,
+        23,
+        258
+    );
+
+
+    pdf.text(
+        `Najmanje poena prosecno postizu u: ${najslabija}`,
+        23,
+        266
+    );
+
+
+    pdf.text(
+        `Prosek u toj cetvrtini: ${s.proseci[s.minIndex].toFixed(1)} poena`,
+        23,
+        273
+    );
+
+
+    footer();
+
+
+    /* =====================================================
+       STRANA 3 — UČINAK PO UTAKMICAMA
+    ===================================================== */
+
+    novaStrana();
+
+
+    pdf.setFontSize(19);
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    pdf.text(
+        "2. REZULTATI UTAKMICA",
+        15,
+        32
+    );
+
+
+    const redovi =
+        [...ekipa.utakmice]
+        .sort(
+            (a,b) =>
+            new Date(a.datum) -
+            new Date(b.datum)
+        )
+        .map(u => {
+
+            const nasi =
+                Number(u.ourQ1) +
+                Number(u.ourQ2) +
+                Number(u.ourQ3) +
+                Number(u.ourQ4);
+
+
+            const njihovi =
+                Number(u.theirQ1) +
+                Number(u.theirQ2) +
+                Number(u.theirQ3) +
+                Number(u.theirQ4);
+
+
+            const ishod =
+                nasi > njihovi
+                    ? "POBEDA"
+                    : nasi < njihovi
+                        ? "PORAZ"
+                        : "NEREŠENO";
+
+
+            return [
+
+                formatDatum(u.datum),
+
+                u.protivnik,
+
+                `${u.ourQ1} : ${u.theirQ1}`,
+
+                `${u.ourQ2} : ${u.theirQ2}`,
+
+                `${u.ourQ3} : ${u.theirQ3}`,
+
+                `${u.ourQ4} : ${u.theirQ4}`,
+
+                `${nasi} : ${njihovi}`,
+
+                ishod
+
+            ];
+
+        });
+
+
+    pdf.autoTable({
+
+        startY:42,
+
+        head:[[
+
+            "Datum",
+
+            "Protivnik",
+
+            "1/4",
+
+            "2/4",
+
+            "3/4",
+
+            "4/4",
+
+            "Ukupno",
+
+            "Ishod"
+
+        ]],
+
+        body:redovi,
+
+        theme:"grid",
+
+        styles:{
+
+            font:"helvetica",
+
+            fontSize:7,
+
+            cellPadding:3,
+
+            halign:"center",
+
+            valign:"middle"
+
+        },
+
+        headStyles:{
+
+            fillColor:crvena,
+
+            textColor:255,
+
+            fontStyle:"bold",
+
+            halign:"center"
+
+        },
+
+        columnStyles:{
+
+            0:{
+                cellWidth:22
+            },
+
+            1:{
+                cellWidth:40,
+                halign:"left"
+            },
+
+            2:{
+                cellWidth:18
+            },
+
+            3:{
+                cellWidth:18
+            },
+
+            4:{
+                cellWidth:18
+            },
+
+            5:{
+                cellWidth:18
+            },
+
+            6:{
+                cellWidth:23
+            },
+
+            7:{
+                cellWidth:25
+            }
+
+        },
+
+        didParseCell:function(data){
+
+            if(
+                data.section === "body" &&
+                data.column.index === 7
+            ){
+
+                if(
+                    data.cell.text[0] === "POBEDA"
+                ){
+
+                    data.cell.styles.textColor =
+                        zelena;
+
+                    data.cell.styles.fontStyle =
+                        "bold";
+
+                }
+
+                if(
+                    data.cell.text[0] === "PORAZ"
+                ){
+
+                    data.cell.styles.textColor =
+                        crvena;
+
+                    data.cell.styles.fontStyle =
+                        "bold";
+
+                }
+
+            }
+
+        }
+
+    });
+
+
+    footer();
+
+
+    /* =====================================================
+       STRANA 4 — DETALJNA ANALIZA ČETVRTINA
+    ===================================================== */
+
+    novaStrana();
+
+
+    pdf.setFontSize(19);
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    pdf.text(
+        "3. DETALJNA ANALIZA CETVRTINA",
+        15,
+        32
+    );
+
+
+    const detaljnaTabela =
+        [...ekipa.utakmice]
+        .sort(
+            (a,b) =>
+            new Date(a.datum) -
+            new Date(b.datum)
+        )
+        .map(u => {
+
+            const nasi = [
+
+                Number(u.ourQ1),
+
+                Number(u.ourQ2),
+
+                Number(u.ourQ3),
+
+                Number(u.ourQ4)
+
+            ];
+
+
+            const njihovi = [
+
+                Number(u.theirQ1),
+
+                Number(u.theirQ2),
+
+                Number(u.theirQ3),
+
+                Number(u.theirQ4)
+
+            ];
+
+
+            return [
+
+                formatDatum(u.datum),
+
+                u.protivnik,
+
+                nasi[0],
+
+                njihovi[0],
+
+                nasi[1],
+
+                njihovi[1],
+
+                nasi[2],
+
+                njihovi[2],
+
+                nasi[3],
+
+                njihovi[3]
+
+            ];
+
+        });
+
+
+    pdf.autoTable({
+
+        startY:42,
+
+        head:[[
+
+            "Datum",
+
+            "Protivnik",
+
+            "1/4 Ekipa A",
+
+            "1/4 Ekipa B",
+
+            "2/4 Ekipa A",
+
+            "2/4 Ekipa B",
+
+            "3/4 Ekipa A",
+
+            "3/4 Ekipa B",
+
+            "4/4 Ekipa A",
+
+            "4/4 Ekipa B"
+
+        ]],
+
+        body:detaljnaTabela,
+
+        theme:"grid",
+
+        styles:{
+
+            font:"helvetica",
+
+            fontSize:7,
+
+            cellPadding:3,
+
+            halign:"center"
+
+        },
+
+        headStyles:{
+
+            fillColor:crvena,
+
+            textColor:255,
+
+            fontStyle:"bold",
+
+            halign:"center"
+
+        },
+
+        columnStyles:{
+
+            0:{
+                cellWidth:21
+            },
+
+            1:{
+                cellWidth:38,
+                halign:"left"
+            }
+
+        }
+
+    });
+
+
+    /* =====================================================
+       ANALIZA POBEDA / PORAZA GRAFIK
+    ===================================================== */
+
+    const resultCanvas =
+        document.createElement("canvas");
+
+    resultCanvas.width = 500;
+    resultCanvas.height = 500;
+
+
+    const resultCtx =
+        resultCanvas.getContext("2d");
+
+
+    const resultChart =
+        new Chart(
+            resultCtx,
+            {
+
+                type:"doughnut",
+
+                data:{
+
+                    labels:[
+                        "Pobede",
+                        "Porazi"
+                    ],
+
+                    datasets:[{
+
+                        data:[
+                            s.pobede,
+                            s.porazi
+                        ],
+
+                        backgroundColor:[
+                            "#16834b",
+                            "#c8102e"
+                        ]
+
+                    }]
+
+                },
+
+                options:{
+
+                    responsive:false,
+
+                    animation:false,
+
+                    plugins:{
+
+                        legend:{
+                            position:"bottom"
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+
+    await new Promise(
+        resolve => setTimeout(resolve,150)
+    );
+
+
+    const resultImage =
+        resultCanvas.toDataURL(
+            "image/png",
+            1.0
+        );
+
+
+    const yGrafik =
+        Math.max(
+            pdf.lastAutoTable.finalY + 15,
+            105
+        );
+
+
+    pdf.setFontSize(12);
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    pdf.text(
+        "Odnos pobeda i poraza",
+        15,
+        yGrafik
+    );
+
+
+    pdf.addImage(
+        resultImage,
+        "PNG",
+        62,
+        yGrafik + 5,
+        86,
+        86
+    );
+
+
+    resultChart.destroy();
+
+
+    footer();
+
+/* =====================================================
+   NOVA STRANA — AKCIJE / FOTOGRAFIJE
+===================================================== */
+
+if(
+    ekipa.fotografije &&
+    ekipa.fotografije.length > 0
+){
+
+    novaStrana();
+
+
+    pdf.setFontSize(20);
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    pdf.setTextColor(
+        tamna[0],
+        tamna[1],
+        tamna[2]
+    );
+
+
+    pdf.text(
+        "4. AKCIJE / FOTO SKAUTING",
+        15,
+        32
+    );
+
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+
+    pdf.setFontSize(9);
+
+
+    pdf.setTextColor(
+        siva[0],
+        siva[1],
+        siva[2]
+    );
+
+
+    pdf.text(
+        "Vizuelna analiza akcija i karakterističnih situacija protivnika.",
+        15,
+        40
+    );
+
+
+    let x = 15;
+    let y = 50;
+
+    const sirinaSlike = 82;
+    const visinaSlike = 55;
+
+    const razmakX = 101;
+    const razmakY = 100;
+
+
+    for(
+        let i = 0;
+        i < ekipa.fotografije.length;
+        i++
+    ){
+
+        const foto =
+            ekipa.fotografije[i];
+
+
+        /* NOVI RED */
+
+        if(
+            i > 0 &&
+            i % 2 === 0
+        ){
+
+            x = 15;
+
+            y += razmakY;
+
+        }
+
+
+        /* AKO NEMA MESTA */
+
+        if(
+            y > 245
+        ){
+
+            footer();
+
+            novaStrana();
+
+            pdf.setFontSize(20);
+
+            pdf.setFont(
+                "helvetica",
+                "bold"
+            );
+
+            pdf.text(
+                "4. AKCIJE / FOTO SKAUTING",
+                15,
+                32
+            );
+
+
+            x = 15;
+
+            y = 48;
+
+        }
+
+
+        /* OKVIR */
+
+        pdf.setFillColor(
+            250,
+            250,
+            250
+        );
+
+
+        pdf.setDrawColor(
+            220,
+            220,
+            220
+        );
+
+
+        pdf.roundedRect(
+            x,
+            y,
+            sirinaSlike,
+            88,
+            4,
+            4,
+            "FD"
+        );
+
+
+        /* FOTOGRAFIJA */
+
+        try{
+
+            pdf.addImage(
+                foto.image,
+                "JPEG",
+                x + 4,
+                y + 4,
+                sirinaSlike - 8,
+                visinaSlike
+            );
+
+        }catch(error){
+
+            try{
+
+                pdf.addImage(
+                    foto.image,
+                    "PNG",
+                    x + 4,
+                    y + 4,
+                    sirinaSlike - 8,
+                    visinaSlike
+                );
+
+            }catch(e){
+
+                console.log(
+                    "Greška fotografije:",
+                    e
+                );
+
+            }
+
+        }
+
+
+        /* NASLOV */
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+        pdf.setFontSize(9);
+
+
+        pdf.setTextColor(
+            crvena[0],
+            crvena[1],
+            crvena[2]
+        );
+
+
+        pdf.text(
+            foto.naziv ||
+            `Akcija ${i + 1}`,
+            x + 5,
+            y + 65
+        );
+
+
+        /* OPIS */
+
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
+        pdf.setFontSize(7);
+
+
+        pdf.setTextColor(
+            tamna[0],
+            tamna[1],
+            tamna[2]
+        );
+
+
+        const opis =
+            foto.opis ||
+            "Bez dodatnog opisa.";
+
+
+        const opisLinije =
+            pdf.splitTextToSize(
+                opis,
+                sirinaSlike - 10
+            );
+
+
+        pdf.text(
+            opisLinije.slice(0,2),
+            x + 5,
+            y + 72
+        );
+
+
+        x += razmakX;
+
+    }
+
+
+    footer();
+
+}
+
+    /* =====================================================
+       ZAVRŠNA STRANA — ZAKLJUČAK
+    ===================================================== */
+
+    novaStrana();
+
+
+    pdf.setFontSize(20);
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    pdf.text(
+        "4. ZAKLJUCAK SKAUTINGA",
+        15,
+        32
+    );
+
+
+    let zakljucak = "";
+
+
+    if(s.utakmice > 0){
+
+        zakljucak +=
+            `Ekipa ${ekipa.naziv} je u dosadasnjem delu sezone odigrala ${s.utakmice} utakmica, uz ucinak od ${s.pobede} pobeda i ${s.porazi} poraza. `;
+
+
+        zakljucak +=
+            `To predstavlja procenat pobeda od ${procenatPobeda.toFixed(1)}%. `;
+
+
+        zakljucak +=
+            `Prosecno postizu ${s.prosekDatih.toFixed(1)} poena po utakmici, dok prosecno primaju ${s.prosekPrimljenih.toFixed(1)} poena. `;
+
+
+        if(s.kosRazlika > 0){
+
+            zakljucak +=
+                `Ukupna kos-razlika je pozitivna i iznosi +${s.kosRazlika}. `;
+
+        }else if(s.kosRazlika < 0){
+
+            zakljucak +=
+                `Ukupna kos-razlika je negativna i iznosi ${s.kosRazlika}. `;
+
+        }else{
+
+            zakljucak +=
+                `Ukupna kos-razlika je neutralna. `;
+
+        }
+
+
+        zakljucak +=
+            `Najefikasniji period igre je ${najbolja}, u kojoj postizu prosecno ${s.proseci[s.maxIndex].toFixed(1)} poena. `;
+
+
+        zakljucak +=
+            `Najmanje poena prosecno postizu u ${najslabija}, sa prosekom od ${s.proseci[s.minIndex].toFixed(1)} poena. `;
+
+
+        if(
+            s.proseci[s.maxIndex] -
+            s.proseci[s.minIndex] >= 5
+        ){
+
+            zakljucak +=
+                `Razlika izmedju najefikasnije i najmanje efikasne cetvrtine je izrazena, što moze biti znacajno za pripremu utakmice. `;
+
+        }else{
+
+            zakljucak +=
+                `Proseci po cetvrtinama su relativno ujednaceni. `;
+
+        }
+
+
+        if(s.pobede > s.porazi){
+
+            zakljucak +=
+                `Dosadasnji rezultati pokazuju pozitivan takmicarski ucinak. `;
+
+        }else if(s.pobede < s.porazi){
+
+            zakljucak +=
+                `Dosadasnji rezultati pokazuju da ekipa ima vise poraza nego pobeda, sto moze ukazivati na prostor za pritisak i promenu ritma utakmice. `;
+
+        }else{
+
+            zakljucak +=
+                `Dosadasnji ucinak je izjednacen po broju pobeda i poraza. `;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       BOX ZAKLJUČAK
+    ===================================================== */
+
+    pdf.setFillColor(
+        250,
+        250,
+        250
+    );
+
+
+    pdf.setDrawColor(
+        crvena[0],
+        crvena[1],
+        crvena[2]
+    );
+
+
+    pdf.roundedRect(
+        15,
+        48,
+        180,
+        95,
+        5,
+        5,
+        "FD"
+    );
+
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+    pdf.setFontSize(10);
+
+    pdf.setTextColor(
+        tamna[0],
+        tamna[1],
+        tamna[2]
+    );
+
+
+    const tekstLinije =
+        pdf.splitTextToSize(
+            zakljucak,
+            160
+        );
+
+
+    pdf.text(
+        tekstLinije,
+        25,
+        62,
+        {
+            lineHeightFactor:1.65
+        }
+    );
+
+
+    /* =====================================================
+       KLJUČNE INFORMACIJE
+    ===================================================== */
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    pdf.setFontSize(13);
+
+    pdf.setTextColor(
+        crvena[0],
+        crvena[1],
+        crvena[2]
+    );
+
+
+    pdf.text(
+        "KLJUCNE SKAUTING INFORMACIJE",
+        15,
+        165
+    );
+
+
+    const kljucne = [
+
+        [
+            "NAJEFIKASNIJA CETVRTINA",
+            najbolja
+        ],
+
+        [
+            "NAJMANJE EFIKASNA CETVRTINA",
+            najslabija
+        ],
+
+        [
+            "PROSEK POENA",
+            s.prosekDatih.toFixed(1)
+        ],
+
+        [
+            "PROSEK PRIMLJENIH",
+            s.prosekPrimljenih.toFixed(1)
+        ],
+
+        [
+            "KOS RAZLIKA",
+            `${s.kosRazlika >= 0 ? "+" : ""}${s.kosRazlika}`
+        ],
+
+        [
+            "POBEDE / PORAZI",
+            `${s.pobede} / ${s.porazi}`
+        ]
+
+    ];
+
+
+    pdf.autoTable({
+
+        startY:173,
+
+        body:kljucne,
+
+        theme:"grid",
+
+        styles:{
+
+            font:"helvetica",
+
+            fontSize:9,
+
+            cellPadding:5
+
+        },
+
+        columnStyles:{
+
+            0:{
+                fontStyle:"bold",
+                fillColor:[248,248,248],
+                cellWidth:90
+            },
+
+            1:{
+                halign:"center",
+                fontStyle:"bold"
+            }
+
+        },
+
+        didParseCell:function(data){
+
+            if(
+                data.section === "body" &&
+                data.column.index === 1
+            ){
+
+                data.cell.styles.textColor =
+                    crvena;
+
+            }
+
+        }
+
+    });
+
+
+    /* =====================================================
+       ZAVRŠNA NAPOMENA
+    ===================================================== */
+
+    const krajY =
+        pdf.lastAutoTable.finalY + 18;
+
+
+    pdf.setFillColor(
+        crvena[0],
+        crvena[1],
+        crvena[2]
+    );
+
+
+    pdf.roundedRect(
+        15,
+        krajY,
+        180,
+        22,
+        4,
+        4,
+        "F"
+    );
+
+
+    pdf.setTextColor(
+        255,
+        255,
+        255
+    );
+
+
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    pdf.setFontSize(9);
+
+
+    pdf.text(
+        "NAPOMENA: Izvestaj je automatski generisan na osnovu unetih rezultata.",
+        sirina / 2,
+        krajY + 9,
+        {
+            align:"center"
+        }
+    );
+
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+    pdf.text(
+        "Koristiti kao pomoc pri pripremi utakmice i planiranju taktike.",
+        sirina / 2,
+        krajY + 16,
+        {
+            align:"center"
+        }
+    );
+
+
+    footer();
+
+
+    /* =====================================================
+       IME PDF FAJLA
+    ===================================================== */
+
+    const bezKvacica = tekst => {
+
+        return tekst
+            .replace(/č/g,"c")
+            .replace(/ć/g,"c")
+            .replace(/š/g,"s")
+            .replace(/ž/g,"z")
+            .replace(/đ/g,"d")
+            .replace(/Č/g,"C")
+            .replace(/Ć/g,"C")
+            .replace(/Š/g,"S")
+            .replace(/Ž/g,"Z")
+            .replace(/Đ/g,"D");
+
+    };
+
+
+    const nazivFajla =
+        bezKvacica(
+            ekipa.naziv
+        )
+        .replace(/[^a-zA-Z0-9]+/g,"_");
+
+
+    pdf.save(
+        `Skauting_${nazivFajla}.pdf`
+    );
+
+}
+
+/* =========================================================
+   LOGO PROTIVNIKA
+========================================================= */
+
+let trenutniLogo = "";
+
+
+/* PREVIEW LOGOA */
+
+function previewTeamLogo(event){
+
+    const file = event.target.files[0];
+
+    if(!file){
+
+        return;
+
+    }
+
+
+    const reader = new FileReader();
+
+
+    reader.onload = function(e){
+
+        trenutniLogo = e.target.result;
+
+
+        document.getElementById("teamLogoImage")
+            .src = trenutniLogo;
+
+
+        document.getElementById("teamLogoPreview")
+            .style.display = "block";
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* UKLONI LOGO */
+
+function obrisiLogoPreview(){
+
+    trenutniLogo = "";
+
+
+    document.getElementById("teamLogo")
+        .value = "";
+
+
+    document.getElementById("teamLogoImage")
+        .src = "";
+
+
+    document.getElementById("teamLogoPreview")
+        .style.display = "none";
+
+}
+
+function ucitajDimenzijeSlike(src){
+
+    return new Promise(
+        (resolve,reject) => {
+
+            const img =
+                new Image();
+
+
+            img.onload = function(){
+
+                resolve({
+
+                    width:
+                        img.naturalWidth,
+
+                    height:
+                        img.naturalHeight
+
+                });
+
+            };
+
+
+            img.onerror = function(){
+
+                reject(
+                    new Error(
+                        "Greška pri učitavanju slike."
+                    )
+                );
+
+            };
+
+
+            img.src = src;
+
+        }
+    );
+
+}
+
+let scoutingFotografije = [];
+
+
+/* =========================================================
+   UČITAVANJE FOTOGRAFIJA
+========================================================= */
+
+function ucitajScoutingFotografije(event){
+
+    const files = Array.from(event.target.files);
+
+    if(!files.length) return;
+
+
+    files.forEach(file => {
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            scoutingFotografije.push({
+
+                id: Date.now() +
+                    Math.random(),
+
+                image:
+                    e.target.result,
+
+                naziv:
+                    "Akcija protivnika",
+
+                opis:
+                    "",
+
+                napomena:
+                    ""
+
+            });
+
+            prikaziScoutingFotografije();
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+
+/* =========================================================
+   PRIKAZ FOTOGRAFIJA
+========================================================= */
+
+function prikaziScoutingFotografije(){
+
+    const container =
+        document.getElementById(
+            "scoutingPhotosPreview"
+        );
+
+
+    if(!container) return;
+
+
+    container.innerHTML = "";
+
+
+    scoutingFotografije.forEach((foto,index) => {
+
+        const div =
+            document.createElement("div");
+
+
+        div.style.cssText = `
+            background:#fff;
+            border:1px solid #ddd;
+            border-radius:12px;
+            padding:10px;
+        `;
+
+
+        div.innerHTML = `
+
+            <img
+                src="${foto.image}"
+                style="
+                    width:100%;
+                    height:130px;
+                    object-fit:cover;
+                    border-radius:8px;
+                "
+            >
+
+            <input
+                type="text"
+                placeholder="Naziv akcije"
+                value="${foto.naziv || ""}"
+                style="
+                    width:100%;
+                    margin-top:8px;
+                    padding:8px;
+                "
+                onchange="
+                    scoutingFotografije[${index}].naziv=this.value
+                "
+            >
+
+            <textarea
+                placeholder="Opis akcije..."
+                style="
+                    width:100%;
+                    margin-top:6px;
+                    padding:8px;
+                    min-height:60px;
+                "
+                onchange="
+                    scoutingFotografije[${index}].opis=this.value
+                "
+            >${foto.opis || ""}</textarea>
+
+            <textarea
+                placeholder="Trenerska napomena..."
+                style="
+                    width:100%;
+                    margin-top:6px;
+                    padding:8px;
+                    min-height:60px;
+                "
+                onchange="
+                    scoutingFotografije[${index}].napomena=this.value
+                "
+            >${foto.napomena || ""}</textarea>
+
+            <button
+                type="button"
+                class="btn btn-light"
+                style="
+                    width:100%;
+                    margin-top:6px;
+                "
+                onclick="
+                    obrisiScoutingFotografiju(${index})
+                "
+            >
+                🗑️ UKLONI
+            </button>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================================================
+   BRISANJE
+========================================================= */
+
+function obrisiScoutingFotografiju(index){
+
+    scoutingFotografije.splice(
+        index,
+        1
+    );
+
+
+    prikaziScoutingFotografije();
+
+}
+
+</script>
+
+</body>
+</html>

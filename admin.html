@@ -455,18 +455,18 @@ Grafički statistički pregled
 
 </a>
 
-<a href="baza.html" class="card">
+<a href="skauting.html" class="card">
 
 <div class="icon">
 
 </div>
 
 <h3>
-KOMUNIKACIONI SISTEM
+SKAUTING EKIPA
 </h3>
 
 <p>
-Komunikacija sa roditeljima
+Prikaz statistickih podata protivnika i priprema utakmice
 </p>
 
 </a>
@@ -487,7 +487,6 @@ Izbor programa i spiskovi
 </a>
 
 </div>
-
 
 
 <footer>
@@ -871,6 +870,74 @@ alert(
 
 
 
+}
+
+/* =========================================================
+   KK TEMPO - PERSONALIZOVANI AI LINK ZA RODITELJE
+   ========================================================= */
+
+const AI_URL = "https://kktempo.github.io/kktempobratunac.com/ai.html";
+
+/*
+   Generisanje sigurnog nasumičnog tokena
+*/
+function generisiAIToken() {
+
+    if (window.crypto && crypto.getRandomValues) {
+
+        const niz = new Uint32Array(4);
+        crypto.getRandomValues(niz);
+
+        return Array.from(niz)
+            .map(broj => broj.toString(36))
+            .join("")
+            .toUpperCase();
+
+    }
+
+    return Math.random()
+        .toString(36)
+        .substring(2, 14)
+        .toUpperCase();
+}
+
+
+/*
+   Pronađi ili napravi token za člana
+*/
+function uzmiAIToken(sifra) {
+
+    let tokeni = JSON.parse(
+        localStorage.getItem("kktempo_ai_tokeni") || "{}"
+    );
+
+    /*
+       Ako član još nema token,
+       automatski ga generišemo.
+    */
+    if (!tokeni[sifra]) {
+
+        tokeni[sifra] = generisiAIToken();
+
+        localStorage.setItem(
+            "kktempo_ai_tokeni",
+            JSON.stringify(tokeni)
+        );
+    }
+
+    return tokeni[sifra];
+}
+
+
+/*
+   Kreiranje personalizovanog AI linka
+*/
+function napraviAILink(sifra) {
+
+    const token = uzmiAIToken(sifra);
+
+    return AI_URL + "?token=" +
+        encodeURIComponent(token);
 }
 
 </script>
