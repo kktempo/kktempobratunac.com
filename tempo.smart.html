@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+
+<script src="tempo-core.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TEMPO SMART</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --red:#c8102e;
+    --red2:#f0183d;
+    --dark:#08090d;
+    --dark2:#0d1017;
+    --dark3:#151923;
+    --text:#ffffff;
+    --muted:#8992a3;
+    --border:rgba(255,255,255,.08);
+}
+
+body{
+    background:var(--dark);
+    color:white;
+    height:100vh;
+    overflow:hidden;
+}
+
+
+/* ==================================================
+   APP
+================================================== */
+
+.app{
+    width:100%;
+    height:100vh;
+    display:flex;
+}
+
+
+/* ==================================================
+   SIDEBAR
+================================================== */
+
+.sidebar{
+
+    width:260px;
+    height:100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0b0d13 0%,
+            #08090d 100%
+        );
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+    flex-direction:column;
+
+    flex-shrink:0;
+
+    position:relative;
+
+    z-index:10;
+}
+
+
+/* LOGO */
+
+.logo-area{
+
+    height:100px;
+
+    display:flex;
+    align-items:center;
+
+    padding:20px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+
+.logo-circle{
+
+    width:52px;
+    height:52px;
+
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--red2),
+            var(--red)
+        );
+
+    font-size:25px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(200,16,46,.35);
+
+}
+
+
+.logo-text{
+    margin-left:12px;
+}
+
+
+.logo-text h1{
+    font-size:18px;
+    font-weight:900;
+    letter-spacing:.5px;
+}
+
+
+.logo-text h1 span{
+    color:var(--red2);
+}
+
+
+.logo-text p{
+    margin-top:4px;
+    color:#697384;
+    font-size:8px;
+    letter-spacing:1.5px;
+}
+
+
+/* MENU */
+
+.menu{
+
+    padding:20px 12px;
+
+    flex:1;
+
+    overflow-y:auto;
+}
+
+
+.menu-title{
+
+    color:#535c6c;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    padding:0 12px 10px;
+
+}
+
+
+.menu-item{
+
+    height:50px;
+
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    color:#929bab;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:0 13px;
+
+    margin-bottom:5px;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    text-align:left;
+
+    transition:.2s;
+
+}
+
+
+.menu-item:hover{
+
+    background:
+        rgba(255,255,255,.045);
+
+    color:white;
+
+}
+
+
+.menu-item.active{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(200,16,46,.25),
+            rgba(200,16,46,.07)
+        );
+
+    border-left:3px solid var(--red);
+
+}
+
+
+.menu-icon{
+
+    width:28px;
+    height:28px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:8px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    font-size:15px;
+
+}
+
+
+.menu-item.active
+.menu-icon{
+
+    background:
+        var(--red);
+
+}
+
+
+/* BOTTOM */
+
+.sidebar-bottom{
+
+    padding:15px;
+
+    border-top:1px solid var(--border);
+
+}
+
+
+.system-status{
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:12px;
+
+}
+
+
+.status-line{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:10px;
+
+    color:#87909f;
+
+}
+
+
+.status-dot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#18d875;
+
+    box-shadow:
+        0 0 10px #18d875;
+
+}
+
+
+.status-line strong{
+
+    color:#18d875;
+
+}
+
+
+/* ==================================================
+   MAIN
+================================================== */
+
+.main{
+
+    flex:1;
+
+    height:100vh;
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+/* ==================================================
+   TOP BAR
+================================================== */
+
+.topbar{
+
+    height:82px;
+
+    flex-shrink:0;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 32px;
+
+    background:
+        rgba(8,9,13,.85);
+
+}
+
+
+.page-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.page-title-icon{
+
+    width:38px;
+    height:38px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(200,16,46,.12);
+
+    color:var(--red2);
+
+}
+
+
+.page-title h2{
+
+    font-size:16px;
+
+}
+
+
+.page-title p{
+
+    font-size:9px;
+
+    color:#687181;
+
+    margin-top:3px;
+
+}
+
+
+.clock{
+
+    text-align:right;
+
+}
+
+
+.clock-time{
+
+    font-size:25px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+}
+
+
+.clock-date{
+
+    color:#727b8b;
+
+    font-size:9px;
+
+    margin-top:4px;
+
+}
+
+
+/* ==================================================
+   CONTENT
+================================================== */
+
+.content{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:30px;
+
+}
+
+
+/* ==================================================
+   HERO
+================================================== */
+
+.hero{
+
+    max-width:1100px;
+
+    margin:0 auto;
+
+    text-align:center;
+
+    padding-top:20px;
+
+}
+
+
+.ai-orb{
+
+    width:100px;
+    height:100px;
+
+    margin:0 auto 20px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:40px;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ff526f,
+            #c8102e 45%,
+            #50000f 100%
+        );
+
+    box-shadow:
+        0 0 0 10px
+        rgba(200,16,46,.05),
+
+        0 0 60px
+        rgba(200,16,46,.45);
+
+    animation:pulse 3s infinite;
+
+}
+
+
+@keyframes pulse{
+
+    50%{
+        transform:scale(1.04);
+
+        box-shadow:
+            0 0 0 15px
+            rgba(200,16,46,.04),
+
+            0 0 90px
+            rgba(200,16,46,.6);
+    }
+
+}
+
+
+.hero h1{
+
+    font-size:38px;
+
+    font-weight:900;
+
+    letter-spacing:-1px;
+
+}
+
+
+.hero h1 span{
+
+    color:var(--red2);
+
+}
+
+
+.hero-subtitle{
+
+    margin-top:9px;
+
+    color:#737d8e;
+
+    font-size:12px;
+
+}
+
+
+/* ==================================================
+   QUESTION BOX
+================================================== */
+
+.question-container{
+
+    max-width:900px;
+
+    margin:35px auto 0;
+
+}
+
+
+.question-box{
+
+    min-height:145px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #11151e,
+            #0b0e14
+        );
+
+    border:
+
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-radius:22px;
+
+    padding:20px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.35);
+
+    transition:.25s;
+
+}
+
+
+.question-box:focus-within{
+
+    border-color:
+        rgba(200,16,46,.6);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.35),
+
+        0 0 35px
+        rgba(200,16,46,.08);
+
+}
+
+
+.question-label{
+
+    font-size:9px;
+
+    color:#646e7e;
+
+    letter-spacing:2px;
+
+    font-weight:900;
+
+    margin-bottom:12px;
+
+}
+
+
+textarea{
+
+    width:100%;
+
+    min-height:60px;
+
+    resize:none;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:16px;
+
+    line-height:1.6;
+
+}
+
+
+textarea::placeholder{
+
+    color:#4e5767;
+
+}
+
+
+.question-footer{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-top:10px;
+
+}
+
+
+.ai-info{
+
+    color:#596273;
+
+    font-size:9px;
+
+}
+
+
+.send-button{
+
+    border:none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0183d,
+            #c8102e
+        );
+
+    color:white;
+
+    width:50px;
+    height:50px;
+
+    border-radius:14px;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 25px
+        rgba(200,16,46,.25);
+
+    transition:.2s;
+
+}
+
+
+.send-button:hover{
+
+    transform:
+        translateY(-2px)
+        scale(1.03);
+
+}
+
+
+/* ==================================================
+   QUICK QUESTIONS
+================================================== */
+
+.quick-title{
+
+    max-width:900px;
+
+    margin:25px auto 10px;
+
+    color:#596273;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+
+}
+
+
+.quick{
+
+    max-width:900px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+
+}
+
+
+.quick button{
+
+    min-height:55px;
+
+    border-radius:13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    background:
+        rgba(255,255,255,.025);
+
+    color:#a2aab8;
+
+    text-align:left;
+
+    padding:12px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+.quick button:hover{
+
+    border-color:
+        rgba(200,16,46,.5);
+
+    background:
+        rgba(200,16,46,.06);
+
+    color:white;
+
+}
+
+
+.quick-icon{
+
+    font-size:16px;
+
+    margin-right:6px;
+
+}
+
+
+.quick-text{
+
+    font-size:10px;
+
+}
+
+
+/* ==================================================
+   ANSWER
+================================================== */
+
+.answer{
+
+    max-width:900px;
+
+    margin:30px auto;
+
+    display:none;
+
+}
+
+
+.answer.show{
+
+    display:block;
+
+}
+
+
+.answer-card{
+
+    background:#10141c;
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:22px;
+
+}
+
+
+.answer-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:15px;
+
+}
+
+
+.answer-ai{
+
+    width:35px;
+    height:35px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:var(--red);
+
+}
+
+
+.answer-header strong{
+
+    font-size:12px;
+
+}
+
+
+.answer-text{
+
+    color:#c6cdd7;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+.mobile-menu{
+
+    display:none;
+
+}
+
+
+@media(max-width:900px){
+
+    .sidebar{
+
+        width:220px;
+
+    }
+
+    .quick{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    body{
+
+        overflow:auto;
+
+    }
+
+    .app{
+
+        height:auto;
+
+        min-height:100vh;
+
+    }
+
+    .sidebar{
+
+        display:none;
+
+    }
+
+    .main{
+
+        min-height:100vh;
+
+    }
+
+    .topbar{
+
+        height:70px;
+
+        padding:0 15px;
+
+    }
+
+    .clock-time{
+
+        font-size:18px;
+
+    }
+
+    .content{
+
+        padding:20px 15px 40px;
+
+    }
+
+    .hero{
+
+        padding-top:15px;
+
+    }
+
+    .hero h1{
+
+        font-size:30px;
+
+    }
+
+    .ai-orb{
+
+        width:80px;
+        height:80px;
+
+        font-size:32px;
+
+    }
+
+    .quick{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+/* ==================================================
+   SCROLLBAR
+================================================== */
+
+::-webkit-scrollbar{
+
+    width:5px;
+
+}
+
+
+::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#272d38;
+
+    border-radius:10px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- ==================================================
+     SIDEBAR
+================================================== -->
+
+<aside class="sidebar">
+
+
+<div class="logo-area">
+
+
+
+<div class="logo-text">
+
+<h1>
+SMART <span>AI SISTEM</span>
+</h1>
+
+<p>
+CENTRALNI SISTEM KLUBA
+</p>
+
+</div>
+
+</div>
+
+
+
+<nav class="menu">
+
+
+<div class="menu-title">
+GLAVNI MENI
+</div>
+
+
+<button
+class="menu-item active"
+onclick="otvori('tempo-smart.html')">
+
+<div class="menu-icon">
+
+</div>
+
+AI SISTEM
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="otvori('clanarine.html')">
+
+<div class="menu-icon">
+
+</div>
+
+ČLANARINE
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="otvori('evidencija.html')">
+
+<div class="menu-icon">
+
+</div>
+
+EVIDENCIJA
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="otvori('statistika.html')">
+
+<div class="menu-icon">
+
+</div>
+
+STATISTIKA
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="otvori('skauting.html')">
+
+<div class="menu-icon">
+
+</div>
+
+SKAUTING
+
+</button>
+
+
+<div
+class="menu-title"
+style="margin-top:25px">
+
+UPRAVLJANJE
+
+</div>
+
+
+
+<button
+class="menu-item"
+onclick="otvori('baza.html')">
+
+<div class="menu-icon">
+
+</div>
+
+ČLANOVI
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="otvori('programi-treninga.html')">
+
+<div class="menu-icon">
+
+</div>
+
+PROGRAMI TRENINGA
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="otvori('arhiva.html')">
+
+<div class="menu-icon">
+
+</div>
+
+ARHIVA
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="otvori('admin-panel.html')">
+
+<div class="menu-icon">
+
+</div>
+
+ADMIN PANEL
+
+</button>
+
+
+</nav>
+
+
+
+<div class="sidebar-bottom">
+
+<div class="system-status">
+
+<div class="status-line">
+
+<div class="status-dot">
+</div>
+
+SISTEM
+
+<strong>
+ONLINE
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+</aside>
+
+
+
+<!-- ==================================================
+     MAIN
+================================================== -->
+
+<main class="main">
+
+
+<!-- TOP BAR -->
+
+<header class="topbar">
+
+
+<div class="page-title">
+
+<div class="page-title-icon">
+
+</div>
+
+<div>
+
+<h2>
+SMART AI SISTEM
+</h2>
+
+<p>
+INTELIGENTNI CENTAR KK TEMPO
+</p>
+
+</div>
+
+</div>
+
+
+<div class="clock">
+
+<div
+id="clock"
+class="clock-time">
+00:00:00
+</div>
+
+<div
+id="date"
+class="clock-date">
+</div>
+
+</div>
+
+
+</header>
+
+
+
+<!-- CONTENT -->
+
+<div class="content">
+
+
+<section class="hero">
+
+
+<div class="ai-orb">
+✦
+</div>
+
+
+<h1>
+Šta želiš da znaš,
+<span>TRENERU?</span>
+</h1>
+
+
+<p class="hero-subtitle">
+
+Postavi pitanje o članovima,
+članarinama, treninzima,
+statistici, finansijama ili skautingu.
+
+</p>
+
+
+<div class="question-container">
+
+
+<div class="question-box">
+
+
+<div class="question-label">
+PITAJ SMART AI 
+</div>
+
+
+<textarea
+id="question"
+placeholder="Postavi mi pitanje..."
+></textarea>
+
+
+<div class="question-footer">
+
+
+<div class="ai-info">
+SMART AI SISTEM • SPREMAN ZA RAD
+</div>
+
+
+<button
+class="send-button"
+onclick="posaljiPitanje()">
+
+➤
+
+</button>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="quick-title">
+BRZA PITANJA
+</div>
+
+
+<div class="quick">
+
+
+
+<button
+onclick="pitaj('Koliko imamo članova?')">
+
+<span class="quick-icon"></span>
+
+<span class="quick-text">
+Koliko imamo članova?
+</span>
+
+</button>
+
+
+<button
+onclick="pitaj('Ko ima dugovanja?')">
+
+<span class="quick-icon"></span>
+
+<span class="quick-text">
+Ko ima dugovanja?
+</span>
+
+</button>
+
+
+<button
+onclick="pitaj('Ko je danas na treningu?')">
+
+<span class="quick-icon"></span>
+
+<span class="quick-text">
+Ko je danas na treningu?
+</span>
+
+</button>
+
+
+<button
+onclick="pitaj('Koliko je naplaćeno?')">
+
+<span class="quick-icon"></span>
+
+<span class="quick-text">
+Koliko je naplaćeno?
+</span>
+
+</button>
+
+
+<button
+onclick="pitaj('Kakva je statistika kluba?')">
+
+<span class="quick-icon"></span>
+
+<span class="quick-text">
+Kakva je statistika?
+</span>
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ODGOVOR -->
+
+<section
+id="answer"
+class="answer">
+
+<div class="answer-card">
+
+
+<div class="answer-header">
+
+<div class="answer-ai">
+✦
+</div>
+
+<strong>
+SMART AI SISTEM
+</strong>
+
+</div>
+
+
+<div
+id="answerText"
+class="answer-text">
+
+</div>
+
+
+</div>
+
+</section>
+
+
+</div>
+
+
+</main>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ==================================================
+   NAVIGACIJA
+================================================== */
+
+function otvori(stranica){
+
+    window.location.href =
+        stranica;
+
+}
+
+
+
+/* ==================================================
+   SAT
+================================================== */
+
+function azurirajSat(){
+
+    const sada =
+        new Date();
+
+
+    document.getElementById(
+        "clock"
+    ).textContent =
+
+        sada.toLocaleTimeString(
+            "sr-RS",
+            {
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit"
+            }
+        );
+
+
+    document.getElementById(
+        "date"
+    ).textContent =
+
+        sada.toLocaleDateString(
+            "sr-RS",
+            {
+                weekday:"long",
+                day:"numeric",
+                month:"long",
+                year:"numeric"
+            }
+        );
+
+}
+
+
+setInterval(
+    azurirajSat,
+    1000
+);
+
+azurirajSat();
+
+
+
+/* ==================================================
+   PITANJE
+================================================== */
+
+function pitaj(
+    pitanje
+){
+
+    document.getElementById(
+        "question"
+    ).value =
+        pitanje;
+
+
+    posaljiPitanje();
+
+}
+
+
+
+function posaljiPitanje(){
+
+    const input =
+        document.getElementById(
+            "question"
+        );
+
+
+    const pitanje =
+        input.value.trim();
+
+
+    if(
+        !pitanje
+    ){
+
+        input.focus();
+
+        return;
+
+    }
+
+
+    const answer =
+        document.getElementById(
+            "answer"
+        );
+
+
+    const answerText =
+        document.getElementById(
+            "answerText"
+        );
+
+
+    answer.classList.add(
+        "show"
+    );
+
+
+    answerText.innerHTML = `
+
+        <div style="
+            color:#c8102e;
+            font-weight:900;
+            margin-bottom:10px;
+        ">
+
+        ANALIZIRAM PODATKE...
+
+        </div>
+
+        SMART AI SISTEM pretražuje
+        podatke ADMIN PANELA.
+
+    `;
+
+
+    /*
+       OVDE SE POVEZUJE
+       TEMPO CORE.
+
+       Sledeća verzija će ovde
+       pozivati centralni AI/data
+       sistem.
+    */
+
+
+    setTimeout(
+        function(){
+
+            answerText.innerHTML = `
+
+                <strong>
+                Primljeno pitanje:
+                </strong>
+
+                <br><br>
+
+                "${escapeHTML(
+                    pitanje
+                )}"
+
+                <br><br>
+
+                <span style="
+                    color:#8992a3;
+                ">
+
+                TEMPO SMART je spreman
+                da ovo pitanje poveže
+                sa podacima članova,
+                članarina, evidencije,
+                statistike i ostalih
+                modula.
+
+                </span>
+
+            `;
+
+        },
+        500
+    );
+
+}
+
+
+
+function escapeHTML(
+tekst
+){
+
+    return String(
+        tekst
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    );
+
+}
+
+
+
+/* ==================================================
+   ENTER
+================================================== */
+
+document.getElementById(
+    "question"
+)
+.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.key === "Enter"
+            &&
+            !e.shiftKey
+        ){
+
+            e.preventDefault();
+
+            posaljiPitanje();
+
+        }
+
+    }
+);
+
+function posaljiPitanje(){
+
+    const pitanje =
+        document.getElementById("question").value.trim();
+
+    if(!pitanje){
+        return;
+    }
+
+    const odgovor =
+        TEMPO.odgovoriNaPitanje(
+            pitanje
+        );
+
+    document.getElementById(
+        "answer"
+    ).classList.add("show");
+
+    document.getElementById(
+        "answerText"
+    ).innerHTML =
+        odgovor.odgovor
+            .replace(/\n/g,"<br>");
+
+}
+
+</script>
+
+
+</body>
+</html>
