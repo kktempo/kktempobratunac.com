@@ -498,3 +498,44 @@
     }
 
 }
+
+.filter-clanarine{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin:20px 0;
+    flex-wrap:wrap;
+}
+
+.filter-clanarine input{
+    flex:1;
+    min-width:250px;
+    padding:14px 18px;
+    border:2px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+}
+
+.filter-clanarine input:focus{
+    border-color:#c8102e;
+}
+
+.filter-clanarine select{
+    padding:14px 18px;
+    border:2px solid #c8102e;
+    border-radius:10px;
+    background:white;
+    color:#c8102e;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.filter-clanarine select:focus{
+    outline:none;
+}
+
+.filter-clanarine select option{
+    color:#222;
+}

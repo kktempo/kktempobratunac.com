@@ -815,6 +815,25 @@ grid-template-columns:1fr;
 
 </div>
 
+<div class="filter-clanarine">
+
+    <input
+        type="text"
+        id="pretraga"
+        placeholder="Pretraži po imenu ili šifri..."
+        oninput="primeniFiltere()"
+    >
+
+    <select
+        id="filterDug"
+        onchange="primeniFiltere()"
+    >
+        <option value="svi">SVI ČLANOVI</option>
+        <option value="duznici">SAMO DUŽNICI</option>
+    </select>
+
+</div>
+
 <div class="pretraga">
 
 <input
@@ -1594,6 +1613,93 @@ function pretraziClanove(){
             red.style.display="";
         }else{
             red.style.display="none";
+        }
+
+    });
+
+}
+
+function primeniFiltere(){
+
+    let tekst =
+        document.getElementById("pretraga")
+        .value
+        .toUpperCase()
+        .trim();
+
+    let filterDug =
+        document.getElementById("filterDug")
+        .value;
+
+    let redovi =
+        document.querySelectorAll("#tabela tr");
+
+
+    redovi.forEach(red => {
+
+        if(red.cells.length < 5){
+            return;
+        }
+
+
+        let sifra =
+            red.cells[0]
+            .textContent
+            .toUpperCase();
+
+        let ime =
+            red.cells[1]
+            .textContent
+            .toUpperCase();
+
+
+        // ==========================
+        // PRETRAGA IMENA / ŠIFRE
+        // ==========================
+
+        let odgovaraTekstu =
+            sifra.includes(tekst) ||
+            ime.includes(tekst);
+
+
+        // ==========================
+        // FILTER DUŽNIKA
+        // ==========================
+
+        let dug =
+            parseFloat(
+                red.cells[4]
+                .textContent
+                .replace("KM","")
+                .trim()
+            ) || 0;
+
+
+        let odgovaraDugu = true;
+
+
+        if(filterDug === "duznici"){
+
+            odgovaraDugu = dug > 0;
+
+        }
+
+
+        // ==========================
+        // PRIKAŽI / SAKRIJ
+        // ==========================
+
+        if(
+            odgovaraTekstu &&
+            odgovaraDugu
+        ){
+
+            red.style.display = "";
+
+        }else{
+
+            red.style.display = "none";
+
         }
 
     });
