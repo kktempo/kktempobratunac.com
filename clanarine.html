@@ -834,19 +834,39 @@ grid-template-columns:1fr;
 
 </div>
 
-<div class="pretraga">
 
-<input
-type="text"
-id="pretraga"
-placeholder="🔍 Pretraži po imenu ili šifri..."
-onkeyup="pretraziClanove()">
 
 <div class="table-wrapper">
 
 <div class="admin-akcije">
 
 </a>
+
+</div>
+
+<div class="datum-duga">
+
+    <label for="datumDuga">
+        <strong>DUGOVANJA NA DAN:</strong>
+    </label>
+
+    <input
+        type="date"
+        id="datumDuga"
+        onchange="prikaziDugNaDatum()"
+    >
+
+    <button
+        type="button"
+        onclick="prikaziDugNaDatum()">
+        🔎 PRIKAŽI DUŽNIKE
+    </button>
+
+    <button
+        type="button"
+        onclick="resetujDatumDuga()">
+        PRIKAŽI TRENUTNO STANJE
+    </button>
 
 </div>
 
@@ -1736,6 +1756,205 @@ function izracunajDug(clan){
     }
 
     return dug;
+
+}
+
+function izracunajDugNaDatum(clan, datum){
+
+    if(!clan || !clan.clanarine){
+        return 0;
+    }
+
+    let dug = 0;
+
+    // Datum pretvaramo u YYYY-MM
+    let granicniMesec = datum.substring(0,7);
+
+    for(let mesec in clan.clanarine){
+
+        // Ne gledamo mesece posle izabranog datuma
+        if(mesec > granicniMesec){
+            continue;
+        }
+
+        let zapis = clan.clanarine[mesec];
+
+        if(!zapis){
+            continue;
+        }
+
+        // Pauza se ne računa kao dug
+        if(imaPauzu(clan, mesec)){
+            continue;
+        }
+
+        // Samo neplaćeni meseci
+        if(zapis.status === "NIJE PLAĆENO"){
+
+            dug += Number(zapis.iznos) || 0;
+
+        }
+
+    }
+
+    return dug;
+}
+
+function prikaziDugNaDatum(){
+
+    let datum =
+        document.getElementById("datumDuga").value;
+
+    if(!datum){
+
+        alert("Molimo izaberite datum.");
+
+        return;
+    }
+
+
+    let tabela =
+        document.getElementById("tabela");
+
+    tabela.innerHTML = "";
+
+
+    let brojDuznika = 0;
+    let ukupnoDugovanje = 0;
+
+
+    for(let sifra in clanovi){
+
+        let clan = clanovi[sifra];
+
+        let dug =
+            izracunajDugNaDatum(
+                clan,
+                datum
+            );
+
+
+        // Prikaži samo one koji duguju
+        if(dug <= 0){
+
+            continue;
+
+        }
+
+
+        brojDuznika++;
+
+        ukupnoDugovanje += dug;
+
+
+        tabela.innerHTML += `
+
+        <tr>
+
+            <td>
+                ${sifra}
+            </td>
+
+            <td>
+                ${clan.ime || "-"}
+            </td>
+
+            <td>
+                ${clan.program || "-"}
+            </td>
+
+            <td>
+                ${clan.cena || 0} KM
+            </td>
+
+            <td
+                class="npl"
+                style="font-weight:bold;"
+            >
+                ${dug} KM
+            </td>
+
+            <td
+                class="npl"
+            >
+                DUŽAN
+            </td>
+
+            <td>
+
+                <button
+                    onclick="promeniStatus('${sifra}')">
+
+                    PLATIO
+
+                </button>
+
+            </td>
+
+            <td>
+
+                <button
+                    onclick="pauzirajMesec('${sifra}')">
+
+                    PAUZA MESEC
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    }
+
+
+    // Ako nema dužnika
+    if(brojDuznika === 0){
+
+        tabela.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="8"
+                style="
+                    text-align:center;
+                    padding:30px;
+                    color:green;
+                    font-weight:bold;
+                "
+            >
+
+                ✅ NEMA DUŽNIKA NA DAN
+                ${datum}
+
+            </td>
+
+        </tr>
+
+        `;
+
+    }
+
+
+    // Promeni statistiku
+    document.getElementById(
+        "dugovanja"
+    ).innerHTML =
+        ukupnoDugovanje + " KM";
+
+
+    document.getElementById(
+        "brojClanova"
+    ).innerHTML =
+        brojDuznika;
+
+}
+
+function resetujDatumDuga(){
+
+    location.reload();
 
 }
 

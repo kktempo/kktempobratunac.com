@@ -539,3 +539,41 @@
 .filter-clanarine select option{
     color:#222;
 }
+
+.datum-duga{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:20px 0;
+    padding:18px;
+    background:#fff;
+    border:2px solid #c8102e;
+    border-radius:12px;
+}
+
+.datum-duga label{
+    color:#c8102e;
+    font-size:15px;
+}
+
+.datum-duga input{
+    padding:11px 14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.datum-duga button{
+    padding:11px 18px;
+    border:none;
+    border-radius:8px;
+    background:#c8102e;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.datum-duga button:hover{
+    background:#980c22;
+}
