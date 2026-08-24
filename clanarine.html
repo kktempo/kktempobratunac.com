@@ -870,6 +870,19 @@ grid-template-columns:1fr;
 
 </div>
 
+<div class="admin-akcije">
+
+    <button
+        type="button"
+        class="duznici-2-btn"
+        onclick="otvoriDuznike2Plus()">
+
+        🔴 DUŽNICI 2+ MESECA
+
+    </button>
+
+</div>
+
 <table>
 
 <thead>
@@ -2749,6 +2762,441 @@ function napraviPotvrdu(
         location.reload();
 
     },5000);
+
+}
+
+function otvoriDuznike2Plus(){
+
+    let duznici = [];
+
+    for(let sifra in clanovi){
+
+        let clan = clanovi[sifra];
+
+        if(!clan){
+            continue;
+        }
+
+
+        let brojNeplacenih = 0;
+        let ukupanDug = 0;
+
+
+        if(clan.clanarine){
+
+            for(let mesec in clan.clanarine){
+
+                let zapis =
+                    clan.clanarine[mesec];
+
+
+                if(!zapis){
+                    continue;
+                }
+
+
+                // PAUZA SE NE RAČUNA
+                if(
+                    typeof imaPauzu === "function" &&
+                    imaPauzu(clan,mesec)
+                ){
+                    continue;
+                }
+
+
+                if(
+                    zapis.status === "NIJE PLAĆENO"
+                ){
+
+                    brojNeplacenih++;
+
+                    ukupanDug +=
+                        Number(zapis.iznos)
+                        ||
+                        Number(clan.cena)
+                        ||
+                        0;
+
+                }
+
+            }
+
+        }
+
+
+        // SAMO 2 ILI VIŠE NEPLAĆENIH
+        if(brojNeplacenih >= 2){
+
+            duznici.push({
+
+                sifra:sifra,
+
+                ime:clan.ime || "-",
+
+                program:
+                    clan.program ||
+                    clan.grupa ||
+                    "-",
+
+                email:clan.email || "",
+
+                brojMeseci:brojNeplacenih,
+
+                dug:ukupanDug
+
+            });
+
+        }
+
+    }
+
+
+    // SORTIRAJ OD NAJVEĆEG DUGA
+    duznici.sort(function(a,b){
+
+        return b.dug-a.dug;
+
+    });
+
+
+    let tabela = "";
+
+
+    if(duznici.length === 0){
+
+        tabela = `
+
+            <div class="nema-duznika">
+
+                ✅ Trenutno nema članova
+                sa 2 ili više neplaćene članarine.
+
+            </div>
+
+        `;
+
+    }else{
+
+        duznici.forEach(function(clan){
+
+            tabela += `
+
+            <tr>
+
+                <td>
+                    <strong>${clan.sifra}</strong>
+                </td>
+
+                <td>
+                    ${clan.ime}
+                </td>
+
+                <td>
+                    ${clan.program}
+                </td>
+
+                <td class="dug-meseci">
+                    ${clan.brojMeseci}
+                </td>
+
+                <td class="dug-iznos">
+                    ${clan.dug} KM
+                </td>
+
+                <td>
+                    ${
+                        clan.email
+                        ?
+                        clan.email
+                        :
+                        '<span style="color:#c8102e;">NEMA EMAIL</span>'
+                    }
+                </td>
+
+                <td>
+
+                    <button
+                        class="podsetnik-btn"
+                        onclick="posaljiPodsetnikDuzniku('${clan.sifra}')">
+
+                        ✉ PODSETNIK
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+    }
+
+
+    document.body.insertAdjacentHTML(
+
+        "beforeend",
+
+        `
+
+        <div id="duznici2Overlay">
+
+            <div class="duznici2-popup">
+
+                <div class="duznici2-header">
+
+                    <h2>
+                        🔴 DUŽNICI 2+ MESECA
+                    </h2>
+
+                    <button
+                        class="duznici2-close"
+                        onclick="zatvoriDuznike2Plus()">
+
+                        ×
+
+                    </button>
+
+                </div>
+
+
+                <div class="duznici2-info">
+
+                    <span>
+                        Članovi sa najmanje 2
+                        neplaćene članarine
+                    </span>
+
+                    <span class="duznici2-count">
+
+                        Ukupno: ${duznici.length}
+
+                    </span>
+
+                </div>
+
+
+                <div class="duznici2-body">
+
+                    ${
+                        duznici.length === 0
+                        ?
+
+                        tabela
+
+                        :
+
+                        `
+
+                        <table class="duznici2-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Šifra</th>
+
+                                    <th>Ime i prezime</th>
+
+                                    <th>Program</th>
+
+                                    <th>Neplaćeno</th>
+
+                                    <th>Dug</th>
+
+                                    <th>Email</th>
+
+                                    <th>Akcija</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                ${tabela}
+
+                            </tbody>
+
+                        </table>
+
+                        `
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `
+
+    );
+
+}
+
+function zatvoriDuznike2Plus(){
+
+    let popup =
+        document.getElementById(
+            "duznici2Overlay"
+        );
+
+    if(popup){
+
+        popup.remove();
+
+    }
+
+}
+
+function posaljiPodsetnikDuzniku(sifra){
+
+    let clan = clanovi[sifra];
+
+
+    if(!clan){
+
+        alert("Član nije pronađen.");
+
+        return;
+
+    }
+
+
+    if(!clan.email){
+
+        alert(
+            "Ovaj član nema unetu email adresu."
+        );
+
+        return;
+
+    }
+
+
+    let neplaceni = [];
+
+    let ukupanDug = 0;
+
+
+    if(clan.clanarine){
+
+        for(let mesec in clan.clanarine){
+
+            let zapis =
+                clan.clanarine[mesec];
+
+
+            if(!zapis){
+                continue;
+            }
+
+
+            if(
+                typeof imaPauzu === "function" &&
+                imaPauzu(clan,mesec)
+            ){
+                continue;
+            }
+
+
+            if(
+                zapis.status === "NIJE PLAĆENO"
+            ){
+
+                neplaceni.push(mesec);
+
+                ukupanDug +=
+                    Number(zapis.iznos)
+                    ||
+                    Number(clan.cena)
+                    ||
+                    0;
+
+            }
+
+        }
+
+    }
+
+
+    let meseciTekst =
+        neplaceni.join(", ");
+
+
+    let naslov =
+        "Podsetnik za uplatu članarine - " +
+        clan.ime;
+
+
+    let poruka =
+
+        "Poštovani,\n\n" +
+
+        "ovim putem Vas ljubazno " +
+        "podsećamo da za igrača:\n\n" +
+
+        "Ime i prezime: " +
+        clan.ime +
+
+        "\n" +
+
+        "Šifra člana: " +
+        sifra +
+
+        "\n\n" +
+
+        "postoje neizmirene članarine.\n\n" +
+
+        "Broj neplaćenih članarina: " +
+        neplaceni.length +
+
+        "\n" +
+
+        "Neplaćeni meseci: " +
+        meseciTekst +
+
+        "\n\n" +
+
+        "Ukupno dugovanje: " +
+        ukupanDug +
+        " KM\n\n" +
+
+        "Molimo Vas da izmirite " +
+        "dugovanje u narednom periodu.\n\n" +
+
+        "Ukoliko je uplata već izvršena, " +
+        "molimo Vas da zanemarite ovu poruku.\n\n" +
+
+        "Hvala na razumevanju.\n\n" +
+
+        "KK Tempo Bratunac";
+
+
+    let gmailURL =
+
+        "https://mail.google.com/mail/?" +
+
+        "view=cm" +
+
+        "&fs=1" +
+
+        "&to=" +
+        encodeURIComponent(clan.email) +
+
+        "&su=" +
+        encodeURIComponent(naslov) +
+
+        "&body=" +
+        encodeURIComponent(poruka);
+
+
+    window.open(
+        gmailURL,
+        "_blank"
+    );
 
 }
 
