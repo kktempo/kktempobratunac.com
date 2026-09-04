@@ -5405,9 +5405,20 @@ let naplaceno = 0;
 let dug = 0;
 let broj = 0;
 
+const sortiraneSifre = Object.keys(clanovi).sort(function(a, b){
 
-for(let sifra in clanovi){
+    const imeA = (clanovi[a].ime || "").trim();
+    const imeB = (clanovi[b].ime || "").trim();
 
+    return imeA.localeCompare(imeB, "sr", {
+        sensitivity: "base"
+    });
+
+});
+
+for(let i = 0; i < sortiraneSifre.length; i++){
+
+    let sifra = sortiraneSifre[i];
     let clan = clanovi[sifra];
 
     broj++;
