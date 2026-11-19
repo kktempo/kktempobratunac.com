@@ -4,7 +4,7 @@
 <head>
 <link rel="manifest" href="manifest.json">
 
-<meta name="theme-color" content="#c8102e">
+<meta name="theme-color" content="#111827">
 
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -19,9 +19,6 @@
 
 <body>
 
-<button onclick="location.href='admin.html'" class="nazad-btn">
-⬅ NAZAD
-</button>
 
 <div class="container">
 
@@ -41,6 +38,40 @@
 </div>
 
 <div id="rezultatPretrage"></div>
+
+<div id="upozorenjaPrisustvo"></div>
+
+<div class="roditelj-box">
+
+    <h2>PODACI RODITELJA</h2>
+
+    <label>Izaberite igrača:</label>
+
+    <select id="izborRoditelja"></select>
+
+    <label>Ime roditelja:</label>
+
+    <input
+        type="text"
+        id="imeRoditelja"
+        placeholder="Ime i prezime roditelja"
+    >
+
+    <label>Broj telefona roditelja:</label>
+
+    <input
+        type="tel"
+        id="telefonRoditelja"
+        placeholder="+381 6X XXX XXXX"
+    >
+
+    <button onclick="sacuvajRoditelja()">
+        SAČUVAJ PODATKE RODITELJA
+    </button>
+
+    <div id="porukaRoditelj"></div>
+
+</div>
 
 <select id="grupa" onchange="ucitajGrupu()">
 
@@ -263,6 +294,8 @@ function sacuvaj(){
 
     alert("Evidencija sačuvana.");
 
+proveriTriUzastopnaOdsustva();
+
 }
 
 function ucitajSacuvanuEvidenciju(){
@@ -455,6 +488,172 @@ pdf.save(
 
 }
 
+let roditelji = JSON.parse(
+    localStorage.getItem("podaciRoditelja")
+) || {};
+
+
+function ucitajIgraceZaRoditelje(){
+
+    let select = document.getElementById("izborRoditelja");
+
+    if(!select) return;
+
+    select.innerHTML = `
+        <option value="">-- IZABERITE IGRAČA --</option>
+    `;
+
+    for(let grupa in grupe){
+
+        let nazivGrupe =
+            grupa === "mini"
+            ? "GRUPA 1"
+            : grupa === "mladji"
+            ? "GRUPA 2"
+            : "GRUPA 3";
+
+        let optgroup = document.createElement("optgroup");
+
+        optgroup.label = nazivGrupe;
+
+        grupe[grupa].forEach(ime => {
+
+            let option = document.createElement("option");
+
+            option.value = ime;
+            option.textContent = ime;
+
+            optgroup.appendChild(option);
+
+        });
+
+        select.appendChild(optgroup);
+
+    }
+
+}
+
+
+function ucitajPodatkeRoditelja(){
+
+    let imeIgraca =
+        document.getElementById("izborRoditelja").value;
+
+    let imeRoditelja =
+        document.getElementById("imeRoditelja");
+
+    let telefon =
+        document.getElementById("telefonRoditelja");
+
+    if(!imeIgraca){
+
+        imeRoditelja.value = "";
+        telefon.value = "";
+
+        return;
+
+    }
+
+    let podaci = roditelji[imeIgraca];
+
+    if(podaci){
+
+        imeRoditelja.value = podaci.imeRoditelja || "";
+        telefon.value = podaci.telefon || "";
+
+    }else{
+
+        imeRoditelja.value = "";
+        telefon.value = "";
+
+    }
+
+}
+
+
+function sacuvajRoditelja(){
+
+    let imeIgraca =
+        document.getElementById("izborRoditelja").value;
+
+    let imeRoditelja =
+        document.getElementById("imeRoditelja").value.trim();
+
+    let telefon =
+        document.getElementById("telefonRoditelja").value.trim();
+
+    let poruka =
+        document.getElementById("porukaRoditelj");
+
+
+    if(!imeIgraca){
+
+        alert("Izaberite igrača.");
+
+        return;
+
+    }
+
+
+    if(!imeRoditelja){
+
+        alert("Unesite ime roditelja.");
+
+        return;
+
+    }
+
+
+    if(!telefon){
+
+        alert("Unesite broj telefona roditelja.");
+
+        return;
+
+    }
+
+
+    roditelji[imeIgraca] = {
+
+        imeRoditelja: imeRoditelja,
+
+        telefon: telefon
+
+    };
+
+
+    localStorage.setItem(
+        "podaciRoditelja",
+        JSON.stringify(roditelji)
+    );
+
+
+    poruka.innerHTML = `
+        <div class="uspesno-sacuvano">
+            ✓ Podaci roditelja su sačuvani.
+        </div>
+    `;
+
+
+    /*
+        Osvežavamo upozorenja da odmah
+        dobije Viber dugme ako postoji
+    */
+
+    proveriTriUzastopnaOdsustva();
+
+}
+
+document
+    .getElementById("izborRoditelja")
+    .addEventListener(
+        "change",
+        ucitajPodatkeRoditelja
+    );
+
+
+ucitajIgraceZaRoditelje();
+
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -625,6 +824,241 @@ function pretraziIgraca(){
     rezultat.innerHTML = html;
 
 }
+
+function proveriTriUzastopnaOdsustva(){
+
+    let upozorenja = document.getElementById("upozorenjaPrisustvo");
+
+    let lista = JSON.parse(
+        localStorage.getItem("listaEvidencija")
+    ) || [];
+
+    upozorenja.innerHTML = "";
+
+    if(lista.length === 0){
+        return;
+    }
+
+    let upozorenjaLista = [];
+
+    // PROLAZIMO KROZ SVE GRUPE
+    for(let grupa in grupe){
+
+        // Uzimamo evidencije samo za ovu grupu
+        // i sortiramo ih od najnovije ka najstarijoj
+        let evidencijeGrupe = lista
+            .filter(e => e.grupa === grupa)
+            .sort((a,b) => {
+                return new Date(b.datum) - new Date(a.datum);
+            });
+
+        // PROVERAVAMO SVAKOG IGRAČA
+        grupe[grupa].forEach(ime => {
+
+            let poslednjaTri = [];
+
+            // Uzimamo poslednja 3 treninga na kojima
+            // je igrač imao evidentiran status
+            for(let evidencija of evidencijeGrupe){
+
+                let kljuc =
+                    "evidencija_" +
+                    evidencija.grupa +
+                    "_" +
+                    evidencija.datum;
+
+                let podaci =
+                    JSON.parse(localStorage.getItem(kljuc));
+
+                if(!podaci){
+                    continue;
+                }
+
+                if(
+                    podaci[ime] === "Prisutan" ||
+                    podaci[ime] === "Nije prisutan"
+                ){
+
+                    poslednjaTri.push({
+                        datum: evidencija.datum,
+                        status: podaci[ime]
+                    });
+
+                }
+
+                // Dovoljna su poslednja 3 treninga
+                if(poslednjaTri.length === 3){
+                    break;
+                }
+
+            }
+
+            // AKO SU SVA TRI POSLEDNJA TRENINGA ODSUSTVO
+            if(
+                poslednjaTri.length === 3 &&
+                poslednjaTri.every(
+                    x => x.status === "Nije prisutan"
+                )
+            ){
+
+                upozorenjaLista.push({
+                    ime: ime,
+                    grupa: grupa,
+                    treninzi: poslednjaTri
+                });
+
+            }
+
+        });
+
+    }
+
+    // AKO NEMA UPOZORENJA
+    if(upozorenjaLista.length === 0){
+
+        upozorenja.innerHTML = `
+            <div class="nema-upozorenja">
+                ✓ Nema igrača sa 3 uzastopna odsustva.
+            </div>
+        `;
+
+        return;
+    }
+
+    // NASLOV UPOZORENJA
+    let html = `
+        <div class="upozorenja-naslov">
+            ⚠️ UPOZORENJE — 3 UZASTOPNA ODSUSTVA
+        </div>
+    `;
+
+    // PRIKAZ SVAKOG IGRAČA
+    upozorenjaLista.forEach(igrac => {
+
+        let nazivGrupe =
+            igrac.grupa === "mini"
+            ? "GRUPA 1"
+            : igrac.grupa === "mladji"
+            ? "GRUPA 2"
+            : "GRUPA 3";
+
+        let roditelj = roditelji[igrac.ime];
+
+        let viberDugme = "";
+
+        // AKO POSTOJI BROJ TELEFONA
+        if(roditelj && roditelj.telefon){
+
+            let broj = roditelj.telefon
+                .replace(/\s+/g, "")
+                .replace(/-/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "");
+
+            // 06xxxxxxxx -> +3816xxxxxxxx
+            if(broj.startsWith("06")){
+                broj = "+381" + broj.substring(1);
+            }
+
+            // 3816xxxxxxxx -> +3816xxxxxxxx
+            if(broj.startsWith("381")){
+                broj = "+" + broj;
+            }
+
+            let poruka =
+                "Poštovani " +
+                (roditelj.imeRoditelja || "") +
+                ",\n\n" +
+
+                "obaveštavamo Vas da Vaše dete " +
+                igrac.ime +
+                " nije prisustvovalo poslednja tri treninga.\n\n" +
+
+                "Datumi odsustva: " +
+                igrac.treninzi
+                    .map(t => formatirajDatum(t.datum))
+                    .join(", ") +
+                ".\n\n" +
+
+                "Molimo Vas da nas obavestite ukoliko postoji razlog odsustva.\n\n" +
+
+                "Hvala na razumevanju.\n" +
+                "KK TEMPO BRATUNAC";
+
+            let viberLink =
+                "viber://chat?number=" +
+                encodeURIComponent(broj) +
+                "&text=" +
+                encodeURIComponent(poruka);
+
+            viberDugme = `
+                <a href="${viberLink}" class="viber-dugme">
+                    📱 POŠALJI VIBER
+                </a>
+            `;
+
+        }else{
+
+            viberDugme = `
+                <div class="nema-telefona">
+                    ⚠️ Nije unet broj telefona roditelja.
+                </div>
+            `;
+
+        }
+
+        html += `
+            <div class="upozorenje-igrac">
+
+                <strong>${igrac.ime}</strong>
+
+                <span>${nazivGrupe}</span>
+
+                <small>
+                    Nije prisutan poslednja 3 treninga
+                </small>
+
+                <div class="datumi-odsustva">
+                    ${igrac.treninzi
+                        .map(t => formatirajDatum(t.datum))
+                        .join(" • ")}
+                </div>
+
+                ${
+                    roditelj
+                    ? `
+                        <div class="podaci-roditelja">
+                            👤 ${roditelj.imeRoditelja}
+                            <br>
+                            📞 ${roditelj.telefon}
+                        </div>
+                    `
+                    : ""
+                }
+
+                ${viberDugme}
+
+            </div>
+        `;
+
+    });
+
+    upozorenja.innerHTML = html;
+
+}
+
+function formatirajDatum(datum){
+
+    if(!datum) return "";
+
+    let delovi = datum.split("-");
+
+    return delovi[2] + "." +
+           delovi[1] + "." +
+           delovi[0] + ".";
+}
+
+proveriTriUzastopnaOdsustva();
 
 </script>
 
