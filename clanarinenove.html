@@ -639,33 +639,41 @@ main{
         </div>
     </button>
 
-    <div class="glavni-meni-lista">
+<div class="glavni-meni-lista">
 
-        <button
-            class="glavni-meni-stavka aktivna"
-            data-sekcija="finansije"
-            type="button"
-        >
-            FINANSIJE
-        </button>
+    <button
+        class="glavni-meni-stavka aktivna"
+        data-sekcija="finansije"
+        type="button"
+    >
+        FINANSIJE
+    </button>
 
-        <button
-            class="glavni-meni-stavka"
-            data-sekcija="kontakt"
-            type="button"
-        >
-            KONTAKT PODACI
-        </button>
+    <button
+        class="glavni-meni-stavka"
+        data-sekcija="evidencija"
+        type="button"
+    >
+        EVIDENCIJA
+    </button>
 
-        <button
-            class="glavni-meni-stavka"
-            data-sekcija="ai"
-            type="button"
-        >
-            AI SISTEM
-        </button>
+    <button
+        class="glavni-meni-stavka"
+        data-sekcija="kontakt"
+        type="button"
+    >
+        KONTAKT PODACI
+    </button>
 
-    </div>
+    <button
+        class="glavni-meni-stavka"
+        data-sekcija="ai"
+        type="button"
+    >
+        AI SISTEM
+    </button>
+
+</div>
 
 </div>
 <header>
@@ -694,10 +702,33 @@ main{
 
     <div id="dugovanjaObavestenja" class="dugovanja-obavestenja"></div>
 </div>
+
     </section>
+<section class="panel" style="margin-top:20px;">
 
-    <section class="panel">
+    <div class="table-title">
 
+        <h2>Poslednjih 10 uplata</h2>
+
+        <p>
+            Najnovije evidentirane uplate članova
+        </p>
+
+    </div>
+
+    <div id="paymentHistoryList"></div>
+
+</section>
+
+        <p>
+            Najnovije evidentirane uplate članova
+        </p>
+
+    </div>
+
+    <div id="paymentHistoryList"></div>
+
+</section>
         <div class="controls">
 
             <div class="search">
@@ -914,29 +945,105 @@ let detailsMemberId = null;
 let detailsMonth = null;
 let editingMemberId = null;
 
+let paymentHistory = [];
 const monthNames = [
     "Januar","Februar","Mart","April","Maj","Jun",
     "Jul","Avgust","Septembar","Oktobar","Novembar","Decembar"
 ];
 
 function loadData(){
-    const saved = localStorage.getItem(STORAGE_KEY);
+
+    const saved =
+        localStorage.getItem(STORAGE_KEY);
 
     if(!saved){
+
         members = {};
-        return;
+
+    }else{
+
+        try{
+
+            members =
+                JSON.parse(saved) || {};
+
+        }catch(error){
+
+            console.error(
+                "Greška pri učitavanju podataka:",
+                error
+            );
+
+            members = {};
+        }
     }
 
-    try{
-        members = JSON.parse(saved) || {};
-    }catch(error){
-        console.error("Greška pri učitavanju podataka:", error);
-        members = {};
+
+    /* =========================
+       UČITAJ POSLEDNJIH 10 UPLATA
+    ========================= */
+
+    const savedPaymentHistory =
+        localStorage.getItem(
+            STORAGE_KEY + "_PAYMENT_HISTORY"
+        );
+
+    if(savedPaymentHistory){
+
+        try{
+
+            paymentHistory =
+                JSON.parse(savedPaymentHistory);
+
+            if(!Array.isArray(paymentHistory)){
+                paymentHistory = [];
+            }
+
+        }catch(error){
+
+            console.error(
+                "Greška pri učitavanju istorije uplata:",
+                error
+            );
+
+            paymentHistory = [];
+        }
+
+    }else{
+
+        paymentHistory = [];
+
     }
 }
 
+
+function saveData(){
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(members)
+    );
+}
+
+
+function savePaymentHistory(){
+
+    localStorage.setItem(
+        STORAGE_KEY + "_PAYMENT_HISTORY",
+        JSON.stringify(paymentHistory)
+    );
+}
+
+
 function saveData(){
     localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
+}
+
+function savePaymentHistory(){
+
+    localStorage.setItem(
+        STORAGE_KEY + "_PAYMENT_HISTORY",
+        JSON.stringify(paymentHistory)
+    );
 }
 
 function formatMoney(value){
@@ -2645,53 +2752,182 @@ function setPaid(id, month){
 
     if(!member) return;
 
-    if(!member.months) member.months = {};
+    if(!member.months){
+        member.months = {};
+    }
+
+    const datumUplate =
+        new Date().toISOString();
+
+
+    /* =========================
+       EVIDENTIRAJ UPLATU
+    ========================= */
 
     member.months[month] = {
-        status:"paid",
-        date:new Date().toISOString()
+
+        status: "paid",
+
+        date: datumUplate
+
     };
 
+
+    /* =========================
+       AKO JE VEĆ POSTOJALA
+       UPLATA ZA OVAJ MESEC,
+       OBRIŠI STARU EVIDENCIJU
+    ========================= */
+
+    paymentHistory =
+        paymentHistory.filter(payment => {
+
+            return !(
+                payment.memberId === id &&
+                payment.month === month
+            );
+
+        });
+
+
+    /* =========================
+       DODAJ NOVU UPLATU NA VRH
+    ========================= */
+
+    paymentHistory.unshift({
+
+        memberId: id,
+
+        name: member.name || "",
+
+        month: month,
+
+        amount: Number(member.price) || 0,
+
+        date: datumUplate
+
+    });
+
+
+    /* =========================
+       SAMO POSLEDNJIH 10
+    ========================= */
+
+    paymentHistory =
+        paymentHistory.slice(0, 10);
+
+
+    /* =========================
+       SAČUVAJ SVE
+    ========================= */
+
+    savePaymentHistory();
+
     saveData();
+
+
+    /* =========================
+       OSVEŽI PRIKAZ
+    ========================= */
+
     renderTable();
+
     updateMemberDetails();
+
+    renderPaymentHistory();
+
+
+    /* =========================
+       EMAIL POTVRDA
+    ========================= */
 
     if(member.email){
 
         const sendMail = confirm(
+
             "Uplata je uspešno evidentirana.\n\n" +
+
             "Da li želiš da pošalješ potvrdu uplate na:\n" +
+
             member.email
+
         );
 
         if(sendMail){
+
             sendPaymentEmail(id, month);
+
         }
 
     }else{
 
         alert(
+
             "Uplata je uspešno evidentirana.\n\n" +
+
             "Član nema upisan email."
+
         );
 
     }
 }
+
 function setUnpaid(id, month){
 
     const member = members[id];
 
     if(!member) return;
 
-    if(!member.months) member.months = {};
+    if(!member.months){
+        member.months = {};
+    }
+
+
+    /* =========================
+       PONIŠTI UPLATU
+    ========================= */
 
     member.months[month] = {
-        status:"unpaid"
+
+        status: "unpaid"
+
     };
 
+
+    /* =========================
+       OBRIŠI IZ POSLEDNJIH 10
+    ========================= */
+
+    paymentHistory =
+        paymentHistory.filter(payment => {
+
+            return !(
+                payment.memberId === id &&
+                payment.month === month
+            );
+
+        });
+
+
+    /* =========================
+       SAČUVAJ
+    ========================= */
+
+    savePaymentHistory();
+
     saveData();
+
+
+    /* =========================
+       OSVEŽI
+    ========================= */
+
     renderTable();
+
     updateMemberDetails();
+
+    renderPaymentHistory();
+
 }
 
 function setPause(id, month){
@@ -2949,7 +3185,10 @@ loadData();
 addCurrentMonthToDebt();
 
 generateMonths();
+
 renderTable();
+
+renderPaymentHistory();
 
 function deleteMember(){
 
@@ -2967,20 +3206,61 @@ function deleteMember(){
 
     if(!potvrda) return;
 
+
+    /* =========================
+       OBRIŠI ČLANA
+    ========================= */
+
     delete members[id];
 
+
+    /* =========================
+       OBRIŠI NJEGOVE UPLATE
+       IZ POSLEDNJIH 10
+    ========================= */
+
+    paymentHistory =
+        paymentHistory.filter(payment => {
+
+            return payment.memberId !== id;
+
+        });
+
+
+    /* =========================
+       SAČUVAJ PODATKE
+    ========================= */
+
     saveData();
+
+    savePaymentHistory();
+
+
+    /* =========================
+       ZATVORI PROZORE
+    ========================= */
 
     closeDetails();
 
     closeHistory();
 
-    renderTable();
 
     detailsMemberId = null;
     detailsMonth = null;
 
-    alert("Član je uspešno obrisan.");
+
+    /* =========================
+       OSVEŽI PRIKAZ
+    ========================= */
+
+    renderTable();
+
+    renderPaymentHistory();
+
+
+    alert(
+        "Član je uspešno obrisan."
+    );
 }
 
 /* =========================
@@ -3012,6 +3292,11 @@ document.querySelectorAll(".glavni-meni-stavka").forEach(function(stavka) {
             return;
         }
 
+if(sekcija === "evidencija"){
+    window.location.href = "evidencija.html";
+    return;
+}
+
         document.querySelectorAll(".glavni-meni-stavka")
             .forEach(function(item) {
                 item.classList.remove("aktivna");
@@ -3035,6 +3320,153 @@ document.addEventListener("click", function(event) {
     }
 
 });
+
+function renderPaymentHistory(){
+
+    const container =
+        document.getElementById(
+            "paymentHistoryList"
+        );
+
+    if(!container) return;
+
+
+    if(paymentHistory.length === 0){
+
+        container.innerHTML = `
+
+            <div style="
+                padding:20px;
+                text-align:center;
+                color:#7b8491;
+                font-weight:700;
+            ">
+
+                Nema evidentiranih uplata.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML =
+        paymentHistory.map((payment, index) => {
+
+            const datum =
+                new Date(payment.date);
+
+
+            const datumTekst =
+                datum.toLocaleDateString(
+                    "sr-Latn-RS"
+                );
+
+
+            const vremeTekst =
+                datum.toLocaleTimeString(
+                    "sr-Latn-RS",
+                    {
+                        hour:"2-digit",
+                        minute:"2-digit"
+                    }
+                );
+
+
+            return `
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    gap:15px;
+                    padding:14px 5px;
+                    border-bottom:1px solid #e5e7eb;
+                ">
+
+                    <div style="
+                        display:flex;
+                        align-items:center;
+                        gap:12px;
+                    ">
+
+                        <div style="
+                            width:32px;
+                            height:32px;
+                            min-width:32px;
+                            border-radius:50%;
+                            background:#15803d;
+                            color:white;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            font-weight:900;
+                        ">
+
+                            ${index + 1}
+
+                        </div>
+
+
+                        <div>
+
+                            <div style="
+                                font-size:15px;
+                                font-weight:900;
+                            ">
+
+                                ${escapeHTML(
+                                    payment.name
+                                )}
+
+                            </div>
+
+
+                            <div style="
+                                margin-top:4px;
+                                font-size:12px;
+                                color:#7b8491;
+                                font-weight:700;
+                            ">
+
+                                ${escapeHTML(
+                                    monthLabel(
+                                        payment.month
+                                    )
+                                )}
+
+                                • ${datumTekst}
+
+                                u ${vremeTekst}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div style="
+                        font-size:15px;
+                        font-weight:900;
+                        white-space:nowrap;
+                        color:#15803d;
+                    ">
+
+                        ${formatMoney(
+                            payment.amount
+                        )}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+}
 
 </script>
 
